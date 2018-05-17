@@ -1,4 +1,4 @@
-package com.fh.service.commodity.commodity.impl;
+package com.fh.service.management.commoditypic.impl;
 
 import java.util.List;
 import javax.annotation.Resource;
@@ -6,16 +6,16 @@ import org.springframework.stereotype.Service;
 import com.fh.dao.DaoSupport;
 import com.fh.entity.Page;
 import com.fh.util.PageData;
-import com.fh.service.commodity.commodity.CommodityManager;
+import com.fh.service.management.commoditypic.CommodityPicManager;
 
 /** 
- * 说明： 商品管理
+ * 说明： 商品图片管理
  * 创建人：成
- * 创建时间：2017-12-04
+ * 创建时间：2017-12-05
  * @version
  */
-@Service("commodityService")
-public class CommodityService implements CommodityManager{
+@Service("commoditypicService")
+public class CommodityPicService implements CommodityPicManager{
 
 	@Resource(name = "daoSupport")
 	private DaoSupport dao;
@@ -25,7 +25,7 @@ public class CommodityService implements CommodityManager{
 	 * @throws Exception
 	 */
 	public void save(PageData pd)throws Exception{
-		dao.save("CommodityMapper.save", pd);
+		dao.save("CommodityPicMapper.save", pd);
 	}
 	
 	/**删除
@@ -33,7 +33,7 @@ public class CommodityService implements CommodityManager{
 	 * @throws Exception
 	 */
 	public void delete(PageData pd)throws Exception{
-		dao.delete("CommodityMapper.delete", pd);
+		dao.delete("CommodityPicMapper.delete", pd);
 	}
 	
 	/**修改
@@ -41,7 +41,7 @@ public class CommodityService implements CommodityManager{
 	 * @throws Exception
 	 */
 	public void edit(PageData pd)throws Exception{
-		dao.update("CommodityMapper.edit", pd);
+		dao.update("CommodityPicMapper.edit", pd);
 	}
 	
 	/**列表
@@ -50,8 +50,7 @@ public class CommodityService implements CommodityManager{
 	 */
 	@SuppressWarnings("unchecked")
 	public List<PageData> list(Page page)throws Exception{
-		System.out.println(dao.findForList("CommodityMapper.datalistPage", page).getClass());
-		return (List<PageData>)dao.findForList("CommodityMapper.datalistPage", page);
+		return (List<PageData>)dao.findForList("CommodityPicMapper.datalistPage", page);
 	}
 	
 	/**列表(全部)
@@ -60,7 +59,7 @@ public class CommodityService implements CommodityManager{
 	 */
 	@SuppressWarnings("unchecked")
 	public List<PageData> listAll(PageData pd)throws Exception{
-		return (List<PageData>)dao.findForList("CommodityMapper.listAll", pd);
+		return (List<PageData>)dao.findForList("CommodityPicMapper.listAll", pd);
 	}
 	
 	/**通过id获取数据
@@ -68,7 +67,7 @@ public class CommodityService implements CommodityManager{
 	 * @throws Exception
 	 */
 	public PageData findById(PageData pd)throws Exception{
-		return (PageData)dao.findForObject("CommodityMapper.findById", pd);
+		return (PageData)dao.findForObject("CommodityPicMapper.findById", pd);
 	}
 	
 	/**批量删除
@@ -76,13 +75,12 @@ public class CommodityService implements CommodityManager{
 	 * @throws Exception
 	 */
 	public void deleteAll(String[] ArrayDATA_IDS)throws Exception{
-		dao.delete("CommodityMapper.deleteAll", ArrayDATA_IDS);
+		dao.delete("CommodityPicMapper.deleteAll", ArrayDATA_IDS);
 	}
-	/**
-	 * 树查询
-	 */
-	public List<PageData> tree_data(Page page)throws Exception{
-		return (List<PageData>)dao.findForList("CommodityMapper.tree_data", page);
+
+	@Override
+	public PageData findByCId(PageData pd) throws Exception {
+		return (PageData)dao.findForObject("CommodityPicMapper.findByCId", pd);
 	}
 	
 }

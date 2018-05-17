@@ -1,4 +1,4 @@
-package com.fh.service.commodity.commodity;
+package com.fh.service.management.commodity;
 
 import java.util.List;
 import com.fh.entity.Page;

@@ -22,7 +22,7 @@ import com.fh.util.AppUtil;
 import com.fh.util.ObjectExcelView;
 import com.fh.util.PageData;
 import com.fh.util.Jurisdiction;
-import com.fh.service.commodity.commoditypic.CommodityPicManager;
+import com.fh.service.management.commoditypic.CommodityPicManager;
 
 /** 
  * 说明：商品图片管理

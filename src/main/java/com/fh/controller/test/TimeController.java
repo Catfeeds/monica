@@ -1,23 +1,17 @@
 package com.fh.controller.test;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
 
-import org.junit.Test;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fh.controller.base.BaseController;
-import com.fh.service.commodity.commoditypic.CommodityPicManager;
-import com.fh.service.fhdb.timingbackup.TimingBackUpManager;
+import com.fh.service.management.commoditypic.CommodityPicManager;
 import com.fh.util.PageData;
-import com.fh.util.Tools;
 
 @Controller
 public class TimeController extends BaseController{

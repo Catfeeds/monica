@@ -42,7 +42,7 @@ setTimeout("top.hangge()",500);
 								欢迎使用 麦香坊后台管理系统&nbsp;&nbsp;
 
 							</div>
-							<div style="height: 550px">
+							<%--<div style="height: 550px">
 								<div id="main" style="width: 100%;height:40%;"></div>
 								<div style="width: 100%;height:40%;">
 									<table style="width: 100%;height: 100%">
@@ -73,7 +73,7 @@ setTimeout("top.hangge()",500);
 
 									</table>
 								</div>
-							</div>
+							</div>--%>
 
 							
 							<%--<div id="main" style="width: 600px;height:300px;"></div>--%>
@@ -206,39 +206,6 @@ setTimeout("top.hangge()",500);
 									});
 								});
 								myChart1.setOption(option1);
-						        // 基于准备好的dom，初始化echarts实例
-						        /*var myChart = echarts.init(document.getElementById('main'));
-						
-						        // 指定图表的配置项和数据
-								var option = {
-						            title: {
-						                text: 'FH Admin用户统计'
-						            },
-						            tooltip: {},
-						            xAxis: {
-						                data: ["系统用户","系统会员"]
-						            },
-						            yAxis: {},
-						            series: [
-						               {
-						                name: '',
-						                type: 'bar',
-						                <%--data: [${pd.userCount},${pd.appUserCount}],--%>
-						                itemStyle: {
-						                    normal: {
-						                        color: function(params) {
-						                            // build a color map as your need.
-						                            var colorList = ['#6FB3E0','#87B87F'];
-						                            return colorList[params.dataIndex];
-						                        }
-						                    }
-						                }
-						               }
-						            ]
-						        };	        
-
-						        // 使用刚指定的配置项和数据显示图表。
-						        myChart.setOption(option);*/
 						    </script>
 							
 						</div>

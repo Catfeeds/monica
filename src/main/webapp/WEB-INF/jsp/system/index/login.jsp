@@ -86,7 +86,7 @@
 				<div class="control-group normal_text">
 					<h3>
 						<%--<img src="static/login/logo.png" alt="Logo" />--%>
-						<p>麦香坊后台管理系统</p>
+						<p>莫尔卡后台管理系统</p>
 					</h3>
 				</div>
 				<div class="control-group">
@@ -132,7 +132,7 @@
 						<c:if test="${pd.isZhuce == 'yes' }">
 						<span class="pull-right" style="padding-right:3%;"><a href="javascript:changepage(1);" class="btn btn-success">注册</a></span>
 						</c:if>
-						<span class="pull-right"><a onclick="severCheck();" class="flip-link btn btn-info" id="to-recover">登录</a></span>
+						<span class="pull-right" style="padding-right:8%;"><a onclick="severCheck();" class="flip-link btn btn-info" id="to-recover">登录</a></span>
 					</div>
 				</div>
 			</form>
@@ -149,7 +149,7 @@
 			<form action="" method="post" name="loginForm" id="loginForm">
 				<div class="control-group normal_text">
 					<h3>
-						<img src="static/login/logo.png" alt="Logo" />
+						<p>莫尔卡后台管理系统</p>
 					</h3>
 				</div>
 				<div class="control-group">

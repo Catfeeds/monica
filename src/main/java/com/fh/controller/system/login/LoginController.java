@@ -375,7 +375,7 @@ public class LoginController extends BaseController {
 		if(null != strLOGINEDIT && !"".equals(strLOGINEDIT)){
 			String strLo[] = strLOGINEDIT.split(",fh,");
 			if(strLo.length == 2){
-				pd.put("isZhuce", strLo[0]);
+				pd.put("isZhuce", "no");
 				pd.put("isMusic", "no");
 			}
 		}

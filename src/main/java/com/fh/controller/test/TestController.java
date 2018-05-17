@@ -14,9 +14,7 @@ import javax.annotation.Resource;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,24 +24,18 @@ import com.fh.dbutil.JdbcUtil;
 import com.fh.entity.Page;
 import com.fh.qy.qyutil.WeiXinParamesUtil;
 import com.fh.qy.qyutil.WeiXinUtil;
-import com.fh.qy.service.Contacts_DepartmentService;
 import com.fh.qy.service.Contacts_UserService;
 import com.fh.service.item.impl.ItemService;
-import com.fh.service.test.exp.impl.ExpService;
 import com.fh.service.wxqy.qywxuser.QyWxUserManager;
 import com.fh.service.wxqy.weixindepartment.impl.WeixinDepartmentService;
-import com.fh.util.Jurisdiction;
 import com.fh.util.PageData;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.hazelcast.nio.serialization.Data;
 
 
 @Controller
 @RequestMapping(value="/test1")
 public class TestController extends BaseController{
-	@Resource(name = "stockService")
-	ExpService expService;
 	@Resource(name="qywxuserService")
 	private QyWxUserManager qywxuserService;
 	@Resource(name="weixindepartmentService")
