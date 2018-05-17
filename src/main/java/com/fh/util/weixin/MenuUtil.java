@@ -21,7 +21,7 @@ import com.fh.util.PageData;
 /**
  * 
 * 类描述： 微信自定义菜单
-* @author FH  31 35 96790
+* @author
 * 作者单位： 
 * 联系方式：
 * 创建时间：206年11月1日

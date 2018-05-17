@@ -1,49 +1,45 @@
 package com.fh.qy.qyutil;
-/*package com.fh.qyutil;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.ConnectException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.List;
+import com.fh.qy.pojo.SNSUserInfo;
+import com.fh.qy.pojo.Token;
+import com.fh.qy.pojo.WeixinOauth2Token;
+import com.fh.qy.pojo.WeixinUserInfo;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONException;
+import net.sf.json.JSONObject;
+import org.junit.Test;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONException;
-import net.sf.json.JSONObject;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.ConnectException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
 
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static com.sun.webpane.platform.ConfigManager.log;
 
-import com.jit.wx.pojo.SNSUserInfo;
-import com.jit.wx.pojo.Token;
-import com.jit.wx.pojo.WeixinOauth2Token;
-import com.jit.wx.pojo.WeixinUserInfo;
 public class CommonUtil {
-	private static Logger log = LoggerFactory.getLogger(CommonUtil.class);
+	//private static Logger log = LoggerFactory.getLogger(CommonUtil.class);
 
     // 凭证获取（GET）
     public final static String token_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
 
-    *//**
+    /**
      * 发送https请求
      * 
      * @param requestUrl 请求地址
      * @param requestMethod 请求方式（GET、POST）
      * @param outputStr 提交的数据
-     * @return JSONObject(通过JSONObject.get(key)的方式获取json对象的属性值)
-     *//*
+     * @return JSONObject(通过JSONObject.get(key)的方式获取json对象的属性值)*/
+
     public static JSONObject httpsRequest(String requestUrl, String requestMethod, String outputStr) {
         JSONObject jsonObject = null;
         try {
@@ -54,13 +50,22 @@ public class CommonUtil {
             // 从上述SSLContext对象中得到SSLSocketFactory对象
             SSLSocketFactory ssf = sslContext.getSocketFactory();
 
-            URL url = new URL(requestUrl);
+           /* URL url = new URL(requestUrl);
             HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
             conn.setSSLSocketFactory(ssf);
             
             conn.setDoOutput(true);
             conn.setDoInput(true);
-            conn.setUseCaches(false);
+            conn.setUseCaches(false);*/
+            URL httpclient =new URL(requestUrl);
+            HttpURLConnection conn =(HttpURLConnection) httpclient.openConnection();
+            conn.setConnectTimeout(50000);
+            conn.setReadTimeout(20000);
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            conn.connect();
             // 设置请求方式（GET/POST）
             conn.setRequestMethod(requestMethod);
 
@@ -90,20 +95,20 @@ public class CommonUtil {
             conn.disconnect();
             jsonObject = JSONObject.fromObject(buffer.toString());
         } catch (ConnectException ce) {
-            log.error("连接超时：{}", ce);
+            //log.error("连接超时：{}", ce);
         } catch (Exception e) {
-            log.error("https请求异常：{}", e);
+            //log.error("https请求异常：{}", e);
         }
         return jsonObject;
     }
 
-    *//**
+    /**
      * 获取接口访问凭证
      * 
      * @param appid 凭证
      * @param appsecret 密钥
-     * @return
-     *//*
+     * @return*/
+
     public static Token getToken(String appid, String appsecret) {
         Token token = null;
         String requestUrl = token_url.replace("APPID", appid).replace("APPSECRET", appsecret);
@@ -118,35 +123,35 @@ public class CommonUtil {
             } catch (JSONException e) {
                 token = null;
                 // 获取token失败
-                log.error("获取token失败 errcode:{} errmsg:{}", jsonObject.getInt("errcode"), jsonObject.getString("errmsg"));
+                //log.error("获取token失败 errcode:{} errmsg:{}", jsonObject.getInt("errcode"), jsonObject.getString("errmsg"));
             }
         }
         return token;
     }
     
     
-    *//**
+    /**
      * URL编码（utf-8）
      * 
      * @param source
-     * @return
-     *//*
+     * @return*/
+
     public static String urlEncodeUTF8(String source) {
         String result = source;
         try {
             result = java.net.URLEncoder.encode(source, "utf-8");
-        } catch (UnsupportedEncodingException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return result;
     }
     
-    *//**
+   /* *
      * 根据内容类型判断文件扩展名
      * 
      * @param contentType 内容类型
-     * @return
-     *//*
+     * @return*/
+
     public static String getFileExt(String contentType) {
         String fileExt = "";
         if ("image/jpeg".equals(contentType))
@@ -163,13 +168,13 @@ public class CommonUtil {
     }
     
     
-    *//**
+    /**
      * 获取用户信息
      * 
      * @param accessToken 接口访问凭证
      * @param openId 用户标识
-     * @return WeixinUserInfo
-     *//*
+     * @return WeixinUserInfo*/
+
     public static  WeixinUserInfo getUserInfo(String accessToken, String openId) {
         WeixinUserInfo weixinUserInfo = null;
         // 拼接请求地址
@@ -204,25 +209,25 @@ public class CommonUtil {
                 weixinUserInfo.setHeadImgUrl(jsonObject.getString("headimgurl"));
             } catch (Exception e) {
                 if (0 == weixinUserInfo.getSubscribe()) {
-                    log.error("用户{}已取消关注", weixinUserInfo.getOpenId());
+                    //log.error("用户{}已取消关注", weixinUserInfo.getOpenId());
                 } else {
                     int errorCode = jsonObject.getInt("errcode");
                     String errorMsg = jsonObject.getString("errmsg");
-                    log.error("获取用户信息失败 errcode:{} errmsg:{}", errorCode, errorMsg);
+                    //log.error("获取用户信息失败 errcode:{} errmsg:{}", errorCode, errorMsg);
                 }
             }
         }
         return weixinUserInfo;
     }
     
-    *//**
+    /**
      * 获取网页授权凭证
      * 
      * @param appId 公众账号的唯一标识
      * @param appSecret 公众账号的密钥
      * @param code
-     * @return WeixinAouth2Token
-     *//*
+     * @return WeixinAouth2Token*/
+
     public static WeixinOauth2Token getOauth2AccessToken(String appId, String appSecret, String code) {
         WeixinOauth2Token wat = null;
         // 拼接请求地址
@@ -245,19 +250,19 @@ public class CommonUtil {
                 wat = null;
                 int errorCode = jsonObject.getInt("errcode");
                 String errorMsg = jsonObject.getString("errmsg");
-                log.error("获取网页授权凭证失败 errcode:{} errmsg:{}", errorCode, errorMsg);
+                //log.error("获取网页授权凭证失败 errcode:{} errmsg:{}", errorCode, errorMsg);
             }
         }
         return wat;
     }
     
-    *//**
+    /**
      * 通过网页授权获取用户信息
      * 
      * @param accessToken 网页授权接口调用凭证
      * @param openId 用户标识
-     * @return SNSUserInfo
-     *//*
+     * @return SNSUserInfo*/
+
     @SuppressWarnings( { "deprecation", "unchecked" })
     public static SNSUserInfo getSNSUserInfo(String accessToken, String openId) {
     	
@@ -291,15 +296,14 @@ public class CommonUtil {
                 snsUserInfo = null;
                 int errorCode = jsonObject.getInt("errcode");
                 String errorMsg = jsonObject.getString("errmsg");
-                log.error("获取用户信息失败 errcode:{} errmsg:{}", errorCode, errorMsg);
+                //log.error("获取用户信息失败 errcode:{} errmsg:{}", errorCode, errorMsg);
             }
         }
         return snsUserInfo;
     }
     
     @Test
- public  void create() {
-    	
+    public void create() {
     	 JSONObject gjson =new JSONObject();
          //JSONObject json = getUserOpenids(array.get(3).toString()); //array参数是用户组所有的用户,该方法打印array其中一个用户的详细信息
          gjson.put("kf_account","jit@gh_71156e74bfb5");
@@ -309,17 +313,17 @@ public class CommonUtil {
 		 String urlstr ="https://api.weixin.qq.com/customservice/kfaccount/add?access_token=ACCESS_TOKEN"; 
         urlstr =urlstr.replace("ACCESS_TOKEN", "oc00LKJvaQFzD7wSB7F6Q6KzltMlIqG_gu80_rTwqi17x-pZGyhLX6ciaFBZIQasNShls9C_5hSXdPBZZxccafCb_jDkrHrDJrRy31HBc-AAXcyR1_VIqCnLyrM8nhTeOBBgACACPP");
         String reqjson = gjson.toString();
-        try {
+        /*try {
             URL httpclient =new URL(urlstr);
             HttpURLConnection conn =(HttpURLConnection) httpclient.openConnection();
             conn.setConnectTimeout(5000);
             conn.setReadTimeout(2000);
             conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");    
-            conn.setDoOutput(true);        
+            conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+            conn.setDoOutput(true);
             conn.setDoInput(true);
             conn.connect();
-            OutputStream os= conn.getOutputStream();    
+            OutputStream os= conn.getOutputStream();
            // System.out.println("ccccc:"+reqjson);
             os.write(reqjson.getBytes("UTF-8"));//传入参数    
             os.flush();
@@ -335,8 +339,7 @@ public class CommonUtil {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } 
+        } */
        
     }
 }
-*/

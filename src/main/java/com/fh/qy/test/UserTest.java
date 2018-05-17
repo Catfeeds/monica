@@ -28,8 +28,6 @@ public class UserTest {
 	public void testCreateUser() {
 		//1.创建user对象
 		//User user = new User("3", "ray", 1,"13886086292","3057046319@qq.com","技术顾问","1");  
-		//User user = new User("4", "jack", 1,"13986086293","4057046319@qq.com","咨询顾问","1");  
-		//User user = new User("5", "tom", 1,"14986086294","5057046319@qq.com","产品经理","1");  
 		User user = new User("6", "Mike", 1,"14686086294","9057046319@qq.com","项目经理","1");
 		//2.获取access_token:根据企业id和通讯录密钥获取access_token,并拼接请求url
 		String accessToken= WeiXinUtil.getAccessToken(WeiXinParamesUtil.corpId, WeiXinParamesUtil.contactsSecret).getToken();

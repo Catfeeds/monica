@@ -33,7 +33,7 @@ public class DataAnalysisController extends BaseController{
 	private SalesOrderBillManager salesorderbillService;
 
 	//图片域名pic_url
-	private String pic_url = "http://jittest.s1.natapp.cc/ssww";
+	private String pic_url = "http://jittest.s1.natapp.cc/monica";
 
 	@Resource(name="interfaceipService")
 	private InterfaceIPManager interfaceipService;

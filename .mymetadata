@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="ssww"
+  name="monica"
   id="myeclipse.1508743419931"
-  context-root="/ssww"
+  context-root="/monica"
   j2ee-spec="1.7"
-  archive="ssww.war">
+  archive="monica.war">
   <attributes>
     <attribute name="webrootdir" value="src/main/webapp" />
   </attributes>

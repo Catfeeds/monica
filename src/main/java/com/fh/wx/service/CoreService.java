@@ -37,7 +37,7 @@ public class CoreService {
            
             // 文本消息
             if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_TEXT)) {
-            	System.out.println("++++++++++++++++++++++++++++++"+requestMap.get("Content"));
+            	System.out.println("接收内容-->"+requestMap.get("Content"));
             	
                 respContent = "您发送的是文本消息！";
             }

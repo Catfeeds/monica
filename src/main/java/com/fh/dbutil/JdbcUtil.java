@@ -16,13 +16,9 @@ import net.sf.json.JSONObject;
 import com.fh.util.PageData;
 
 public class JdbcUtil {
-	/*url2:jdbc:sqlserver://127.0.0.1:1433;databaseName=sswwdb
-		driverClassName2:com.microsoft.sqlserver.jdbc.SQLServerDriver
-		username2:sa
-		password2:sa*/
 	private static Connection getConn() {
 	    String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	    String url = "jdbc:sqlserver://127.0.0.1:1433;databaseName=sswwdb";
+	    String url = "jdbc:sqlserver://127.0.0.1:1433;databaseName=monica";
 	    String username = "sa";
 	    String password = "sa";
 	    Connection conn = null;
@@ -69,7 +65,6 @@ public class JdbcUtil {
 		                pd.put("DFName", rs.getObject("DFName"));
 		                jsonObj1.add(pd);
 	            count ++ ;
-	            
 	        }
 	        //System.out.println(pd);
 	            System.out.println("============================"+count);

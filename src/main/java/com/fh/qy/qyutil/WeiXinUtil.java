@@ -50,8 +50,6 @@ public class WeiXinUtil {
 	//获取jsapi_ticket的接口地址（GET） 限200（次/天）  
 	public final static String jsapi_ticket_url = "https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=ACCESSTOKEN";  
 
-
-
 	/**
 	 * 1.发起https请求并获取结果 
 	 *  

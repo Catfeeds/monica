@@ -48,14 +48,14 @@
 											</div>
 											<div class="aui-list-cell-cn">门店日收款排行榜</div>
 											<div class="aui-list-cell-fr"></div> </a>
-										 <a href="http://jittest.s1.natapp.cc/ssww/store/trendAnalysis"
+										 <a href="http://jittest.s1.natapp.cc/monica/store/trendAnalysis"
 											class="aui-list-cell">
 											<div class="aui-list-cell-fl">
 												<img src="static/images/store/chart_pie.png">
 											</div>
 											<div class="aui-list-cell-cn">应收账款趋势分析</div>
 											<div class="aui-list-cell-fr"></div> </a>
-										 <a href="http://jittest.s1.natapp.cc/ssww/store/timeRateAnalysis"  class="aui-list-cell">
+										 <a href="http://jittest.s1.natapp.cc/monica/store/timeRateAnalysis"  class="aui-list-cell">
 											<div class="aui-list-cell-fl">
 												<img src="static/images/store/chart_bar.png">
 											</div>

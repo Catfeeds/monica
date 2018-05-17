@@ -92,7 +92,7 @@ public class TestHttpController extends BaseController{
 		String timestamp = Long.toString(System.currentTimeMillis() / 1000); // 必填，生成签名的时间戳
 		//System.out.println("timestamp:"+timestamp);
 		//String url=request.getRequestURL().toString();
-		String url = "http://jittest.s1.natapp.cc/ssww/http/testEwm";
+		String url = "http://jittest.s1.natapp.cc/monica/http/testEwm";
 		//System.out.println("url:"+url);
 
 		//2.字典序           ，注意这里参数名必须全部小写，且必须有序
@@ -121,7 +121,7 @@ public class TestHttpController extends BaseController{
 	@RequestMapping(value="/getItembase")
 	//@Test
 	public void test() throws Exception{
-		String requestUrl = "http://lkl.natapp1.cc/ssww/test/search";
+		String requestUrl = "http://lkl.natapp1.cc/monica/test/search";
 		try {
             URL httpclient =new URL(requestUrl);
             HttpURLConnection conn =(HttpURLConnection) httpclient.openConnection();
@@ -214,7 +214,7 @@ public class TestHttpController extends BaseController{
 	@RequestMapping(value="/getClassify_item")
 	//@Test
 	public void getClassify_item() throws Exception{
-		String requestUrl = "http://lkl.natapp1.cc/ssww/test/food";
+		String requestUrl = "http://lkl.natapp1.cc/monica/test/food";
 		try {
             URL httpclient =new URL(requestUrl);
             HttpURLConnection conn =(HttpURLConnection) httpclient.openConnection();
@@ -301,7 +301,7 @@ public class TestHttpController extends BaseController{
 	@RequestMapping(value="/getCommodity")
 	//@Test
 	public ModelAndView getCommodity() throws Exception{
-		String requestUrl = "http://lkl.natapp1.cc/ssww/test/stockfood?test="+"123";
+		String requestUrl = "http://lkl.natapp1.cc/monica/test/stockfood?test="+"123";
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();

@@ -472,7 +472,7 @@
        
        function addClient(){
        		$("#addClient").css("color","#006699");
-       		window.location.href="http://jittest.s1.natapp.cc/ssww/store/addClient";
+       		window.location.href="http://jittest.s1.natapp.cc/monica/store/addClient";
        }
 	</script>
 

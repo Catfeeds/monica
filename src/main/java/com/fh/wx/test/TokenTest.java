@@ -17,7 +17,6 @@ import com.fh.wx.pojo.Token;
 import com.fh.wx.pojo.WeixinUserInfo;
 import com.fh.wx.utils.CommonUtil;
 import com.fh.wx.utils.MyX509TrustManager;
-import com.fh.wx.utils.TokenUtil;
 import org.junit.Test;
 
 

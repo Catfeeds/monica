@@ -77,22 +77,12 @@ public class MenuManager {
 			System.out.println("票据"+token.getToken());
 			System.out.println("有效时间"+token.getExpiresIn());
 			
-			//String path = "D:/imooc.jpg";
-			//String mediaId = WeixinUtil.upload(path, token.getToken(), "thumb");
-			//System.out.println(mediaId);
-			
-			//String menu = JSONObject.fromObject(WeixinUtil.initMenu()).toString();
-			//String menu = JSONObject.fromObjec
 			int result = WeixinUtil.deleteMenu(token.getToken());
 			if(result == 0){
 				System.out.println("删除菜单成功！！");
 			}else {
 				System.out.println("错误码："+result);
 			}
-			
-			//String result = WeixinUtil.translate("my name is laobi");
-			//String result = WeixinUtil.translateFull("");
-			//System.out.println(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -103,112 +93,6 @@ public class MenuManager {
      * @return
      */
     private static Menu getMenu() {
-        /*CommonButton btn11 = new CommonButton();
-        btn11.setName("天气预报");
-        btn11.setType("click");
-        btn11.setKey("11");
-
-        CommonButton btn12 = new CommonButton();
-        btn12.setName("公交查询");
-        btn12.setType("click");
-        btn12.setKey("12");
-
-        CommonButton btn13 = new CommonButton();
-        btn13.setName("周边搜索");
-        btn13.setType("click");
-        btn13.setKey("13");
-
-        CommonButton btn14 = new CommonButton();
-        btn14.setName("天下足球");
-        btn14.setType("click");
-        btn14.setKey("14");
-
-        CommonButton btn21 = new CommonButton();
-        btn21.setName("英语翻译");
-        btn21.setType("click");
-        btn21.setKey("21");
-
-        CommonButton btn22 = new CommonButton();
-        btn22.setName("百度一下");
-        btn22.setType("click");
-        btn22.setKey("22");
-
-        CommonButton btn23 = new CommonButton();
-        btn23.setName("电影频道");
-        btn23.setType("click");
-        btn23.setKey("23");
-
-        CommonButton btn24 = new CommonButton();
-        btn24.setName("人脸识别");
-        btn24.setType("click");
-        btn24.setKey("24");
-
-        CommonButton btn25 = new CommonButton();
-        btn25.setName("聊天唠嗑");
-        btn25.setType("click");
-        btn25.setKey("25");
-
-        CommonButton btn31 = new CommonButton();
-        btn31.setName("朋友圈");
-        btn31.setType("click");
-        btn31.setKey("31");*/
-
-        /*CommonButton btn32 = new CommonButton();
-        btn32.setName("电影排行榜");
-        btn32.setType("click");
-        btn32.setKey("32");*/
-        
-        /*ViewButton btn32 = new ViewButton();
-        btn32.setName("view菜单");
-        btn32.setType("view");
-        btn32.setUrl("http://jtwx.s1.natapp.cc/souvc/jsp/gps.jsp");
-        
-        CommonButton btn33 = new CommonButton();
-        btn33.setName("幽默笑话");
-        btn33.setType("click");
-        btn33.setKey("33");*/
-
-        
-        /**
-         * 微信：  mainBtn1,mainBtn2,mainBtn3底部的三个一级菜单。
-         */
-        
-       /* ComplexButton mainBtn1 = new ComplexButton();
-        mainBtn1.setName("生活助手");
-        //一级下有4个子菜单
-        mainBtn1.setSub_button(new CommonButton[] { btn11, btn12, btn13, btn14 });
-
-        
-        ComplexButton mainBtn2 = new ComplexButton();
-        mainBtn2.setName("休闲驿站");
-        mainBtn2.setSub_button(new CommonButton[] { btn21, btn22, btn23, btn24, btn25 });
-
-        
-        ComplexButton mainBtn3 = new ComplexButton();
-        mainBtn3.setName("更多体验");
-        mainBtn3.setSub_button(new Button[] { btn31,btn32, btn33 });*/
-    	
-    	 /*CommonButton btn21 = new CommonButton();
-         btn21.setName("英语翻译");
-         btn21.setType("click");
-         btn21.setKey("21");
-
-         CommonButton btn22 = new CommonButton();
-         btn22.setName("百度一下");
-         btn22.setType("click");
-         btn22.setKey("22");
-
-         CommonButton btn23 = new CommonButton();
-         btn23.setName("电影频道");
-         btn23.setType("click");
-         btn23.setKey("23");
-         ComplexButton mainBtn2 = new ComplexButton();
-         mainBtn2.setName("更多体验");
-         mainBtn2.setSub_button(new Button[] { btn21,btn22, btn23 });*/
-    	/*ViewButton vb2 = new ViewButton();
-    	vb2.setName("预览开发");
-    	vb2.setType("view");
-    	vb2.setUrl("http://www.baidu.com");*/
     	ViewButton vb11 = new ViewButton();
     	vb11.setName("协同平台");
     	vb11.setType("view");
@@ -227,12 +111,6 @@ public class MenuManager {
     	/**
          * 封装整个菜单
          */
-    	/*Button button = new Button();
-		button.setName("菜单");
-		button.setSub_button(new Button[]{button31,button32});
-		
-		menu.setButton(new Button[]{button11,button21,button});
-		return menu;*/
         Menu menu = new Menu();
         menu.setButton(new Button[] {vb11,vb21,vb31});
 

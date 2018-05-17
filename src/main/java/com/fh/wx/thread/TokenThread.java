@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import com.fh.wx.info.WeixinInfo;
 import com.fh.wx.pojo.Token;
 import com.fh.wx.utils.CommonUtil;
-import com.fh.wx.utils.TokenUtil;
 
 
 public class TokenThread /*implements Runnable*/  {

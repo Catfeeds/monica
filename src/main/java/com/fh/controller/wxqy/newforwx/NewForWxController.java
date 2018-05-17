@@ -42,7 +42,7 @@ public class NewForWxController extends BaseController {
 	
 	
 	//图片域名pic_url
-		private String pic_qzurl = "http://127.0.0.1:8080/ssww";
+		private String pic_qzurl = "http://127.0.0.1:8080/monica";
 	/**保存
 	 * @param
 	 * @throws Exception

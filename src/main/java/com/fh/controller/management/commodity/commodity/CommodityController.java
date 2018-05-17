@@ -37,7 +37,7 @@ import com.fh.service.item.impl.ItemService;
 @RequestMapping(value="/commodity")
 public class CommodityController extends BaseController {
 	//图片域名pic_url
-	private String pic_qzurl = "http://127.0.0.1:8080/ssww";
+	private String pic_qzurl = "http://127.0.0.1:8080/monica";
 
 	String menuUrl = "commodity/list.do"; //菜单地址(权限用)
 	@Resource(name="commodityService")

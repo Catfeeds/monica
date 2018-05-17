@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="monica:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="ssww.war">
-      <element id="artifact" artifact-name="monica:war exploded" />
-    </root>
-  </artifact>
-</component>
