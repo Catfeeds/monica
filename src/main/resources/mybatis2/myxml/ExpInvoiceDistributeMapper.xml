@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fh.dao2.ExpInvoiceDistributeMapper">
+  <resultMap id="BaseResultMap" type="com.fh.entity.ExpInvoiceDistribute">
+    <id column="FID" jdbcType="INTEGER" property="fid" />
+    <result column="FYear" jdbcType="INTEGER" property="fyear" />
+    <result column="FPeriod" jdbcType="INTEGER" property="fperiod" />
+    <result column="FHookID" jdbcType="INTEGER" property="fhookid" />
+    <result column="FID_SRC" jdbcType="INTEGER" property="fidSrc" />
+    <result column="FEntryID_SRC" jdbcType="INTEGER" property="fentryidSrc" />
+    <result column="FBillNo_SRC" jdbcType="NVARCHAR" property="fbillnoSrc" />
+    <result column="FStandardID" jdbcType="INTEGER" property="fstandardid" />
+    <result column="FSrcTaxAmtFor" jdbcType="DECIMAL" property="fsrctaxamtfor" />
+    <result column="FSrcNoTaxAmtFor" jdbcType="DECIMAL" property="fsrcnotaxamtfor" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    FID, FYear, FPeriod, FHookID, FID_SRC, FEntryID_SRC, FBillNo_SRC, FStandardID, FSrcTaxAmtFor, 
+    FSrcNoTaxAmtFor
+  </sql>
+  <select id="selectByExample" parameterType="com.fh.entity.ExpInvoiceDistributeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from AA_ExpInvoiceDistribute
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from AA_ExpInvoiceDistribute
+    where FID = #{fid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from AA_ExpInvoiceDistribute
+    where FID = #{fid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fh.entity.ExpInvoiceDistributeExample">
+    delete from AA_ExpInvoiceDistribute
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fh.entity.ExpInvoiceDistribute">
+    insert into AA_ExpInvoiceDistribute (FID, FYear, FPeriod, 
+      FHookID, FID_SRC, FEntryID_SRC, 
+      FBillNo_SRC, FStandardID, FSrcTaxAmtFor, 
+      FSrcNoTaxAmtFor)
+    values (#{fid,jdbcType=INTEGER}, #{fyear,jdbcType=INTEGER}, #{fperiod,jdbcType=INTEGER}, 
+      #{fhookid,jdbcType=INTEGER}, #{fidSrc,jdbcType=INTEGER}, #{fentryidSrc,jdbcType=INTEGER}, 
+      #{fbillnoSrc,jdbcType=NVARCHAR}, #{fstandardid,jdbcType=INTEGER}, #{fsrctaxamtfor,jdbcType=DECIMAL}, 
+      #{fsrcnotaxamtfor,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fh.entity.ExpInvoiceDistribute">
+    insert into AA_ExpInvoiceDistribute
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        FID,
+      </if>
+      <if test="fyear != null">
+        FYear,
+      </if>
+      <if test="fperiod != null">
+        FPeriod,
+      </if>
+      <if test="fhookid != null">
+        FHookID,
+      </if>
+      <if test="fidSrc != null">
+        FID_SRC,
+      </if>
+      <if test="fentryidSrc != null">
+        FEntryID_SRC,
+      </if>
+      <if test="fbillnoSrc != null">
+        FBillNo_SRC,
+      </if>
+      <if test="fstandardid != null">
+        FStandardID,
+      </if>
+      <if test="fsrctaxamtfor != null">
+        FSrcTaxAmtFor,
+      </if>
+      <if test="fsrcnotaxamtfor != null">
+        FSrcNoTaxAmtFor,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="fyear != null">
+        #{fyear,jdbcType=INTEGER},
+      </if>
+      <if test="fperiod != null">
+        #{fperiod,jdbcType=INTEGER},
+      </if>
+      <if test="fhookid != null">
+        #{fhookid,jdbcType=INTEGER},
+      </if>
+      <if test="fidSrc != null">
+        #{fidSrc,jdbcType=INTEGER},
+      </if>
+      <if test="fentryidSrc != null">
+        #{fentryidSrc,jdbcType=INTEGER},
+      </if>
+      <if test="fbillnoSrc != null">
+        #{fbillnoSrc,jdbcType=NVARCHAR},
+      </if>
+      <if test="fstandardid != null">
+        #{fstandardid,jdbcType=INTEGER},
+      </if>
+      <if test="fsrctaxamtfor != null">
+        #{fsrctaxamtfor,jdbcType=DECIMAL},
+      </if>
+      <if test="fsrcnotaxamtfor != null">
+        #{fsrcnotaxamtfor,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fh.entity.ExpInvoiceDistributeExample" resultType="java.lang.Long">
+    select count(*) from AA_ExpInvoiceDistribute
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update AA_ExpInvoiceDistribute
+    <set>
+      <if test="record.fid != null">
+        FID = #{record.fid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fyear != null">
+        FYear = #{record.fyear,jdbcType=INTEGER},
+      </if>
+      <if test="record.fperiod != null">
+        FPeriod = #{record.fperiod,jdbcType=INTEGER},
+      </if>
+      <if test="record.fhookid != null">
+        FHookID = #{record.fhookid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fidSrc != null">
+        FID_SRC = #{record.fidSrc,jdbcType=INTEGER},
+      </if>
+      <if test="record.fentryidSrc != null">
+        FEntryID_SRC = #{record.fentryidSrc,jdbcType=INTEGER},
+      </if>
+      <if test="record.fbillnoSrc != null">
+        FBillNo_SRC = #{record.fbillnoSrc,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fstandardid != null">
+        FStandardID = #{record.fstandardid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fsrctaxamtfor != null">
+        FSrcTaxAmtFor = #{record.fsrctaxamtfor,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fsrcnotaxamtfor != null">
+        FSrcNoTaxAmtFor = #{record.fsrcnotaxamtfor,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update AA_ExpInvoiceDistribute
+    set FID = #{record.fid,jdbcType=INTEGER},
+      FYear = #{record.fyear,jdbcType=INTEGER},
+      FPeriod = #{record.fperiod,jdbcType=INTEGER},
+      FHookID = #{record.fhookid,jdbcType=INTEGER},
+      FID_SRC = #{record.fidSrc,jdbcType=INTEGER},
+      FEntryID_SRC = #{record.fentryidSrc,jdbcType=INTEGER},
+      FBillNo_SRC = #{record.fbillnoSrc,jdbcType=NVARCHAR},
+      FStandardID = #{record.fstandardid,jdbcType=INTEGER},
+      FSrcTaxAmtFor = #{record.fsrctaxamtfor,jdbcType=DECIMAL},
+      FSrcNoTaxAmtFor = #{record.fsrcnotaxamtfor,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fh.entity.ExpInvoiceDistribute">
+    update AA_ExpInvoiceDistribute
+    <set>
+      <if test="fyear != null">
+        FYear = #{fyear,jdbcType=INTEGER},
+      </if>
+      <if test="fperiod != null">
+        FPeriod = #{fperiod,jdbcType=INTEGER},
+      </if>
+      <if test="fhookid != null">
+        FHookID = #{fhookid,jdbcType=INTEGER},
+      </if>
+      <if test="fidSrc != null">
+        FID_SRC = #{fidSrc,jdbcType=INTEGER},
+      </if>
+      <if test="fentryidSrc != null">
+        FEntryID_SRC = #{fentryidSrc,jdbcType=INTEGER},
+      </if>
+      <if test="fbillnoSrc != null">
+        FBillNo_SRC = #{fbillnoSrc,jdbcType=NVARCHAR},
+      </if>
+      <if test="fstandardid != null">
+        FStandardID = #{fstandardid,jdbcType=INTEGER},
+      </if>
+      <if test="fsrctaxamtfor != null">
+        FSrcTaxAmtFor = #{fsrctaxamtfor,jdbcType=DECIMAL},
+      </if>
+      <if test="fsrcnotaxamtfor != null">
+        FSrcNoTaxAmtFor = #{fsrcnotaxamtfor,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where FID = #{fid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fh.entity.ExpInvoiceDistribute">
+    update AA_ExpInvoiceDistribute
+    set FYear = #{fyear,jdbcType=INTEGER},
+      FPeriod = #{fperiod,jdbcType=INTEGER},
+      FHookID = #{fhookid,jdbcType=INTEGER},
+      FID_SRC = #{fidSrc,jdbcType=INTEGER},
+      FEntryID_SRC = #{fentryidSrc,jdbcType=INTEGER},
+      FBillNo_SRC = #{fbillnoSrc,jdbcType=NVARCHAR},
+      FStandardID = #{fstandardid,jdbcType=INTEGER},
+      FSrcTaxAmtFor = #{fsrctaxamtfor,jdbcType=DECIMAL},
+      FSrcNoTaxAmtFor = #{fsrcnotaxamtfor,jdbcType=DECIMAL}
+    where FID = #{fid,jdbcType=INTEGER}
+  </update>
+</mapper>

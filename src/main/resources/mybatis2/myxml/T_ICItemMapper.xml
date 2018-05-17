@@ -1,0 +1,3301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fh.dao2.T_ICItemMapper">
+  <resultMap id="BaseResultMap" type="com.fh.entity.T_ICItem">
+    <result column="FItemID" jdbcType="INTEGER" property="fitemid" />
+    <result column="FModel" jdbcType="VARCHAR" property="fmodel" />
+    <result column="FName" jdbcType="VARCHAR" property="fname" />
+    <result column="FHelpCode" jdbcType="VARCHAR" property="fhelpcode" />
+    <result column="FDeleted" jdbcType="SMALLINT" property="fdeleted" />
+    <result column="FShortNumber" jdbcType="VARCHAR" property="fshortnumber" />
+    <result column="FNumber" jdbcType="VARCHAR" property="fnumber" />
+    <result column="FParentID" jdbcType="INTEGER" property="fparentid" />
+    <result column="FBrNo" jdbcType="VARCHAR" property="fbrno" />
+    <result column="FTopID" jdbcType="INTEGER" property="ftopid" />
+    <result column="FRP" jdbcType="SMALLINT" property="frp" />
+    <result column="FOmortize" jdbcType="SMALLINT" property="fomortize" />
+    <result column="FOmortizeScale" jdbcType="SMALLINT" property="fomortizescale" />
+    <result column="FForSale" jdbcType="BIT" property="fforsale" />
+    <result column="FStaCost" jdbcType="DOUBLE" property="fstacost" />
+    <result column="FOrderPrice" jdbcType="DOUBLE" property="forderprice" />
+    <result column="FOrderMethod" jdbcType="INTEGER" property="fordermethod" />
+    <result column="FPriceFixingType" jdbcType="INTEGER" property="fpricefixingtype" />
+    <result column="FSalePriceFixingType" jdbcType="INTEGER" property="fsalepricefixingtype" />
+    <result column="FPerWastage" jdbcType="DOUBLE" property="fperwastage" />
+    <result column="FARAcctID" jdbcType="INTEGER" property="faracctid" />
+    <result column="FPlanPriceMethod" jdbcType="SMALLINT" property="fplanpricemethod" />
+    <result column="FPlanClass" jdbcType="SMALLINT" property="fplanclass" />
+    <result column="FPY" jdbcType="NVARCHAR" property="fpy" />
+    <result column="FPinYin" jdbcType="NVARCHAR" property="fpinyin" />
+    <result column="FRefCost" jdbcType="DECIMAL" property="frefcost" />
+    <result column="FInvName" jdbcType="VARCHAR" property="finvname" />
+    <result column="FErpClsID" jdbcType="INTEGER" property="ferpclsid" />
+    <result column="FUnitID" jdbcType="INTEGER" property="funitid" />
+    <result column="FUnitGroupID" jdbcType="INTEGER" property="funitgroupid" />
+    <result column="FDefaultLoc" jdbcType="INTEGER" property="fdefaultloc" />
+    <result column="FSPID" jdbcType="INTEGER" property="fspid" />
+    <result column="FSource" jdbcType="INTEGER" property="fsource" />
+    <result column="FQtyDecimal" jdbcType="SMALLINT" property="fqtydecimal" />
+    <result column="FLowLimit" jdbcType="DECIMAL" property="flowlimit" />
+    <result column="FHighLimit" jdbcType="DECIMAL" property="fhighlimit" />
+    <result column="FSecInv" jdbcType="DECIMAL" property="fsecinv" />
+    <result column="FUseState" jdbcType="INTEGER" property="fusestate" />
+    <result column="FIsEquipment" jdbcType="BIT" property="fisequipment" />
+    <result column="FEquipmentNum" jdbcType="VARCHAR" property="fequipmentnum" />
+    <result column="FIsSparePart" jdbcType="BIT" property="fissparepart" />
+    <result column="FFullName" jdbcType="VARCHAR" property="ffullname" />
+    <result column="FSecUnitID" jdbcType="INTEGER" property="fsecunitid" />
+    <result column="FSecCoefficient" jdbcType="DECIMAL" property="fseccoefficient" />
+    <result column="FSecUnitDecimal" jdbcType="INTEGER" property="fsecunitdecimal" />
+    <result column="FAlias" jdbcType="VARCHAR" property="falias" />
+    <result column="FOrderUnitID" jdbcType="INTEGER" property="forderunitid" />
+    <result column="FSaleUnitID" jdbcType="INTEGER" property="fsaleunitid" />
+    <result column="FStoreUnitID" jdbcType="INTEGER" property="fstoreunitid" />
+    <result column="FProductUnitID" jdbcType="INTEGER" property="fproductunitid" />
+    <result column="FApproveNo" jdbcType="VARCHAR" property="fapproveno" />
+    <result column="FAuxClassID" jdbcType="INTEGER" property="fauxclassid" />
+    <result column="FTypeID" jdbcType="INTEGER" property="ftypeid" />
+    <result column="FPreDeadLine" jdbcType="INTEGER" property="fpredeadline" />
+    <result column="FSerialClassID" jdbcType="INTEGER" property="fserialclassid" />
+    <result column="FComCategoryID" jdbcType="INTEGER" property="fcomcategoryid" />
+    <result column="FComTypeID" jdbcType="INTEGER" property="fcomtypeid" />
+    <result column="FSellMethod" jdbcType="INTEGER" property="fsellmethod" />
+    <result column="FProducingArea" jdbcType="NVARCHAR" property="fproducingarea" />
+    <result column="FComBrandID" jdbcType="INTEGER" property="fcombrandid" />
+    <result column="FPointsRate" jdbcType="DECIMAL" property="fpointsrate" />
+    <result column="FComponents" jdbcType="NVARCHAR" property="fcomponents" />
+    <result column="FGoodsNumber" jdbcType="NVARCHAR" property="fgoodsnumber" />
+    <result column="FPackTypeID" jdbcType="INTEGER" property="fpacktypeid" />
+    <result column="FVIPPrice" jdbcType="DECIMAL" property="fvipprice" />
+    <result column="FSilverVIPPrice" jdbcType="DECIMAL" property="fsilvervipprice" />
+    <result column="FGoldVIPPrice" jdbcType="DECIMAL" property="fgoldvipprice" />
+    <result column="FGoodsBarCode" jdbcType="VARCHAR" property="fgoodsbarcode" />
+    <result column="FOperator" jdbcType="VARCHAR" property="foperator" />
+    <result column="FOperatingTime" jdbcType="TIMESTAMP" property="foperatingtime" />
+    <result column="FBusinessType" jdbcType="INTEGER" property="fbusinesstype" />
+    <result column="FBarCodeUnitID" jdbcType="INTEGER" property="fbarcodeunitid" />
+    <result column="FKCCUnitID" jdbcType="INTEGER" property="fkccunitid" />
+    <result column="FLastUpdateTime" jdbcType="TIMESTAMP" property="flastupdatetime" />
+    <result column="FOrderRector" jdbcType="INTEGER" property="forderrector" />
+    <result column="FPOHghPrcMnyType" jdbcType="INTEGER" property="fpohghprcmnytype" />
+    <result column="FPOHighPrice" jdbcType="DECIMAL" property="fpohighprice" />
+    <result column="FWWHghPrc" jdbcType="DECIMAL" property="fwwhghprc" />
+    <result column="FWWHghPrcMnyType" jdbcType="INTEGER" property="fwwhghprcmnytype" />
+    <result column="FSOLowPrc" jdbcType="DECIMAL" property="fsolowprc" />
+    <result column="FSOLowPrcMnyType" jdbcType="INTEGER" property="fsolowprcmnytype" />
+    <result column="FIsSale" jdbcType="BIT" property="fissale" />
+    <result column="FProfitRate" jdbcType="DECIMAL" property="fprofitrate" />
+    <result column="FSalePrice" jdbcType="DECIMAL" property="fsaleprice" />
+    <result column="FBatchManager" jdbcType="BIT" property="fbatchmanager" />
+    <result column="FISKFPeriod" jdbcType="BIT" property="fiskfperiod" />
+    <result column="FKFPeriod" jdbcType="DECIMAL" property="fkfperiod" />
+    <result column="FTrack" jdbcType="INTEGER" property="ftrack" />
+    <result column="FPlanPrice" jdbcType="DECIMAL" property="fplanprice" />
+    <result column="FPriceDecimal" jdbcType="SMALLINT" property="fpricedecimal" />
+    <result column="FAcctID" jdbcType="INTEGER" property="facctid" />
+    <result column="FSaleAcctID" jdbcType="INTEGER" property="fsaleacctid" />
+    <result column="FCostAcctID" jdbcType="INTEGER" property="fcostacctid" />
+    <result column="FAPAcctID" jdbcType="INTEGER" property="fapacctid" />
+    <result column="FGoodSpec" jdbcType="INTEGER" property="fgoodspec" />
+    <result column="FCostProject" jdbcType="INTEGER" property="fcostproject" />
+    <result column="FIsSnManage" jdbcType="BIT" property="fissnmanage" />
+    <result column="FStockTime" jdbcType="BIT" property="fstocktime" />
+    <result column="FBookPlan" jdbcType="BIT" property="fbookplan" />
+    <result column="FBeforeExpire" jdbcType="INTEGER" property="fbeforeexpire" />
+    <result column="FTaxRate" jdbcType="INTEGER" property="ftaxrate" />
+    <result column="FAdminAcctID" jdbcType="INTEGER" property="fadminacctid" />
+    <result column="FNote" jdbcType="VARCHAR" property="fnote" />
+    <result column="FIsSpecialTax" jdbcType="BIT" property="fisspecialtax" />
+    <result column="FSOHighLimit" jdbcType="DECIMAL" property="fsohighlimit" />
+    <result column="FSOLowLimit" jdbcType="DECIMAL" property="fsolowlimit" />
+    <result column="FOIHighLimit" jdbcType="DECIMAL" property="foihighlimit" />
+    <result column="FOILowLimit" jdbcType="DECIMAL" property="foilowlimit" />
+    <result column="FDaysPer" jdbcType="INTEGER" property="fdaysper" />
+    <result column="FLastCheckDate" jdbcType="TIMESTAMP" property="flastcheckdate" />
+    <result column="FCheckCycle" jdbcType="INTEGER" property="fcheckcycle" />
+    <result column="FCheckCycUnit" jdbcType="INTEGER" property="fcheckcycunit" />
+    <result column="FStockPrice" jdbcType="DECIMAL" property="fstockprice" />
+    <result column="FABCCls" jdbcType="CHAR" property="fabccls" />
+    <result column="FBatchQty" jdbcType="DOUBLE" property="fbatchqty" />
+    <result column="FClass" jdbcType="BIT" property="fclass" />
+    <result column="FCostDiffRate" jdbcType="DOUBLE" property="fcostdiffrate" />
+    <result column="FDepartment" jdbcType="INTEGER" property="fdepartment" />
+    <result column="FSaleTaxAcctID" jdbcType="INTEGER" property="fsaletaxacctid" />
+    <result column="FCBBmStandardID" jdbcType="INTEGER" property="fcbbmstandardid" />
+    <result column="FCBRestore" jdbcType="INTEGER" property="fcbrestore" />
+    <result column="FOnlineShopPName" jdbcType="NVARCHAR" property="fonlineshoppname" />
+    <result column="FOnlineShopPNo" jdbcType="VARCHAR" property="fonlineshoppno" />
+    <result column="FIsPDASnManage" jdbcType="BIT" property="fispdasnmanage" />
+    <result column="FPlanTrategy" jdbcType="INTEGER" property="fplantrategy" />
+    <result column="FOrderTrategy" jdbcType="INTEGER" property="fordertrategy" />
+    <result column="FLeadTime" jdbcType="REAL" property="fleadtime" />
+    <result column="FFixLeadTime" jdbcType="REAL" property="ffixleadtime" />
+    <result column="FTotalTQQ" jdbcType="INTEGER" property="ftotaltqq" />
+    <result column="FQtyMin" jdbcType="DECIMAL" property="fqtymin" />
+    <result column="FQtyMax" jdbcType="DECIMAL" property="fqtymax" />
+    <result column="FCUUnitID" jdbcType="INTEGER" property="fcuunitid" />
+    <result column="FOrderInterVal" jdbcType="INTEGER" property="forderinterval" />
+    <result column="FBatchAppendQty" jdbcType="DECIMAL" property="fbatchappendqty" />
+    <result column="FOrderPoint" jdbcType="DECIMAL" property="forderpoint" />
+    <result column="FBatFixEconomy" jdbcType="DECIMAL" property="fbatfixeconomy" />
+    <result column="FBatChangeEconomy" jdbcType="DECIMAL" property="fbatchangeeconomy" />
+    <result column="FRequirePoint" jdbcType="INTEGER" property="frequirepoint" />
+    <result column="FPlanPoint" jdbcType="INTEGER" property="fplanpoint" />
+    <result column="FDefaultRoutingID" jdbcType="INTEGER" property="fdefaultroutingid" />
+    <result column="FDefaultWorkTypeID" jdbcType="INTEGER" property="fdefaultworktypeid" />
+    <result column="FProductPrincipal" jdbcType="INTEGER" property="fproductprincipal" />
+    <result column="FDailyConsume" jdbcType="DECIMAL" property="fdailyconsume" />
+    <result column="FMRPCon" jdbcType="BIT" property="fmrpcon" />
+    <result column="FPlanner" jdbcType="INTEGER" property="fplanner" />
+    <result column="FPutInteger" jdbcType="BIT" property="fputinteger" />
+    <result column="FInHighLimit" jdbcType="DECIMAL" property="finhighlimit" />
+    <result column="FInLowLimit" jdbcType="DECIMAL" property="finlowlimit" />
+    <result column="FLowestBomCode" jdbcType="INTEGER" property="flowestbomcode" />
+    <result column="FMRPOrder" jdbcType="BIT" property="fmrporder" />
+    <result column="FIsCharSourceItem" jdbcType="INTEGER" property="fischarsourceitem" />
+    <result column="FCharSourceItemID" jdbcType="INTEGER" property="fcharsourceitemid" />
+    <result column="FPlanMode" jdbcType="INTEGER" property="fplanmode" />
+    <result column="FCtrlType" jdbcType="INTEGER" property="fctrltype" />
+    <result column="FCtrlStraregy" jdbcType="INTEGER" property="fctrlstraregy" />
+    <result column="FContainerName" jdbcType="NVARCHAR" property="fcontainername" />
+    <result column="FKanBanCapability" jdbcType="INTEGER" property="fkanbancapability" />
+    <result column="FIsBackFlush" jdbcType="INTEGER" property="fisbackflush" />
+    <result column="FBackFlushStockID" jdbcType="INTEGER" property="fbackflushstockid" />
+    <result column="FBackFlushSPID" jdbcType="INTEGER" property="fbackflushspid" />
+    <result column="F_102" jdbcType="VARCHAR" property="f102" />
+    <result column="F_103" jdbcType="INTEGER" property="f103" />
+    <result column="F_104" jdbcType="VARCHAR" property="f104" />
+    <result column="FChartNumber" jdbcType="VARCHAR" property="fchartnumber" />
+    <result column="FIsKeyItem" jdbcType="BIT" property="fiskeyitem" />
+    <result column="FMaund" jdbcType="INTEGER" property="fmaund" />
+    <result column="FGrossWeight" jdbcType="DECIMAL" property="fgrossweight" />
+    <result column="FNetWeight" jdbcType="DECIMAL" property="fnetweight" />
+    <result column="FCubicMeasure" jdbcType="INTEGER" property="fcubicmeasure" />
+    <result column="FLength" jdbcType="DECIMAL" property="flength" />
+    <result column="FWidth" jdbcType="DECIMAL" property="fwidth" />
+    <result column="FHeight" jdbcType="DECIMAL" property="fheight" />
+    <result column="FSize" jdbcType="DECIMAL" property="fsize" />
+    <result column="FVersion" jdbcType="VARCHAR" property="fversion" />
+    <result column="FZJNum" jdbcType="DECIMAL" property="fzjnum" />
+    <result column="FStandardCost" jdbcType="DECIMAL" property="fstandardcost" />
+    <result column="FStandardManHour" jdbcType="DECIMAL" property="fstandardmanhour" />
+    <result column="FStdPayRate" jdbcType="DECIMAL" property="fstdpayrate" />
+    <result column="FChgFeeRate" jdbcType="DECIMAL" property="fchgfeerate" />
+    <result column="FStdFixFeeRate" jdbcType="DECIMAL" property="fstdfixfeerate" />
+    <result column="FOutMachFee" jdbcType="DECIMAL" property="foutmachfee" />
+    <result column="FPieceRate" jdbcType="DECIMAL" property="fpiecerate" />
+    <result column="FStdBatchQty" jdbcType="DECIMAL" property="fstdbatchqty" />
+    <result column="FPOVAcctID" jdbcType="INTEGER" property="fpovacctid" />
+    <result column="FPIVAcctID" jdbcType="INTEGER" property="fpivacctid" />
+    <result column="FMCVAcctID" jdbcType="INTEGER" property="fmcvacctid" />
+    <result column="FPCVAcctID" jdbcType="INTEGER" property="fpcvacctid" />
+    <result column="FSLAcctID" jdbcType="INTEGER" property="fslacctid" />
+    <result column="FCAVAcctID" jdbcType="INTEGER" property="fcavacctid" />
+    <result column="FCBAppendRate" jdbcType="DECIMAL" property="fcbappendrate" />
+    <result column="FCBAppendProject" jdbcType="INTEGER" property="fcbappendproject" />
+    <result column="FCostBomID" jdbcType="INTEGER" property="fcostbomid" />
+    <result column="FCBRouting" jdbcType="INTEGER" property="fcbrouting" />
+    <result column="FInspectionLevel" jdbcType="INTEGER" property="finspectionlevel" />
+    <result column="FInspectionProject" jdbcType="INTEGER" property="finspectionproject" />
+    <result column="FIsListControl" jdbcType="INTEGER" property="fislistcontrol" />
+    <result column="FProChkMde" jdbcType="INTEGER" property="fprochkmde" />
+    <result column="FWWChkMde" jdbcType="INTEGER" property="fwwchkmde" />
+    <result column="FSOChkMde" jdbcType="INTEGER" property="fsochkmde" />
+    <result column="FWthDrwChkMde" jdbcType="INTEGER" property="fwthdrwchkmde" />
+    <result column="FStkChkMde" jdbcType="INTEGER" property="fstkchkmde" />
+    <result column="FOtherChkMde" jdbcType="INTEGER" property="fotherchkmde" />
+    <result column="FStkChkPrd" jdbcType="INTEGER" property="fstkchkprd" />
+    <result column="FStkChkAlrm" jdbcType="INTEGER" property="fstkchkalrm" />
+    <result column="FIdentifier" jdbcType="INTEGER" property="fidentifier" />
+    <result column="FNameEn" jdbcType="NVARCHAR" property="fnameen" />
+    <result column="FModelEn" jdbcType="NVARCHAR" property="fmodelen" />
+    <result column="FHSNumber" jdbcType="INTEGER" property="fhsnumber" />
+    <result column="FFirstUnit" jdbcType="NVARCHAR" property="ffirstunit" />
+    <result column="FSecondUnit" jdbcType="NVARCHAR" property="fsecondunit" />
+    <result column="FFirstUnitRate" jdbcType="DECIMAL" property="ffirstunitrate" />
+    <result column="FSecondUnitRate" jdbcType="DECIMAL" property="fsecondunitrate" />
+    <result column="FIsManage" jdbcType="BIT" property="fismanage" />
+    <result column="FPackType" jdbcType="INTEGER" property="fpacktype" />
+    <result column="FLenDecimal" jdbcType="INTEGER" property="flendecimal" />
+    <result column="FCubageDecimal" jdbcType="INTEGER" property="fcubagedecimal" />
+    <result column="FWeightDecimal" jdbcType="INTEGER" property="fweightdecimal" />
+    <result column="FImpostTaxRate" jdbcType="DECIMAL" property="fimposttaxrate" />
+    <result column="FConsumeTaxRate" jdbcType="DECIMAL" property="fconsumetaxrate" />
+    <result column="FManageType" jdbcType="INTEGER" property="fmanagetype" />
+    <result column="FBarcode" jdbcType="VARCHAR" property="fbarcode" />
+  </resultMap>
+  
+  
+  <resultMap id="BaseResultMapWithOther" type="com.fh.entity.T_ICItem">
+    <result column="FItemID" jdbcType="INTEGER" property="fitemid" />
+    <result column="FModel" jdbcType="VARCHAR" property="fmodel" />
+    <result column="FName" jdbcType="VARCHAR" property="fname" />
+    <result column="FHelpCode" jdbcType="VARCHAR" property="fhelpcode" />
+    <result column="FDeleted" jdbcType="SMALLINT" property="fdeleted" />
+    <result column="FShortNumber" jdbcType="VARCHAR" property="fshortnumber" />
+    <result column="FNumber" jdbcType="VARCHAR" property="fnumber" />
+    <result column="FParentID" jdbcType="INTEGER" property="fparentid" />
+    <result column="FBrNo" jdbcType="VARCHAR" property="fbrno" />
+    <result column="FTopID" jdbcType="INTEGER" property="ftopid" />
+    <result column="FRP" jdbcType="SMALLINT" property="frp" />
+    <result column="FOmortize" jdbcType="SMALLINT" property="fomortize" />
+    <result column="FOmortizeScale" jdbcType="SMALLINT" property="fomortizescale" />
+    <result column="FForSale" jdbcType="BIT" property="fforsale" />
+    <result column="FStaCost" jdbcType="DOUBLE" property="fstacost" />
+    <result column="FOrderPrice" jdbcType="DOUBLE" property="forderprice" />
+    <result column="FOrderMethod" jdbcType="INTEGER" property="fordermethod" />
+    <result column="FPriceFixingType" jdbcType="INTEGER" property="fpricefixingtype" />
+    <result column="FSalePriceFixingType" jdbcType="INTEGER" property="fsalepricefixingtype" />
+    <result column="FPerWastage" jdbcType="DOUBLE" property="fperwastage" />
+    <result column="FARAcctID" jdbcType="INTEGER" property="faracctid" />
+    <result column="FPlanPriceMethod" jdbcType="SMALLINT" property="fplanpricemethod" />
+    <result column="FPlanClass" jdbcType="SMALLINT" property="fplanclass" />
+    <result column="FPY" jdbcType="NVARCHAR" property="fpy" />
+    <result column="FPinYin" jdbcType="NVARCHAR" property="fpinyin" />
+    <result column="FRefCost" jdbcType="DECIMAL" property="frefcost" />
+    <result column="FInvName" jdbcType="VARCHAR" property="finvname" />
+    <result column="FErpClsID" jdbcType="INTEGER" property="ferpclsid" />
+    <result column="FUnitID" jdbcType="INTEGER" property="funitid" />
+    <result column="FUnitGroupID" jdbcType="INTEGER" property="funitgroupid" />
+    <result column="FDefaultLoc" jdbcType="INTEGER" property="fdefaultloc" />
+    <result column="FSPID" jdbcType="INTEGER" property="fspid" />
+    <result column="FSource" jdbcType="INTEGER" property="fsource" />
+    <result column="FQtyDecimal" jdbcType="SMALLINT" property="fqtydecimal" />
+    <result column="FLowLimit" jdbcType="DECIMAL" property="flowlimit" />
+    <result column="FHighLimit" jdbcType="DECIMAL" property="fhighlimit" />
+    <result column="FSecInv" jdbcType="DECIMAL" property="fsecinv" />
+    <result column="FUseState" jdbcType="INTEGER" property="fusestate" />
+    <result column="FIsEquipment" jdbcType="BIT" property="fisequipment" />
+    <result column="FEquipmentNum" jdbcType="VARCHAR" property="fequipmentnum" />
+    <result column="FIsSparePart" jdbcType="BIT" property="fissparepart" />
+    <result column="FFullName" jdbcType="VARCHAR" property="ffullname" />
+    <result column="FSecUnitID" jdbcType="INTEGER" property="fsecunitid" />
+    <result column="FSecCoefficient" jdbcType="DECIMAL" property="fseccoefficient" />
+    <result column="FSecUnitDecimal" jdbcType="INTEGER" property="fsecunitdecimal" />
+    <result column="FAlias" jdbcType="VARCHAR" property="falias" />
+    <result column="FOrderUnitID" jdbcType="INTEGER" property="forderunitid" />
+    <result column="FSaleUnitID" jdbcType="INTEGER" property="fsaleunitid" />
+    <result column="FStoreUnitID" jdbcType="INTEGER" property="fstoreunitid" />
+    <result column="FProductUnitID" jdbcType="INTEGER" property="fproductunitid" />
+    <result column="FApproveNo" jdbcType="VARCHAR" property="fapproveno" />
+    <result column="FAuxClassID" jdbcType="INTEGER" property="fauxclassid" />
+    <result column="FTypeID" jdbcType="INTEGER" property="ftypeid" />
+    <result column="FPreDeadLine" jdbcType="INTEGER" property="fpredeadline" />
+    <result column="FSerialClassID" jdbcType="INTEGER" property="fserialclassid" />
+    <result column="FComCategoryID" jdbcType="INTEGER" property="fcomcategoryid" />
+    <result column="FComTypeID" jdbcType="INTEGER" property="fcomtypeid" />
+    <result column="FSellMethod" jdbcType="INTEGER" property="fsellmethod" />
+    <result column="FProducingArea" jdbcType="NVARCHAR" property="fproducingarea" />
+    <result column="FComBrandID" jdbcType="INTEGER" property="fcombrandid" />
+    <result column="FPointsRate" jdbcType="DECIMAL" property="fpointsrate" />
+    <result column="FComponents" jdbcType="NVARCHAR" property="fcomponents" />
+    <result column="FGoodsNumber" jdbcType="NVARCHAR" property="fgoodsnumber" />
+    <result column="FPackTypeID" jdbcType="INTEGER" property="fpacktypeid" />
+    <result column="FVIPPrice" jdbcType="DECIMAL" property="fvipprice" />
+    <result column="FSilverVIPPrice" jdbcType="DECIMAL" property="fsilvervipprice" />
+    <result column="FGoldVIPPrice" jdbcType="DECIMAL" property="fgoldvipprice" />
+    <result column="FGoodsBarCode" jdbcType="VARCHAR" property="fgoodsbarcode" />
+    <result column="FOperator" jdbcType="VARCHAR" property="foperator" />
+    <result column="FOperatingTime" jdbcType="TIMESTAMP" property="foperatingtime" />
+    <result column="FBusinessType" jdbcType="INTEGER" property="fbusinesstype" />
+    <result column="FBarCodeUnitID" jdbcType="INTEGER" property="fbarcodeunitid" />
+    <result column="FKCCUnitID" jdbcType="INTEGER" property="fkccunitid" />
+    <result column="FLastUpdateTime" jdbcType="TIMESTAMP" property="flastupdatetime" />
+    <result column="FOrderRector" jdbcType="INTEGER" property="forderrector" />
+    <result column="FPOHghPrcMnyType" jdbcType="INTEGER" property="fpohghprcmnytype" />
+    <result column="FPOHighPrice" jdbcType="DECIMAL" property="fpohighprice" />
+    <result column="FWWHghPrc" jdbcType="DECIMAL" property="fwwhghprc" />
+    <result column="FWWHghPrcMnyType" jdbcType="INTEGER" property="fwwhghprcmnytype" />
+    <result column="FSOLowPrc" jdbcType="DECIMAL" property="fsolowprc" />
+    <result column="FSOLowPrcMnyType" jdbcType="INTEGER" property="fsolowprcmnytype" />
+    <result column="FIsSale" jdbcType="BIT" property="fissale" />
+    <result column="FProfitRate" jdbcType="DECIMAL" property="fprofitrate" />
+    <result column="FSalePrice" jdbcType="DECIMAL" property="fsaleprice" />
+    <result column="FBatchManager" jdbcType="BIT" property="fbatchmanager" />
+    <result column="FISKFPeriod" jdbcType="BIT" property="fiskfperiod" />
+    <result column="FKFPeriod" jdbcType="DECIMAL" property="fkfperiod" />
+    <result column="FTrack" jdbcType="INTEGER" property="ftrack" />
+    <result column="FPlanPrice" jdbcType="DECIMAL" property="fplanprice" />
+    <result column="FPriceDecimal" jdbcType="SMALLINT" property="fpricedecimal" />
+    <result column="FAcctID" jdbcType="INTEGER" property="facctid" />
+    <result column="FSaleAcctID" jdbcType="INTEGER" property="fsaleacctid" />
+    <result column="FCostAcctID" jdbcType="INTEGER" property="fcostacctid" />
+    <result column="FAPAcctID" jdbcType="INTEGER" property="fapacctid" />
+    <result column="FGoodSpec" jdbcType="INTEGER" property="fgoodspec" />
+    <result column="FCostProject" jdbcType="INTEGER" property="fcostproject" />
+    <result column="FIsSnManage" jdbcType="BIT" property="fissnmanage" />
+    <result column="FStockTime" jdbcType="BIT" property="fstocktime" />
+    <result column="FBookPlan" jdbcType="BIT" property="fbookplan" />
+    <result column="FBeforeExpire" jdbcType="INTEGER" property="fbeforeexpire" />
+    <result column="FTaxRate" jdbcType="INTEGER" property="ftaxrate" />
+    <result column="FAdminAcctID" jdbcType="INTEGER" property="fadminacctid" />
+    <result column="FNote" jdbcType="VARCHAR" property="fnote" />
+    <result column="FIsSpecialTax" jdbcType="BIT" property="fisspecialtax" />
+    <result column="FSOHighLimit" jdbcType="DECIMAL" property="fsohighlimit" />
+    <result column="FSOLowLimit" jdbcType="DECIMAL" property="fsolowlimit" />
+    <result column="FOIHighLimit" jdbcType="DECIMAL" property="foihighlimit" />
+    <result column="FOILowLimit" jdbcType="DECIMAL" property="foilowlimit" />
+    <result column="FDaysPer" jdbcType="INTEGER" property="fdaysper" />
+    <result column="FLastCheckDate" jdbcType="TIMESTAMP" property="flastcheckdate" />
+    <result column="FCheckCycle" jdbcType="INTEGER" property="fcheckcycle" />
+    <result column="FCheckCycUnit" jdbcType="INTEGER" property="fcheckcycunit" />
+    <result column="FStockPrice" jdbcType="DECIMAL" property="fstockprice" />
+    <result column="FABCCls" jdbcType="CHAR" property="fabccls" />
+    <result column="FBatchQty" jdbcType="DOUBLE" property="fbatchqty" />
+    <result column="FClass" jdbcType="BIT" property="fclass" />
+    <result column="FCostDiffRate" jdbcType="DOUBLE" property="fcostdiffrate" />
+    <result column="FDepartment" jdbcType="INTEGER" property="fdepartment" />
+    <result column="FSaleTaxAcctID" jdbcType="INTEGER" property="fsaletaxacctid" />
+    <result column="FCBBmStandardID" jdbcType="INTEGER" property="fcbbmstandardid" />
+    <result column="FCBRestore" jdbcType="INTEGER" property="fcbrestore" />
+    <result column="FOnlineShopPName" jdbcType="NVARCHAR" property="fonlineshoppname" />
+    <result column="FOnlineShopPNo" jdbcType="VARCHAR" property="fonlineshoppno" />
+    <result column="FIsPDASnManage" jdbcType="BIT" property="fispdasnmanage" />
+    <result column="FPlanTrategy" jdbcType="INTEGER" property="fplantrategy" />
+    <result column="FOrderTrategy" jdbcType="INTEGER" property="fordertrategy" />
+    <result column="FLeadTime" jdbcType="REAL" property="fleadtime" />
+    <result column="FFixLeadTime" jdbcType="REAL" property="ffixleadtime" />
+    <result column="FTotalTQQ" jdbcType="INTEGER" property="ftotaltqq" />
+    <result column="FQtyMin" jdbcType="DECIMAL" property="fqtymin" />
+    <result column="FQtyMax" jdbcType="DECIMAL" property="fqtymax" />
+    <result column="FCUUnitID" jdbcType="INTEGER" property="fcuunitid" />
+    <result column="FOrderInterVal" jdbcType="INTEGER" property="forderinterval" />
+    <result column="FBatchAppendQty" jdbcType="DECIMAL" property="fbatchappendqty" />
+    <result column="FOrderPoint" jdbcType="DECIMAL" property="forderpoint" />
+    <result column="FBatFixEconomy" jdbcType="DECIMAL" property="fbatfixeconomy" />
+    <result column="FBatChangeEconomy" jdbcType="DECIMAL" property="fbatchangeeconomy" />
+    <result column="FRequirePoint" jdbcType="INTEGER" property="frequirepoint" />
+    <result column="FPlanPoint" jdbcType="INTEGER" property="fplanpoint" />
+    <result column="FDefaultRoutingID" jdbcType="INTEGER" property="fdefaultroutingid" />
+    <result column="FDefaultWorkTypeID" jdbcType="INTEGER" property="fdefaultworktypeid" />
+    <result column="FProductPrincipal" jdbcType="INTEGER" property="fproductprincipal" />
+    <result column="FDailyConsume" jdbcType="DECIMAL" property="fdailyconsume" />
+    <result column="FMRPCon" jdbcType="BIT" property="fmrpcon" />
+    <result column="FPlanner" jdbcType="INTEGER" property="fplanner" />
+    <result column="FPutInteger" jdbcType="BIT" property="fputinteger" />
+    <result column="FInHighLimit" jdbcType="DECIMAL" property="finhighlimit" />
+    <result column="FInLowLimit" jdbcType="DECIMAL" property="finlowlimit" />
+    <result column="FLowestBomCode" jdbcType="INTEGER" property="flowestbomcode" />
+    <result column="FMRPOrder" jdbcType="BIT" property="fmrporder" />
+    <result column="FIsCharSourceItem" jdbcType="INTEGER" property="fischarsourceitem" />
+    <result column="FCharSourceItemID" jdbcType="INTEGER" property="fcharsourceitemid" />
+    <result column="FPlanMode" jdbcType="INTEGER" property="fplanmode" />
+    <result column="FCtrlType" jdbcType="INTEGER" property="fctrltype" />
+    <result column="FCtrlStraregy" jdbcType="INTEGER" property="fctrlstraregy" />
+    <result column="FContainerName" jdbcType="NVARCHAR" property="fcontainername" />
+    <result column="FKanBanCapability" jdbcType="INTEGER" property="fkanbancapability" />
+    <result column="FIsBackFlush" jdbcType="INTEGER" property="fisbackflush" />
+    <result column="FBackFlushStockID" jdbcType="INTEGER" property="fbackflushstockid" />
+    <result column="FBackFlushSPID" jdbcType="INTEGER" property="fbackflushspid" />
+    <result column="F_102" jdbcType="VARCHAR" property="f102" />
+    <result column="F_103" jdbcType="INTEGER" property="f103" />
+    <result column="F_104" jdbcType="VARCHAR" property="f104" />
+    <result column="FChartNumber" jdbcType="VARCHAR" property="fchartnumber" />
+    <result column="FIsKeyItem" jdbcType="BIT" property="fiskeyitem" />
+    <result column="FMaund" jdbcType="INTEGER" property="fmaund" />
+    <result column="FGrossWeight" jdbcType="DECIMAL" property="fgrossweight" />
+    <result column="FNetWeight" jdbcType="DECIMAL" property="fnetweight" />
+    <result column="FCubicMeasure" jdbcType="INTEGER" property="fcubicmeasure" />
+    <result column="FLength" jdbcType="DECIMAL" property="flength" />
+    <result column="FWidth" jdbcType="DECIMAL" property="fwidth" />
+    <result column="FHeight" jdbcType="DECIMAL" property="fheight" />
+    <result column="FSize" jdbcType="DECIMAL" property="fsize" />
+    <result column="FVersion" jdbcType="VARCHAR" property="fversion" />
+    <result column="FZJNum" jdbcType="DECIMAL" property="fzjnum" />
+    <result column="FStandardCost" jdbcType="DECIMAL" property="fstandardcost" />
+    <result column="FStandardManHour" jdbcType="DECIMAL" property="fstandardmanhour" />
+    <result column="FStdPayRate" jdbcType="DECIMAL" property="fstdpayrate" />
+    <result column="FChgFeeRate" jdbcType="DECIMAL" property="fchgfeerate" />
+    <result column="FStdFixFeeRate" jdbcType="DECIMAL" property="fstdfixfeerate" />
+    <result column="FOutMachFee" jdbcType="DECIMAL" property="foutmachfee" />
+    <result column="FPieceRate" jdbcType="DECIMAL" property="fpiecerate" />
+    <result column="FStdBatchQty" jdbcType="DECIMAL" property="fstdbatchqty" />
+    <result column="FPOVAcctID" jdbcType="INTEGER" property="fpovacctid" />
+    <result column="FPIVAcctID" jdbcType="INTEGER" property="fpivacctid" />
+    <result column="FMCVAcctID" jdbcType="INTEGER" property="fmcvacctid" />
+    <result column="FPCVAcctID" jdbcType="INTEGER" property="fpcvacctid" />
+    <result column="FSLAcctID" jdbcType="INTEGER" property="fslacctid" />
+    <result column="FCAVAcctID" jdbcType="INTEGER" property="fcavacctid" />
+    <result column="FCBAppendRate" jdbcType="DECIMAL" property="fcbappendrate" />
+    <result column="FCBAppendProject" jdbcType="INTEGER" property="fcbappendproject" />
+    <result column="FCostBomID" jdbcType="INTEGER" property="fcostbomid" />
+    <result column="FCBRouting" jdbcType="INTEGER" property="fcbrouting" />
+    <result column="FInspectionLevel" jdbcType="INTEGER" property="finspectionlevel" />
+    <result column="FInspectionProject" jdbcType="INTEGER" property="finspectionproject" />
+    <result column="FIsListControl" jdbcType="INTEGER" property="fislistcontrol" />
+    <result column="FProChkMde" jdbcType="INTEGER" property="fprochkmde" />
+    <result column="FWWChkMde" jdbcType="INTEGER" property="fwwchkmde" />
+    <result column="FSOChkMde" jdbcType="INTEGER" property="fsochkmde" />
+    <result column="FWthDrwChkMde" jdbcType="INTEGER" property="fwthdrwchkmde" />
+    <result column="FStkChkMde" jdbcType="INTEGER" property="fstkchkmde" />
+    <result column="FOtherChkMde" jdbcType="INTEGER" property="fotherchkmde" />
+    <result column="FStkChkPrd" jdbcType="INTEGER" property="fstkchkprd" />
+    <result column="FStkChkAlrm" jdbcType="INTEGER" property="fstkchkalrm" />
+    <result column="FIdentifier" jdbcType="INTEGER" property="fidentifier" />
+    <result column="FNameEn" jdbcType="NVARCHAR" property="fnameen" />
+    <result column="FModelEn" jdbcType="NVARCHAR" property="fmodelen" />
+    <result column="FHSNumber" jdbcType="INTEGER" property="fhsnumber" />
+    <result column="FFirstUnit" jdbcType="NVARCHAR" property="ffirstunit" />
+    <result column="FSecondUnit" jdbcType="NVARCHAR" property="fsecondunit" />
+    <result column="FFirstUnitRate" jdbcType="DECIMAL" property="ffirstunitrate" />
+    <result column="FSecondUnitRate" jdbcType="DECIMAL" property="fsecondunitrate" />
+    <result column="FIsManage" jdbcType="BIT" property="fismanage" />
+    <result column="FPackType" jdbcType="INTEGER" property="fpacktype" />
+    <result column="FLenDecimal" jdbcType="INTEGER" property="flendecimal" />
+    <result column="FCubageDecimal" jdbcType="INTEGER" property="fcubagedecimal" />
+    <result column="FWeightDecimal" jdbcType="INTEGER" property="fweightdecimal" />
+    <result column="FImpostTaxRate" jdbcType="DECIMAL" property="fimposttaxrate" />
+    <result column="FConsumeTaxRate" jdbcType="DECIMAL" property="fconsumetaxrate" />
+    <result column="FManageType" jdbcType="INTEGER" property="fmanagetype" />
+    <result column="FBarcode" jdbcType="VARCHAR" property="fbarcode" />
+    <association property="t_MeasureUnit" javaType="com.fh.entity.T_MeasureUnit">
+			<id column="FMeasureUnitID" jdbcType="INTEGER" property="fmeasureunitid" />
+		    <result column="FUnitGroupID" jdbcType="INTEGER" property="funitgroupid" />
+		    <result column="FNumber" jdbcType="VARCHAR" property="fnumber" />
+		    <result column="FAuxClass" jdbcType="VARCHAR" property="fauxclass" />
+		    <result column="FName" jdbcType="VARCHAR" property="fname" />
+		    <result column="FConversation" jdbcType="INTEGER" property="fconversation" />
+		    <result column="FCoefficient" jdbcType="DECIMAL" property="fcoefficient" />
+		    <result column="FPrecision" jdbcType="INTEGER" property="fprecision" />
+		    <result column="FBrNo" jdbcType="CHAR" property="fbrno" />
+		    <result column="FItemID" jdbcType="INTEGER" property="fitemid" />
+		    <result column="FParentID" jdbcType="INTEGER" property="fparentid" />
+		    <result column="FDeleted" jdbcType="SMALLINT" property="fdeleted" />
+		    <result column="FShortNumber" jdbcType="VARCHAR" property="fshortnumber" />
+		    <result column="FOperDate" jdbcType="CHAR" property="foperdate" />
+		    <result column="FScale" jdbcType="DECIMAL" property="fscale" />
+		    <result column="FStandard" jdbcType="SMALLINT" property="fstandard" />
+		    <result column="FControl" jdbcType="SMALLINT" property="fcontrol" />
+		    <result column="FSystemType" jdbcType="INTEGER" property="fsystemtype" />
+		    <result column="UUID" jdbcType="CHAR" property="uuid" />
+		    <result column="FNameEN" jdbcType="NVARCHAR" property="fnameen" />
+		    <result column="FNameEnPlu" jdbcType="NVARCHAR" property="fnameenplu" />
+		</association>
+		<association property="icinventory" javaType="com.fh.entity.Icinventory">
+			<id column="FItemID" jdbcType="INTEGER" property="fitemid" />
+		    <result column="FStockID" jdbcType="INTEGER" property="fstockid" />
+		    <result column="FAuxPropID" jdbcType="INTEGER" property="fauxpropid" />
+		    <result column="FBatchNo" jdbcType="VARCHAR" property="fbatchno" />
+		    <result column="FStockPlaceID" jdbcType="INTEGER" property="fstockplaceid" />
+		    <result column="FKFPeriod" jdbcType="INTEGER" property="fkfperiod" />
+		    <result column="FKFDate" jdbcType="VARCHAR" property="fkfdate" />
+		    <result column="FBrNo" jdbcType="VARCHAR" property="fbrno" />
+		    <result column="FMTONo" jdbcType="NVARCHAR" property="fmtono" />
+		    <result column="FQty" jdbcType="DECIMAL" property="fqty" />
+		    <result column="FBal" jdbcType="DECIMAL" property="fbal" />
+		    <result column="FQtyLock" jdbcType="DECIMAL" property="fqtylock" />
+		    <result column="FSecQty" jdbcType="DECIMAL" property="fsecqty" />
+		    <result column="FLastUpdateTime" jdbcType="TIMESTAMP" property="flastupdatetime" />
+		</association>
+		<association property="t_Stock" javaType="com.fh.entity.T_Stock">
+			<id column="FItemID" jdbcType="INTEGER" property="fitemid" />
+		    <result column="FBrNO" jdbcType="VARCHAR" property="fbrno" />
+		    <result column="FHelperCode" jdbcType="VARCHAR" property="fhelpercode" />
+		    <result column="FEmpID" jdbcType="INTEGER" property="fempid" />
+		    <result column="FAddress" jdbcType="VARCHAR" property="faddress" />
+		    <result column="FPhone" jdbcType="VARCHAR" property="fphone" />
+		    <result column="FProperty" jdbcType="SMALLINT" property="fproperty" />
+		    <result column="FBWorkShop" jdbcType="INTEGER" property="fbworkshop" />
+		    <result column="FName" jdbcType="VARCHAR" property="fname" />
+		    <result column="FNumber" jdbcType="VARCHAR" property="fnumber" />
+		    <result column="FParentID" jdbcType="INTEGER" property="fparentid" />
+		    <result column="FDeleted" jdbcType="SMALLINT" property="fdeleted" />
+		    <result column="FShortNumber" jdbcType="VARCHAR" property="fshortnumber" />
+		    <result column="FTypeID" jdbcType="INTEGER" property="ftypeid" />
+		    <result column="FIsStockMgr" jdbcType="BIT" property="fisstockmgr" />
+		    <result column="FSPGroupID" jdbcType="INTEGER" property="fspgroupid" />
+		    <result column="FMRPAvail" jdbcType="BIT" property="fmrpavail" />
+		    <result column="FGroupID" jdbcType="INTEGER" property="fgroupid" />
+		    <result column="FStockGroupID" jdbcType="INTEGER" property="fstockgroupid" />
+		    <result column="FCalcCostOrder" jdbcType="INTEGER" property="fcalccostorder" />
+		    <result column="FPlanArea" jdbcType="INTEGER" property="fplanarea" />
+		    <result column="FUnderStock" jdbcType="INTEGER" property="funderstock" />
+		    <result column="FHelpcode" jdbcType="VARCHAR" property="fhelpcode" />
+		    <result column="FBranchID" jdbcType="INTEGER" property="fbranchid" />
+		    <result column="FPointsRate" jdbcType="DECIMAL" property="fpointsrate" />
+		    <result column="FIsShared" jdbcType="INTEGER" property="fisshared" />
+		    <result column="FIsInStatistics" jdbcType="BIT" property="fisinstatistics" />
+		</association>
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.fh.entity.T_ICItem">
+    <result column="FModifyTime" jdbcType="BINARY" property="fmodifytime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    FItemID, FModel, FName, FHelpCode, FDeleted, FShortNumber, FNumber, FParentID, FBrNo, 
+    FTopID, FRP, FOmortize, FOmortizeScale, FForSale, FStaCost, FOrderPrice, FOrderMethod, 
+    FPriceFixingType, FSalePriceFixingType, FPerWastage, FARAcctID, FPlanPriceMethod, 
+    FPlanClass, FPY, FPinYin, FRefCost, FInvName, FErpClsID, FUnitID, FUnitGroupID, FDefaultLoc, 
+    FSPID, FSource, FQtyDecimal, FLowLimit, FHighLimit, FSecInv, FUseState, FIsEquipment, 
+    FEquipmentNum, FIsSparePart, FFullName, FSecUnitID, FSecCoefficient, FSecUnitDecimal, 
+    FAlias, FOrderUnitID, FSaleUnitID, FStoreUnitID, FProductUnitID, FApproveNo, FAuxClassID, 
+    FTypeID, FPreDeadLine, FSerialClassID, FComCategoryID, FComTypeID, FSellMethod, FProducingArea, 
+    FComBrandID, FPointsRate, FComponents, FGoodsNumber, FPackTypeID, FVIPPrice, FSilverVIPPrice, 
+    FGoldVIPPrice, FGoodsBarCode, FOperator, FOperatingTime, FBusinessType, FBarCodeUnitID, 
+    FKCCUnitID, FLastUpdateTime, FOrderRector, FPOHghPrcMnyType, FPOHighPrice, FWWHghPrc, 
+    FWWHghPrcMnyType, FSOLowPrc, FSOLowPrcMnyType, FIsSale, FProfitRate, FSalePrice, 
+    FBatchManager, FISKFPeriod, FKFPeriod, FTrack, FPlanPrice, FPriceDecimal, FAcctID, 
+    FSaleAcctID, FCostAcctID, FAPAcctID, FGoodSpec, FCostProject, FIsSnManage, FStockTime, 
+    FBookPlan, FBeforeExpire, FTaxRate, FAdminAcctID, FNote, FIsSpecialTax, FSOHighLimit, 
+    FSOLowLimit, FOIHighLimit, FOILowLimit, FDaysPer, FLastCheckDate, FCheckCycle, FCheckCycUnit, 
+    FStockPrice, FABCCls, FBatchQty, FClass, FCostDiffRate, FDepartment, FSaleTaxAcctID, 
+    FCBBmStandardID, FCBRestore, FOnlineShopPName, FOnlineShopPNo, FIsPDASnManage, FPlanTrategy, 
+    FOrderTrategy, FLeadTime, FFixLeadTime, FTotalTQQ, FQtyMin, FQtyMax, FCUUnitID, FOrderInterVal, 
+    FBatchAppendQty, FOrderPoint, FBatFixEconomy, FBatChangeEconomy, FRequirePoint, FPlanPoint, 
+    FDefaultRoutingID, FDefaultWorkTypeID, FProductPrincipal, FDailyConsume, FMRPCon, 
+    FPlanner, FPutInteger, FInHighLimit, FInLowLimit, FLowestBomCode, FMRPOrder, FIsCharSourceItem, 
+    FCharSourceItemID, FPlanMode, FCtrlType, FCtrlStraregy, FContainerName, FKanBanCapability, 
+    FIsBackFlush, FBackFlushStockID, FBackFlushSPID, F_102, F_103, F_104, FChartNumber, 
+    FIsKeyItem, FMaund, FGrossWeight, FNetWeight, FCubicMeasure, FLength, FWidth, FHeight, 
+    FSize, FVersion, FZJNum, FStandardCost, FStandardManHour, FStdPayRate, FChgFeeRate, 
+    FStdFixFeeRate, FOutMachFee, FPieceRate, FStdBatchQty, FPOVAcctID, FPIVAcctID, FMCVAcctID, 
+    FPCVAcctID, FSLAcctID, FCAVAcctID, FCBAppendRate, FCBAppendProject, FCostBomID, FCBRouting, 
+    FInspectionLevel, FInspectionProject, FIsListControl, FProChkMde, FWWChkMde, FSOChkMde, 
+    FWthDrwChkMde, FStkChkMde, FOtherChkMde, FStkChkPrd, FStkChkAlrm, FIdentifier, FNameEn, 
+    FModelEn, FHSNumber, FFirstUnit, FSecondUnit, FFirstUnitRate, FSecondUnitRate, FIsManage, 
+    FPackType, FLenDecimal, FCubageDecimal, FWeightDecimal, FImpostTaxRate, FConsumeTaxRate, 
+    FManageType, FBarcode
+  </sql>
+  <sql id="Blob_Column_List">
+    FModifyTime
+  </sql>
+  <sql id="Other_Column_List">
+   A.FNumber,A.FName,A.FModel,B.FName,Sum(IsNull(C.FQty,0)),ISNULL(D.FName,'')
+  </sql>
+  
+  <select id="selectByOther" parameterType="com.fh.entity.T_ICItemExample" resultMap="BaseResultMapWithOther">
+    select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Other_Column_List" />
+		from t_ICItem A inner Join T_MeasureUnit B On A.FUnitID=B.FMeasureUnitID left  Join ICInventory C On C.FItemID=A.FItemID left  Join t_Stock D On D.FItemID=C.FStockID
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		Group By A.FNumber,A.FName,A.FModel,B.FName,ISNULL(D.FName,'') Order By A.FNumber,ISNULL(D.FName,'')
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+  </select>
+  
+  <select id="selectByExampleWithBLOBs" parameterType="com.fh.entity.T_ICItemExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_ICItem
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.fh.entity.T_ICItemExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_ICItem
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.fh.entity.T_ICItemExample">
+    delete from t_ICItem
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fh.entity.T_ICItem">
+    insert into t_ICItem (FItemID, FModel, FName, 
+      FHelpCode, FDeleted, FShortNumber, 
+      FNumber, FParentID, FBrNo, 
+      FTopID, FRP, FOmortize, 
+      FOmortizeScale, FForSale, FStaCost, 
+      FOrderPrice, FOrderMethod, FPriceFixingType, 
+      FSalePriceFixingType, FPerWastage, FARAcctID, 
+      FPlanPriceMethod, FPlanClass, FPY, 
+      FPinYin, FRefCost, FInvName, 
+      FErpClsID, FUnitID, FUnitGroupID, 
+      FDefaultLoc, FSPID, FSource, 
+      FQtyDecimal, FLowLimit, FHighLimit, 
+      FSecInv, FUseState, FIsEquipment, 
+      FEquipmentNum, FIsSparePart, FFullName, 
+      FSecUnitID, FSecCoefficient, FSecUnitDecimal, 
+      FAlias, FOrderUnitID, FSaleUnitID, 
+      FStoreUnitID, FProductUnitID, FApproveNo, 
+      FAuxClassID, FTypeID, FPreDeadLine, 
+      FSerialClassID, FComCategoryID, FComTypeID, 
+      FSellMethod, FProducingArea, FComBrandID, 
+      FPointsRate, FComponents, FGoodsNumber, 
+      FPackTypeID, FVIPPrice, FSilverVIPPrice, 
+      FGoldVIPPrice, FGoodsBarCode, FOperator, 
+      FOperatingTime, FBusinessType, FBarCodeUnitID, 
+      FKCCUnitID, FLastUpdateTime, FOrderRector, 
+      FPOHghPrcMnyType, FPOHighPrice, FWWHghPrc, 
+      FWWHghPrcMnyType, FSOLowPrc, FSOLowPrcMnyType, 
+      FIsSale, FProfitRate, FSalePrice, 
+      FBatchManager, FISKFPeriod, FKFPeriod, 
+      FTrack, FPlanPrice, FPriceDecimal, 
+      FAcctID, FSaleAcctID, FCostAcctID, 
+      FAPAcctID, FGoodSpec, FCostProject, 
+      FIsSnManage, FStockTime, FBookPlan, 
+      FBeforeExpire, FTaxRate, FAdminAcctID, 
+      FNote, FIsSpecialTax, FSOHighLimit, 
+      FSOLowLimit, FOIHighLimit, FOILowLimit, 
+      FDaysPer, FLastCheckDate, FCheckCycle, 
+      FCheckCycUnit, FStockPrice, FABCCls, 
+      FBatchQty, FClass, FCostDiffRate, 
+      FDepartment, FSaleTaxAcctID, FCBBmStandardID, 
+      FCBRestore, FOnlineShopPName, FOnlineShopPNo, 
+      FIsPDASnManage, FPlanTrategy, FOrderTrategy, 
+      FLeadTime, FFixLeadTime, FTotalTQQ, 
+      FQtyMin, FQtyMax, FCUUnitID, 
+      FOrderInterVal, FBatchAppendQty, FOrderPoint, 
+      FBatFixEconomy, FBatChangeEconomy, FRequirePoint, 
+      FPlanPoint, FDefaultRoutingID, FDefaultWorkTypeID, 
+      FProductPrincipal, FDailyConsume, FMRPCon, 
+      FPlanner, FPutInteger, FInHighLimit, 
+      FInLowLimit, FLowestBomCode, FMRPOrder, 
+      FIsCharSourceItem, FCharSourceItemID, FPlanMode, 
+      FCtrlType, FCtrlStraregy, FContainerName, 
+      FKanBanCapability, FIsBackFlush, FBackFlushStockID, 
+      FBackFlushSPID, F_102, F_103, 
+      F_104, FChartNumber, FIsKeyItem, 
+      FMaund, FGrossWeight, FNetWeight, 
+      FCubicMeasure, FLength, FWidth, 
+      FHeight, FSize, FVersion, 
+      FZJNum, FStandardCost, FStandardManHour, 
+      FStdPayRate, FChgFeeRate, FStdFixFeeRate, 
+      FOutMachFee, FPieceRate, FStdBatchQty, 
+      FPOVAcctID, FPIVAcctID, FMCVAcctID, 
+      FPCVAcctID, FSLAcctID, FCAVAcctID, 
+      FCBAppendRate, FCBAppendProject, FCostBomID, 
+      FCBRouting, FInspectionLevel, FInspectionProject, 
+      FIsListControl, FProChkMde, FWWChkMde, 
+      FSOChkMde, FWthDrwChkMde, FStkChkMde, 
+      FOtherChkMde, FStkChkPrd, FStkChkAlrm, 
+      FIdentifier, FNameEn, FModelEn, 
+      FHSNumber, FFirstUnit, FSecondUnit, 
+      FFirstUnitRate, FSecondUnitRate, FIsManage, 
+      FPackType, FLenDecimal, FCubageDecimal, 
+      FWeightDecimal, FImpostTaxRate, FConsumeTaxRate, 
+      FManageType, FBarcode, FModifyTime
+      )
+    values (#{fitemid,jdbcType=INTEGER}, #{fmodel,jdbcType=VARCHAR}, #{fname,jdbcType=VARCHAR}, 
+      #{fhelpcode,jdbcType=VARCHAR}, #{fdeleted,jdbcType=SMALLINT}, #{fshortnumber,jdbcType=VARCHAR}, 
+      #{fnumber,jdbcType=VARCHAR}, #{fparentid,jdbcType=INTEGER}, #{fbrno,jdbcType=VARCHAR}, 
+      #{ftopid,jdbcType=INTEGER}, #{frp,jdbcType=SMALLINT}, #{fomortize,jdbcType=SMALLINT}, 
+      #{fomortizescale,jdbcType=SMALLINT}, #{fforsale,jdbcType=BIT}, #{fstacost,jdbcType=DOUBLE}, 
+      #{forderprice,jdbcType=DOUBLE}, #{fordermethod,jdbcType=INTEGER}, #{fpricefixingtype,jdbcType=INTEGER}, 
+      #{fsalepricefixingtype,jdbcType=INTEGER}, #{fperwastage,jdbcType=DOUBLE}, #{faracctid,jdbcType=INTEGER}, 
+      #{fplanpricemethod,jdbcType=SMALLINT}, #{fplanclass,jdbcType=SMALLINT}, #{fpy,jdbcType=NVARCHAR}, 
+      #{fpinyin,jdbcType=NVARCHAR}, #{frefcost,jdbcType=DECIMAL}, #{finvname,jdbcType=VARCHAR}, 
+      #{ferpclsid,jdbcType=INTEGER}, #{funitid,jdbcType=INTEGER}, #{funitgroupid,jdbcType=INTEGER}, 
+      #{fdefaultloc,jdbcType=INTEGER}, #{fspid,jdbcType=INTEGER}, #{fsource,jdbcType=INTEGER}, 
+      #{fqtydecimal,jdbcType=SMALLINT}, #{flowlimit,jdbcType=DECIMAL}, #{fhighlimit,jdbcType=DECIMAL}, 
+      #{fsecinv,jdbcType=DECIMAL}, #{fusestate,jdbcType=INTEGER}, #{fisequipment,jdbcType=BIT}, 
+      #{fequipmentnum,jdbcType=VARCHAR}, #{fissparepart,jdbcType=BIT}, #{ffullname,jdbcType=VARCHAR}, 
+      #{fsecunitid,jdbcType=INTEGER}, #{fseccoefficient,jdbcType=DECIMAL}, #{fsecunitdecimal,jdbcType=INTEGER}, 
+      #{falias,jdbcType=VARCHAR}, #{forderunitid,jdbcType=INTEGER}, #{fsaleunitid,jdbcType=INTEGER}, 
+      #{fstoreunitid,jdbcType=INTEGER}, #{fproductunitid,jdbcType=INTEGER}, #{fapproveno,jdbcType=VARCHAR}, 
+      #{fauxclassid,jdbcType=INTEGER}, #{ftypeid,jdbcType=INTEGER}, #{fpredeadline,jdbcType=INTEGER}, 
+      #{fserialclassid,jdbcType=INTEGER}, #{fcomcategoryid,jdbcType=INTEGER}, #{fcomtypeid,jdbcType=INTEGER}, 
+      #{fsellmethod,jdbcType=INTEGER}, #{fproducingarea,jdbcType=NVARCHAR}, #{fcombrandid,jdbcType=INTEGER}, 
+      #{fpointsrate,jdbcType=DECIMAL}, #{fcomponents,jdbcType=NVARCHAR}, #{fgoodsnumber,jdbcType=NVARCHAR}, 
+      #{fpacktypeid,jdbcType=INTEGER}, #{fvipprice,jdbcType=DECIMAL}, #{fsilvervipprice,jdbcType=DECIMAL}, 
+      #{fgoldvipprice,jdbcType=DECIMAL}, #{fgoodsbarcode,jdbcType=VARCHAR}, #{foperator,jdbcType=VARCHAR}, 
+      #{foperatingtime,jdbcType=TIMESTAMP}, #{fbusinesstype,jdbcType=INTEGER}, #{fbarcodeunitid,jdbcType=INTEGER}, 
+      #{fkccunitid,jdbcType=INTEGER}, #{flastupdatetime,jdbcType=TIMESTAMP}, #{forderrector,jdbcType=INTEGER}, 
+      #{fpohghprcmnytype,jdbcType=INTEGER}, #{fpohighprice,jdbcType=DECIMAL}, #{fwwhghprc,jdbcType=DECIMAL}, 
+      #{fwwhghprcmnytype,jdbcType=INTEGER}, #{fsolowprc,jdbcType=DECIMAL}, #{fsolowprcmnytype,jdbcType=INTEGER}, 
+      #{fissale,jdbcType=BIT}, #{fprofitrate,jdbcType=DECIMAL}, #{fsaleprice,jdbcType=DECIMAL}, 
+      #{fbatchmanager,jdbcType=BIT}, #{fiskfperiod,jdbcType=BIT}, #{fkfperiod,jdbcType=DECIMAL}, 
+      #{ftrack,jdbcType=INTEGER}, #{fplanprice,jdbcType=DECIMAL}, #{fpricedecimal,jdbcType=SMALLINT}, 
+      #{facctid,jdbcType=INTEGER}, #{fsaleacctid,jdbcType=INTEGER}, #{fcostacctid,jdbcType=INTEGER}, 
+      #{fapacctid,jdbcType=INTEGER}, #{fgoodspec,jdbcType=INTEGER}, #{fcostproject,jdbcType=INTEGER}, 
+      #{fissnmanage,jdbcType=BIT}, #{fstocktime,jdbcType=BIT}, #{fbookplan,jdbcType=BIT}, 
+      #{fbeforeexpire,jdbcType=INTEGER}, #{ftaxrate,jdbcType=INTEGER}, #{fadminacctid,jdbcType=INTEGER}, 
+      #{fnote,jdbcType=VARCHAR}, #{fisspecialtax,jdbcType=BIT}, #{fsohighlimit,jdbcType=DECIMAL}, 
+      #{fsolowlimit,jdbcType=DECIMAL}, #{foihighlimit,jdbcType=DECIMAL}, #{foilowlimit,jdbcType=DECIMAL}, 
+      #{fdaysper,jdbcType=INTEGER}, #{flastcheckdate,jdbcType=TIMESTAMP}, #{fcheckcycle,jdbcType=INTEGER}, 
+      #{fcheckcycunit,jdbcType=INTEGER}, #{fstockprice,jdbcType=DECIMAL}, #{fabccls,jdbcType=CHAR}, 
+      #{fbatchqty,jdbcType=DOUBLE}, #{fclass,jdbcType=BIT}, #{fcostdiffrate,jdbcType=DOUBLE}, 
+      #{fdepartment,jdbcType=INTEGER}, #{fsaletaxacctid,jdbcType=INTEGER}, #{fcbbmstandardid,jdbcType=INTEGER}, 
+      #{fcbrestore,jdbcType=INTEGER}, #{fonlineshoppname,jdbcType=NVARCHAR}, #{fonlineshoppno,jdbcType=VARCHAR}, 
+      #{fispdasnmanage,jdbcType=BIT}, #{fplantrategy,jdbcType=INTEGER}, #{fordertrategy,jdbcType=INTEGER}, 
+      #{fleadtime,jdbcType=REAL}, #{ffixleadtime,jdbcType=REAL}, #{ftotaltqq,jdbcType=INTEGER}, 
+      #{fqtymin,jdbcType=DECIMAL}, #{fqtymax,jdbcType=DECIMAL}, #{fcuunitid,jdbcType=INTEGER}, 
+      #{forderinterval,jdbcType=INTEGER}, #{fbatchappendqty,jdbcType=DECIMAL}, #{forderpoint,jdbcType=DECIMAL}, 
+      #{fbatfixeconomy,jdbcType=DECIMAL}, #{fbatchangeeconomy,jdbcType=DECIMAL}, #{frequirepoint,jdbcType=INTEGER}, 
+      #{fplanpoint,jdbcType=INTEGER}, #{fdefaultroutingid,jdbcType=INTEGER}, #{fdefaultworktypeid,jdbcType=INTEGER}, 
+      #{fproductprincipal,jdbcType=INTEGER}, #{fdailyconsume,jdbcType=DECIMAL}, #{fmrpcon,jdbcType=BIT}, 
+      #{fplanner,jdbcType=INTEGER}, #{fputinteger,jdbcType=BIT}, #{finhighlimit,jdbcType=DECIMAL}, 
+      #{finlowlimit,jdbcType=DECIMAL}, #{flowestbomcode,jdbcType=INTEGER}, #{fmrporder,jdbcType=BIT}, 
+      #{fischarsourceitem,jdbcType=INTEGER}, #{fcharsourceitemid,jdbcType=INTEGER}, #{fplanmode,jdbcType=INTEGER}, 
+      #{fctrltype,jdbcType=INTEGER}, #{fctrlstraregy,jdbcType=INTEGER}, #{fcontainername,jdbcType=NVARCHAR}, 
+      #{fkanbancapability,jdbcType=INTEGER}, #{fisbackflush,jdbcType=INTEGER}, #{fbackflushstockid,jdbcType=INTEGER}, 
+      #{fbackflushspid,jdbcType=INTEGER}, #{f102,jdbcType=VARCHAR}, #{f103,jdbcType=INTEGER}, 
+      #{f104,jdbcType=VARCHAR}, #{fchartnumber,jdbcType=VARCHAR}, #{fiskeyitem,jdbcType=BIT}, 
+      #{fmaund,jdbcType=INTEGER}, #{fgrossweight,jdbcType=DECIMAL}, #{fnetweight,jdbcType=DECIMAL}, 
+      #{fcubicmeasure,jdbcType=INTEGER}, #{flength,jdbcType=DECIMAL}, #{fwidth,jdbcType=DECIMAL}, 
+      #{fheight,jdbcType=DECIMAL}, #{fsize,jdbcType=DECIMAL}, #{fversion,jdbcType=VARCHAR}, 
+      #{fzjnum,jdbcType=DECIMAL}, #{fstandardcost,jdbcType=DECIMAL}, #{fstandardmanhour,jdbcType=DECIMAL}, 
+      #{fstdpayrate,jdbcType=DECIMAL}, #{fchgfeerate,jdbcType=DECIMAL}, #{fstdfixfeerate,jdbcType=DECIMAL}, 
+      #{foutmachfee,jdbcType=DECIMAL}, #{fpiecerate,jdbcType=DECIMAL}, #{fstdbatchqty,jdbcType=DECIMAL}, 
+      #{fpovacctid,jdbcType=INTEGER}, #{fpivacctid,jdbcType=INTEGER}, #{fmcvacctid,jdbcType=INTEGER}, 
+      #{fpcvacctid,jdbcType=INTEGER}, #{fslacctid,jdbcType=INTEGER}, #{fcavacctid,jdbcType=INTEGER}, 
+      #{fcbappendrate,jdbcType=DECIMAL}, #{fcbappendproject,jdbcType=INTEGER}, #{fcostbomid,jdbcType=INTEGER}, 
+      #{fcbrouting,jdbcType=INTEGER}, #{finspectionlevel,jdbcType=INTEGER}, #{finspectionproject,jdbcType=INTEGER}, 
+      #{fislistcontrol,jdbcType=INTEGER}, #{fprochkmde,jdbcType=INTEGER}, #{fwwchkmde,jdbcType=INTEGER}, 
+      #{fsochkmde,jdbcType=INTEGER}, #{fwthdrwchkmde,jdbcType=INTEGER}, #{fstkchkmde,jdbcType=INTEGER}, 
+      #{fotherchkmde,jdbcType=INTEGER}, #{fstkchkprd,jdbcType=INTEGER}, #{fstkchkalrm,jdbcType=INTEGER}, 
+      #{fidentifier,jdbcType=INTEGER}, #{fnameen,jdbcType=NVARCHAR}, #{fmodelen,jdbcType=NVARCHAR}, 
+      #{fhsnumber,jdbcType=INTEGER}, #{ffirstunit,jdbcType=NVARCHAR}, #{fsecondunit,jdbcType=NVARCHAR}, 
+      #{ffirstunitrate,jdbcType=DECIMAL}, #{fsecondunitrate,jdbcType=DECIMAL}, #{fismanage,jdbcType=BIT}, 
+      #{fpacktype,jdbcType=INTEGER}, #{flendecimal,jdbcType=INTEGER}, #{fcubagedecimal,jdbcType=INTEGER}, 
+      #{fweightdecimal,jdbcType=INTEGER}, #{fimposttaxrate,jdbcType=DECIMAL}, #{fconsumetaxrate,jdbcType=DECIMAL}, 
+      #{fmanagetype,jdbcType=INTEGER}, #{fbarcode,jdbcType=VARCHAR}, #{fmodifytime,jdbcType=BINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fh.entity.T_ICItem">
+    insert into t_ICItem
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fitemid != null">
+        FItemID,
+      </if>
+      <if test="fmodel != null">
+        FModel,
+      </if>
+      <if test="fname != null">
+        FName,
+      </if>
+      <if test="fhelpcode != null">
+        FHelpCode,
+      </if>
+      <if test="fdeleted != null">
+        FDeleted,
+      </if>
+      <if test="fshortnumber != null">
+        FShortNumber,
+      </if>
+      <if test="fnumber != null">
+        FNumber,
+      </if>
+      <if test="fparentid != null">
+        FParentID,
+      </if>
+      <if test="fbrno != null">
+        FBrNo,
+      </if>
+      <if test="ftopid != null">
+        FTopID,
+      </if>
+      <if test="frp != null">
+        FRP,
+      </if>
+      <if test="fomortize != null">
+        FOmortize,
+      </if>
+      <if test="fomortizescale != null">
+        FOmortizeScale,
+      </if>
+      <if test="fforsale != null">
+        FForSale,
+      </if>
+      <if test="fstacost != null">
+        FStaCost,
+      </if>
+      <if test="forderprice != null">
+        FOrderPrice,
+      </if>
+      <if test="fordermethod != null">
+        FOrderMethod,
+      </if>
+      <if test="fpricefixingtype != null">
+        FPriceFixingType,
+      </if>
+      <if test="fsalepricefixingtype != null">
+        FSalePriceFixingType,
+      </if>
+      <if test="fperwastage != null">
+        FPerWastage,
+      </if>
+      <if test="faracctid != null">
+        FARAcctID,
+      </if>
+      <if test="fplanpricemethod != null">
+        FPlanPriceMethod,
+      </if>
+      <if test="fplanclass != null">
+        FPlanClass,
+      </if>
+      <if test="fpy != null">
+        FPY,
+      </if>
+      <if test="fpinyin != null">
+        FPinYin,
+      </if>
+      <if test="frefcost != null">
+        FRefCost,
+      </if>
+      <if test="finvname != null">
+        FInvName,
+      </if>
+      <if test="ferpclsid != null">
+        FErpClsID,
+      </if>
+      <if test="funitid != null">
+        FUnitID,
+      </if>
+      <if test="funitgroupid != null">
+        FUnitGroupID,
+      </if>
+      <if test="fdefaultloc != null">
+        FDefaultLoc,
+      </if>
+      <if test="fspid != null">
+        FSPID,
+      </if>
+      <if test="fsource != null">
+        FSource,
+      </if>
+      <if test="fqtydecimal != null">
+        FQtyDecimal,
+      </if>
+      <if test="flowlimit != null">
+        FLowLimit,
+      </if>
+      <if test="fhighlimit != null">
+        FHighLimit,
+      </if>
+      <if test="fsecinv != null">
+        FSecInv,
+      </if>
+      <if test="fusestate != null">
+        FUseState,
+      </if>
+      <if test="fisequipment != null">
+        FIsEquipment,
+      </if>
+      <if test="fequipmentnum != null">
+        FEquipmentNum,
+      </if>
+      <if test="fissparepart != null">
+        FIsSparePart,
+      </if>
+      <if test="ffullname != null">
+        FFullName,
+      </if>
+      <if test="fsecunitid != null">
+        FSecUnitID,
+      </if>
+      <if test="fseccoefficient != null">
+        FSecCoefficient,
+      </if>
+      <if test="fsecunitdecimal != null">
+        FSecUnitDecimal,
+      </if>
+      <if test="falias != null">
+        FAlias,
+      </if>
+      <if test="forderunitid != null">
+        FOrderUnitID,
+      </if>
+      <if test="fsaleunitid != null">
+        FSaleUnitID,
+      </if>
+      <if test="fstoreunitid != null">
+        FStoreUnitID,
+      </if>
+      <if test="fproductunitid != null">
+        FProductUnitID,
+      </if>
+      <if test="fapproveno != null">
+        FApproveNo,
+      </if>
+      <if test="fauxclassid != null">
+        FAuxClassID,
+      </if>
+      <if test="ftypeid != null">
+        FTypeID,
+      </if>
+      <if test="fpredeadline != null">
+        FPreDeadLine,
+      </if>
+      <if test="fserialclassid != null">
+        FSerialClassID,
+      </if>
+      <if test="fcomcategoryid != null">
+        FComCategoryID,
+      </if>
+      <if test="fcomtypeid != null">
+        FComTypeID,
+      </if>
+      <if test="fsellmethod != null">
+        FSellMethod,
+      </if>
+      <if test="fproducingarea != null">
+        FProducingArea,
+      </if>
+      <if test="fcombrandid != null">
+        FComBrandID,
+      </if>
+      <if test="fpointsrate != null">
+        FPointsRate,
+      </if>
+      <if test="fcomponents != null">
+        FComponents,
+      </if>
+      <if test="fgoodsnumber != null">
+        FGoodsNumber,
+      </if>
+      <if test="fpacktypeid != null">
+        FPackTypeID,
+      </if>
+      <if test="fvipprice != null">
+        FVIPPrice,
+      </if>
+      <if test="fsilvervipprice != null">
+        FSilverVIPPrice,
+      </if>
+      <if test="fgoldvipprice != null">
+        FGoldVIPPrice,
+      </if>
+      <if test="fgoodsbarcode != null">
+        FGoodsBarCode,
+      </if>
+      <if test="foperator != null">
+        FOperator,
+      </if>
+      <if test="foperatingtime != null">
+        FOperatingTime,
+      </if>
+      <if test="fbusinesstype != null">
+        FBusinessType,
+      </if>
+      <if test="fbarcodeunitid != null">
+        FBarCodeUnitID,
+      </if>
+      <if test="fkccunitid != null">
+        FKCCUnitID,
+      </if>
+      <if test="flastupdatetime != null">
+        FLastUpdateTime,
+      </if>
+      <if test="forderrector != null">
+        FOrderRector,
+      </if>
+      <if test="fpohghprcmnytype != null">
+        FPOHghPrcMnyType,
+      </if>
+      <if test="fpohighprice != null">
+        FPOHighPrice,
+      </if>
+      <if test="fwwhghprc != null">
+        FWWHghPrc,
+      </if>
+      <if test="fwwhghprcmnytype != null">
+        FWWHghPrcMnyType,
+      </if>
+      <if test="fsolowprc != null">
+        FSOLowPrc,
+      </if>
+      <if test="fsolowprcmnytype != null">
+        FSOLowPrcMnyType,
+      </if>
+      <if test="fissale != null">
+        FIsSale,
+      </if>
+      <if test="fprofitrate != null">
+        FProfitRate,
+      </if>
+      <if test="fsaleprice != null">
+        FSalePrice,
+      </if>
+      <if test="fbatchmanager != null">
+        FBatchManager,
+      </if>
+      <if test="fiskfperiod != null">
+        FISKFPeriod,
+      </if>
+      <if test="fkfperiod != null">
+        FKFPeriod,
+      </if>
+      <if test="ftrack != null">
+        FTrack,
+      </if>
+      <if test="fplanprice != null">
+        FPlanPrice,
+      </if>
+      <if test="fpricedecimal != null">
+        FPriceDecimal,
+      </if>
+      <if test="facctid != null">
+        FAcctID,
+      </if>
+      <if test="fsaleacctid != null">
+        FSaleAcctID,
+      </if>
+      <if test="fcostacctid != null">
+        FCostAcctID,
+      </if>
+      <if test="fapacctid != null">
+        FAPAcctID,
+      </if>
+      <if test="fgoodspec != null">
+        FGoodSpec,
+      </if>
+      <if test="fcostproject != null">
+        FCostProject,
+      </if>
+      <if test="fissnmanage != null">
+        FIsSnManage,
+      </if>
+      <if test="fstocktime != null">
+        FStockTime,
+      </if>
+      <if test="fbookplan != null">
+        FBookPlan,
+      </if>
+      <if test="fbeforeexpire != null">
+        FBeforeExpire,
+      </if>
+      <if test="ftaxrate != null">
+        FTaxRate,
+      </if>
+      <if test="fadminacctid != null">
+        FAdminAcctID,
+      </if>
+      <if test="fnote != null">
+        FNote,
+      </if>
+      <if test="fisspecialtax != null">
+        FIsSpecialTax,
+      </if>
+      <if test="fsohighlimit != null">
+        FSOHighLimit,
+      </if>
+      <if test="fsolowlimit != null">
+        FSOLowLimit,
+      </if>
+      <if test="foihighlimit != null">
+        FOIHighLimit,
+      </if>
+      <if test="foilowlimit != null">
+        FOILowLimit,
+      </if>
+      <if test="fdaysper != null">
+        FDaysPer,
+      </if>
+      <if test="flastcheckdate != null">
+        FLastCheckDate,
+      </if>
+      <if test="fcheckcycle != null">
+        FCheckCycle,
+      </if>
+      <if test="fcheckcycunit != null">
+        FCheckCycUnit,
+      </if>
+      <if test="fstockprice != null">
+        FStockPrice,
+      </if>
+      <if test="fabccls != null">
+        FABCCls,
+      </if>
+      <if test="fbatchqty != null">
+        FBatchQty,
+      </if>
+      <if test="fclass != null">
+        FClass,
+      </if>
+      <if test="fcostdiffrate != null">
+        FCostDiffRate,
+      </if>
+      <if test="fdepartment != null">
+        FDepartment,
+      </if>
+      <if test="fsaletaxacctid != null">
+        FSaleTaxAcctID,
+      </if>
+      <if test="fcbbmstandardid != null">
+        FCBBmStandardID,
+      </if>
+      <if test="fcbrestore != null">
+        FCBRestore,
+      </if>
+      <if test="fonlineshoppname != null">
+        FOnlineShopPName,
+      </if>
+      <if test="fonlineshoppno != null">
+        FOnlineShopPNo,
+      </if>
+      <if test="fispdasnmanage != null">
+        FIsPDASnManage,
+      </if>
+      <if test="fplantrategy != null">
+        FPlanTrategy,
+      </if>
+      <if test="fordertrategy != null">
+        FOrderTrategy,
+      </if>
+      <if test="fleadtime != null">
+        FLeadTime,
+      </if>
+      <if test="ffixleadtime != null">
+        FFixLeadTime,
+      </if>
+      <if test="ftotaltqq != null">
+        FTotalTQQ,
+      </if>
+      <if test="fqtymin != null">
+        FQtyMin,
+      </if>
+      <if test="fqtymax != null">
+        FQtyMax,
+      </if>
+      <if test="fcuunitid != null">
+        FCUUnitID,
+      </if>
+      <if test="forderinterval != null">
+        FOrderInterVal,
+      </if>
+      <if test="fbatchappendqty != null">
+        FBatchAppendQty,
+      </if>
+      <if test="forderpoint != null">
+        FOrderPoint,
+      </if>
+      <if test="fbatfixeconomy != null">
+        FBatFixEconomy,
+      </if>
+      <if test="fbatchangeeconomy != null">
+        FBatChangeEconomy,
+      </if>
+      <if test="frequirepoint != null">
+        FRequirePoint,
+      </if>
+      <if test="fplanpoint != null">
+        FPlanPoint,
+      </if>
+      <if test="fdefaultroutingid != null">
+        FDefaultRoutingID,
+      </if>
+      <if test="fdefaultworktypeid != null">
+        FDefaultWorkTypeID,
+      </if>
+      <if test="fproductprincipal != null">
+        FProductPrincipal,
+      </if>
+      <if test="fdailyconsume != null">
+        FDailyConsume,
+      </if>
+      <if test="fmrpcon != null">
+        FMRPCon,
+      </if>
+      <if test="fplanner != null">
+        FPlanner,
+      </if>
+      <if test="fputinteger != null">
+        FPutInteger,
+      </if>
+      <if test="finhighlimit != null">
+        FInHighLimit,
+      </if>
+      <if test="finlowlimit != null">
+        FInLowLimit,
+      </if>
+      <if test="flowestbomcode != null">
+        FLowestBomCode,
+      </if>
+      <if test="fmrporder != null">
+        FMRPOrder,
+      </if>
+      <if test="fischarsourceitem != null">
+        FIsCharSourceItem,
+      </if>
+      <if test="fcharsourceitemid != null">
+        FCharSourceItemID,
+      </if>
+      <if test="fplanmode != null">
+        FPlanMode,
+      </if>
+      <if test="fctrltype != null">
+        FCtrlType,
+      </if>
+      <if test="fctrlstraregy != null">
+        FCtrlStraregy,
+      </if>
+      <if test="fcontainername != null">
+        FContainerName,
+      </if>
+      <if test="fkanbancapability != null">
+        FKanBanCapability,
+      </if>
+      <if test="fisbackflush != null">
+        FIsBackFlush,
+      </if>
+      <if test="fbackflushstockid != null">
+        FBackFlushStockID,
+      </if>
+      <if test="fbackflushspid != null">
+        FBackFlushSPID,
+      </if>
+      <if test="f102 != null">
+        F_102,
+      </if>
+      <if test="f103 != null">
+        F_103,
+      </if>
+      <if test="f104 != null">
+        F_104,
+      </if>
+      <if test="fchartnumber != null">
+        FChartNumber,
+      </if>
+      <if test="fiskeyitem != null">
+        FIsKeyItem,
+      </if>
+      <if test="fmaund != null">
+        FMaund,
+      </if>
+      <if test="fgrossweight != null">
+        FGrossWeight,
+      </if>
+      <if test="fnetweight != null">
+        FNetWeight,
+      </if>
+      <if test="fcubicmeasure != null">
+        FCubicMeasure,
+      </if>
+      <if test="flength != null">
+        FLength,
+      </if>
+      <if test="fwidth != null">
+        FWidth,
+      </if>
+      <if test="fheight != null">
+        FHeight,
+      </if>
+      <if test="fsize != null">
+        FSize,
+      </if>
+      <if test="fversion != null">
+        FVersion,
+      </if>
+      <if test="fzjnum != null">
+        FZJNum,
+      </if>
+      <if test="fstandardcost != null">
+        FStandardCost,
+      </if>
+      <if test="fstandardmanhour != null">
+        FStandardManHour,
+      </if>
+      <if test="fstdpayrate != null">
+        FStdPayRate,
+      </if>
+      <if test="fchgfeerate != null">
+        FChgFeeRate,
+      </if>
+      <if test="fstdfixfeerate != null">
+        FStdFixFeeRate,
+      </if>
+      <if test="foutmachfee != null">
+        FOutMachFee,
+      </if>
+      <if test="fpiecerate != null">
+        FPieceRate,
+      </if>
+      <if test="fstdbatchqty != null">
+        FStdBatchQty,
+      </if>
+      <if test="fpovacctid != null">
+        FPOVAcctID,
+      </if>
+      <if test="fpivacctid != null">
+        FPIVAcctID,
+      </if>
+      <if test="fmcvacctid != null">
+        FMCVAcctID,
+      </if>
+      <if test="fpcvacctid != null">
+        FPCVAcctID,
+      </if>
+      <if test="fslacctid != null">
+        FSLAcctID,
+      </if>
+      <if test="fcavacctid != null">
+        FCAVAcctID,
+      </if>
+      <if test="fcbappendrate != null">
+        FCBAppendRate,
+      </if>
+      <if test="fcbappendproject != null">
+        FCBAppendProject,
+      </if>
+      <if test="fcostbomid != null">
+        FCostBomID,
+      </if>
+      <if test="fcbrouting != null">
+        FCBRouting,
+      </if>
+      <if test="finspectionlevel != null">
+        FInspectionLevel,
+      </if>
+      <if test="finspectionproject != null">
+        FInspectionProject,
+      </if>
+      <if test="fislistcontrol != null">
+        FIsListControl,
+      </if>
+      <if test="fprochkmde != null">
+        FProChkMde,
+      </if>
+      <if test="fwwchkmde != null">
+        FWWChkMde,
+      </if>
+      <if test="fsochkmde != null">
+        FSOChkMde,
+      </if>
+      <if test="fwthdrwchkmde != null">
+        FWthDrwChkMde,
+      </if>
+      <if test="fstkchkmde != null">
+        FStkChkMde,
+      </if>
+      <if test="fotherchkmde != null">
+        FOtherChkMde,
+      </if>
+      <if test="fstkchkprd != null">
+        FStkChkPrd,
+      </if>
+      <if test="fstkchkalrm != null">
+        FStkChkAlrm,
+      </if>
+      <if test="fidentifier != null">
+        FIdentifier,
+      </if>
+      <if test="fnameen != null">
+        FNameEn,
+      </if>
+      <if test="fmodelen != null">
+        FModelEn,
+      </if>
+      <if test="fhsnumber != null">
+        FHSNumber,
+      </if>
+      <if test="ffirstunit != null">
+        FFirstUnit,
+      </if>
+      <if test="fsecondunit != null">
+        FSecondUnit,
+      </if>
+      <if test="ffirstunitrate != null">
+        FFirstUnitRate,
+      </if>
+      <if test="fsecondunitrate != null">
+        FSecondUnitRate,
+      </if>
+      <if test="fismanage != null">
+        FIsManage,
+      </if>
+      <if test="fpacktype != null">
+        FPackType,
+      </if>
+      <if test="flendecimal != null">
+        FLenDecimal,
+      </if>
+      <if test="fcubagedecimal != null">
+        FCubageDecimal,
+      </if>
+      <if test="fweightdecimal != null">
+        FWeightDecimal,
+      </if>
+      <if test="fimposttaxrate != null">
+        FImpostTaxRate,
+      </if>
+      <if test="fconsumetaxrate != null">
+        FConsumeTaxRate,
+      </if>
+      <if test="fmanagetype != null">
+        FManageType,
+      </if>
+      <if test="fbarcode != null">
+        FBarcode,
+      </if>
+      <if test="fmodifytime != null">
+        FModifyTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fitemid != null">
+        #{fitemid,jdbcType=INTEGER},
+      </if>
+      <if test="fmodel != null">
+        #{fmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="fname != null">
+        #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="fhelpcode != null">
+        #{fhelpcode,jdbcType=VARCHAR},
+      </if>
+      <if test="fdeleted != null">
+        #{fdeleted,jdbcType=SMALLINT},
+      </if>
+      <if test="fshortnumber != null">
+        #{fshortnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fnumber != null">
+        #{fnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fparentid != null">
+        #{fparentid,jdbcType=INTEGER},
+      </if>
+      <if test="fbrno != null">
+        #{fbrno,jdbcType=VARCHAR},
+      </if>
+      <if test="ftopid != null">
+        #{ftopid,jdbcType=INTEGER},
+      </if>
+      <if test="frp != null">
+        #{frp,jdbcType=SMALLINT},
+      </if>
+      <if test="fomortize != null">
+        #{fomortize,jdbcType=SMALLINT},
+      </if>
+      <if test="fomortizescale != null">
+        #{fomortizescale,jdbcType=SMALLINT},
+      </if>
+      <if test="fforsale != null">
+        #{fforsale,jdbcType=BIT},
+      </if>
+      <if test="fstacost != null">
+        #{fstacost,jdbcType=DOUBLE},
+      </if>
+      <if test="forderprice != null">
+        #{forderprice,jdbcType=DOUBLE},
+      </if>
+      <if test="fordermethod != null">
+        #{fordermethod,jdbcType=INTEGER},
+      </if>
+      <if test="fpricefixingtype != null">
+        #{fpricefixingtype,jdbcType=INTEGER},
+      </if>
+      <if test="fsalepricefixingtype != null">
+        #{fsalepricefixingtype,jdbcType=INTEGER},
+      </if>
+      <if test="fperwastage != null">
+        #{fperwastage,jdbcType=DOUBLE},
+      </if>
+      <if test="faracctid != null">
+        #{faracctid,jdbcType=INTEGER},
+      </if>
+      <if test="fplanpricemethod != null">
+        #{fplanpricemethod,jdbcType=SMALLINT},
+      </if>
+      <if test="fplanclass != null">
+        #{fplanclass,jdbcType=SMALLINT},
+      </if>
+      <if test="fpy != null">
+        #{fpy,jdbcType=NVARCHAR},
+      </if>
+      <if test="fpinyin != null">
+        #{fpinyin,jdbcType=NVARCHAR},
+      </if>
+      <if test="frefcost != null">
+        #{frefcost,jdbcType=DECIMAL},
+      </if>
+      <if test="finvname != null">
+        #{finvname,jdbcType=VARCHAR},
+      </if>
+      <if test="ferpclsid != null">
+        #{ferpclsid,jdbcType=INTEGER},
+      </if>
+      <if test="funitid != null">
+        #{funitid,jdbcType=INTEGER},
+      </if>
+      <if test="funitgroupid != null">
+        #{funitgroupid,jdbcType=INTEGER},
+      </if>
+      <if test="fdefaultloc != null">
+        #{fdefaultloc,jdbcType=INTEGER},
+      </if>
+      <if test="fspid != null">
+        #{fspid,jdbcType=INTEGER},
+      </if>
+      <if test="fsource != null">
+        #{fsource,jdbcType=INTEGER},
+      </if>
+      <if test="fqtydecimal != null">
+        #{fqtydecimal,jdbcType=SMALLINT},
+      </if>
+      <if test="flowlimit != null">
+        #{flowlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="fhighlimit != null">
+        #{fhighlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="fsecinv != null">
+        #{fsecinv,jdbcType=DECIMAL},
+      </if>
+      <if test="fusestate != null">
+        #{fusestate,jdbcType=INTEGER},
+      </if>
+      <if test="fisequipment != null">
+        #{fisequipment,jdbcType=BIT},
+      </if>
+      <if test="fequipmentnum != null">
+        #{fequipmentnum,jdbcType=VARCHAR},
+      </if>
+      <if test="fissparepart != null">
+        #{fissparepart,jdbcType=BIT},
+      </if>
+      <if test="ffullname != null">
+        #{ffullname,jdbcType=VARCHAR},
+      </if>
+      <if test="fsecunitid != null">
+        #{fsecunitid,jdbcType=INTEGER},
+      </if>
+      <if test="fseccoefficient != null">
+        #{fseccoefficient,jdbcType=DECIMAL},
+      </if>
+      <if test="fsecunitdecimal != null">
+        #{fsecunitdecimal,jdbcType=INTEGER},
+      </if>
+      <if test="falias != null">
+        #{falias,jdbcType=VARCHAR},
+      </if>
+      <if test="forderunitid != null">
+        #{forderunitid,jdbcType=INTEGER},
+      </if>
+      <if test="fsaleunitid != null">
+        #{fsaleunitid,jdbcType=INTEGER},
+      </if>
+      <if test="fstoreunitid != null">
+        #{fstoreunitid,jdbcType=INTEGER},
+      </if>
+      <if test="fproductunitid != null">
+        #{fproductunitid,jdbcType=INTEGER},
+      </if>
+      <if test="fapproveno != null">
+        #{fapproveno,jdbcType=VARCHAR},
+      </if>
+      <if test="fauxclassid != null">
+        #{fauxclassid,jdbcType=INTEGER},
+      </if>
+      <if test="ftypeid != null">
+        #{ftypeid,jdbcType=INTEGER},
+      </if>
+      <if test="fpredeadline != null">
+        #{fpredeadline,jdbcType=INTEGER},
+      </if>
+      <if test="fserialclassid != null">
+        #{fserialclassid,jdbcType=INTEGER},
+      </if>
+      <if test="fcomcategoryid != null">
+        #{fcomcategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="fcomtypeid != null">
+        #{fcomtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="fsellmethod != null">
+        #{fsellmethod,jdbcType=INTEGER},
+      </if>
+      <if test="fproducingarea != null">
+        #{fproducingarea,jdbcType=NVARCHAR},
+      </if>
+      <if test="fcombrandid != null">
+        #{fcombrandid,jdbcType=INTEGER},
+      </if>
+      <if test="fpointsrate != null">
+        #{fpointsrate,jdbcType=DECIMAL},
+      </if>
+      <if test="fcomponents != null">
+        #{fcomponents,jdbcType=NVARCHAR},
+      </if>
+      <if test="fgoodsnumber != null">
+        #{fgoodsnumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="fpacktypeid != null">
+        #{fpacktypeid,jdbcType=INTEGER},
+      </if>
+      <if test="fvipprice != null">
+        #{fvipprice,jdbcType=DECIMAL},
+      </if>
+      <if test="fsilvervipprice != null">
+        #{fsilvervipprice,jdbcType=DECIMAL},
+      </if>
+      <if test="fgoldvipprice != null">
+        #{fgoldvipprice,jdbcType=DECIMAL},
+      </if>
+      <if test="fgoodsbarcode != null">
+        #{fgoodsbarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="foperator != null">
+        #{foperator,jdbcType=VARCHAR},
+      </if>
+      <if test="foperatingtime != null">
+        #{foperatingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fbusinesstype != null">
+        #{fbusinesstype,jdbcType=INTEGER},
+      </if>
+      <if test="fbarcodeunitid != null">
+        #{fbarcodeunitid,jdbcType=INTEGER},
+      </if>
+      <if test="fkccunitid != null">
+        #{fkccunitid,jdbcType=INTEGER},
+      </if>
+      <if test="flastupdatetime != null">
+        #{flastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="forderrector != null">
+        #{forderrector,jdbcType=INTEGER},
+      </if>
+      <if test="fpohghprcmnytype != null">
+        #{fpohghprcmnytype,jdbcType=INTEGER},
+      </if>
+      <if test="fpohighprice != null">
+        #{fpohighprice,jdbcType=DECIMAL},
+      </if>
+      <if test="fwwhghprc != null">
+        #{fwwhghprc,jdbcType=DECIMAL},
+      </if>
+      <if test="fwwhghprcmnytype != null">
+        #{fwwhghprcmnytype,jdbcType=INTEGER},
+      </if>
+      <if test="fsolowprc != null">
+        #{fsolowprc,jdbcType=DECIMAL},
+      </if>
+      <if test="fsolowprcmnytype != null">
+        #{fsolowprcmnytype,jdbcType=INTEGER},
+      </if>
+      <if test="fissale != null">
+        #{fissale,jdbcType=BIT},
+      </if>
+      <if test="fprofitrate != null">
+        #{fprofitrate,jdbcType=DECIMAL},
+      </if>
+      <if test="fsaleprice != null">
+        #{fsaleprice,jdbcType=DECIMAL},
+      </if>
+      <if test="fbatchmanager != null">
+        #{fbatchmanager,jdbcType=BIT},
+      </if>
+      <if test="fiskfperiod != null">
+        #{fiskfperiod,jdbcType=BIT},
+      </if>
+      <if test="fkfperiod != null">
+        #{fkfperiod,jdbcType=DECIMAL},
+      </if>
+      <if test="ftrack != null">
+        #{ftrack,jdbcType=INTEGER},
+      </if>
+      <if test="fplanprice != null">
+        #{fplanprice,jdbcType=DECIMAL},
+      </if>
+      <if test="fpricedecimal != null">
+        #{fpricedecimal,jdbcType=SMALLINT},
+      </if>
+      <if test="facctid != null">
+        #{facctid,jdbcType=INTEGER},
+      </if>
+      <if test="fsaleacctid != null">
+        #{fsaleacctid,jdbcType=INTEGER},
+      </if>
+      <if test="fcostacctid != null">
+        #{fcostacctid,jdbcType=INTEGER},
+      </if>
+      <if test="fapacctid != null">
+        #{fapacctid,jdbcType=INTEGER},
+      </if>
+      <if test="fgoodspec != null">
+        #{fgoodspec,jdbcType=INTEGER},
+      </if>
+      <if test="fcostproject != null">
+        #{fcostproject,jdbcType=INTEGER},
+      </if>
+      <if test="fissnmanage != null">
+        #{fissnmanage,jdbcType=BIT},
+      </if>
+      <if test="fstocktime != null">
+        #{fstocktime,jdbcType=BIT},
+      </if>
+      <if test="fbookplan != null">
+        #{fbookplan,jdbcType=BIT},
+      </if>
+      <if test="fbeforeexpire != null">
+        #{fbeforeexpire,jdbcType=INTEGER},
+      </if>
+      <if test="ftaxrate != null">
+        #{ftaxrate,jdbcType=INTEGER},
+      </if>
+      <if test="fadminacctid != null">
+        #{fadminacctid,jdbcType=INTEGER},
+      </if>
+      <if test="fnote != null">
+        #{fnote,jdbcType=VARCHAR},
+      </if>
+      <if test="fisspecialtax != null">
+        #{fisspecialtax,jdbcType=BIT},
+      </if>
+      <if test="fsohighlimit != null">
+        #{fsohighlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="fsolowlimit != null">
+        #{fsolowlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="foihighlimit != null">
+        #{foihighlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="foilowlimit != null">
+        #{foilowlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="fdaysper != null">
+        #{fdaysper,jdbcType=INTEGER},
+      </if>
+      <if test="flastcheckdate != null">
+        #{flastcheckdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcheckcycle != null">
+        #{fcheckcycle,jdbcType=INTEGER},
+      </if>
+      <if test="fcheckcycunit != null">
+        #{fcheckcycunit,jdbcType=INTEGER},
+      </if>
+      <if test="fstockprice != null">
+        #{fstockprice,jdbcType=DECIMAL},
+      </if>
+      <if test="fabccls != null">
+        #{fabccls,jdbcType=CHAR},
+      </if>
+      <if test="fbatchqty != null">
+        #{fbatchqty,jdbcType=DOUBLE},
+      </if>
+      <if test="fclass != null">
+        #{fclass,jdbcType=BIT},
+      </if>
+      <if test="fcostdiffrate != null">
+        #{fcostdiffrate,jdbcType=DOUBLE},
+      </if>
+      <if test="fdepartment != null">
+        #{fdepartment,jdbcType=INTEGER},
+      </if>
+      <if test="fsaletaxacctid != null">
+        #{fsaletaxacctid,jdbcType=INTEGER},
+      </if>
+      <if test="fcbbmstandardid != null">
+        #{fcbbmstandardid,jdbcType=INTEGER},
+      </if>
+      <if test="fcbrestore != null">
+        #{fcbrestore,jdbcType=INTEGER},
+      </if>
+      <if test="fonlineshoppname != null">
+        #{fonlineshoppname,jdbcType=NVARCHAR},
+      </if>
+      <if test="fonlineshoppno != null">
+        #{fonlineshoppno,jdbcType=VARCHAR},
+      </if>
+      <if test="fispdasnmanage != null">
+        #{fispdasnmanage,jdbcType=BIT},
+      </if>
+      <if test="fplantrategy != null">
+        #{fplantrategy,jdbcType=INTEGER},
+      </if>
+      <if test="fordertrategy != null">
+        #{fordertrategy,jdbcType=INTEGER},
+      </if>
+      <if test="fleadtime != null">
+        #{fleadtime,jdbcType=REAL},
+      </if>
+      <if test="ffixleadtime != null">
+        #{ffixleadtime,jdbcType=REAL},
+      </if>
+      <if test="ftotaltqq != null">
+        #{ftotaltqq,jdbcType=INTEGER},
+      </if>
+      <if test="fqtymin != null">
+        #{fqtymin,jdbcType=DECIMAL},
+      </if>
+      <if test="fqtymax != null">
+        #{fqtymax,jdbcType=DECIMAL},
+      </if>
+      <if test="fcuunitid != null">
+        #{fcuunitid,jdbcType=INTEGER},
+      </if>
+      <if test="forderinterval != null">
+        #{forderinterval,jdbcType=INTEGER},
+      </if>
+      <if test="fbatchappendqty != null">
+        #{fbatchappendqty,jdbcType=DECIMAL},
+      </if>
+      <if test="forderpoint != null">
+        #{forderpoint,jdbcType=DECIMAL},
+      </if>
+      <if test="fbatfixeconomy != null">
+        #{fbatfixeconomy,jdbcType=DECIMAL},
+      </if>
+      <if test="fbatchangeeconomy != null">
+        #{fbatchangeeconomy,jdbcType=DECIMAL},
+      </if>
+      <if test="frequirepoint != null">
+        #{frequirepoint,jdbcType=INTEGER},
+      </if>
+      <if test="fplanpoint != null">
+        #{fplanpoint,jdbcType=INTEGER},
+      </if>
+      <if test="fdefaultroutingid != null">
+        #{fdefaultroutingid,jdbcType=INTEGER},
+      </if>
+      <if test="fdefaultworktypeid != null">
+        #{fdefaultworktypeid,jdbcType=INTEGER},
+      </if>
+      <if test="fproductprincipal != null">
+        #{fproductprincipal,jdbcType=INTEGER},
+      </if>
+      <if test="fdailyconsume != null">
+        #{fdailyconsume,jdbcType=DECIMAL},
+      </if>
+      <if test="fmrpcon != null">
+        #{fmrpcon,jdbcType=BIT},
+      </if>
+      <if test="fplanner != null">
+        #{fplanner,jdbcType=INTEGER},
+      </if>
+      <if test="fputinteger != null">
+        #{fputinteger,jdbcType=BIT},
+      </if>
+      <if test="finhighlimit != null">
+        #{finhighlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="finlowlimit != null">
+        #{finlowlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="flowestbomcode != null">
+        #{flowestbomcode,jdbcType=INTEGER},
+      </if>
+      <if test="fmrporder != null">
+        #{fmrporder,jdbcType=BIT},
+      </if>
+      <if test="fischarsourceitem != null">
+        #{fischarsourceitem,jdbcType=INTEGER},
+      </if>
+      <if test="fcharsourceitemid != null">
+        #{fcharsourceitemid,jdbcType=INTEGER},
+      </if>
+      <if test="fplanmode != null">
+        #{fplanmode,jdbcType=INTEGER},
+      </if>
+      <if test="fctrltype != null">
+        #{fctrltype,jdbcType=INTEGER},
+      </if>
+      <if test="fctrlstraregy != null">
+        #{fctrlstraregy,jdbcType=INTEGER},
+      </if>
+      <if test="fcontainername != null">
+        #{fcontainername,jdbcType=NVARCHAR},
+      </if>
+      <if test="fkanbancapability != null">
+        #{fkanbancapability,jdbcType=INTEGER},
+      </if>
+      <if test="fisbackflush != null">
+        #{fisbackflush,jdbcType=INTEGER},
+      </if>
+      <if test="fbackflushstockid != null">
+        #{fbackflushstockid,jdbcType=INTEGER},
+      </if>
+      <if test="fbackflushspid != null">
+        #{fbackflushspid,jdbcType=INTEGER},
+      </if>
+      <if test="f102 != null">
+        #{f102,jdbcType=VARCHAR},
+      </if>
+      <if test="f103 != null">
+        #{f103,jdbcType=INTEGER},
+      </if>
+      <if test="f104 != null">
+        #{f104,jdbcType=VARCHAR},
+      </if>
+      <if test="fchartnumber != null">
+        #{fchartnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fiskeyitem != null">
+        #{fiskeyitem,jdbcType=BIT},
+      </if>
+      <if test="fmaund != null">
+        #{fmaund,jdbcType=INTEGER},
+      </if>
+      <if test="fgrossweight != null">
+        #{fgrossweight,jdbcType=DECIMAL},
+      </if>
+      <if test="fnetweight != null">
+        #{fnetweight,jdbcType=DECIMAL},
+      </if>
+      <if test="fcubicmeasure != null">
+        #{fcubicmeasure,jdbcType=INTEGER},
+      </if>
+      <if test="flength != null">
+        #{flength,jdbcType=DECIMAL},
+      </if>
+      <if test="fwidth != null">
+        #{fwidth,jdbcType=DECIMAL},
+      </if>
+      <if test="fheight != null">
+        #{fheight,jdbcType=DECIMAL},
+      </if>
+      <if test="fsize != null">
+        #{fsize,jdbcType=DECIMAL},
+      </if>
+      <if test="fversion != null">
+        #{fversion,jdbcType=VARCHAR},
+      </if>
+      <if test="fzjnum != null">
+        #{fzjnum,jdbcType=DECIMAL},
+      </if>
+      <if test="fstandardcost != null">
+        #{fstandardcost,jdbcType=DECIMAL},
+      </if>
+      <if test="fstandardmanhour != null">
+        #{fstandardmanhour,jdbcType=DECIMAL},
+      </if>
+      <if test="fstdpayrate != null">
+        #{fstdpayrate,jdbcType=DECIMAL},
+      </if>
+      <if test="fchgfeerate != null">
+        #{fchgfeerate,jdbcType=DECIMAL},
+      </if>
+      <if test="fstdfixfeerate != null">
+        #{fstdfixfeerate,jdbcType=DECIMAL},
+      </if>
+      <if test="foutmachfee != null">
+        #{foutmachfee,jdbcType=DECIMAL},
+      </if>
+      <if test="fpiecerate != null">
+        #{fpiecerate,jdbcType=DECIMAL},
+      </if>
+      <if test="fstdbatchqty != null">
+        #{fstdbatchqty,jdbcType=DECIMAL},
+      </if>
+      <if test="fpovacctid != null">
+        #{fpovacctid,jdbcType=INTEGER},
+      </if>
+      <if test="fpivacctid != null">
+        #{fpivacctid,jdbcType=INTEGER},
+      </if>
+      <if test="fmcvacctid != null">
+        #{fmcvacctid,jdbcType=INTEGER},
+      </if>
+      <if test="fpcvacctid != null">
+        #{fpcvacctid,jdbcType=INTEGER},
+      </if>
+      <if test="fslacctid != null">
+        #{fslacctid,jdbcType=INTEGER},
+      </if>
+      <if test="fcavacctid != null">
+        #{fcavacctid,jdbcType=INTEGER},
+      </if>
+      <if test="fcbappendrate != null">
+        #{fcbappendrate,jdbcType=DECIMAL},
+      </if>
+      <if test="fcbappendproject != null">
+        #{fcbappendproject,jdbcType=INTEGER},
+      </if>
+      <if test="fcostbomid != null">
+        #{fcostbomid,jdbcType=INTEGER},
+      </if>
+      <if test="fcbrouting != null">
+        #{fcbrouting,jdbcType=INTEGER},
+      </if>
+      <if test="finspectionlevel != null">
+        #{finspectionlevel,jdbcType=INTEGER},
+      </if>
+      <if test="finspectionproject != null">
+        #{finspectionproject,jdbcType=INTEGER},
+      </if>
+      <if test="fislistcontrol != null">
+        #{fislistcontrol,jdbcType=INTEGER},
+      </if>
+      <if test="fprochkmde != null">
+        #{fprochkmde,jdbcType=INTEGER},
+      </if>
+      <if test="fwwchkmde != null">
+        #{fwwchkmde,jdbcType=INTEGER},
+      </if>
+      <if test="fsochkmde != null">
+        #{fsochkmde,jdbcType=INTEGER},
+      </if>
+      <if test="fwthdrwchkmde != null">
+        #{fwthdrwchkmde,jdbcType=INTEGER},
+      </if>
+      <if test="fstkchkmde != null">
+        #{fstkchkmde,jdbcType=INTEGER},
+      </if>
+      <if test="fotherchkmde != null">
+        #{fotherchkmde,jdbcType=INTEGER},
+      </if>
+      <if test="fstkchkprd != null">
+        #{fstkchkprd,jdbcType=INTEGER},
+      </if>
+      <if test="fstkchkalrm != null">
+        #{fstkchkalrm,jdbcType=INTEGER},
+      </if>
+      <if test="fidentifier != null">
+        #{fidentifier,jdbcType=INTEGER},
+      </if>
+      <if test="fnameen != null">
+        #{fnameen,jdbcType=NVARCHAR},
+      </if>
+      <if test="fmodelen != null">
+        #{fmodelen,jdbcType=NVARCHAR},
+      </if>
+      <if test="fhsnumber != null">
+        #{fhsnumber,jdbcType=INTEGER},
+      </if>
+      <if test="ffirstunit != null">
+        #{ffirstunit,jdbcType=NVARCHAR},
+      </if>
+      <if test="fsecondunit != null">
+        #{fsecondunit,jdbcType=NVARCHAR},
+      </if>
+      <if test="ffirstunitrate != null">
+        #{ffirstunitrate,jdbcType=DECIMAL},
+      </if>
+      <if test="fsecondunitrate != null">
+        #{fsecondunitrate,jdbcType=DECIMAL},
+      </if>
+      <if test="fismanage != null">
+        #{fismanage,jdbcType=BIT},
+      </if>
+      <if test="fpacktype != null">
+        #{fpacktype,jdbcType=INTEGER},
+      </if>
+      <if test="flendecimal != null">
+        #{flendecimal,jdbcType=INTEGER},
+      </if>
+      <if test="fcubagedecimal != null">
+        #{fcubagedecimal,jdbcType=INTEGER},
+      </if>
+      <if test="fweightdecimal != null">
+        #{fweightdecimal,jdbcType=INTEGER},
+      </if>
+      <if test="fimposttaxrate != null">
+        #{fimposttaxrate,jdbcType=DECIMAL},
+      </if>
+      <if test="fconsumetaxrate != null">
+        #{fconsumetaxrate,jdbcType=DECIMAL},
+      </if>
+      <if test="fmanagetype != null">
+        #{fmanagetype,jdbcType=INTEGER},
+      </if>
+      <if test="fbarcode != null">
+        #{fbarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="fmodifytime != null">
+        #{fmodifytime,jdbcType=BINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fh.entity.T_ICItemExample" resultType="java.lang.Long">
+    select count(*) from t_ICItem
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_ICItem
+    <set>
+      <if test="record.fitemid != null">
+        FItemID = #{record.fitemid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fmodel != null">
+        FModel = #{record.fmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fname != null">
+        FName = #{record.fname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fhelpcode != null">
+        FHelpCode = #{record.fhelpcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fdeleted != null">
+        FDeleted = #{record.fdeleted,jdbcType=SMALLINT},
+      </if>
+      <if test="record.fshortnumber != null">
+        FShortNumber = #{record.fshortnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fnumber != null">
+        FNumber = #{record.fnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fparentid != null">
+        FParentID = #{record.fparentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fbrno != null">
+        FBrNo = #{record.fbrno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ftopid != null">
+        FTopID = #{record.ftopid,jdbcType=INTEGER},
+      </if>
+      <if test="record.frp != null">
+        FRP = #{record.frp,jdbcType=SMALLINT},
+      </if>
+      <if test="record.fomortize != null">
+        FOmortize = #{record.fomortize,jdbcType=SMALLINT},
+      </if>
+      <if test="record.fomortizescale != null">
+        FOmortizeScale = #{record.fomortizescale,jdbcType=SMALLINT},
+      </if>
+      <if test="record.fforsale != null">
+        FForSale = #{record.fforsale,jdbcType=BIT},
+      </if>
+      <if test="record.fstacost != null">
+        FStaCost = #{record.fstacost,jdbcType=DOUBLE},
+      </if>
+      <if test="record.forderprice != null">
+        FOrderPrice = #{record.forderprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fordermethod != null">
+        FOrderMethod = #{record.fordermethod,jdbcType=INTEGER},
+      </if>
+      <if test="record.fpricefixingtype != null">
+        FPriceFixingType = #{record.fpricefixingtype,jdbcType=INTEGER},
+      </if>
+      <if test="record.fsalepricefixingtype != null">
+        FSalePriceFixingType = #{record.fsalepricefixingtype,jdbcType=INTEGER},
+      </if>
+      <if test="record.fperwastage != null">
+        FPerWastage = #{record.fperwastage,jdbcType=DOUBLE},
+      </if>
+      <if test="record.faracctid != null">
+        FARAcctID = #{record.faracctid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fplanpricemethod != null">
+        FPlanPriceMethod = #{record.fplanpricemethod,jdbcType=SMALLINT},
+      </if>
+      <if test="record.fplanclass != null">
+        FPlanClass = #{record.fplanclass,jdbcType=SMALLINT},
+      </if>
+      <if test="record.fpy != null">
+        FPY = #{record.fpy,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fpinyin != null">
+        FPinYin = #{record.fpinyin,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.frefcost != null">
+        FRefCost = #{record.frefcost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.finvname != null">
+        FInvName = #{record.finvname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ferpclsid != null">
+        FErpClsID = #{record.ferpclsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.funitid != null">
+        FUnitID = #{record.funitid,jdbcType=INTEGER},
+      </if>
+      <if test="record.funitgroupid != null">
+        FUnitGroupID = #{record.funitgroupid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fdefaultloc != null">
+        FDefaultLoc = #{record.fdefaultloc,jdbcType=INTEGER},
+      </if>
+      <if test="record.fspid != null">
+        FSPID = #{record.fspid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fsource != null">
+        FSource = #{record.fsource,jdbcType=INTEGER},
+      </if>
+      <if test="record.fqtydecimal != null">
+        FQtyDecimal = #{record.fqtydecimal,jdbcType=SMALLINT},
+      </if>
+      <if test="record.flowlimit != null">
+        FLowLimit = #{record.flowlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fhighlimit != null">
+        FHighLimit = #{record.fhighlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fsecinv != null">
+        FSecInv = #{record.fsecinv,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fusestate != null">
+        FUseState = #{record.fusestate,jdbcType=INTEGER},
+      </if>
+      <if test="record.fisequipment != null">
+        FIsEquipment = #{record.fisequipment,jdbcType=BIT},
+      </if>
+      <if test="record.fequipmentnum != null">
+        FEquipmentNum = #{record.fequipmentnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fissparepart != null">
+        FIsSparePart = #{record.fissparepart,jdbcType=BIT},
+      </if>
+      <if test="record.ffullname != null">
+        FFullName = #{record.ffullname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fsecunitid != null">
+        FSecUnitID = #{record.fsecunitid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fseccoefficient != null">
+        FSecCoefficient = #{record.fseccoefficient,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fsecunitdecimal != null">
+        FSecUnitDecimal = #{record.fsecunitdecimal,jdbcType=INTEGER},
+      </if>
+      <if test="record.falias != null">
+        FAlias = #{record.falias,jdbcType=VARCHAR},
+      </if>
+      <if test="record.forderunitid != null">
+        FOrderUnitID = #{record.forderunitid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fsaleunitid != null">
+        FSaleUnitID = #{record.fsaleunitid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fstoreunitid != null">
+        FStoreUnitID = #{record.fstoreunitid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fproductunitid != null">
+        FProductUnitID = #{record.fproductunitid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fapproveno != null">
+        FApproveNo = #{record.fapproveno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fauxclassid != null">
+        FAuxClassID = #{record.fauxclassid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ftypeid != null">
+        FTypeID = #{record.ftypeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fpredeadline != null">
+        FPreDeadLine = #{record.fpredeadline,jdbcType=INTEGER},
+      </if>
+      <if test="record.fserialclassid != null">
+        FSerialClassID = #{record.fserialclassid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcomcategoryid != null">
+        FComCategoryID = #{record.fcomcategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcomtypeid != null">
+        FComTypeID = #{record.fcomtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fsellmethod != null">
+        FSellMethod = #{record.fsellmethod,jdbcType=INTEGER},
+      </if>
+      <if test="record.fproducingarea != null">
+        FProducingArea = #{record.fproducingarea,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fcombrandid != null">
+        FComBrandID = #{record.fcombrandid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fpointsrate != null">
+        FPointsRate = #{record.fpointsrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fcomponents != null">
+        FComponents = #{record.fcomponents,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fgoodsnumber != null">
+        FGoodsNumber = #{record.fgoodsnumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fpacktypeid != null">
+        FPackTypeID = #{record.fpacktypeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fvipprice != null">
+        FVIPPrice = #{record.fvipprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fsilvervipprice != null">
+        FSilverVIPPrice = #{record.fsilvervipprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fgoldvipprice != null">
+        FGoldVIPPrice = #{record.fgoldvipprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fgoodsbarcode != null">
+        FGoodsBarCode = #{record.fgoodsbarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.foperator != null">
+        FOperator = #{record.foperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.foperatingtime != null">
+        FOperatingTime = #{record.foperatingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fbusinesstype != null">
+        FBusinessType = #{record.fbusinesstype,jdbcType=INTEGER},
+      </if>
+      <if test="record.fbarcodeunitid != null">
+        FBarCodeUnitID = #{record.fbarcodeunitid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fkccunitid != null">
+        FKCCUnitID = #{record.fkccunitid,jdbcType=INTEGER},
+      </if>
+      <if test="record.flastupdatetime != null">
+        FLastUpdateTime = #{record.flastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.forderrector != null">
+        FOrderRector = #{record.forderrector,jdbcType=INTEGER},
+      </if>
+      <if test="record.fpohghprcmnytype != null">
+        FPOHghPrcMnyType = #{record.fpohghprcmnytype,jdbcType=INTEGER},
+      </if>
+      <if test="record.fpohighprice != null">
+        FPOHighPrice = #{record.fpohighprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fwwhghprc != null">
+        FWWHghPrc = #{record.fwwhghprc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fwwhghprcmnytype != null">
+        FWWHghPrcMnyType = #{record.fwwhghprcmnytype,jdbcType=INTEGER},
+      </if>
+      <if test="record.fsolowprc != null">
+        FSOLowPrc = #{record.fsolowprc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fsolowprcmnytype != null">
+        FSOLowPrcMnyType = #{record.fsolowprcmnytype,jdbcType=INTEGER},
+      </if>
+      <if test="record.fissale != null">
+        FIsSale = #{record.fissale,jdbcType=BIT},
+      </if>
+      <if test="record.fprofitrate != null">
+        FProfitRate = #{record.fprofitrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fsaleprice != null">
+        FSalePrice = #{record.fsaleprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fbatchmanager != null">
+        FBatchManager = #{record.fbatchmanager,jdbcType=BIT},
+      </if>
+      <if test="record.fiskfperiod != null">
+        FISKFPeriod = #{record.fiskfperiod,jdbcType=BIT},
+      </if>
+      <if test="record.fkfperiod != null">
+        FKFPeriod = #{record.fkfperiod,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ftrack != null">
+        FTrack = #{record.ftrack,jdbcType=INTEGER},
+      </if>
+      <if test="record.fplanprice != null">
+        FPlanPrice = #{record.fplanprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fpricedecimal != null">
+        FPriceDecimal = #{record.fpricedecimal,jdbcType=SMALLINT},
+      </if>
+      <if test="record.facctid != null">
+        FAcctID = #{record.facctid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fsaleacctid != null">
+        FSaleAcctID = #{record.fsaleacctid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcostacctid != null">
+        FCostAcctID = #{record.fcostacctid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fapacctid != null">
+        FAPAcctID = #{record.fapacctid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fgoodspec != null">
+        FGoodSpec = #{record.fgoodspec,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcostproject != null">
+        FCostProject = #{record.fcostproject,jdbcType=INTEGER},
+      </if>
+      <if test="record.fissnmanage != null">
+        FIsSnManage = #{record.fissnmanage,jdbcType=BIT},
+      </if>
+      <if test="record.fstocktime != null">
+        FStockTime = #{record.fstocktime,jdbcType=BIT},
+      </if>
+      <if test="record.fbookplan != null">
+        FBookPlan = #{record.fbookplan,jdbcType=BIT},
+      </if>
+      <if test="record.fbeforeexpire != null">
+        FBeforeExpire = #{record.fbeforeexpire,jdbcType=INTEGER},
+      </if>
+      <if test="record.ftaxrate != null">
+        FTaxRate = #{record.ftaxrate,jdbcType=INTEGER},
+      </if>
+      <if test="record.fadminacctid != null">
+        FAdminAcctID = #{record.fadminacctid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fnote != null">
+        FNote = #{record.fnote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fisspecialtax != null">
+        FIsSpecialTax = #{record.fisspecialtax,jdbcType=BIT},
+      </if>
+      <if test="record.fsohighlimit != null">
+        FSOHighLimit = #{record.fsohighlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fsolowlimit != null">
+        FSOLowLimit = #{record.fsolowlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.foihighlimit != null">
+        FOIHighLimit = #{record.foihighlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.foilowlimit != null">
+        FOILowLimit = #{record.foilowlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fdaysper != null">
+        FDaysPer = #{record.fdaysper,jdbcType=INTEGER},
+      </if>
+      <if test="record.flastcheckdate != null">
+        FLastCheckDate = #{record.flastcheckdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fcheckcycle != null">
+        FCheckCycle = #{record.fcheckcycle,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcheckcycunit != null">
+        FCheckCycUnit = #{record.fcheckcycunit,jdbcType=INTEGER},
+      </if>
+      <if test="record.fstockprice != null">
+        FStockPrice = #{record.fstockprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fabccls != null">
+        FABCCls = #{record.fabccls,jdbcType=CHAR},
+      </if>
+      <if test="record.fbatchqty != null">
+        FBatchQty = #{record.fbatchqty,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fclass != null">
+        FClass = #{record.fclass,jdbcType=BIT},
+      </if>
+      <if test="record.fcostdiffrate != null">
+        FCostDiffRate = #{record.fcostdiffrate,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fdepartment != null">
+        FDepartment = #{record.fdepartment,jdbcType=INTEGER},
+      </if>
+      <if test="record.fsaletaxacctid != null">
+        FSaleTaxAcctID = #{record.fsaletaxacctid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcbbmstandardid != null">
+        FCBBmStandardID = #{record.fcbbmstandardid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcbrestore != null">
+        FCBRestore = #{record.fcbrestore,jdbcType=INTEGER},
+      </if>
+      <if test="record.fonlineshoppname != null">
+        FOnlineShopPName = #{record.fonlineshoppname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fonlineshoppno != null">
+        FOnlineShopPNo = #{record.fonlineshoppno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fispdasnmanage != null">
+        FIsPDASnManage = #{record.fispdasnmanage,jdbcType=BIT},
+      </if>
+      <if test="record.fplantrategy != null">
+        FPlanTrategy = #{record.fplantrategy,jdbcType=INTEGER},
+      </if>
+      <if test="record.fordertrategy != null">
+        FOrderTrategy = #{record.fordertrategy,jdbcType=INTEGER},
+      </if>
+      <if test="record.fleadtime != null">
+        FLeadTime = #{record.fleadtime,jdbcType=REAL},
+      </if>
+      <if test="record.ffixleadtime != null">
+        FFixLeadTime = #{record.ffixleadtime,jdbcType=REAL},
+      </if>
+      <if test="record.ftotaltqq != null">
+        FTotalTQQ = #{record.ftotaltqq,jdbcType=INTEGER},
+      </if>
+      <if test="record.fqtymin != null">
+        FQtyMin = #{record.fqtymin,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fqtymax != null">
+        FQtyMax = #{record.fqtymax,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fcuunitid != null">
+        FCUUnitID = #{record.fcuunitid,jdbcType=INTEGER},
+      </if>
+      <if test="record.forderinterval != null">
+        FOrderInterVal = #{record.forderinterval,jdbcType=INTEGER},
+      </if>
+      <if test="record.fbatchappendqty != null">
+        FBatchAppendQty = #{record.fbatchappendqty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.forderpoint != null">
+        FOrderPoint = #{record.forderpoint,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fbatfixeconomy != null">
+        FBatFixEconomy = #{record.fbatfixeconomy,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fbatchangeeconomy != null">
+        FBatChangeEconomy = #{record.fbatchangeeconomy,jdbcType=DECIMAL},
+      </if>
+      <if test="record.frequirepoint != null">
+        FRequirePoint = #{record.frequirepoint,jdbcType=INTEGER},
+      </if>
+      <if test="record.fplanpoint != null">
+        FPlanPoint = #{record.fplanpoint,jdbcType=INTEGER},
+      </if>
+      <if test="record.fdefaultroutingid != null">
+        FDefaultRoutingID = #{record.fdefaultroutingid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fdefaultworktypeid != null">
+        FDefaultWorkTypeID = #{record.fdefaultworktypeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fproductprincipal != null">
+        FProductPrincipal = #{record.fproductprincipal,jdbcType=INTEGER},
+      </if>
+      <if test="record.fdailyconsume != null">
+        FDailyConsume = #{record.fdailyconsume,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fmrpcon != null">
+        FMRPCon = #{record.fmrpcon,jdbcType=BIT},
+      </if>
+      <if test="record.fplanner != null">
+        FPlanner = #{record.fplanner,jdbcType=INTEGER},
+      </if>
+      <if test="record.fputinteger != null">
+        FPutInteger = #{record.fputinteger,jdbcType=BIT},
+      </if>
+      <if test="record.finhighlimit != null">
+        FInHighLimit = #{record.finhighlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.finlowlimit != null">
+        FInLowLimit = #{record.finlowlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.flowestbomcode != null">
+        FLowestBomCode = #{record.flowestbomcode,jdbcType=INTEGER},
+      </if>
+      <if test="record.fmrporder != null">
+        FMRPOrder = #{record.fmrporder,jdbcType=BIT},
+      </if>
+      <if test="record.fischarsourceitem != null">
+        FIsCharSourceItem = #{record.fischarsourceitem,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcharsourceitemid != null">
+        FCharSourceItemID = #{record.fcharsourceitemid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fplanmode != null">
+        FPlanMode = #{record.fplanmode,jdbcType=INTEGER},
+      </if>
+      <if test="record.fctrltype != null">
+        FCtrlType = #{record.fctrltype,jdbcType=INTEGER},
+      </if>
+      <if test="record.fctrlstraregy != null">
+        FCtrlStraregy = #{record.fctrlstraregy,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcontainername != null">
+        FContainerName = #{record.fcontainername,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fkanbancapability != null">
+        FKanBanCapability = #{record.fkanbancapability,jdbcType=INTEGER},
+      </if>
+      <if test="record.fisbackflush != null">
+        FIsBackFlush = #{record.fisbackflush,jdbcType=INTEGER},
+      </if>
+      <if test="record.fbackflushstockid != null">
+        FBackFlushStockID = #{record.fbackflushstockid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fbackflushspid != null">
+        FBackFlushSPID = #{record.fbackflushspid,jdbcType=INTEGER},
+      </if>
+      <if test="record.f102 != null">
+        F_102 = #{record.f102,jdbcType=VARCHAR},
+      </if>
+      <if test="record.f103 != null">
+        F_103 = #{record.f103,jdbcType=INTEGER},
+      </if>
+      <if test="record.f104 != null">
+        F_104 = #{record.f104,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fchartnumber != null">
+        FChartNumber = #{record.fchartnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fiskeyitem != null">
+        FIsKeyItem = #{record.fiskeyitem,jdbcType=BIT},
+      </if>
+      <if test="record.fmaund != null">
+        FMaund = #{record.fmaund,jdbcType=INTEGER},
+      </if>
+      <if test="record.fgrossweight != null">
+        FGrossWeight = #{record.fgrossweight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fnetweight != null">
+        FNetWeight = #{record.fnetweight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fcubicmeasure != null">
+        FCubicMeasure = #{record.fcubicmeasure,jdbcType=INTEGER},
+      </if>
+      <if test="record.flength != null">
+        FLength = #{record.flength,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fwidth != null">
+        FWidth = #{record.fwidth,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fheight != null">
+        FHeight = #{record.fheight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fsize != null">
+        FSize = #{record.fsize,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fversion != null">
+        FVersion = #{record.fversion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fzjnum != null">
+        FZJNum = #{record.fzjnum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fstandardcost != null">
+        FStandardCost = #{record.fstandardcost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fstandardmanhour != null">
+        FStandardManHour = #{record.fstandardmanhour,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fstdpayrate != null">
+        FStdPayRate = #{record.fstdpayrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fchgfeerate != null">
+        FChgFeeRate = #{record.fchgfeerate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fstdfixfeerate != null">
+        FStdFixFeeRate = #{record.fstdfixfeerate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.foutmachfee != null">
+        FOutMachFee = #{record.foutmachfee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fpiecerate != null">
+        FPieceRate = #{record.fpiecerate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fstdbatchqty != null">
+        FStdBatchQty = #{record.fstdbatchqty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fpovacctid != null">
+        FPOVAcctID = #{record.fpovacctid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fpivacctid != null">
+        FPIVAcctID = #{record.fpivacctid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fmcvacctid != null">
+        FMCVAcctID = #{record.fmcvacctid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fpcvacctid != null">
+        FPCVAcctID = #{record.fpcvacctid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fslacctid != null">
+        FSLAcctID = #{record.fslacctid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcavacctid != null">
+        FCAVAcctID = #{record.fcavacctid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcbappendrate != null">
+        FCBAppendRate = #{record.fcbappendrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fcbappendproject != null">
+        FCBAppendProject = #{record.fcbappendproject,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcostbomid != null">
+        FCostBomID = #{record.fcostbomid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcbrouting != null">
+        FCBRouting = #{record.fcbrouting,jdbcType=INTEGER},
+      </if>
+      <if test="record.finspectionlevel != null">
+        FInspectionLevel = #{record.finspectionlevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.finspectionproject != null">
+        FInspectionProject = #{record.finspectionproject,jdbcType=INTEGER},
+      </if>
+      <if test="record.fislistcontrol != null">
+        FIsListControl = #{record.fislistcontrol,jdbcType=INTEGER},
+      </if>
+      <if test="record.fprochkmde != null">
+        FProChkMde = #{record.fprochkmde,jdbcType=INTEGER},
+      </if>
+      <if test="record.fwwchkmde != null">
+        FWWChkMde = #{record.fwwchkmde,jdbcType=INTEGER},
+      </if>
+      <if test="record.fsochkmde != null">
+        FSOChkMde = #{record.fsochkmde,jdbcType=INTEGER},
+      </if>
+      <if test="record.fwthdrwchkmde != null">
+        FWthDrwChkMde = #{record.fwthdrwchkmde,jdbcType=INTEGER},
+      </if>
+      <if test="record.fstkchkmde != null">
+        FStkChkMde = #{record.fstkchkmde,jdbcType=INTEGER},
+      </if>
+      <if test="record.fotherchkmde != null">
+        FOtherChkMde = #{record.fotherchkmde,jdbcType=INTEGER},
+      </if>
+      <if test="record.fstkchkprd != null">
+        FStkChkPrd = #{record.fstkchkprd,jdbcType=INTEGER},
+      </if>
+      <if test="record.fstkchkalrm != null">
+        FStkChkAlrm = #{record.fstkchkalrm,jdbcType=INTEGER},
+      </if>
+      <if test="record.fidentifier != null">
+        FIdentifier = #{record.fidentifier,jdbcType=INTEGER},
+      </if>
+      <if test="record.fnameen != null">
+        FNameEn = #{record.fnameen,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fmodelen != null">
+        FModelEn = #{record.fmodelen,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fhsnumber != null">
+        FHSNumber = #{record.fhsnumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.ffirstunit != null">
+        FFirstUnit = #{record.ffirstunit,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fsecondunit != null">
+        FSecondUnit = #{record.fsecondunit,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ffirstunitrate != null">
+        FFirstUnitRate = #{record.ffirstunitrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fsecondunitrate != null">
+        FSecondUnitRate = #{record.fsecondunitrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fismanage != null">
+        FIsManage = #{record.fismanage,jdbcType=BIT},
+      </if>
+      <if test="record.fpacktype != null">
+        FPackType = #{record.fpacktype,jdbcType=INTEGER},
+      </if>
+      <if test="record.flendecimal != null">
+        FLenDecimal = #{record.flendecimal,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcubagedecimal != null">
+        FCubageDecimal = #{record.fcubagedecimal,jdbcType=INTEGER},
+      </if>
+      <if test="record.fweightdecimal != null">
+        FWeightDecimal = #{record.fweightdecimal,jdbcType=INTEGER},
+      </if>
+      <if test="record.fimposttaxrate != null">
+        FImpostTaxRate = #{record.fimposttaxrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fconsumetaxrate != null">
+        FConsumeTaxRate = #{record.fconsumetaxrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fmanagetype != null">
+        FManageType = #{record.fmanagetype,jdbcType=INTEGER},
+      </if>
+      <if test="record.fbarcode != null">
+        FBarcode = #{record.fbarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmodifytime != null">
+        FModifyTime = #{record.fmodifytime,jdbcType=BINARY},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update t_ICItem
+    set FItemID = #{record.fitemid,jdbcType=INTEGER},
+      FModel = #{record.fmodel,jdbcType=VARCHAR},
+      FName = #{record.fname,jdbcType=VARCHAR},
+      FHelpCode = #{record.fhelpcode,jdbcType=VARCHAR},
+      FDeleted = #{record.fdeleted,jdbcType=SMALLINT},
+      FShortNumber = #{record.fshortnumber,jdbcType=VARCHAR},
+      FNumber = #{record.fnumber,jdbcType=VARCHAR},
+      FParentID = #{record.fparentid,jdbcType=INTEGER},
+      FBrNo = #{record.fbrno,jdbcType=VARCHAR},
+      FTopID = #{record.ftopid,jdbcType=INTEGER},
+      FRP = #{record.frp,jdbcType=SMALLINT},
+      FOmortize = #{record.fomortize,jdbcType=SMALLINT},
+      FOmortizeScale = #{record.fomortizescale,jdbcType=SMALLINT},
+      FForSale = #{record.fforsale,jdbcType=BIT},
+      FStaCost = #{record.fstacost,jdbcType=DOUBLE},
+      FOrderPrice = #{record.forderprice,jdbcType=DOUBLE},
+      FOrderMethod = #{record.fordermethod,jdbcType=INTEGER},
+      FPriceFixingType = #{record.fpricefixingtype,jdbcType=INTEGER},
+      FSalePriceFixingType = #{record.fsalepricefixingtype,jdbcType=INTEGER},
+      FPerWastage = #{record.fperwastage,jdbcType=DOUBLE},
+      FARAcctID = #{record.faracctid,jdbcType=INTEGER},
+      FPlanPriceMethod = #{record.fplanpricemethod,jdbcType=SMALLINT},
+      FPlanClass = #{record.fplanclass,jdbcType=SMALLINT},
+      FPY = #{record.fpy,jdbcType=NVARCHAR},
+      FPinYin = #{record.fpinyin,jdbcType=NVARCHAR},
+      FRefCost = #{record.frefcost,jdbcType=DECIMAL},
+      FInvName = #{record.finvname,jdbcType=VARCHAR},
+      FErpClsID = #{record.ferpclsid,jdbcType=INTEGER},
+      FUnitID = #{record.funitid,jdbcType=INTEGER},
+      FUnitGroupID = #{record.funitgroupid,jdbcType=INTEGER},
+      FDefaultLoc = #{record.fdefaultloc,jdbcType=INTEGER},
+      FSPID = #{record.fspid,jdbcType=INTEGER},
+      FSource = #{record.fsource,jdbcType=INTEGER},
+      FQtyDecimal = #{record.fqtydecimal,jdbcType=SMALLINT},
+      FLowLimit = #{record.flowlimit,jdbcType=DECIMAL},
+      FHighLimit = #{record.fhighlimit,jdbcType=DECIMAL},
+      FSecInv = #{record.fsecinv,jdbcType=DECIMAL},
+      FUseState = #{record.fusestate,jdbcType=INTEGER},
+      FIsEquipment = #{record.fisequipment,jdbcType=BIT},
+      FEquipmentNum = #{record.fequipmentnum,jdbcType=VARCHAR},
+      FIsSparePart = #{record.fissparepart,jdbcType=BIT},
+      FFullName = #{record.ffullname,jdbcType=VARCHAR},
+      FSecUnitID = #{record.fsecunitid,jdbcType=INTEGER},
+      FSecCoefficient = #{record.fseccoefficient,jdbcType=DECIMAL},
+      FSecUnitDecimal = #{record.fsecunitdecimal,jdbcType=INTEGER},
+      FAlias = #{record.falias,jdbcType=VARCHAR},
+      FOrderUnitID = #{record.forderunitid,jdbcType=INTEGER},
+      FSaleUnitID = #{record.fsaleunitid,jdbcType=INTEGER},
+      FStoreUnitID = #{record.fstoreunitid,jdbcType=INTEGER},
+      FProductUnitID = #{record.fproductunitid,jdbcType=INTEGER},
+      FApproveNo = #{record.fapproveno,jdbcType=VARCHAR},
+      FAuxClassID = #{record.fauxclassid,jdbcType=INTEGER},
+      FTypeID = #{record.ftypeid,jdbcType=INTEGER},
+      FPreDeadLine = #{record.fpredeadline,jdbcType=INTEGER},
+      FSerialClassID = #{record.fserialclassid,jdbcType=INTEGER},
+      FComCategoryID = #{record.fcomcategoryid,jdbcType=INTEGER},
+      FComTypeID = #{record.fcomtypeid,jdbcType=INTEGER},
+      FSellMethod = #{record.fsellmethod,jdbcType=INTEGER},
+      FProducingArea = #{record.fproducingarea,jdbcType=NVARCHAR},
+      FComBrandID = #{record.fcombrandid,jdbcType=INTEGER},
+      FPointsRate = #{record.fpointsrate,jdbcType=DECIMAL},
+      FComponents = #{record.fcomponents,jdbcType=NVARCHAR},
+      FGoodsNumber = #{record.fgoodsnumber,jdbcType=NVARCHAR},
+      FPackTypeID = #{record.fpacktypeid,jdbcType=INTEGER},
+      FVIPPrice = #{record.fvipprice,jdbcType=DECIMAL},
+      FSilverVIPPrice = #{record.fsilvervipprice,jdbcType=DECIMAL},
+      FGoldVIPPrice = #{record.fgoldvipprice,jdbcType=DECIMAL},
+      FGoodsBarCode = #{record.fgoodsbarcode,jdbcType=VARCHAR},
+      FOperator = #{record.foperator,jdbcType=VARCHAR},
+      FOperatingTime = #{record.foperatingtime,jdbcType=TIMESTAMP},
+      FBusinessType = #{record.fbusinesstype,jdbcType=INTEGER},
+      FBarCodeUnitID = #{record.fbarcodeunitid,jdbcType=INTEGER},
+      FKCCUnitID = #{record.fkccunitid,jdbcType=INTEGER},
+      FLastUpdateTime = #{record.flastupdatetime,jdbcType=TIMESTAMP},
+      FOrderRector = #{record.forderrector,jdbcType=INTEGER},
+      FPOHghPrcMnyType = #{record.fpohghprcmnytype,jdbcType=INTEGER},
+      FPOHighPrice = #{record.fpohighprice,jdbcType=DECIMAL},
+      FWWHghPrc = #{record.fwwhghprc,jdbcType=DECIMAL},
+      FWWHghPrcMnyType = #{record.fwwhghprcmnytype,jdbcType=INTEGER},
+      FSOLowPrc = #{record.fsolowprc,jdbcType=DECIMAL},
+      FSOLowPrcMnyType = #{record.fsolowprcmnytype,jdbcType=INTEGER},
+      FIsSale = #{record.fissale,jdbcType=BIT},
+      FProfitRate = #{record.fprofitrate,jdbcType=DECIMAL},
+      FSalePrice = #{record.fsaleprice,jdbcType=DECIMAL},
+      FBatchManager = #{record.fbatchmanager,jdbcType=BIT},
+      FISKFPeriod = #{record.fiskfperiod,jdbcType=BIT},
+      FKFPeriod = #{record.fkfperiod,jdbcType=DECIMAL},
+      FTrack = #{record.ftrack,jdbcType=INTEGER},
+      FPlanPrice = #{record.fplanprice,jdbcType=DECIMAL},
+      FPriceDecimal = #{record.fpricedecimal,jdbcType=SMALLINT},
+      FAcctID = #{record.facctid,jdbcType=INTEGER},
+      FSaleAcctID = #{record.fsaleacctid,jdbcType=INTEGER},
+      FCostAcctID = #{record.fcostacctid,jdbcType=INTEGER},
+      FAPAcctID = #{record.fapacctid,jdbcType=INTEGER},
+      FGoodSpec = #{record.fgoodspec,jdbcType=INTEGER},
+      FCostProject = #{record.fcostproject,jdbcType=INTEGER},
+      FIsSnManage = #{record.fissnmanage,jdbcType=BIT},
+      FStockTime = #{record.fstocktime,jdbcType=BIT},
+      FBookPlan = #{record.fbookplan,jdbcType=BIT},
+      FBeforeExpire = #{record.fbeforeexpire,jdbcType=INTEGER},
+      FTaxRate = #{record.ftaxrate,jdbcType=INTEGER},
+      FAdminAcctID = #{record.fadminacctid,jdbcType=INTEGER},
+      FNote = #{record.fnote,jdbcType=VARCHAR},
+      FIsSpecialTax = #{record.fisspecialtax,jdbcType=BIT},
+      FSOHighLimit = #{record.fsohighlimit,jdbcType=DECIMAL},
+      FSOLowLimit = #{record.fsolowlimit,jdbcType=DECIMAL},
+      FOIHighLimit = #{record.foihighlimit,jdbcType=DECIMAL},
+      FOILowLimit = #{record.foilowlimit,jdbcType=DECIMAL},
+      FDaysPer = #{record.fdaysper,jdbcType=INTEGER},
+      FLastCheckDate = #{record.flastcheckdate,jdbcType=TIMESTAMP},
+      FCheckCycle = #{record.fcheckcycle,jdbcType=INTEGER},
+      FCheckCycUnit = #{record.fcheckcycunit,jdbcType=INTEGER},
+      FStockPrice = #{record.fstockprice,jdbcType=DECIMAL},
+      FABCCls = #{record.fabccls,jdbcType=CHAR},
+      FBatchQty = #{record.fbatchqty,jdbcType=DOUBLE},
+      FClass = #{record.fclass,jdbcType=BIT},
+      FCostDiffRate = #{record.fcostdiffrate,jdbcType=DOUBLE},
+      FDepartment = #{record.fdepartment,jdbcType=INTEGER},
+      FSaleTaxAcctID = #{record.fsaletaxacctid,jdbcType=INTEGER},
+      FCBBmStandardID = #{record.fcbbmstandardid,jdbcType=INTEGER},
+      FCBRestore = #{record.fcbrestore,jdbcType=INTEGER},
+      FOnlineShopPName = #{record.fonlineshoppname,jdbcType=NVARCHAR},
+      FOnlineShopPNo = #{record.fonlineshoppno,jdbcType=VARCHAR},
+      FIsPDASnManage = #{record.fispdasnmanage,jdbcType=BIT},
+      FPlanTrategy = #{record.fplantrategy,jdbcType=INTEGER},
+      FOrderTrategy = #{record.fordertrategy,jdbcType=INTEGER},
+      FLeadTime = #{record.fleadtime,jdbcType=REAL},
+      FFixLeadTime = #{record.ffixleadtime,jdbcType=REAL},
+      FTotalTQQ = #{record.ftotaltqq,jdbcType=INTEGER},
+      FQtyMin = #{record.fqtymin,jdbcType=DECIMAL},
+      FQtyMax = #{record.fqtymax,jdbcType=DECIMAL},
+      FCUUnitID = #{record.fcuunitid,jdbcType=INTEGER},
+      FOrderInterVal = #{record.forderinterval,jdbcType=INTEGER},
+      FBatchAppendQty = #{record.fbatchappendqty,jdbcType=DECIMAL},
+      FOrderPoint = #{record.forderpoint,jdbcType=DECIMAL},
+      FBatFixEconomy = #{record.fbatfixeconomy,jdbcType=DECIMAL},
+      FBatChangeEconomy = #{record.fbatchangeeconomy,jdbcType=DECIMAL},
+      FRequirePoint = #{record.frequirepoint,jdbcType=INTEGER},
+      FPlanPoint = #{record.fplanpoint,jdbcType=INTEGER},
+      FDefaultRoutingID = #{record.fdefaultroutingid,jdbcType=INTEGER},
+      FDefaultWorkTypeID = #{record.fdefaultworktypeid,jdbcType=INTEGER},
+      FProductPrincipal = #{record.fproductprincipal,jdbcType=INTEGER},
+      FDailyConsume = #{record.fdailyconsume,jdbcType=DECIMAL},
+      FMRPCon = #{record.fmrpcon,jdbcType=BIT},
+      FPlanner = #{record.fplanner,jdbcType=INTEGER},
+      FPutInteger = #{record.fputinteger,jdbcType=BIT},
+      FInHighLimit = #{record.finhighlimit,jdbcType=DECIMAL},
+      FInLowLimit = #{record.finlowlimit,jdbcType=DECIMAL},
+      FLowestBomCode = #{record.flowestbomcode,jdbcType=INTEGER},
+      FMRPOrder = #{record.fmrporder,jdbcType=BIT},
+      FIsCharSourceItem = #{record.fischarsourceitem,jdbcType=INTEGER},
+      FCharSourceItemID = #{record.fcharsourceitemid,jdbcType=INTEGER},
+      FPlanMode = #{record.fplanmode,jdbcType=INTEGER},
+      FCtrlType = #{record.fctrltype,jdbcType=INTEGER},
+      FCtrlStraregy = #{record.fctrlstraregy,jdbcType=INTEGER},
+      FContainerName = #{record.fcontainername,jdbcType=NVARCHAR},
+      FKanBanCapability = #{record.fkanbancapability,jdbcType=INTEGER},
+      FIsBackFlush = #{record.fisbackflush,jdbcType=INTEGER},
+      FBackFlushStockID = #{record.fbackflushstockid,jdbcType=INTEGER},
+      FBackFlushSPID = #{record.fbackflushspid,jdbcType=INTEGER},
+      F_102 = #{record.f102,jdbcType=VARCHAR},
+      F_103 = #{record.f103,jdbcType=INTEGER},
+      F_104 = #{record.f104,jdbcType=VARCHAR},
+      FChartNumber = #{record.fchartnumber,jdbcType=VARCHAR},
+      FIsKeyItem = #{record.fiskeyitem,jdbcType=BIT},
+      FMaund = #{record.fmaund,jdbcType=INTEGER},
+      FGrossWeight = #{record.fgrossweight,jdbcType=DECIMAL},
+      FNetWeight = #{record.fnetweight,jdbcType=DECIMAL},
+      FCubicMeasure = #{record.fcubicmeasure,jdbcType=INTEGER},
+      FLength = #{record.flength,jdbcType=DECIMAL},
+      FWidth = #{record.fwidth,jdbcType=DECIMAL},
+      FHeight = #{record.fheight,jdbcType=DECIMAL},
+      FSize = #{record.fsize,jdbcType=DECIMAL},
+      FVersion = #{record.fversion,jdbcType=VARCHAR},
+      FZJNum = #{record.fzjnum,jdbcType=DECIMAL},
+      FStandardCost = #{record.fstandardcost,jdbcType=DECIMAL},
+      FStandardManHour = #{record.fstandardmanhour,jdbcType=DECIMAL},
+      FStdPayRate = #{record.fstdpayrate,jdbcType=DECIMAL},
+      FChgFeeRate = #{record.fchgfeerate,jdbcType=DECIMAL},
+      FStdFixFeeRate = #{record.fstdfixfeerate,jdbcType=DECIMAL},
+      FOutMachFee = #{record.foutmachfee,jdbcType=DECIMAL},
+      FPieceRate = #{record.fpiecerate,jdbcType=DECIMAL},
+      FStdBatchQty = #{record.fstdbatchqty,jdbcType=DECIMAL},
+      FPOVAcctID = #{record.fpovacctid,jdbcType=INTEGER},
+      FPIVAcctID = #{record.fpivacctid,jdbcType=INTEGER},
+      FMCVAcctID = #{record.fmcvacctid,jdbcType=INTEGER},
+      FPCVAcctID = #{record.fpcvacctid,jdbcType=INTEGER},
+      FSLAcctID = #{record.fslacctid,jdbcType=INTEGER},
+      FCAVAcctID = #{record.fcavacctid,jdbcType=INTEGER},
+      FCBAppendRate = #{record.fcbappendrate,jdbcType=DECIMAL},
+      FCBAppendProject = #{record.fcbappendproject,jdbcType=INTEGER},
+      FCostBomID = #{record.fcostbomid,jdbcType=INTEGER},
+      FCBRouting = #{record.fcbrouting,jdbcType=INTEGER},
+      FInspectionLevel = #{record.finspectionlevel,jdbcType=INTEGER},
+      FInspectionProject = #{record.finspectionproject,jdbcType=INTEGER},
+      FIsListControl = #{record.fislistcontrol,jdbcType=INTEGER},
+      FProChkMde = #{record.fprochkmde,jdbcType=INTEGER},
+      FWWChkMde = #{record.fwwchkmde,jdbcType=INTEGER},
+      FSOChkMde = #{record.fsochkmde,jdbcType=INTEGER},
+      FWthDrwChkMde = #{record.fwthdrwchkmde,jdbcType=INTEGER},
+      FStkChkMde = #{record.fstkchkmde,jdbcType=INTEGER},
+      FOtherChkMde = #{record.fotherchkmde,jdbcType=INTEGER},
+      FStkChkPrd = #{record.fstkchkprd,jdbcType=INTEGER},
+      FStkChkAlrm = #{record.fstkchkalrm,jdbcType=INTEGER},
+      FIdentifier = #{record.fidentifier,jdbcType=INTEGER},
+      FNameEn = #{record.fnameen,jdbcType=NVARCHAR},
+      FModelEn = #{record.fmodelen,jdbcType=NVARCHAR},
+      FHSNumber = #{record.fhsnumber,jdbcType=INTEGER},
+      FFirstUnit = #{record.ffirstunit,jdbcType=NVARCHAR},
+      FSecondUnit = #{record.fsecondunit,jdbcType=NVARCHAR},
+      FFirstUnitRate = #{record.ffirstunitrate,jdbcType=DECIMAL},
+      FSecondUnitRate = #{record.fsecondunitrate,jdbcType=DECIMAL},
+      FIsManage = #{record.fismanage,jdbcType=BIT},
+      FPackType = #{record.fpacktype,jdbcType=INTEGER},
+      FLenDecimal = #{record.flendecimal,jdbcType=INTEGER},
+      FCubageDecimal = #{record.fcubagedecimal,jdbcType=INTEGER},
+      FWeightDecimal = #{record.fweightdecimal,jdbcType=INTEGER},
+      FImpostTaxRate = #{record.fimposttaxrate,jdbcType=DECIMAL},
+      FConsumeTaxRate = #{record.fconsumetaxrate,jdbcType=DECIMAL},
+      FManageType = #{record.fmanagetype,jdbcType=INTEGER},
+      FBarcode = #{record.fbarcode,jdbcType=VARCHAR},
+      FModifyTime = #{record.fmodifytime,jdbcType=BINARY}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_ICItem
+    set FItemID = #{record.fitemid,jdbcType=INTEGER},
+      FModel = #{record.fmodel,jdbcType=VARCHAR},
+      FName = #{record.fname,jdbcType=VARCHAR},
+      FHelpCode = #{record.fhelpcode,jdbcType=VARCHAR},
+      FDeleted = #{record.fdeleted,jdbcType=SMALLINT},
+      FShortNumber = #{record.fshortnumber,jdbcType=VARCHAR},
+      FNumber = #{record.fnumber,jdbcType=VARCHAR},
+      FParentID = #{record.fparentid,jdbcType=INTEGER},
+      FBrNo = #{record.fbrno,jdbcType=VARCHAR},
+      FTopID = #{record.ftopid,jdbcType=INTEGER},
+      FRP = #{record.frp,jdbcType=SMALLINT},
+      FOmortize = #{record.fomortize,jdbcType=SMALLINT},
+      FOmortizeScale = #{record.fomortizescale,jdbcType=SMALLINT},
+      FForSale = #{record.fforsale,jdbcType=BIT},
+      FStaCost = #{record.fstacost,jdbcType=DOUBLE},
+      FOrderPrice = #{record.forderprice,jdbcType=DOUBLE},
+      FOrderMethod = #{record.fordermethod,jdbcType=INTEGER},
+      FPriceFixingType = #{record.fpricefixingtype,jdbcType=INTEGER},
+      FSalePriceFixingType = #{record.fsalepricefixingtype,jdbcType=INTEGER},
+      FPerWastage = #{record.fperwastage,jdbcType=DOUBLE},
+      FARAcctID = #{record.faracctid,jdbcType=INTEGER},
+      FPlanPriceMethod = #{record.fplanpricemethod,jdbcType=SMALLINT},
+      FPlanClass = #{record.fplanclass,jdbcType=SMALLINT},
+      FPY = #{record.fpy,jdbcType=NVARCHAR},
+      FPinYin = #{record.fpinyin,jdbcType=NVARCHAR},
+      FRefCost = #{record.frefcost,jdbcType=DECIMAL},
+      FInvName = #{record.finvname,jdbcType=VARCHAR},
+      FErpClsID = #{record.ferpclsid,jdbcType=INTEGER},
+      FUnitID = #{record.funitid,jdbcType=INTEGER},
+      FUnitGroupID = #{record.funitgroupid,jdbcType=INTEGER},
+      FDefaultLoc = #{record.fdefaultloc,jdbcType=INTEGER},
+      FSPID = #{record.fspid,jdbcType=INTEGER},
+      FSource = #{record.fsource,jdbcType=INTEGER},
+      FQtyDecimal = #{record.fqtydecimal,jdbcType=SMALLINT},
+      FLowLimit = #{record.flowlimit,jdbcType=DECIMAL},
+      FHighLimit = #{record.fhighlimit,jdbcType=DECIMAL},
+      FSecInv = #{record.fsecinv,jdbcType=DECIMAL},
+      FUseState = #{record.fusestate,jdbcType=INTEGER},
+      FIsEquipment = #{record.fisequipment,jdbcType=BIT},
+      FEquipmentNum = #{record.fequipmentnum,jdbcType=VARCHAR},
+      FIsSparePart = #{record.fissparepart,jdbcType=BIT},
+      FFullName = #{record.ffullname,jdbcType=VARCHAR},
+      FSecUnitID = #{record.fsecunitid,jdbcType=INTEGER},
+      FSecCoefficient = #{record.fseccoefficient,jdbcType=DECIMAL},
+      FSecUnitDecimal = #{record.fsecunitdecimal,jdbcType=INTEGER},
+      FAlias = #{record.falias,jdbcType=VARCHAR},
+      FOrderUnitID = #{record.forderunitid,jdbcType=INTEGER},
+      FSaleUnitID = #{record.fsaleunitid,jdbcType=INTEGER},
+      FStoreUnitID = #{record.fstoreunitid,jdbcType=INTEGER},
+      FProductUnitID = #{record.fproductunitid,jdbcType=INTEGER},
+      FApproveNo = #{record.fapproveno,jdbcType=VARCHAR},
+      FAuxClassID = #{record.fauxclassid,jdbcType=INTEGER},
+      FTypeID = #{record.ftypeid,jdbcType=INTEGER},
+      FPreDeadLine = #{record.fpredeadline,jdbcType=INTEGER},
+      FSerialClassID = #{record.fserialclassid,jdbcType=INTEGER},
+      FComCategoryID = #{record.fcomcategoryid,jdbcType=INTEGER},
+      FComTypeID = #{record.fcomtypeid,jdbcType=INTEGER},
+      FSellMethod = #{record.fsellmethod,jdbcType=INTEGER},
+      FProducingArea = #{record.fproducingarea,jdbcType=NVARCHAR},
+      FComBrandID = #{record.fcombrandid,jdbcType=INTEGER},
+      FPointsRate = #{record.fpointsrate,jdbcType=DECIMAL},
+      FComponents = #{record.fcomponents,jdbcType=NVARCHAR},
+      FGoodsNumber = #{record.fgoodsnumber,jdbcType=NVARCHAR},
+      FPackTypeID = #{record.fpacktypeid,jdbcType=INTEGER},
+      FVIPPrice = #{record.fvipprice,jdbcType=DECIMAL},
+      FSilverVIPPrice = #{record.fsilvervipprice,jdbcType=DECIMAL},
+      FGoldVIPPrice = #{record.fgoldvipprice,jdbcType=DECIMAL},
+      FGoodsBarCode = #{record.fgoodsbarcode,jdbcType=VARCHAR},
+      FOperator = #{record.foperator,jdbcType=VARCHAR},
+      FOperatingTime = #{record.foperatingtime,jdbcType=TIMESTAMP},
+      FBusinessType = #{record.fbusinesstype,jdbcType=INTEGER},
+      FBarCodeUnitID = #{record.fbarcodeunitid,jdbcType=INTEGER},
+      FKCCUnitID = #{record.fkccunitid,jdbcType=INTEGER},
+      FLastUpdateTime = #{record.flastupdatetime,jdbcType=TIMESTAMP},
+      FOrderRector = #{record.forderrector,jdbcType=INTEGER},
+      FPOHghPrcMnyType = #{record.fpohghprcmnytype,jdbcType=INTEGER},
+      FPOHighPrice = #{record.fpohighprice,jdbcType=DECIMAL},
+      FWWHghPrc = #{record.fwwhghprc,jdbcType=DECIMAL},
+      FWWHghPrcMnyType = #{record.fwwhghprcmnytype,jdbcType=INTEGER},
+      FSOLowPrc = #{record.fsolowprc,jdbcType=DECIMAL},
+      FSOLowPrcMnyType = #{record.fsolowprcmnytype,jdbcType=INTEGER},
+      FIsSale = #{record.fissale,jdbcType=BIT},
+      FProfitRate = #{record.fprofitrate,jdbcType=DECIMAL},
+      FSalePrice = #{record.fsaleprice,jdbcType=DECIMAL},
+      FBatchManager = #{record.fbatchmanager,jdbcType=BIT},
+      FISKFPeriod = #{record.fiskfperiod,jdbcType=BIT},
+      FKFPeriod = #{record.fkfperiod,jdbcType=DECIMAL},
+      FTrack = #{record.ftrack,jdbcType=INTEGER},
+      FPlanPrice = #{record.fplanprice,jdbcType=DECIMAL},
+      FPriceDecimal = #{record.fpricedecimal,jdbcType=SMALLINT},
+      FAcctID = #{record.facctid,jdbcType=INTEGER},
+      FSaleAcctID = #{record.fsaleacctid,jdbcType=INTEGER},
+      FCostAcctID = #{record.fcostacctid,jdbcType=INTEGER},
+      FAPAcctID = #{record.fapacctid,jdbcType=INTEGER},
+      FGoodSpec = #{record.fgoodspec,jdbcType=INTEGER},
+      FCostProject = #{record.fcostproject,jdbcType=INTEGER},
+      FIsSnManage = #{record.fissnmanage,jdbcType=BIT},
+      FStockTime = #{record.fstocktime,jdbcType=BIT},
+      FBookPlan = #{record.fbookplan,jdbcType=BIT},
+      FBeforeExpire = #{record.fbeforeexpire,jdbcType=INTEGER},
+      FTaxRate = #{record.ftaxrate,jdbcType=INTEGER},
+      FAdminAcctID = #{record.fadminacctid,jdbcType=INTEGER},
+      FNote = #{record.fnote,jdbcType=VARCHAR},
+      FIsSpecialTax = #{record.fisspecialtax,jdbcType=BIT},
+      FSOHighLimit = #{record.fsohighlimit,jdbcType=DECIMAL},
+      FSOLowLimit = #{record.fsolowlimit,jdbcType=DECIMAL},
+      FOIHighLimit = #{record.foihighlimit,jdbcType=DECIMAL},
+      FOILowLimit = #{record.foilowlimit,jdbcType=DECIMAL},
+      FDaysPer = #{record.fdaysper,jdbcType=INTEGER},
+      FLastCheckDate = #{record.flastcheckdate,jdbcType=TIMESTAMP},
+      FCheckCycle = #{record.fcheckcycle,jdbcType=INTEGER},
+      FCheckCycUnit = #{record.fcheckcycunit,jdbcType=INTEGER},
+      FStockPrice = #{record.fstockprice,jdbcType=DECIMAL},
+      FABCCls = #{record.fabccls,jdbcType=CHAR},
+      FBatchQty = #{record.fbatchqty,jdbcType=DOUBLE},
+      FClass = #{record.fclass,jdbcType=BIT},
+      FCostDiffRate = #{record.fcostdiffrate,jdbcType=DOUBLE},
+      FDepartment = #{record.fdepartment,jdbcType=INTEGER},
+      FSaleTaxAcctID = #{record.fsaletaxacctid,jdbcType=INTEGER},
+      FCBBmStandardID = #{record.fcbbmstandardid,jdbcType=INTEGER},
+      FCBRestore = #{record.fcbrestore,jdbcType=INTEGER},
+      FOnlineShopPName = #{record.fonlineshoppname,jdbcType=NVARCHAR},
+      FOnlineShopPNo = #{record.fonlineshoppno,jdbcType=VARCHAR},
+      FIsPDASnManage = #{record.fispdasnmanage,jdbcType=BIT},
+      FPlanTrategy = #{record.fplantrategy,jdbcType=INTEGER},
+      FOrderTrategy = #{record.fordertrategy,jdbcType=INTEGER},
+      FLeadTime = #{record.fleadtime,jdbcType=REAL},
+      FFixLeadTime = #{record.ffixleadtime,jdbcType=REAL},
+      FTotalTQQ = #{record.ftotaltqq,jdbcType=INTEGER},
+      FQtyMin = #{record.fqtymin,jdbcType=DECIMAL},
+      FQtyMax = #{record.fqtymax,jdbcType=DECIMAL},
+      FCUUnitID = #{record.fcuunitid,jdbcType=INTEGER},
+      FOrderInterVal = #{record.forderinterval,jdbcType=INTEGER},
+      FBatchAppendQty = #{record.fbatchappendqty,jdbcType=DECIMAL},
+      FOrderPoint = #{record.forderpoint,jdbcType=DECIMAL},
+      FBatFixEconomy = #{record.fbatfixeconomy,jdbcType=DECIMAL},
+      FBatChangeEconomy = #{record.fbatchangeeconomy,jdbcType=DECIMAL},
+      FRequirePoint = #{record.frequirepoint,jdbcType=INTEGER},
+      FPlanPoint = #{record.fplanpoint,jdbcType=INTEGER},
+      FDefaultRoutingID = #{record.fdefaultroutingid,jdbcType=INTEGER},
+      FDefaultWorkTypeID = #{record.fdefaultworktypeid,jdbcType=INTEGER},
+      FProductPrincipal = #{record.fproductprincipal,jdbcType=INTEGER},
+      FDailyConsume = #{record.fdailyconsume,jdbcType=DECIMAL},
+      FMRPCon = #{record.fmrpcon,jdbcType=BIT},
+      FPlanner = #{record.fplanner,jdbcType=INTEGER},
+      FPutInteger = #{record.fputinteger,jdbcType=BIT},
+      FInHighLimit = #{record.finhighlimit,jdbcType=DECIMAL},
+      FInLowLimit = #{record.finlowlimit,jdbcType=DECIMAL},
+      FLowestBomCode = #{record.flowestbomcode,jdbcType=INTEGER},
+      FMRPOrder = #{record.fmrporder,jdbcType=BIT},
+      FIsCharSourceItem = #{record.fischarsourceitem,jdbcType=INTEGER},
+      FCharSourceItemID = #{record.fcharsourceitemid,jdbcType=INTEGER},
+      FPlanMode = #{record.fplanmode,jdbcType=INTEGER},
+      FCtrlType = #{record.fctrltype,jdbcType=INTEGER},
+      FCtrlStraregy = #{record.fctrlstraregy,jdbcType=INTEGER},
+      FContainerName = #{record.fcontainername,jdbcType=NVARCHAR},
+      FKanBanCapability = #{record.fkanbancapability,jdbcType=INTEGER},
+      FIsBackFlush = #{record.fisbackflush,jdbcType=INTEGER},
+      FBackFlushStockID = #{record.fbackflushstockid,jdbcType=INTEGER},
+      FBackFlushSPID = #{record.fbackflushspid,jdbcType=INTEGER},
+      F_102 = #{record.f102,jdbcType=VARCHAR},
+      F_103 = #{record.f103,jdbcType=INTEGER},
+      F_104 = #{record.f104,jdbcType=VARCHAR},
+      FChartNumber = #{record.fchartnumber,jdbcType=VARCHAR},
+      FIsKeyItem = #{record.fiskeyitem,jdbcType=BIT},
+      FMaund = #{record.fmaund,jdbcType=INTEGER},
+      FGrossWeight = #{record.fgrossweight,jdbcType=DECIMAL},
+      FNetWeight = #{record.fnetweight,jdbcType=DECIMAL},
+      FCubicMeasure = #{record.fcubicmeasure,jdbcType=INTEGER},
+      FLength = #{record.flength,jdbcType=DECIMAL},
+      FWidth = #{record.fwidth,jdbcType=DECIMAL},
+      FHeight = #{record.fheight,jdbcType=DECIMAL},
+      FSize = #{record.fsize,jdbcType=DECIMAL},
+      FVersion = #{record.fversion,jdbcType=VARCHAR},
+      FZJNum = #{record.fzjnum,jdbcType=DECIMAL},
+      FStandardCost = #{record.fstandardcost,jdbcType=DECIMAL},
+      FStandardManHour = #{record.fstandardmanhour,jdbcType=DECIMAL},
+      FStdPayRate = #{record.fstdpayrate,jdbcType=DECIMAL},
+      FChgFeeRate = #{record.fchgfeerate,jdbcType=DECIMAL},
+      FStdFixFeeRate = #{record.fstdfixfeerate,jdbcType=DECIMAL},
+      FOutMachFee = #{record.foutmachfee,jdbcType=DECIMAL},
+      FPieceRate = #{record.fpiecerate,jdbcType=DECIMAL},
+      FStdBatchQty = #{record.fstdbatchqty,jdbcType=DECIMAL},
+      FPOVAcctID = #{record.fpovacctid,jdbcType=INTEGER},
+      FPIVAcctID = #{record.fpivacctid,jdbcType=INTEGER},
+      FMCVAcctID = #{record.fmcvacctid,jdbcType=INTEGER},
+      FPCVAcctID = #{record.fpcvacctid,jdbcType=INTEGER},
+      FSLAcctID = #{record.fslacctid,jdbcType=INTEGER},
+      FCAVAcctID = #{record.fcavacctid,jdbcType=INTEGER},
+      FCBAppendRate = #{record.fcbappendrate,jdbcType=DECIMAL},
+      FCBAppendProject = #{record.fcbappendproject,jdbcType=INTEGER},
+      FCostBomID = #{record.fcostbomid,jdbcType=INTEGER},
+      FCBRouting = #{record.fcbrouting,jdbcType=INTEGER},
+      FInspectionLevel = #{record.finspectionlevel,jdbcType=INTEGER},
+      FInspectionProject = #{record.finspectionproject,jdbcType=INTEGER},
+      FIsListControl = #{record.fislistcontrol,jdbcType=INTEGER},
+      FProChkMde = #{record.fprochkmde,jdbcType=INTEGER},
+      FWWChkMde = #{record.fwwchkmde,jdbcType=INTEGER},
+      FSOChkMde = #{record.fsochkmde,jdbcType=INTEGER},
+      FWthDrwChkMde = #{record.fwthdrwchkmde,jdbcType=INTEGER},
+      FStkChkMde = #{record.fstkchkmde,jdbcType=INTEGER},
+      FOtherChkMde = #{record.fotherchkmde,jdbcType=INTEGER},
+      FStkChkPrd = #{record.fstkchkprd,jdbcType=INTEGER},
+      FStkChkAlrm = #{record.fstkchkalrm,jdbcType=INTEGER},
+      FIdentifier = #{record.fidentifier,jdbcType=INTEGER},
+      FNameEn = #{record.fnameen,jdbcType=NVARCHAR},
+      FModelEn = #{record.fmodelen,jdbcType=NVARCHAR},
+      FHSNumber = #{record.fhsnumber,jdbcType=INTEGER},
+      FFirstUnit = #{record.ffirstunit,jdbcType=NVARCHAR},
+      FSecondUnit = #{record.fsecondunit,jdbcType=NVARCHAR},
+      FFirstUnitRate = #{record.ffirstunitrate,jdbcType=DECIMAL},
+      FSecondUnitRate = #{record.fsecondunitrate,jdbcType=DECIMAL},
+      FIsManage = #{record.fismanage,jdbcType=BIT},
+      FPackType = #{record.fpacktype,jdbcType=INTEGER},
+      FLenDecimal = #{record.flendecimal,jdbcType=INTEGER},
+      FCubageDecimal = #{record.fcubagedecimal,jdbcType=INTEGER},
+      FWeightDecimal = #{record.fweightdecimal,jdbcType=INTEGER},
+      FImpostTaxRate = #{record.fimposttaxrate,jdbcType=DECIMAL},
+      FConsumeTaxRate = #{record.fconsumetaxrate,jdbcType=DECIMAL},
+      FManageType = #{record.fmanagetype,jdbcType=INTEGER},
+      FBarcode = #{record.fbarcode,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

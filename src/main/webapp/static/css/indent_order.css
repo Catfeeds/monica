@@ -1,0 +1,18 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+/* 
+body{ width:100%; height:100%; background-color:#f9f9f9;}
+html{ width:100%; height:100%; background-color:#f9f9f9;}
+*{margin:0; padding:0;border:none; text-decoration:none; font-family:"Droid Sans Fallback",Rotobo,"冬青黑和华文黑体",HelveticaNeue; font-size:14px; font-weight:normal; outline:none;line-height:normal}
+img{ display:block;}
+.clearfix{ clear:both}
+.margin{ margin-top:10px; width:100%; height:1px;} */
+
+/*header标题*/
+.header1{ height:46px; line-height:46px; background-color:#01aff0; color:white; font-size:18px; text-align:center; position:relative}
+.header_left{ height:46px; line-height:46px; color:white; text-align:left; font-size:14px; position:absolute; left:4%; top:0}
+.header_left img{ float:left; margin-top:14px; width:11px; height:auto}
+.header_right{ height:46px; line-height:46px; color:white; text-align:right; font-size:14px; position:absolute; right:4%; top:0}
+.header_right img{ float:right; margin-top:14px; width:18px; height:auto}
+

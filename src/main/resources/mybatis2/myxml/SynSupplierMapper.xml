@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SynSupplierManager">
+	
+	<!--表名 -->
+	<sql id="tableName">
+		t_Supplier
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		FItemID,FNumber,FName,FAddress,FContact,FPhone,FModifyTime
+	</sql>
+	<sql id="Field1">
+		p.FInterID as FInterID,p.FBillNo as FBillNo,p.FDate as FDate,p.FSupplyID as FVendorID,
+		s.FContact as FContact ,s.FPhone as FTelephone,e.FDate as FShippingDate,e.FNote as FNote,p.FBillerID as FBillerID,
+		p.FCheckerID as FCheckerID,p.FCheckDate as FCheckDate
+	</sql>
+	<!-- 列表 -->
+	<select id="supplier_synchronization" parameterType="page" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+	</select>
+	
+	<!-- 同步采购订单 -->
+	 <select id="poorder_synchronization" parameterType="page" resultType="pd">
+		SELECT p.FInterID ,p.FBillNo,p.FDate,p.FSupplyID,s.FContact,s.FPhone as FTelephone,
+		p.FStatus as FStatus,p.FBillerID as FBillerID,p.FCheckerID as FCheckerID,p.FCheckDate as FCheckDate
+ 		from  POOrder p INNER JOIN t_Supplier s ON p.FSupplyID = s.FItemID
+	</select>
+	
+	<!-- 同步采购订单 -->
+	 <select id="poorderEntry_synchronization" parameterType="page" resultType="pd">
+		SELECT e.FInterId,e.FEntryID,e.FItemID,e.FDate, m.FName,e.FAuxqty,e.FNote 
+		from 
+		POOrderEntry e  INNER JOIN t_MeasureUnit m ON e.FUnitID = m.FItemID
+	</select>
+	<!-- <select id="poorder_synchronization" parameterType="page" resultType="pd">
+		SELECT 
+		<include refid="Field1"></include>
+ 		from POOrder 
+ 		p INNER  Join POOrderEntry e ON p.FInterID = e.FInterID INNER JOIN t_Supplier s ON p.FSupplyID = s.FItemID
+	</select>  -->
+</mapper>

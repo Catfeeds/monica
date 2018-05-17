@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fh.dao.TB_WXQYAPPMapper">
+  <resultMap id="BaseResultMap" type="com.fh.entity.TB_WXQYAPP">
+    <id column="WXQYAPP_ID" jdbcType="NVARCHAR" property="wxqyappId" />
+    <result column="APPNAME" jdbcType="NVARCHAR" property="appname" />
+    <result column="APPSECRET" jdbcType="NVARCHAR" property="appsecret" />
+    <result column="APPAGENTID" jdbcType="NVARCHAR" property="appagentid" />
+    <result column="CREATETIME" jdbcType="NVARCHAR" property="createtime" />
+    <result column="UPDATETIME" jdbcType="NVARCHAR" property="updatetime" />
+    <result column="CREATEMAN" jdbcType="NVARCHAR" property="createman" />
+    <result column="APPURL" jdbcType="NVARCHAR" property="appurl" />
+    <result column="TOKEN" jdbcType="NVARCHAR" property="token" />
+    <result column="ENCODINGAESKEY" jdbcType="NVARCHAR" property="encodingaeskey" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    WXQYAPP_ID, APPNAME, APPSECRET, APPAGENTID, CREATETIME, UPDATETIME, CREATEMAN, APPURL, 
+    TOKEN, ENCODINGAESKEY
+  </sql>
+  <select id="selectByExample" parameterType="com.fh.entity.TB_WXQYAPPExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TB_WXQYAPP
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_WXQYAPP
+    where WXQYAPP_ID = #{wxqyappId,jdbcType=NVARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_WXQYAPP
+    where WXQYAPP_ID = #{wxqyappId,jdbcType=NVARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fh.entity.TB_WXQYAPPExample">
+    delete from TB_WXQYAPP
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fh.entity.TB_WXQYAPP">
+    insert into TB_WXQYAPP (WXQYAPP_ID, APPNAME, APPSECRET, 
+      APPAGENTID, CREATETIME, UPDATETIME, 
+      CREATEMAN, APPURL, TOKEN, 
+      ENCODINGAESKEY)
+    values (#{wxqyappId,jdbcType=NVARCHAR}, #{appname,jdbcType=NVARCHAR}, #{appsecret,jdbcType=NVARCHAR}, 
+      #{appagentid,jdbcType=NVARCHAR}, #{createtime,jdbcType=NVARCHAR}, #{updatetime,jdbcType=NVARCHAR}, 
+      #{createman,jdbcType=NVARCHAR}, #{appurl,jdbcType=NVARCHAR}, #{token,jdbcType=NVARCHAR}, 
+      #{encodingaeskey,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fh.entity.TB_WXQYAPP">
+    insert into TB_WXQYAPP
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wxqyappId != null">
+        WXQYAPP_ID,
+      </if>
+      <if test="appname != null">
+        APPNAME,
+      </if>
+      <if test="appsecret != null">
+        APPSECRET,
+      </if>
+      <if test="appagentid != null">
+        APPAGENTID,
+      </if>
+      <if test="createtime != null">
+        CREATETIME,
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME,
+      </if>
+      <if test="createman != null">
+        CREATEMAN,
+      </if>
+      <if test="appurl != null">
+        APPURL,
+      </if>
+      <if test="token != null">
+        TOKEN,
+      </if>
+      <if test="encodingaeskey != null">
+        ENCODINGAESKEY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wxqyappId != null">
+        #{wxqyappId,jdbcType=NVARCHAR},
+      </if>
+      <if test="appname != null">
+        #{appname,jdbcType=NVARCHAR},
+      </if>
+      <if test="appsecret != null">
+        #{appsecret,jdbcType=NVARCHAR},
+      </if>
+      <if test="appagentid != null">
+        #{appagentid,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=NVARCHAR},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=NVARCHAR},
+      </if>
+      <if test="createman != null">
+        #{createman,jdbcType=NVARCHAR},
+      </if>
+      <if test="appurl != null">
+        #{appurl,jdbcType=NVARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=NVARCHAR},
+      </if>
+      <if test="encodingaeskey != null">
+        #{encodingaeskey,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fh.entity.TB_WXQYAPPExample" resultType="java.lang.Long">
+    select count(*) from TB_WXQYAPP
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update TB_WXQYAPP
+    <set>
+      <if test="record.wxqyappId != null">
+        WXQYAPP_ID = #{record.wxqyappId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.appname != null">
+        APPNAME = #{record.appname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.appsecret != null">
+        APPSECRET = #{record.appsecret,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.appagentid != null">
+        APPAGENTID = #{record.appagentid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        CREATETIME = #{record.createtime,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.updatetime != null">
+        UPDATETIME = #{record.updatetime,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createman != null">
+        CREATEMAN = #{record.createman,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.appurl != null">
+        APPURL = #{record.appurl,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.token != null">
+        TOKEN = #{record.token,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.encodingaeskey != null">
+        ENCODINGAESKEY = #{record.encodingaeskey,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update TB_WXQYAPP
+    set WXQYAPP_ID = #{record.wxqyappId,jdbcType=NVARCHAR},
+      APPNAME = #{record.appname,jdbcType=NVARCHAR},
+      APPSECRET = #{record.appsecret,jdbcType=NVARCHAR},
+      APPAGENTID = #{record.appagentid,jdbcType=NVARCHAR},
+      CREATETIME = #{record.createtime,jdbcType=NVARCHAR},
+      UPDATETIME = #{record.updatetime,jdbcType=NVARCHAR},
+      CREATEMAN = #{record.createman,jdbcType=NVARCHAR},
+      APPURL = #{record.appurl,jdbcType=NVARCHAR},
+      TOKEN = #{record.token,jdbcType=NVARCHAR},
+      ENCODINGAESKEY = #{record.encodingaeskey,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fh.entity.TB_WXQYAPP">
+    update TB_WXQYAPP
+    <set>
+      <if test="appname != null">
+        APPNAME = #{appname,jdbcType=NVARCHAR},
+      </if>
+      <if test="appsecret != null">
+        APPSECRET = #{appsecret,jdbcType=NVARCHAR},
+      </if>
+      <if test="appagentid != null">
+        APPAGENTID = #{appagentid,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null">
+        CREATETIME = #{createtime,jdbcType=NVARCHAR},
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME = #{updatetime,jdbcType=NVARCHAR},
+      </if>
+      <if test="createman != null">
+        CREATEMAN = #{createman,jdbcType=NVARCHAR},
+      </if>
+      <if test="appurl != null">
+        APPURL = #{appurl,jdbcType=NVARCHAR},
+      </if>
+      <if test="token != null">
+        TOKEN = #{token,jdbcType=NVARCHAR},
+      </if>
+      <if test="encodingaeskey != null">
+        ENCODINGAESKEY = #{encodingaeskey,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where WXQYAPP_ID = #{wxqyappId,jdbcType=NVARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fh.entity.TB_WXQYAPP">
+    update TB_WXQYAPP
+    set APPNAME = #{appname,jdbcType=NVARCHAR},
+      APPSECRET = #{appsecret,jdbcType=NVARCHAR},
+      APPAGENTID = #{appagentid,jdbcType=NVARCHAR},
+      CREATETIME = #{createtime,jdbcType=NVARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=NVARCHAR},
+      CREATEMAN = #{createman,jdbcType=NVARCHAR},
+      APPURL = #{appurl,jdbcType=NVARCHAR},
+      TOKEN = #{token,jdbcType=NVARCHAR},
+      ENCODINGAESKEY = #{encodingaeskey,jdbcType=NVARCHAR}
+    where WXQYAPP_ID = #{wxqyappId,jdbcType=NVARCHAR}
+  </update>
+</mapper>

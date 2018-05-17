@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ItemManager">
+	
+	<!--表名 -->
+	<sql id="tableName">
+		TB_WXQYAPP
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		A.FNumber,A.FName,A.FModel,B.FName,Sum(IsNull(C.FQty,0)),ISNULL(D.FName,'')
+	</sql>
+	
+	
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage11" parameterType="page" resultType="pd">
+		select * from (select top 100 percent A.FItemID as FID,A.FParentID as PID,
+		A.FNumber as AFNumber,A.FName as AFName,A.FModel as AFModel,B.FName as BFName,Sum(IsNull(C.FQty,0)) as CFQty,ISNULL(D.FName,'') as DFName
+		from t_ICItem A inner Join T_MeasureUnit B On A.FUnitID=B.FMeasureUnitID left  Join ICInventory C On C.FItemID=A.FItemID left  Join t_Stock D On D.FItemID=C.FStockID
+		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
+		where A.FName +ISNULL(A.FModel,'') Like '%'+#{pd.keywords}+'%'
+		</if>
+		<if test="pd.treeKey!= null and pd.treeKey != ''"><!-- 关键词检索 -->
+		where D.FItemID = #{pd.treeKey}
+		</if>
+		Group By A.FItemID ,A.FParentID,A.FNumber,A.FName,A.FModel,B.FName,ISNULL(D.FName,'') Order By A.FNumber,ISNULL(D.FName,'')) as a
+	</select>
+	
+	<select id="tree_data" parameterType="page" resultType="pd">
+		select FItemID AS CKid,FParentID AS CKFid,FName as CK from t_Item  where FItemClassID = 5
+	</select>
+	
+	<select id="listAllSalesOrder" parameterType="page" resultType="pd">
+		select * from TB_SALESORDERBILL 
+	</select>
+	
+	<select id="listAllSalesOrderEntry" parameterType="page" resultType="pd">
+		select * from TB_SALESORDERBILLENTRY 
+	</select>
+	
+	<!-- 新增销售订单-->
+	<insert id="save_salesOrder" parameterType="pd">
+		insert into 
+		TB_SALESORDERBILL
+		(
+		FTEMPID,	
+		FBILLNO,	
+		FNEEDDATE,	
+		FDEPTID,	
+		FCONTACT,	
+		FTELEPHONE,	
+		FBILLERID,	
+		FDATE,	
+		FSTATUS,	
+		FCHECKERID,	
+		FCHECKDATE,	
+		FREMARK,
+		CLIENT_ID,
+		FCustID,
+		FSYNSTATUS,	
+		SALESORDERBILL_ID
+		) values (
+		#{FTEMPID},	
+		#{FBILLNO},	
+		#{FNEEDDATE},	
+		#{FDEPTID},	
+		#{FCONTACT},	
+		#{FTELEPHONE},	
+		#{FBILLERID},	
+		#{FDATE},	
+		#{FSTATUS},	
+		#{FCHECKERID},	
+		#{FCHECKDATE},	
+		#{FREMARK},
+		#{CLIENT_ID},
+		#{FCustID},
+		#{FSYNSTATUS},
+		#{SALESORDERBILL_ID}
+		)
+	</insert>
+	
+	<!-- 新增销售订单明细-->
+	<insert id="save_salesOrderEntry" parameterType="pd">
+		insert into 
+		TB_SALESORDERBILLENTRY
+		(
+		FENTRYID,	
+		FITEMID,	
+		FAUXQTY,	
+		FDATE,	
+		FAUXPRICE,	
+		FAMOUNT,	
+		FTAXRATE,	
+		FALLPRICE,	
+		FALLAMOUNT,	
+		FREMARK,	
+		SALESORDERBILL_ID,
+		SALESORDERBILLENTRY_ID
+		) values (
+		#{FENTRYID},	
+		#{FITEMID},	
+		#{FAUXQTY},	
+		#{FDATE},	
+		#{FAUXPRICE},	
+		#{FAMOUNT},	
+		#{FTAXRATE},	
+		#{FALLPRICE},	
+		#{FALLAMOUNT},	
+		#{FREMARK},	
+		#{SALESORDERBILL_ID},
+		#{SALESORDERBILLENTRY_ID}
+		)
+	</insert>
+	
+	<!-- 树id查询 -->
+	<select id="tree_dataByid" parameterType="page" resultType="pd">
+		select FItemID AS CKid,FParentID AS CKFid,FName as CK from t_Item  where FItemClassID = 5 and FItemID = #{pd.treeKey}
+	</select>
+	
+	<select id="z_ARSummary" parameterType="page" resultType="pd">
+		Exec z_ARSummary #{pd.Year},#{pd.Period},#{pd.CustNum},#{pd.EmpName}	
+	</select>
+	
+	<!-- 通过存储过程获取订单编号 -->
+	<select id="getBillNO" parameterType="page" resultType="pd">
+		Declare @BillNO	Varchar(100)
+		Exec CR_ICBillNo 1,3,81,@BillNO Output
+		Select @BillNO 
+	</select>
+	
+	<!-- 部门 -->
+	<select id="datalistPage_erp" parameterType="page" resultType="pd">
+		Select FItemID,FNumber,FName,FParentID,FModifyTime,FDeleted 
+		From t_Item 
+		Where FItemClassID=2
+		<if test="pd.FModifyTime!= null and pd.FModifyTime != ''"><!-- 关键词检索 -->
+		And FModifyTime> #{pd.FModifyTime}
+		</if>
+	</select>
+	
+	<!-- 客户资料 -->
+	<select id="listClient" parameterType="page" resultType="pd">
+		Select FItemID,FNumber,FName,FParentID,FModifyTime,FDeleted 
+		From t_Item 
+		Where FItemClassID=1
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from t_ICItem A inner Join T_MeasureUnit B On A.FUnitID=B.FMeasureUnitID left  Join ICInventory C On C.FItemID=A.FItemID left  Join t_Stock D On D.FItemID=C.FStockID
+	</select>
+
+	<select id="list_OrderCount" parameterType="page" resultType="pd">
+		SELECT COUNT(FDATE) as count from TB_SALESORDERBILL where CONVERT(VARCHAR(10),FDATE,120) LIKE  #{pd.FDATE} +'%'
+			and FSYNSTATUS = 1
+	</select>
+
+	<select id="list_ClientOrderCount" parameterType="page" resultType="pd">
+		SELECT COUNT(s.CLIENT_ID) as value,c.FNAME as name from
+		TB_SALESORDERBILL s LEFT JOIN t_Item c ON s.CLIENT_ID = c.FITEMID
+		where CONVERT(VARCHAR(10),s.FDATE,120) LIKE  #{pd.FDATE} +'%'
+		GROUP BY s.CLIENT_ID ,c.FNAME
+	</select>
+
+	<select id="listItemAll" parameterType="pd" resultType="pd">
+		Select A.FNumber,A.FName,A.FModel,B.FName AS FBasicUnit,C.FName AS FSaleUnit,A.FModifyTime as FModifyTime,
+		D.FName AS FOrderUnit,A.FOrderPrice,A.FSalePrice,A.FItemID,A.FParentID,A.FUnitID,A.FSaleUnitID,A.FOrderUnitID
+		From t_ICItem A
+		Inner Join t_MeasureUnit B On A.FUnitID=B.FMeasureUnitID
+		Inner Join t_MeasureUnit C On A.FSaleUnitID=C.FMeasureUnitID
+		Inner Join t_MeasureUnit D On A.FOrderUnitID =D.FMeasureUnitID
+		Order By A.FNumber
+	</select>
+</mapper>
