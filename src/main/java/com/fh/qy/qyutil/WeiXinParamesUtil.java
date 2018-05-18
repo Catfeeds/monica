@@ -15,8 +15,8 @@ public class WeiXinParamesUtil {
 
 	//应用的凭证密钥
 	public final static String agentSecret = "4VM4v7JFLOfIgXbPeoWLz5aEUYbkxC24QHSIO9fPTsY";
-	//麦香坊工作台应用的凭证密钥
-	public final static String mxfAgentSecret = "GCB1HLm-Ii0lfACOjoZmW9qMdjPIKV0pOyBda-DPMec";
+	//莫尔卡工作台应用的凭证密钥
+	public final static String mncAgentSecret = "B6kHFal4F2fIUFscOZP8pDF6QmLGtF06xyZrE_PDdUk";
 	//本机测应用的密匙
 	public final static String localhostAgentSecret = "jjeChxOovff-gsvFFZNPOMn3fM3KOmomDZv0bpBRfMs";
 	//本机oa应用的密匙
@@ -31,6 +31,9 @@ public class WeiXinParamesUtil {
 	
 	//企业应用的id，整型。可在应用的设置页面查看
 	public final static int agentId = 1000007;
+
+	//莫尔卡应用id
+	public final static int mncagentId = 1000011;
 
 
 }

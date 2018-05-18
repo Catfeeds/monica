@@ -119,7 +119,7 @@ public class QyWxUserController extends BaseController {
 			List<PageData> departments = weixindepartmentService.list(page);
 			//System.out.println("//////////"+departments);
 			for (int j = 0; j < departments.size(); j++) {
-				System.out.println(departments.get(j).get("ID"));
+				//System.out.println(departments.get(j).get("ID"));
 				depNums.add(departments.get(j).get("ID").toString());
 			}
 		}

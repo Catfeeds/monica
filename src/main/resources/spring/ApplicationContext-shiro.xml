@@ -39,14 +39,12 @@
 				/erp_Get/**					= anon
 				/test_Get/**				= anon
 				/store/**					= anon
-				/synergy/**					= anon
 				/platformQY/**				= anon
 				/order/**					= anon
 				/qywx/**		 			= anon
+				/platformpage/**			= anon
 				/http/**					= anon
-				/template_Order/**		 	= anon
 				/wx/**		 				= anon
-				/checkUp/**					= anon
 				/commodity_shop/**		 	= anon
 				/plugins/ueditor/jsp/**		= anon
 				/static/login/** 			= anon

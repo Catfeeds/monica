@@ -18,11 +18,11 @@ public class CodeToUserService {
 	public JSONObject getUserinfo(String accessToken,String code){
 		String getUserinfo_url="https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?access_token=ACCESS_TOKEN&code=CODE";
 		getUserinfo_url = getUserinfo_url.replace("ACCESS_TOKEN", accessToken).replace("CODE", code);
-		System.out.println(getUserinfo_url);
+		//System.out.println(getUserinfo_url);
 		//getUserinfo_url = getUserinfo_url.replace("CODE", code);
 		//3.调用接口，发送消息
 		JSONObject jsonObject = CommonUtil.httpsRequest(getUserinfo_url, "GET", null);
-        System.out.println(jsonObject);
+        //System.out.println(jsonObject);
 	
 		//4.错误消息处理
 		if (null != jsonObject) {  

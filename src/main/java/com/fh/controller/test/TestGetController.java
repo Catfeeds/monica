@@ -70,7 +70,6 @@ public class TestGetController extends BaseController{
 		//List<PageData>	varList = itemService.listAll_ERP(page);
 		json.put("Data", varList);
 		return json;
-		
 	}
 	
 	@RequestMapping(value="/erp_item")
