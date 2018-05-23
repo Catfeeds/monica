@@ -64,7 +64,9 @@ public interface ItemManager {
 	 * @throws Exception
 	 */
 	public List<PageData> listItemAll(PageData pd)throws Exception;
-	
+
+	public List<PageData> listClassify_item(Page page)throws Exception;
+
 	/**z_ARSummary
 	 * @param page
 	 * @throws Exception

@@ -1,6 +1,12 @@
 package com.fh.controller.management.classify_item;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 
+import com.fh.service.management.interfaceip.InterfaceIPManager;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -39,6 +46,8 @@ public class Classify_itemController extends BaseController {
 	String menuUrl = "classify_item/list.do"; // 菜单地址(权限用)
 	@Resource(name = "classify_itemService")
 	private Classify_itemManager classify_itemService;
+	@Resource(name="interfaceipService")
+	private InterfaceIPManager interfaceipService;
 
 	/**
 	 * 保存
@@ -172,6 +181,119 @@ public class Classify_itemController extends BaseController {
 		mv.addObject("pd", pd);
 		mv.addObject("QX", Jurisdiction.getHC()); // 按钮权限
 		return mv;
+	}
+
+	public String getIpAndProjectName()throws Exception{
+		String ip = null;
+		String projectName = null;
+		PageData pd = new PageData();
+		pd = interfaceipService.findByNew(pd);
+		ip = pd.getString("IP");
+		System.out.println("ip:"+ip);
+		projectName = pd.getString("PROJECTNAME");
+		return ip+"/"+projectName;
+	}
+
+	@RequestMapping(value="/getClassify_item")
+	@ResponseBody
+	public Map<String, Object> getClassify_item() throws Exception{
+		Map<String, Object> json = new HashMap<String, Object>();
+		String requestUrl = this.getIpAndProjectName()+"/erp_Get/getClassify_item";
+		System.out.println(requestUrl);
+		try {
+			URL httpclient =new URL(requestUrl);
+			HttpURLConnection conn =(HttpURLConnection) httpclient.openConnection();
+			conn.setConnectTimeout(50000);
+			conn.setReadTimeout(20000);
+			conn.setRequestMethod("GET");
+			conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+			conn.setDoOutput(true);
+			conn.setDoInput(true);
+			conn.connect();
+			InputStream is =conn.getInputStream();
+			//int size =is.available();
+			ByteArrayOutputStream buff = new ByteArrayOutputStream();
+			int c;
+			while((c = is.read()) >= 0){
+				buff.write(c);
+			}
+			byte[] data = buff.toByteArray();
+			buff.close();
+
+			String htmlText = new String(data, "UTF-8");
+			JSONObject jsStr = JSONObject.fromObject(htmlText);
+			//System.out.println(jsStr);
+			System.out.println(jsStr.getJSONArray("Data"));
+			JSONArray jsonarr = jsStr.getJSONArray("Data"); // erp数据
+			PageData pd = new PageData();
+			List<PageData>	varOList = classify_itemService.listAll(pd); // 本地数据
+			//新增开关
+			int hint = 0; //0为开启，1为关闭
+			//删除开关
+			int dint = 0; //开0,关1
+			//int dstr = 0;
+			int count = 0;
+			int dcount = 0;
+			int ecount = 0;
+			PageData pd3 = new PageData();
+			for (int i = 0; i < jsonarr.size(); i++) {
+				hint = 1;
+				JSONObject job = jsonarr.getJSONObject(i);
+				for (int j = 0; j < varOList.size(); j++) {
+					if(varOList.get(j).get("FITEMID").equals(Integer.parseInt(job.get("FItemID").toString()))){
+						hint = 0;
+						if (!varOList.get(j).get("FMODIFYTIME").equals(job.get("FModifyTime").toString())) {
+							//System.out.println("修改"+ job.getString("FName"));
+							pd3.put("CLASSIFY_ITEM_ID", varOList.get(j).get("CLASSIFY_ITEM_ID"));
+							pd3.put("FNAME", job.getString("FName"));
+							pd3.put("FPARENTID", Integer.parseInt(job.get("FParentID").toString()));
+							pd3.put("FNUMBER", job.getString("FNumber"));
+							pd3.put("FITEMID", Integer.parseInt(job.get("FItemID").toString()));
+							pd3.put("FMODIFYTIME", job.get("FModifyTime").toString());
+							classify_itemService.edit(pd3);
+							ecount ++ ;
+						}
+					}
+				}
+				if(hint == 1) {
+					//System.out.println(job.getString("FBasicUnit"));
+					pd.put("CLASSIFY_ITEM_ID", this.get32UUID());
+					pd.put("FNAME", job.getString("FName"));
+					pd.put("FPARENTID", Integer.parseInt(job.get("FParentID").toString()));
+					pd.put("FNUMBER", job.getString("FNumber"));
+					pd.put("FITEMID", Integer.parseInt(job.get("FItemID").toString()));
+					pd.put("FMODIFYTIME", job.get("FModifyTime").toString());
+					classify_itemService.save(pd);
+					count++;
+				}
+			}
+
+			for (int j = 0; j < varOList.size(); j++) {
+				for (int i = 0; i < jsonarr.size(); i++) {
+					JSONObject job = jsonarr.getJSONObject(i);
+					if(Integer.parseInt(job.get("FItemID").toString()) == (int)varOList.get(j).get("FITEMID")){
+						dint = 1; //存在
+					}
+				}
+				if(dint == 0){
+					PageData pd2 = new PageData();
+					pd2.put("FITEMID",(int)varOList.get(j).get("FITEMID"));
+					classify_itemService.deleteByFITEMID(pd2);
+					dcount ++ ;
+				}
+				dint = 0;
+			}
+			System.out.println("完成");
+			System.out.println("新增数据"+count);
+			System.out.println("修改数据"+ecount);
+			System.out.println("删除数据"+dcount);
+			json.put("Data", "新增数据"+count+"条；"+"修改数据"+ecount+"条；"+"删除数据"+dcount+"条。");
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return json;
 	}
 
 	/**

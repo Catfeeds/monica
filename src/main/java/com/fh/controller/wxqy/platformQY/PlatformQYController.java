@@ -56,6 +56,16 @@ public class PlatformQYController extends BaseController {
 		mv.setViewName("wxqy/platformQY/index");
 		return mv;
 	}
+
+	@RequestMapping(value="/testIndex")
+	public ModelAndView testIndex(Page page) throws Exception{
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		mv.addObject("UserId", "1213");
+		mv.setViewName("wxqy/platformQY/index");
+		return mv;
+	}
 	
 	@RequestMapping(value="/getUserId")
 	@ResponseBody

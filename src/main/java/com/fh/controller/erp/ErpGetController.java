@@ -108,6 +108,18 @@ public class ErpGetController extends BaseController{
 		
 	}
 
+	@RequestMapping(value="/getClassify_item")
+	@ResponseBody
+	public  Map<String, Object> getClassify_item(Page page) throws Exception{
+		Map<String, Object> json = new HashMap<String, Object>();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		List<PageData>	varList  = itemService.listClassify_item(page);
+		json.put("Data", varList);
+		return json;
+
+	}
+
 	@RequestMapping(value="/load")
 	@ResponseBody
 	public Map<String, Object> load(Page page)throws Exception{

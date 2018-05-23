@@ -32,7 +32,7 @@ public class PlatformPageController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		mv.addObject("UserId", "");
-		mv.setViewName("wxqy/platformQY/platform_page/toQRcode");
+		mv.setViewName("wxqy/platformQY/platform_page/QRcode");
 		return mv;
 	}
 

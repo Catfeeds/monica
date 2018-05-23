@@ -71,35 +71,6 @@
 						<div class="col-xs-12">
 
 							<div class="weui-msg wallet-main clearfix" style="margin-top: 0">
-								<%--<ul
-									class="wallet-control flex flex-pack-justify flex-pack-center">
-									<li class="flex flex-v flex-align-center">
-										<p style="font-size: 38px">1</p>
-										<br>
-										<p>待办报价</p>
-										<br>
-									<a onclick="onclick1()"><em>点击查看</em>
-									</a>
-									</li>
-									<li class="flex flex-v flex-align-center">
-										<p style="font-size: 38px">3</p>
-										<br>
-										<p>新的订单</p>
-										<br>
-									<a onclick="onclick1()"> <em>点击查看</em>
-									</a>
-									</li>
-									<li class="flex flex-v flex-align-center">
-										<p style="font-size: 38px">5</p>
-										<br>
-										<p>待发货订单</p>
-										<br>
-									<a onclick="onclick1()"> <em>点击查看</em>
-									</a>
-									</li>
-								</ul>--%>
-								<!-- 服务 -->
-								<!-- <div class="weui-cells__title">功能服务</div> -->
 								<div class="weui-grids">
 									<c:set var="theString" value="${userData.ROLE}" />
 									<a onclick="onclick1()"
@@ -117,9 +88,6 @@
 												src="static/images/platformQY/paste_plain.png" alt="">
 										</div>
 										<p class="weui-grid__label">订单管理</p> </a>
-									<%-- <a
-										href="<%=basePath%>order/receive_order?FVENDORID=${FVENDORID}"
-										class="weui-grid js_grid"> --%>
 									<a href="<%=basePath%>platformpage/toQRcode?USERID=${UserId}"
 										class="weui-grid js_grid">
 										<div>
@@ -142,10 +110,6 @@
 												src="static/images/platformQY/appointment-missed.png" alt="">
 										</div>
 										<p class="weui-grid__label">预警提醒</p> </a>
-									<%-- </c:if> --%>
-
-									<%-- <a href="<%=basePath%>platformQY/toCheck"
-										class="weui-grid js_grid"> --%>
 									<a onclick="onclick1()"
 										class="weui-grid js_grid">
 	
@@ -161,9 +125,6 @@
 												src="static/images/platformQY/map.png" alt="">
 										</div>
 										<p class="weui-grid__label">考勤签到</p> </a>
-									<%-- <a
-										href="<%=basePath%>store/list_client"
-										class="weui-grid js_grid"> --%>
 									<a onclick="onclick1()"
 										class="weui-grid js_grid">
 										<div>
@@ -173,7 +134,6 @@
 										<p class="weui-grid__label">工作报告</p> </a>
 								</div>
 								<!-- 服务 -->
-
 							</div>
 
 							<!-- -------------------------------------------- -->
@@ -189,13 +149,7 @@
 
 
 	</div>
-	<!-- /.main-container -->
-
-	<!-- basic scripts -->
-	<!-- 页面底部js¨ -->
-	<%-- <%@ include file="../../system/index/foot.jsp"%> --%>
 	<script type="text/javascript">
-		//$(top.hangge());
 		function onclick1() {
 			alert("暂无内容！！");
 		}

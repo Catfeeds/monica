@@ -1,5 +1,28 @@
-package com.fh.controller.test;
+package com.fh.controller.distance;
 
+import com.fh.controller.base.BaseController;
+import com.fh.entity.Page;
+import com.fh.qy.qyutil.WeiXinParamesUtil;
+import com.fh.qy.qyutil.WeiXinUtil;
+import com.fh.service.management.classify_item.Classify_itemManager;
+import com.fh.service.management.client.ClientManager;
+import com.fh.service.management.erp_dep.ERP_DepManager;
+import com.fh.service.management.interfaceip.InterfaceIPManager;
+import com.fh.service.management.itembase.ItemBaseManager;
+import com.fh.service.management.salesorderbill.SalesOrderBillManager;
+import com.fh.service.management.salesorderbillentry.SalesOrderBillEntryManager;
+import com.fh.service.management.supplier.impl.SupplierService;
+import com.fh.util.PageData;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.annotation.Resource;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,39 +37,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.annotation.Resource;
-
-import com.fh.qy.qyutil.WeiXinParamesUtil;
-import com.fh.qy.qyutil.WeiXinUtil;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-
-import com.fh.controller.base.BaseController;
-import com.fh.entity.Page;
-import com.fh.service.management.classify_item.Classify_itemManager;
-import com.fh.service.management.client.ClientManager;
-import com.fh.service.management.erp_dep.ERP_DepManager;
-import com.fh.service.management.interfaceip.InterfaceIPManager;
-import com.fh.service.management.itembase.ItemBaseManager;
-import com.fh.service.management.salesorderbill.SalesOrderBillManager;
-import com.fh.service.management.salesorderbillentry.SalesOrderBillEntryManager;
-import com.fh.service.management.supplier.impl.SupplierService;
-import com.fh.util.Jurisdiction;
-import com.fh.util.PageData;
-
 
 @Controller
-@RequestMapping(value="/http")
-public class TestHttpController extends BaseController{
-	private static Logger log = LoggerFactory.getLogger(TestHttpController.class);
+@RequestMapping(value="/httpERP")
+public class HttpController extends BaseController{
+	private static Logger log = LoggerFactory.getLogger(HttpController.class);
 	@Resource(name="itembaseService")
 	private ItemBaseManager itembaseService;
 	
@@ -119,9 +114,8 @@ public class TestHttpController extends BaseController{
 	}
 
 	@RequestMapping(value="/getItembase")
-	//@Test
-	public void test() throws Exception{
-		String requestUrl = "http://lkl.natapp1.cc/monica/test/search";
+	public void getItembase() throws Exception{
+		String requestUrl = this.getIpAndProjectName()+"/monica/erp/getItembase";
 		try {
             URL httpclient =new URL(requestUrl);
             HttpURLConnection conn =(HttpURLConnection) httpclient.openConnection();
@@ -294,7 +288,6 @@ public class TestHttpController extends BaseController{
         } catch (IOException e) {
             e.printStackTrace();
         } 
-		
 	}
 	
 	

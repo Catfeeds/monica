@@ -97,6 +97,13 @@ public class ItemService implements ItemManager {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	public List<PageData> listClassify_item(Page page) throws Exception {
+		// TODO Auto-generated method stub
+		return (List<PageData>)dao2.findForList("ItemManager.listClassify_item", page);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
 	public List<PageData> list_z_ARSummary(Page page) throws Exception {
 		// TODO Auto-generated method stub
 		return (List<PageData>)dao2.findForList("ItemManager.z_ARSummary", page);

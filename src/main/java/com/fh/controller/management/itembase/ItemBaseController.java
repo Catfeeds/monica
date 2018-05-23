@@ -267,7 +267,8 @@ public class ItemBaseController extends BaseController {
 	@ResponseBody
 	public  Map<String, Object> test() throws Exception{
 		Map<String, Object> json = new HashMap<String, Object>();
-		String requestUrl = this.getIpAndProjectName()+"/test_Get/erp_item";
+		String requestUrl = this.getIpAndProjectName()+"/erp_Get/erp_item";
+
 		try {
             URL httpclient =new URL(requestUrl);
             HttpURLConnection conn =(HttpURLConnection) httpclient.openConnection();

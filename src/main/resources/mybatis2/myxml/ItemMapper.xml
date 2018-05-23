@@ -26,7 +26,8 @@
 		<if test="pd.treeKey!= null and pd.treeKey != ''"><!-- 关键词检索 -->
 		where D.FItemID = #{pd.treeKey}
 		</if>
-		Group By A.FItemID ,A.FParentID,A.FNumber,A.FName,A.FModel,B.FName,ISNULL(D.FName,'') Order By A.FNumber,ISNULL(D.FName,'')) as a
+		Group By A.FItemID ,A.FParentID,A.FNumber,A.FName,A.FModel,B.FName,ISNULL(D.FName,'')
+		Order By A.FNumber,ISNULL(D.FName,'')) as a
 	</select>
 	
 	<select id="tree_data" parameterType="page" resultType="pd">
@@ -147,6 +148,14 @@
 		From t_Item 
 		Where FItemClassID=1
 	</select>
+
+	<!-- 物料资料分类 -->
+	<select id="listClassify_item" parameterType="page" resultType="pd">
+		Select FItemID,FNumber,FName,FParentID,FModifyTime,FDeleted
+		From t_Item
+		Where FItemClassID=4 And FDetail=0
+	</select>
+
 	
 	<!-- 列表(全部) -->
 	<select id="listAll" parameterType="pd" resultType="pd">
