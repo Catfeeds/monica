@@ -108,7 +108,14 @@ public class ItemService implements ItemManager {
 		// TODO Auto-generated method stub
 		return (List<PageData>)dao2.findForList("ItemManager.z_ARSummary", page);
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<PageData> datalistPageInventory(Page page) throws Exception {
+		// TODO Auto-generated method stub
+		return (List<PageData>)dao2.findForList("ItemManager.datalistPageInventory", page);
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<PageData> tree_dataByid(Page page) throws Exception {

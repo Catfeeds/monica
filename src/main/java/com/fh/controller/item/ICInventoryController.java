@@ -1,6 +1,12 @@
 package com.fh.controller.item;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +16,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.fh.service.management.interfaceip.InterfaceIPManager;
+import com.fh.service.management.warehouse.WarehouseManager;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -33,6 +41,23 @@ public class ICInventoryController extends BaseController {
 	@Resource(name = "itemService")
 	ItemService itemService;
 
+	@Resource(name="warehouseService")
+	private WarehouseManager warehouseService;
+
+	@Resource(name="interfaceipService")
+	private InterfaceIPManager interfaceipService;
+
+	public String getIpAndProjectName()throws Exception{
+		String ip = null;
+		String projectName = null;
+		PageData pd = new PageData();
+		pd = interfaceipService.findByNew(pd);
+		ip = pd.getString("IP");
+		System.out.println("ip:"+ip);
+		projectName = pd.getString("PROJECTNAME");
+		return ip+"/"+projectName;
+	}
+
 	@RequestMapping(value = "/list")
 	public ModelAndView list(Page page) throws Exception {
 		logBefore(logger, Jurisdiction.getUsername() + "列表NewForWx");
@@ -43,24 +68,108 @@ public class ICInventoryController extends BaseController {
 		pd = this.getPageData();
 		String keywords = pd.getString("keywords"); // 关键词检索条件
 		String treeKey = pd.getString("treeKey");
-		String showCount = pd.getString("showCount");
-		if (null != keywords && !"".equals(keywords)) {
+		String currentPage = pd.getString("currentPage");
+		System.out.println("pd"+pd);
+		if (null != currentPage && !"".equals(currentPage)) {
+			currentPage = pd.getString("currentPage");
+		}else {
+			currentPage = "0";
+		}
+		//String showCount  = pd.getString("showCount");
+		/*if (null != keywords && !"".equals(keywords)) {
 			pd.put("keywords", keywords.trim());
-		}
+		}*/
 		if (null != treeKey && !"".equals(treeKey)) {
-			pd.put("treeKey", URLDecoder.decode(treeKey, "UTF-8").trim());
+			pd.put("treeKey", treeKey);
 		}
-		if (null == showCount || "".equals(showCount)) {
-			page.setShowCount(15);
-		}
+		System.out.println(treeKey);
 		page.setPd(pd);
-		List<PageData> varList = itemService.list(page);
-		System.out.println(varList.size());
+		//System.out.println(pd);
+		String requestUrl = this.getIpAndProjectName()+"/erp_Get/erp_getInventory?currentPage="+currentPage+"&treeKey="+treeKey;
+				//+"&keywords="+keywords;
+		System.out.println(requestUrl);
+		try {
+			URL httpclient =new URL(requestUrl);
+			HttpURLConnection conn =(HttpURLConnection) httpclient.openConnection();
+			conn.setConnectTimeout(50000);
+			conn.setReadTimeout(20000);
+			conn.setRequestMethod("GET");
+			conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+			conn.setDoOutput(true);
+			conn.setDoInput(true);
+			conn.connect();
+			InputStream is =conn.getInputStream();
+			//int size =is.available();
+			ByteArrayOutputStream buff = new ByteArrayOutputStream();
+			int c;
+			while((c = is.read()) >= 0){
+				buff.write(c);
+			}
+			byte[] data = buff.toByteArray();
+			buff.close();
+
+			String htmlText = new String(data, "UTF-8");
+			JSONObject jsStr = JSONObject.fromObject(htmlText);
+			//System.out.println(jsStr);
+			JSONArray jsonarr = jsStr.getJSONArray("Data"); // erp数据
+			String jsonPageStr = jsStr.getString("getPageStr"); // 分页
+			String jsonPage = jsStr.getString("page"); // 分页
+			//System.out.println(jsonPageStr);
+			List<PageData> listInventory = jsonarr;
+			mv.addObject("varList", listInventory);
+			mv.addObject("jsonPageStr", jsonPageStr);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//List<PageData> varList = itemService.list(page);
 		mv.setViewName("item/icinventory");
-		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
 		mv.addObject("QX", Jurisdiction.getHC()); // 按钮权限
 		return mv;
+	}
+
+	public void getWarehouse() throws Exception{
+		String requestUrl = this.getIpAndProjectName()+"/erp_Get/getWarehouse";
+		try {
+			URL httpclient =new URL(requestUrl);
+			HttpURLConnection conn =(HttpURLConnection) httpclient.openConnection();
+			conn.setConnectTimeout(50000);
+			conn.setReadTimeout(20000);
+			conn.setRequestMethod("GET");
+			conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+			conn.setDoOutput(true);
+			conn.setDoInput(true);
+			conn.connect();
+			InputStream is =conn.getInputStream();
+			//int size =is.available();
+			ByteArrayOutputStream buff = new ByteArrayOutputStream();
+			int c;
+			while((c = is.read()) >= 0){
+				buff.write(c);
+			}
+			byte[] data = buff.toByteArray();
+			buff.close();
+			String htmlText = new String(data, "UTF-8");
+			JSONObject jsStr = JSONObject.fromObject(htmlText);
+			JSONArray jsonarr = jsStr.getJSONArray("Data"); // erp数据
+			PageData pd = new PageData();
+			warehouseService.deleteAll(pd);
+			for (int i = 0; i < jsonarr.size(); i++) {
+				JSONObject job = jsonarr.getJSONObject(i);
+				pd.put("WAREHOUSE_ID", this.get32UUID());
+				pd.put("FITEMID", Integer.parseInt(job.get("FItemID").toString()));
+				pd.put("FPARENTID", Integer.parseInt(job.get("FParentID").toString()));
+				pd.put("FNAME",job.getString("FName"));
+				//System.out.println(pd);
+				warehouseService.save(pd);
+				}
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@RequestMapping(value = "/listTree")
@@ -73,9 +182,10 @@ public class ICInventoryController extends BaseController {
 
 	@RequestMapping(value = "/dateTree")
 	@ResponseBody
-	public JSONArray dateTree(Page page) {
+	public JSONArray dateTree(Page page) throws Exception{
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		getWarehouse();
 		String keywords = pd.getString("keywords"); // 关键词检索条件
 		if (null != keywords && !"".equals(keywords)) {
 			pd.put("keywords", keywords.trim());
@@ -83,7 +193,7 @@ public class ICInventoryController extends BaseController {
 		page.setPd(pd);
 		JSONArray arr = null;
 		try {
-			arr = JSONArray.fromObject(itemService.list_tree(page));
+			arr = JSONArray.fromObject(warehouseService.listAll(pd));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -100,9 +210,9 @@ public class ICInventoryController extends BaseController {
 		Iterator<Object> it = arr.iterator();
 		while (it.hasNext()) {
 			JSONObject ob = (JSONObject) it.next();
-			sb.append("{id:").append(ob.getString("CKid")).append(",pId:")
-					.append(ob.getString("CKFid")).append(",name:\"")
-					.append(ob.getString("CK")).append("\"").append(",open:")
+			sb.append("{id:").append(ob.getString("FITEMID")).append(",pId:")
+					.append(ob.getString("FPARENTID")).append(",name:\"")
+					.append(ob.getString("FNAME")).append("\"").append(",open:")
 					.append("false").append("},");
 		}
 		// System.out.println(sb.substring(0,sb.length()-1)+"]");

@@ -67,6 +67,8 @@ public interface ItemManager {
 
 	public List<PageData> listClassify_item(Page page)throws Exception;
 
+	public List<PageData> datalistPageInventory(Page page)throws Exception;
+
 	/**z_ARSummary
 	 * @param page
 	 * @throws Exception

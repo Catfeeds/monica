@@ -15,7 +15,7 @@
 <!-- 下拉框 -->
 <link rel="stylesheet" href="static/ace/css/chosen.css" />
 <!-- jsp文件头和头部 -->
-<%@ include file="../system/index/top.jsp"%>
+<%@ include file="../../system/index/top.jsp"%>
 <!-- 日期框 -->
 <link rel="stylesheet" href="static/ace/css/datepicker.css" />
 </head>
@@ -31,7 +31,7 @@
 						<div class="col-xs-12">
 							
 						<!-- 检索  -->
-						<form action="icinventory/list.do?treeKey=${pd.treeKey }" method="post" name="Form" id="Form">
+						<form action="warehouse/list.do" method="post" name="Form" id="Form">
 						<table style="margin-top:5px;">
 							<tr>
 								<td>
@@ -41,6 +41,16 @@
 											<i class="ace-icon fa fa-search nav-search-icon"></i>
 										</span>
 									</div>
+								</td>
+								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastStart" id="lastStart"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期" title="开始日期"/></td>
+								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastEnd" name="lastEnd"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期" title="结束日期"/></td>
+								<td style="vertical-align:top;padding-left:2px;">
+								 	<select class="chosen-select form-control" name="name" id="id" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
+									<option value=""></option>
+									<option value="">全部</option>
+									<option value="">1</option>
+									<option value="">2</option>
+								  	</select>
 								</td>
 								<c:if test="${QX.cha == 1 }">
 								<td style="vertical-align:top;padding-left:2px"><a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i></a></td>
@@ -57,13 +67,10 @@
 									<label class="pos-rel"><input type="checkbox" class="ace" id="zcheckbox" /><span class="lbl"></span></label>
 									</th>
 									<th class="center" style="width:50px;">序号</th>
-									<th class="center">商品代码</th>
-									<th class="center">商品名称</th>
-									<th class="center">规格型号</th>
-									<th class="center">单位</th>
-									<th class="center">库存数量</th>
-									<th class="center">仓库</th>
-									<!-- <th class="center">操作</th> -->
+									<th class="center">FItemID</th>
+									<th class="center">FParentID</th>
+									<th class="center">仓库名称</th>
+									<th class="center">操作</th>
 								</tr>
 							</thead>
 													
@@ -71,30 +78,28 @@
 							<!-- 开始循环 -->	
 							<c:choose>
 								<c:when test="${not empty varList}">
+									<c:if test="${QX.cha == 1 }">
 									<c:forEach items="${varList}" var="var" varStatus="vs">
 										<tr>
 											<td class='center'>
-												<label class="pos-rel"><input type='checkbox' name='ids' value="${var.AFNumber}" class="ace" /><span class="lbl"></span></label>
+												<label class="pos-rel"><input type='checkbox' name='ids' value="${var.WAREHOUSE_ID}" class="ace" /><span class="lbl"></span></label>
 											</td>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
-											<td class='center'>${var.AFNumber}</td>
-											<td class='center'>${var.AFName}</td>
-											<td class='center'>${var.AFModel}</td>
-											<td class='center'>${var.BFName}</td>
-											<td class='center'><fmt:formatNumber value="${var.CFQty}" pattern="0"/></td>
-											<td class='center'>${var.DFName}</td>
-											<%-- <td class="center">
+											<td class='center'>${var.FITEMID}</td>
+											<td class='center'>${var.FPARENTID}</td>
+											<td class='center'>${var.FNAME}</td>
+											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
 												</c:if>
 												<div class="hidden-sm hidden-xs btn-group">
 													<c:if test="${QX.edit == 1 }">
-													<a class="btn btn-xs btn-success" title="编辑" onclick="edit('${var.NEWFORWX_ID}');">
+													<a class="btn btn-xs btn-success" title="编辑" onclick="edit('${var.WAREHOUSE_ID}');">
 														<i class="ace-icon fa fa-pencil-square-o bigger-120" title="编辑"></i>
 													</a>
 													</c:if>
 													<c:if test="${QX.del == 1 }">
-													<a class="btn btn-xs btn-danger" onclick="del('${var.NEWFORWX_ID}');">
+													<a class="btn btn-xs btn-danger" onclick="del('${var.WAREHOUSE_ID}');">
 														<i class="ace-icon fa fa-trash-o bigger-120" title="删除"></i>
 													</a>
 													</c:if>
@@ -108,7 +113,7 @@
 														<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 															<c:if test="${QX.edit == 1 }">
 															<li>
-																<a style="cursor:pointer;" onclick="edit('${var.NEWFORWX_ID}');" class="tooltip-success" data-rel="tooltip" title="修改">
+																<a style="cursor:pointer;" onclick="edit('${var.WAREHOUSE_ID}');" class="tooltip-success" data-rel="tooltip" title="修改">
 																	<span class="green">
 																		<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 																	</span>
@@ -117,7 +122,7 @@
 															</c:if>
 															<c:if test="${QX.del == 1 }">
 															<li>
-																<a style="cursor:pointer;" onclick="del('${var.NEWFORWX_ID}');" class="tooltip-error" data-rel="tooltip" title="删除">
+																<a style="cursor:pointer;" onclick="del('${var.WAREHOUSE_ID}');" class="tooltip-error" data-rel="tooltip" title="删除">
 																	<span class="red">
 																		<i class="ace-icon fa fa-trash-o bigger-120"></i>
 																	</span>
@@ -127,10 +132,11 @@
 														</ul>
 													</div>
 												</div>
-											</td> --%>
+											</td>
 										</tr>
 									
 									</c:forEach>
+									</c:if>
 									<c:if test="${QX.cha == 0 }">
 										<tr>
 											<td colspan="100" class="center">您无权查看</td>
@@ -148,15 +154,15 @@
 						<div class="page-header position-relative">
 						<table style="width:100%;">
 							<tr>
-								<%-- <td style="vertical-align:top;">
+								<td style="vertical-align:top;">
 									<c:if test="${QX.add == 1 }">
-									<a class="btn btn-mini btn-success" onclick="add_New();">新增</a>
+									<a class="btn btn-mini btn-success" onclick="add();">新增</a>
 									</c:if>
 									<c:if test="${QX.del == 1 }">
 									<a class="btn btn-mini btn-danger" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='ace-icon fa fa-trash-o bigger-120'></i></a>
 									</c:if>
-								</td> --%>
-								<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${jsonPageStr}</div></td>
+								</td>
+								<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>
 							</tr>
 						</table>
 						</div>
@@ -182,7 +188,7 @@
 
 	<!-- basic scripts -->
 	<!-- 页面底部js¨ -->
-	<%@ include file="../system/index/foot.jsp"%>
+	<%@ include file="../../system/index/foot.jsp"%>
 	<!-- 删除时确认窗口 -->
 	<script src="static/ace/js/bootbox.js"></script>
 	<!-- ace scripts -->
@@ -201,6 +207,7 @@
 			$("#Form").submit();
 		}
 		$(function() {
+		
 			//日期框
 			$('.date-picker').datepicker({
 				autoclose: true,
@@ -252,7 +259,7 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="新增";
-			 diag.URL = '<%=basePath%>newforwx/goAdd.do';
+			 diag.URL = '<%=basePath%>warehouse/goAdd.do';
 			 diag.Width = 450;
 			 diag.Height = 355;
 			 diag.Modal = true;				//有无遮罩窗口
@@ -276,7 +283,7 @@
 			bootbox.confirm("确定要删除吗?", function(result) {
 				if(result) {
 					top.jzts();
-					var url = "<%=basePath%>newforwx/delete.do?NEWFORWX_ID="+Id+"&tm="+new Date().getTime();
+					var url = "<%=basePath%>warehouse/delete.do?WAREHOUSE_ID="+Id+"&tm="+new Date().getTime();
 					$.get(url,function(data){
 						tosearch();
 					});
@@ -290,18 +297,18 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="编辑";
-			 diag.URL = '<%=basePath%>newforwx/goEdit.do?NEWFORWX_ID='+Id;
-			 diag.Width =  window.innerWidth;
-			diag.Height = window.innerHeight;
-			diag.Modal = true; //有无遮罩窗口
-			diag.ShowMaxButton = true; //最大化按钮
-			diag.ShowMinButton = true; //最小化按钮
-			/*  diag.CancelEvent = function(){ //关闭事件
+			 diag.URL = '<%=basePath%>warehouse/goEdit.do?WAREHOUSE_ID='+Id;
+			 diag.Width = 450;
+			 diag.Height = 355;
+			 diag.Modal = true;				//有无遮罩窗口
+			 diag. ShowMaxButton = true;	//最大化按钮
+		     diag.ShowMinButton = true;		//最小化按钮 
+			 diag.CancelEvent = function(){ //关闭事件
 				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					 tosearch();
 				}
 				diag.close();
-			 }; */
+			 };
 			 diag.show();
 		}
 		
@@ -334,7 +341,7 @@
 							top.jzts();
 							$.ajax({
 								type: "POST",
-								url: '<%=basePath%>newforwx/deleteAll.do?tm='+new Date().getTime(),
+								url: '<%=basePath%>warehouse/deleteAll.do?tm='+new Date().getTime(),
 						    	data: {DATA_IDS:str},
 								dataType:'json',
 								//beforeSend: validateData,
@@ -353,11 +360,8 @@
 		
 		//导出excel
 		function toExcel(){
-			window.location.href='<%=basePath%>icinventory/excel.do';
+			window.location.href='<%=basePath%>warehouse/excel.do';
 		}
-		
-		
-		
 	</script>
 
 

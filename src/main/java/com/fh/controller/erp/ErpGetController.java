@@ -98,14 +98,34 @@ public class ErpGetController extends BaseController{
 		Map<String, Object> json = new HashMap<String, Object>();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		//page.setShowCount(1000);
+
 		//System.out.println(pd.getString("test"));
 		List<PageData>	varList  =itemService.listItemAll(pd);
 		//System.out.println(varList);
 		//List<PageData>	varList = itemService.listAll_ERP(page);
 		json.put("Data", varList);
 		return json;
-		
+	}
+
+	@RequestMapping(value="/erp_getInventory")
+	@ResponseBody
+	public  Map<String, Object> erp_getInventory(Page page) throws Exception{
+		Map<String, Object> json = new HashMap<String, Object>();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		System.out.println(pd);
+		if (pd.getString("treeKey") == null || "".equals(pd.getString("treeKey")) || "null".equals(pd.getString("treeKey"))){
+			pd.put("treeKey",null);
+		}
+		page.setPd(pd);
+		List<PageData>	varList  =itemService.datalistPageInventory(page);
+		System.out.println(varList.size());
+		//System.out.println("库存查询："+varList);
+		json.put("Data", varList);
+		//System.out.println("page.getPageStr():"+page.getPageStr());
+		json.put("getPageStr", page.getPageStr());
+		json.put("page", page);
+		return json;
 	}
 
 	@RequestMapping(value="/getClassify_item")
@@ -115,6 +135,18 @@ public class ErpGetController extends BaseController{
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		List<PageData>	varList  = itemService.listClassify_item(page);
+		json.put("Data", varList);
+		return json;
+
+	}
+
+	@RequestMapping(value="/getWarehouse")
+	@ResponseBody
+	public  Map<String, Object> getWarehouse(Page page) throws Exception{
+		Map<String, Object> json = new HashMap<String, Object>();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		List<PageData>	varList  = itemService.list_tree(page);
 		json.put("Data", varList);
 		return json;
 

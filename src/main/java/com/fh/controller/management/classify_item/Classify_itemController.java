@@ -137,7 +137,7 @@ public class Classify_itemController extends BaseController {
 			e.printStackTrace();
 		}
 		JSONArray jsStr = JSONArray.fromObject(this.makeTree(arr));
-		System.out.println(jsStr);
+		//System.out.println(jsStr);
 		return jsStr;
 	}
 

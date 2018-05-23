@@ -18,8 +18,10 @@
 	<!-- 列表 -->
 	<select id="datalistPage11" parameterType="page" resultType="pd">
 		select * from (select top 100 percent A.FItemID as FID,A.FParentID as PID,
-		A.FNumber as AFNumber,A.FName as AFName,A.FModel as AFModel,B.FName as BFName,Sum(IsNull(C.FQty,0)) as CFQty,ISNULL(D.FName,'') as DFName
-		from t_ICItem A inner Join T_MeasureUnit B On A.FUnitID=B.FMeasureUnitID left  Join ICInventory C On C.FItemID=A.FItemID left  Join t_Stock D On D.FItemID=C.FStockID
+		A.FNumber as AFNumber,A.FName as AFName,A.FModel as AFModel,B.FName as BFName,Sum(IsNull(C.FQty,0)) as CFQty,
+		ISNULL(D.FName,'') as DFName
+		from t_ICItem A inner Join T_MeasureUnit B On A.FUnitID=B.FMeasureUnitID
+		left  Join ICInventory C On C.FItemID=A.FItemID left  Join t_Stock D On D.FItemID=C.FStockID
 		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
 		where A.FName +ISNULL(A.FModel,'') Like '%'+#{pd.keywords}+'%'
 		</if>
@@ -31,7 +33,7 @@
 	</select>
 	
 	<select id="tree_data" parameterType="page" resultType="pd">
-		select FItemID AS CKid,FParentID AS CKFid,FName as CK from t_Item  where FItemClassID = 5
+		select FItemID ,FParentID ,FName  from t_Item  where FItemClassID = 5
 	</select>
 	
 	<select id="listAllSalesOrder" parameterType="page" resultType="pd">
@@ -184,5 +186,20 @@
 		Inner Join t_MeasureUnit C On A.FSaleUnitID=C.FMeasureUnitID
 		Inner Join t_MeasureUnit D On A.FOrderUnitID =D.FMeasureUnitID
 		Order By A.FNumber
+	</select>
+
+	<select id="datalistPageInventory" parameterType="page" resultType="pd">
+		select * from (select top 100 percent A.FItemID as FID,A.FParentID as PID,
+		A.FNumber as AFNumber,A.FName as AFName,A.FModel as AFModel,B.FName as BFName,Sum(IsNull(C.FQty,0)) as CFQty,
+		ISNULL(D.FName,'') as DFName
+		from t_ICItem A inner Join T_MeasureUnit B On A.FUnitID=B.FMeasureUnitID
+		inner  Join ICInventory C On C.FItemID=A.FItemID inner  Join t_Stock D On D.FItemID=C.FStockID
+		WHERE  1 = 1
+		<!--<if test="pd.keywords != null and pd.keywords != ''">&lt;!&ndash; 关键词检索 &ndash;&gt;
+			where A.FName +ISNULL(A.FModel,'') Like '%'+#{pd.keywords}+'%'
+		</if>-->
+		AND D.FItemID = #{pd.treeKey}
+		Group By A.FItemID ,A.FParentID,A.FNumber,A.FName,A.FModel,B.FName,ISNULL(D.FName,'')
+		Order By A.FNumber,ISNULL(D.FName,'')) as a
 	</select>
 </mapper>
