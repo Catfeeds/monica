@@ -82,7 +82,6 @@ public class ICInventoryController extends BaseController {
 		if (null != treeKey && !"".equals(treeKey)) {
 			pd.put("treeKey", treeKey);
 		}
-		System.out.println(treeKey);
 		page.setPd(pd);
 		//System.out.println(pd);
 		String requestUrl = this.getIpAndProjectName()+"/erp_Get/erp_getInventory?currentPage="+currentPage+"&treeKey="+treeKey;

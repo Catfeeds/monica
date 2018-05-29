@@ -95,7 +95,7 @@
 												src="static/images/platformQY/qr-droid.png" alt="">
 										</div>
 										<p class="weui-grid__label">条码追溯</p> </a>
-									<a
+									<a  href="<%=basePath%>platformpage/icinventory?USERID=${UserId}"
 										class="weui-grid js_grid">
 										<div>
 											<img style="width: 35px;height: 35px"

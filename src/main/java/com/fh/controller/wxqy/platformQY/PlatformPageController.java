@@ -36,5 +36,24 @@ public class PlatformPageController extends BaseController {
 		return mv;
 	}
 
+	@RequestMapping(value="/icinventory")
+	public ModelAndView icinventory(Page page) throws Exception{
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		mv.addObject("UserId", "");
+		mv.setViewName("wxqy/platformQY/platform_page/icinventory");
+		return mv;
+	}
+
+	@RequestMapping(value="/icinventoryDetail")
+	public ModelAndView icinventoryDetail(Page page) throws Exception{
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		mv.addObject("UserId", "");
+		mv.setViewName("wxqy/platformQY/platform_page/icinventoryDetail");
+		return mv;
+	}
 
 }

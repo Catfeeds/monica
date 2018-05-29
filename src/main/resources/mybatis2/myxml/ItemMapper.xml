@@ -189,17 +189,6 @@
 	</select>
 
 	<select id="datalistPageInventory" parameterType="page" resultType="pd">
-		select * from (select top 100 percent A.FItemID as FID,A.FParentID as PID,
-		A.FNumber as AFNumber,A.FName as AFName,A.FModel as AFModel,B.FName as BFName,Sum(IsNull(C.FQty,0)) as CFQty,
-		ISNULL(D.FName,'') as DFName
-		from t_ICItem A inner Join T_MeasureUnit B On A.FUnitID=B.FMeasureUnitID
-		inner  Join ICInventory C On C.FItemID=A.FItemID inner  Join t_Stock D On D.FItemID=C.FStockID
-		WHERE  1 = 1
-		<!--<if test="pd.keywords != null and pd.keywords != ''">&lt;!&ndash; 关键词检索 &ndash;&gt;
-			where A.FName +ISNULL(A.FModel,'') Like '%'+#{pd.keywords}+'%'
-		</if>-->
-		AND D.FItemID = #{pd.treeKey}
-		Group By A.FItemID ,A.FParentID,A.FNumber,A.FName,A.FModel,B.FName,ISNULL(D.FName,'')
-		Order By A.FNumber,ISNULL(D.FName,'')) as a
+		select * from VW_ICInvQry where CFStockID = #{pd.treeKey}
 	</select>
 </mapper>
