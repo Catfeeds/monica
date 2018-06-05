@@ -23,7 +23,7 @@
 <%-- <%@ include file="../../system/index/top.jsp"%> --%>
 <style>
 	select {
-		/*Chrome和Firefox里面的边框***************************************是不一样的，所以复写了一下*/
+		/*Chrome和Firefox里面的边框********8+++++++++++++++++++++++++++++++++***是不一样的，所以复写了一下*/
 		border: solid 2px #006699;
 		border-radius: 3px;
 		/*很关键：将默认的select选择框样式清除*/
