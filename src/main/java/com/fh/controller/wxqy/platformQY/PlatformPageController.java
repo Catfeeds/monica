@@ -26,6 +26,7 @@ public class PlatformPageController extends BaseController {
 
 	CodeToUserService ctus = new CodeToUserService();
 
+	//二维码追溯
 	@RequestMapping(value="/toQRcode")
 	public ModelAndView toIndex(Page page) throws Exception{
 		ModelAndView mv = this.getModelAndView();
@@ -36,6 +37,7 @@ public class PlatformPageController extends BaseController {
 		return mv;
 	}
 
+	//库存查询
 	@RequestMapping(value="/icinventory")
 	public ModelAndView icinventory(Page page) throws Exception{
 		ModelAndView mv = this.getModelAndView();
@@ -46,6 +48,7 @@ public class PlatformPageController extends BaseController {
 		return mv;
 	}
 
+	//库存明细查询
 	@RequestMapping(value="/icinventoryDetail")
 	public ModelAndView icinventoryDetail(Page page) throws Exception{
 		ModelAndView mv = this.getModelAndView();
@@ -56,4 +59,14 @@ public class PlatformPageController extends BaseController {
 		return mv;
 	}
 
+	//订单系统
+	@RequestMapping(value="/toOrder")
+	public ModelAndView toOrder(Page page) throws Exception{
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		mv.addObject("UserId", "");
+		mv.setViewName("wxqy/platformQY/platform_page/toOrder");
+		return mv;
+	}
 }
