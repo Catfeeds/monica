@@ -82,7 +82,7 @@
 										<p class="weui-grid__label">新闻公告</p> </a>
 
 										<%-- <c:if test="${fn:contains(theString,'门店') ||fn:contains(theString,'管理员')}"> --%>
-									<a onclick="onclick1()" class="weui-grid js_grid">
+									<a href="<%=basePath%>platformpage/toOrder" class="weui-grid js_grid">
 										<div>
 											<img style="width: 35px;height: 35px"
 												src="static/images/platformQY/paste_plain.png" alt="">
