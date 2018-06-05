@@ -31,7 +31,7 @@
 		-moz-appearance:none;
 		-webkit-appearance:none;
 
-		/*在选择框的最右侧中间显示小箭头图片*/
+		/*在选择框的最右侧中间显122113131313123示小箭头图片*/
 		background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;
 		/*为下拉小箭头留出一点位置，避免被文字覆盖*/
 		padding-right: 16px;
