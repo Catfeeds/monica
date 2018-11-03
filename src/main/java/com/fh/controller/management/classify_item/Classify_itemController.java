@@ -271,13 +271,13 @@ public class Classify_itemController extends BaseController {
 			for (int j = 0; j < varOList.size(); j++) {
 				for (int i = 0; i < jsonarr.size(); i++) {
 					JSONObject job = jsonarr.getJSONObject(i);
-					if(Integer.parseInt(job.get("FItemID").toString()) == (int)varOList.get(j).get("FITEMID")){
+					if(Integer.parseInt(job.get("FItemID").toString()) == Integer.parseInt(varOList.get(j).get("FITEMID").toString())){
 						dint = 1; //存在
 					}
 				}
 				if(dint == 0){
 					PageData pd2 = new PageData();
-					pd2.put("FITEMID",(int)varOList.get(j).get("FITEMID"));
+					pd2.put("FITEMID",Integer.parseInt(varOList.get(j).get("FITEMID").toString()));
 					classify_itemService.deleteByFITEMID(pd2);
 					dcount ++ ;
 				}

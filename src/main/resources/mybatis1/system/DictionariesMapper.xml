@@ -55,7 +55,12 @@
 		where 
 			DICTIONARIES_ID = #{DICTIONARIES_ID}
 	</delete>
-	
+
+	<select id="listByParentName" parameterType="pd" resultType="pd">
+	SELECT NAME as title,NAME as value from sys_dictionaries where PARENT_ID IN
+	( select DICTIONARIES_ID from sys_dictionaries where NAME = #{PNAME})
+	</select>
+
 	<!-- 修改 -->
 	<update id="edit" parameterType="pd">
 		update

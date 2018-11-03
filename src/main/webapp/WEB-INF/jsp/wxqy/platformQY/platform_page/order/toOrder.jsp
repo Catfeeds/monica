@@ -49,7 +49,7 @@
 .state {
 	float: left;
 	margin-left: 10%;
-	width: 40%;
+	width:35%;
 	line-height: 43px;
 	color: #65646b;
 	font-size: 14px;
@@ -59,7 +59,18 @@
 .state1 {
 	float: left;
 	margin-left: 0%;
-	width: 40%;
+	width:35%;
+	line-height: 43px;
+	color: #65646b;
+	font-size: 14px;
+	text-align: center
+}
+
+.add {
+	float: left;
+	margin-left: 0%;
+	margin-top: 5px;
+	width:15%;
 	line-height: 43px;
 	color: #65646b;
 	font-size: 14px;
@@ -67,9 +78,9 @@
 }
 
 .blue_block {
-	width: 20%;
+	width: 35%;
 	position: absolute;
-	left: 20%;
+	left: 10%;
 	bottom: 0;
 	height: 2px;
 	background-color: #01aff0;
@@ -228,6 +239,11 @@
 								<div class="state">今日订单</div>
 								<%--<div class="state1">订单模板</div>--%>
 								<div class="state1">历史记录</div>
+								<div class="add">
+									<div onclick="createOrder()" style="border-radius: 8px; line-height: 30px; width: 95%;height:30px;background-color: #99CC66">
+										新增
+									</div>
+								</div>
 								<div class="blue_block"></div>
 							</div>
 							<!--订单信息-->
@@ -444,6 +460,10 @@
 
 	<!-- basic scripts -->
 	<script>
+		function createOrder(){
+			window.location.href="<%=basePath%>platformpage/createOrder";
+		}
+
 		function checkOrder(value){
 			alert(value);
 		}
@@ -500,7 +520,7 @@
 		//$(top.hangge());
 		$(".state:eq(0)").click(
 			function(){
-				$(".blue_block").animate({left:'20%'});
+				$(".blue_block").animate({left:'10%'});
 				$(".move").css("left","0%");
 					if($("#body").height()>$("#order").height()){
 						$("#move_box").height($("#body").height()-88);
@@ -515,7 +535,7 @@
 		$(".state1:eq(0)").click(
 
 			function(){
-				$(".blue_block").animate({left:'60%'})
+				$(".blue_block").animate({left:'45%'})
 				$(".move").css("left","-100%");
 				if($("#body").height()>$("#template").height()){
 						$("#move_box").height($("#body").height()-88);
