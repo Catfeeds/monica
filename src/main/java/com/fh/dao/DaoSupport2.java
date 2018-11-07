@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 @Repository("daoSupport2")
 public class DaoSupport2 implements DAO {
 
-	//@Resource(name = "sqlSessionTemplate2") //去掉注释，打开第2数据源
+	@Resource(name = "sqlSessionTemplate2") //去掉注释，打开第2数据源
 	private SqlSessionTemplate sqlSessionTemplate2;
 	
 	/**
