@@ -285,7 +285,8 @@
             var newjsonstr = '['; 
 			$('.aui-car-box-list-text-arithmetic1 input').each(function(){ 
 					 newjsonstr += '{';  
-	                 newjsonstr += '"FITEMID":"' +$(this).attr("id")+ '",';  
+	                 newjsonstr += '"FITEMID":"' +$(this).attr("id")+ '",';
+					 newjsonstr += '"FENTRYID":"' +$(this).attr("name")+ '",';
 	                 newjsonstr += '"FAUXQTY":"' +$(this).val();  
 	                 newjsonstr += '"}';
 	                 newjsonstr += ',';

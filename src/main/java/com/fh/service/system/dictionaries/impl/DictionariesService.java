@@ -72,7 +72,11 @@ public class DictionariesService implements DictionariesManager{
 	public PageData findByBianma(PageData pd)throws Exception{
 		return (PageData)dao.findForObject("DictionariesMapper.findByBianma", pd);
 	}
-	
+
+	public List<PageData> listByParentName(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("DictionariesMapper.listByParentName", pd);
+	}
+
 	/**
 	 * 通过ID获取其子级列表
 	 * @param parentId
@@ -86,7 +90,7 @@ public class DictionariesService implements DictionariesManager{
 	
 	/**
 	 * 获取所有数据并填充每条数据的子级列表(递归处理)
-	 * @param MENU_ID
+	 * @param
 	 * @return
 	 * @throws Exception
 	 */
