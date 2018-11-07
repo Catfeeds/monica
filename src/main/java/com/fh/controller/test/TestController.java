@@ -116,7 +116,6 @@ public class TestController extends BaseController{
 				//pd.put("DEPARTMENT",ob.getString("department"));	
 				pd.put("DEPARTMENT",depName.toString().substring(1, depName.toString().length()-1));
 				pd.put("OPENID",openidString);	
-				System.out.println("======>>"+pd);
 				qywxuserService.save(pd);
 				System.out.println("插入"+count+"条数据");
 				count ++ ;
@@ -146,11 +145,9 @@ public class TestController extends BaseController{
 	@RequestMapping(value="/test_getOpenId")
 	@ResponseBody
 	public  Map<String, Object> test_getOpenId() throws Exception{
-		System.out.println("----------->:getOpenid");
 		Map<String, Object> json = new HashMap<String, Object>();
 		//2.获取access_token:根据企业id和通讯录密钥获取access_token,并拼接请求url
 		String accessToken= WeiXinUtil.getAccessToken(WeiXinParamesUtil.corpId, WeiXinParamesUtil.contactsSecret).getToken();
-		System.out.println("accessToken:"+accessToken);
 		Contacts_UserService cus = new Contacts_UserService();
 		String openidString = cus.useridToOpenid(accessToken, "DengJiaCheng");
 		json.put("result", "成功");
@@ -170,7 +167,6 @@ public class TestController extends BaseController{
 		Page page = new Page();
 		page.setPd(pd);
 		List<PageData>	userList =qywxuserService.list(page);	
-		System.out.println(userList);
 		json.put("result", userList);
 		return json;
 	}
@@ -189,7 +185,6 @@ public class TestController extends BaseController{
 		JdbcUtil jdbcUtil = new JdbcUtil();
 		List<PageData> jsonObj = jdbcUtil.getAll("FW0231浴巾架＿有标");
 		PageInfo<PageData> varListPage=new PageInfo<PageData>(jsonObj,1); //5表示要连续显示的页数
-		System.out.println(jsonObj);
 		json.put("result",jsonObj);
 		return json;
 		
@@ -206,10 +201,7 @@ public class TestController extends BaseController{
 		String keywords = "浴巾";
 		pd.put("keywords", keywords.trim());
 		page.setPd(pd);
-		System.out.println(pd);
 		List<PageData>	varList = itemService.list(page);
-		System.out.println(varList);
-		System.out.println(varList.size());
 		json.put("result",varList);
 		return json;
 		
@@ -240,12 +232,8 @@ public class TestController extends BaseController{
 		pd.put("Period",2);
 		pd.put("CustNum","");
 		pd.put("EmpName","");
-		System.out.println(pd);
 		page.setPd(pd);
-		System.out.println(pd);
 		List<PageData>	varList = itemService.list_z_ARSummary(page);
-		System.out.println(varList);
-		System.out.println(varList.size());
 		json.put("result",varList);
 		return json;
 		

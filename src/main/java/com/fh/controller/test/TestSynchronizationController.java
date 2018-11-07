@@ -84,7 +84,7 @@ public class TestSynchronizationController extends BaseController{
 			if(dint == 0){
 				System.out.println(varOList.get(j).get("FITEMID"));
 				PageData pd2 = new PageData();
-				pd2.put("FITEMID",(int)varOList.get(j).get("FITEMID"));
+				pd2.put("FITEMID",Integer.parseInt(varOList.get(j).get("FITEMID").toString()));
 				System.out.println("delete:"+pd2);
 				supplierService.deleteByFITEMID(pd2);
 				dcount ++ ;

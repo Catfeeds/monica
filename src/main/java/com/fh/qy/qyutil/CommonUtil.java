@@ -24,7 +24,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-import static com.sun.webpane.platform.ConfigManager.log;
+//import static com.sun.webpane.platform.ConfigManager.log;
 
 public class CommonUtil {
 	//private static Logger log = LoggerFactory.getLogger(CommonUtil.class);

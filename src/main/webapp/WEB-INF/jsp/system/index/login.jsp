@@ -70,15 +70,16 @@
 	</script>
 </head>
 <body >
-	<img src="static/login/images/login11.jpg" width="100%" height="100%"
-		 style="position:absolute;top:0;left:0;right:100;bottom:0;z-index:-1" />
+	<%--<img src="static/login/images/login12.jpg" width="100%" height="100%"
+		 style="position:absolute;top:0;left:0;right:100;bottom:0;z-index:-1" />--%>
 	<c:if test="${pd.isMusic == 'yes' }">
 	<div style="display: none">
 	    <audio src="static/login/music/fh1.mp3" autoplay=""></audio>
 	</div>	
 	</c:if>
 	<canvas class="cavs"></canvas>
-	<div style="width:100%;text-align: center;margin: 0 auto;position: absolute;">
+	<div style="background: url(static/login/images/login12.jpg);background-size:100% 100%;
+	height:100%;width:100%;text-align: center;margin: 0 auto;position: absolute;">
 		<!-- 登录 -->
 		<div id="windows1">
 		<div id="loginbox" style="border-radius: 15px">
@@ -136,93 +137,18 @@
 					</div>
 				</div>
 			</form>
-			<div class="controls">
+			<%--<div class="controls">
 				<div class="main_input_box">
 					<font color="white"><span id="nameerr"><p style="font-size:18px;color: #0D0D0D">Copyright © 佛山捷特科技</p></span></font>
 				</div>
+			</div>--%>
+		</div>
+		</div>
+		<div class="controls" style="font-family:'微软雅黑';position: fixed;bottom: 0;margin-left: 40%">
+			<div class="main_input_box">
+				<font color="white"><span id="nameerr"><p style="font-size:15px;color: #f2f2f2db">Copyright©2014-2018 捷特科技 版权所有</p></span></font>
 			</div>
 		</div>
-		</div>
-		<!-- 注册 -->
-		<div id="windows2" style="display: none;">
-		<div id="loginbox" style="border-radius: 15px">
-			<form action="" method="post" name="loginForm" id="loginForm">
-				<div class="control-group normal_text">
-					<h3>
-						<p>莫尔卡后台管理系统</p>
-					</h3>
-				</div>
-				<div class="control-group">
-					<div class="controls">
-						<div class="main_input_box">
-							<span class="add-on bg_lg">
-							<i>用户</i>
-							</span><input type="text" name="USERNAME" id="USERNAME" value="" placeholder="请输入用户名" />
-						</div>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="controls">
-						<div class="main_input_box">
-							<span class="add-on bg_ly">
-							<i>密码</i>
-							</span><input type="password" name="PASSWORD" id="PASSWORD" placeholder="请输入密码" class="keypad" keypadMode="full" allowKeyboard="true" value=""/>
-						</div>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="controls">
-						<div class="main_input_box">
-							<span class="add-on bg_ly">
-							<i>重输</i>
-							</span><input type="password" name="chkpwd" id="chkpwd" placeholder="请重新输入密码" class="keypad" keypadMode="full" allowKeyboard="true" value=""/>
-						</div>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="controls">
-						<div class="main_input_box">
-							<span class="add-on bg_lg">
-							<i>姓名</i>
-							</span><input type="text" name="NAME" id="name" value="" placeholder="请输入姓名" />
-						</div>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="controls">
-						<div class="main_input_box">
-							<span class="add-on bg_lg">
-							<i>邮箱</i>
-							</span><input type="text" name="EMAIL" id="EMAIL" value="" placeholder="请输入邮箱" />
-						</div>
-					</div>
-				</div>
-				<div class="form-actions">
-					<div style="width:86%;padding-left:8%;">
-
-						<div style="float: left;padding-top:2px;">
-							<i><img src="static/login/yan.png" /></i>
-						</div>
-						<div style="float: left;" class="codediv">
-							<input type="text" name="rcode" id="rcode" class="login_code"
-								style="height:16px; padding-top:4px;" />
-						</div>
-						<div style="float: left;">
-							<i><img style="height:22px;" id="zcodeImg" alt="点击更换" title="点击更换" src="" /></i>
-						</div>
-						<span class="pull-right" style="padding-right:3%;"><a href="javascript:changepage(2);" class="btn btn-success">取消</a></span>
-						<span class="pull-right"><a onclick="register();" class="flip-link btn btn-info" id="to-recover">提交</a></span>
-					</div>
-				</div>
-			</form>
-			<div class="controls">
-				<div class="main_input_box">
-					<span id="nameerr"><p style="font-size:18px;color: #0D0D0D">Copyright © 佛山捷特科技</p></span>
-				</div>
-			</div>
-		</div>
-		</div>
-		
 	</div>
 	<div id="templatemo_banner_slide" class="container_wapper">
 		<div class="camera_wrap camera_emboss" id="camera_slide">

@@ -109,7 +109,6 @@ public class QyWxUserController extends BaseController {
 		pd = this.getPageData();
 		String[] arr = pd.getString("DEPARTMENT").split(",");
 		//String keywords = null;
-		System.out.println("pd:::"+pd);
 		Page page = new Page();
 		Contacts_UserService cus = new Contacts_UserService();
 		ArrayList<String>  depNums = new ArrayList<String>();
@@ -117,9 +116,7 @@ public class QyWxUserController extends BaseController {
 			pd.put("keywords", arr[i].trim());
 			page.setPd(pd);
 			List<PageData> departments = weixindepartmentService.list(page);
-			//System.out.println("//////////"+departments);
 			for (int j = 0; j < departments.size(); j++) {
-				//System.out.println(departments.get(j).get("ID"));
 				depNums.add(departments.get(j).get("ID").toString());
 			}
 		}
@@ -150,7 +147,6 @@ public class QyWxUserController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		//keywords  = "3";
-		//System.out.println("keywords值："+keywords);
 		if(null != pd.getString("keywords") && !"".equals(pd.getString("keywords"))){
 			String keywords = URLDecoder.decode(pd.getString("keywords"), "UTF-8");				//关键词检索条件
 			pd.put("keywords", keywords.trim());
@@ -309,7 +305,6 @@ public class QyWxUserController extends BaseController {
 			e.printStackTrace();
 		}
 		JSONArray jsStr = JSONArray.fromObject(this.makeTree(arr));
-		//System.out.println(jsStr);
 		 return jsStr;
 	}
 	
@@ -324,8 +319,7 @@ public class QyWxUserController extends BaseController {
            	sb.append("{id:").append(ob.getString("ID")).append(",pId:").append(ob.getString("PARENTID")).append(",name:\"")  
             .append(ob.getString("DNAME")).append("\"").append(",open:").append("true").append("},");  
            }
-       // System.out.println(sb.substring(0,sb.length()-1)+"]");
-        return sb.substring(0,sb.length()-1)+"]";  
+        return sb.substring(0,sb.length()-1)+"]";
     } 
 	
 	@RequestMapping(value="/getUserByQYwx")
@@ -336,8 +330,6 @@ public class QyWxUserController extends BaseController {
 		//2.获取access_token:根据企业id和通讯录密钥获取access_token,并拼接请求url
 		String accessToken= WeiXinUtil.getAccessToken(WeiXinParamesUtil.corpId, WeiXinParamesUtil.contactsSecret).getToken();
 		//String accessToken2= WeiXinUtil.getAccessToken(WeiXinParamesUtil.corpId, WeiXinParamesUtil.contactsSecret).getToken();
-		System.out.println("accessToken:"+accessToken);
-		//System.out.println("accessToken:"+accessToken2);
 		//1.获取部门ID以及是否获取子部门成员
 		String departmentId="1";
 		String fetchChild="1";
@@ -352,7 +344,6 @@ public class QyWxUserController extends BaseController {
 		pd = this.getPageData();
 		List<PageData> pages = qywxuserService.listAll(pd);
 		List<PageData> depPages = weixindepService.listAll(pd);
-		//System.out.println("成员集合："+pages);
 		//新增开关
 		int hint = 0; //开0,关1
 		//删除开关
@@ -378,7 +369,6 @@ public class QyWxUserController extends BaseController {
 				pd.put("NAME",ob.getString("name"));
 				pd.put("DEPNUM",ob.getString("department"));
 				for (int x = 0; x < strs.length; x++) {
-					System.out.println(strs[x].getClass());
 					for (int y = 0; y < depPages.size(); y++) {
 						if (strs[x].equals(depPages.get(y).get("ID").toString())) {
 							{
@@ -390,7 +380,6 @@ public class QyWxUserController extends BaseController {
 				//pd.put("DEPARTMENT",ob.getString("department"));	
 				pd.put("DEPARTMENT",depName.toString().substring(1, depName.toString().length()-1));
 				pd.put("OPENID",openidString);	
-				System.out.println("======>>"+pd);
 				qywxuserService.save(pd);
 				System.out.println("插入"+count+"条数据");
 				count ++ ;

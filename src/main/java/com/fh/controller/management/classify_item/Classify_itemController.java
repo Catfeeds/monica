@@ -223,7 +223,6 @@ public class Classify_itemController extends BaseController {
 			String htmlText = new String(data, "UTF-8");
 			JSONObject jsStr = JSONObject.fromObject(htmlText);
 			//System.out.println(jsStr);
-			System.out.println(jsStr.getJSONArray("Data"));
 			JSONArray jsonarr = jsStr.getJSONArray("Data"); // erp数据
 			PageData pd = new PageData();
 			List<PageData>	varOList = classify_itemService.listAll(pd); // 本地数据
@@ -243,7 +242,6 @@ public class Classify_itemController extends BaseController {
 					if(varOList.get(j).get("FITEMID").equals(Integer.parseInt(job.get("FItemID").toString()))){
 						hint = 0;
 						if (!varOList.get(j).get("FMODIFYTIME").equals(job.get("FModifyTime").toString())) {
-							//System.out.println("修改"+ job.getString("FName"));
 							pd3.put("CLASSIFY_ITEM_ID", varOList.get(j).get("CLASSIFY_ITEM_ID"));
 							pd3.put("FNAME", job.getString("FName"));
 							pd3.put("FPARENTID", Integer.parseInt(job.get("FParentID").toString()));
@@ -256,7 +254,6 @@ public class Classify_itemController extends BaseController {
 					}
 				}
 				if(hint == 1) {
-					//System.out.println(job.getString("FBasicUnit"));
 					pd.put("CLASSIFY_ITEM_ID", this.get32UUID());
 					pd.put("FNAME", job.getString("FName"));
 					pd.put("FPARENTID", Integer.parseInt(job.get("FParentID").toString()));
@@ -271,13 +268,13 @@ public class Classify_itemController extends BaseController {
 			for (int j = 0; j < varOList.size(); j++) {
 				for (int i = 0; i < jsonarr.size(); i++) {
 					JSONObject job = jsonarr.getJSONObject(i);
-					if(Integer.parseInt(job.get("FItemID").toString()) == (int)varOList.get(j).get("FITEMID")){
+					if(Integer.parseInt(job.get("FItemID").toString()) == Integer.parseInt(varOList.get(j).get("FITEMID").toString())){
 						dint = 1; //存在
 					}
 				}
 				if(dint == 0){
 					PageData pd2 = new PageData();
-					pd2.put("FITEMID",(int)varOList.get(j).get("FITEMID"));
+					pd2.put("FITEMID",Integer.parseInt(varOList.get(j).get("FITEMID").toString()));
 					classify_itemService.deleteByFITEMID(pd2);
 					dcount ++ ;
 				}
