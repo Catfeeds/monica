@@ -22,11 +22,11 @@
 	<property name="mapperLocations" value="classpath:mybatis1/test/*.xml"></property>
 	</bean> -->
 	<!-- 配置mybatis扫描器，将mybatis放入接口的容器中 -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	<!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory2"/>
 		<property name="basePackage" value="com.fh.dao2"></property>
-	</bean>
+	</bean>-->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
@@ -105,7 +105,7 @@
 	
 	<!-- ====================数据源2==================== -->
 	
-	<bean id="sqlSessionTemplate2" class="org.mybatis.spring.SqlSessionTemplate">
+	<!--<bean id="sqlSessionTemplate2" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory2" />
 	</bean>
 	<bean id="sqlSessionFactory2" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -152,6 +152,6 @@
 	</tx:advice>
 	<bean name="transactionManager2" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">   
     	<property name="dataSource" ref="dataSource2"></property>
- 	</bean>
+ 	</bean>-->
  	
 </beans>

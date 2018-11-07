@@ -291,8 +291,6 @@ public class ItemBaseController extends BaseController {
 
             String htmlText = new String(data, "UTF-8");
             JSONObject jsStr = JSONObject.fromObject(htmlText);
-            //System.out.println(jsStr);
-           // System.out.println(jsStr.getJSONArray("Data"));
             JSONArray jsonarr = jsStr.getJSONArray("Data"); // erp数据
             PageData pd = new PageData();
             List<PageData>	varOList = itembaseService.listAll(pd); // 本地数据
@@ -312,7 +310,6 @@ public class ItemBaseController extends BaseController {
     				if(varOList.get(j).get("FITEMID").equals(Integer.parseInt(job.get("FItemID").toString()))){
     					hint = 0;
     					if (!varOList.get(j).get("FMODIFYTIME").equals(job.get("FModifyTime").toString())) {
-							//System.out.println("修改"+ job.getString("FName"));
 							pd3.put("ITEMBASE_ID", varOList.get(j).get("ITEMBASE_ID"));
 							pd3.put("FBASICUNIT", job.getString("FBasicUnit"));
 							pd3.put("FORDERUNIT", job.getString("FOrderUnit"));
@@ -334,7 +331,6 @@ public class ItemBaseController extends BaseController {
     				}
     			}
     			if(hint == 1) {
-	            	//System.out.println(job.getString("FBasicUnit"));
 	            	pd.put("ITEMBASE_ID", this.get32UUID());
 	            	pd.put("FBASICUNIT", job.getString("FBasicUnit"));
 	            	pd.put("FORDERUNIT", job.getString("FOrderUnit"));
@@ -350,7 +346,6 @@ public class ItemBaseController extends BaseController {
 	            	pd.put("FNUMBER", job.getString("FNumber"));
 	            	pd.put("FSALEUNIT", job.getString("FSaleUnit"));
 	            	pd.put("FMODIFYTIME",job.get("FModifyTime").toString());
-	            	//System.out.println(pd);
 	            	itembaseService.save(pd);
 	            	count++;
     			}

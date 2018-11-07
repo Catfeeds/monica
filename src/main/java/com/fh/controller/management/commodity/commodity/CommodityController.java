@@ -58,7 +58,6 @@ public class CommodityController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		System.out.println(pd);
 		pd.put("COMMODITY_ID", this.get32UUID());	//主键
 		commodityService.save(pd);
 		mv.addObject("msg","success");
@@ -93,7 +92,6 @@ public class CommodityController extends BaseController {
 		PageData pd = new PageData();
 		PageData pd1 = new PageData();
 		pd = this.getPageData();
-		System.out.println(pd.getString("COMMODITYPIC_ID"));
 		if(pd.getString("MAIN_PIC") != null && pd.getString("COMMODITYPIC_ID") == null && "".equals(pd.getString("COMMODITYPIC_ID"))){
 			System.out.println("开始执行主图为null的保存");
 			pd1.put("PIC_URL", pd.getString("MAIN_PIC"));
@@ -109,7 +107,6 @@ public class CommodityController extends BaseController {
 			commoditypicService.edit(pd1);
 		}
 		
-		//System.out.println(pd1);
 		commodityService.edit(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
@@ -207,7 +204,6 @@ public class CommodityController extends BaseController {
 		pd = this.getPageData();
 		pd = commodityService.findById(pd);	//根据ID读取
 		pd1 = commoditypicService.findByCId(pd);
-		System.out.println(pd1);
 		mv.setViewName("commodity/commodity/edit_commodity");
 		mv.addObject("msg", "edit");
 		mv.addObject("pd", pd);
@@ -311,7 +307,6 @@ public class CommodityController extends BaseController {
 		 try {
 			List<PageData>	varList = itemService.list(page);
 			List<PageData> varOList = commodityService.listAll(pd1);
-			//System.out.println(varList);
 			for (int i = 0; i < varList.size(); i++) {
 				hint = 1;
 				for (int j = 0; j < varOList.size(); j++) {
@@ -337,7 +332,6 @@ public class CommodityController extends BaseController {
 					 pd.put("FNAME",varList.get(i).get("AFName"));
 					 commodityService.save(pd);
 					 count ++ ;
-					// System.out.println(pd);
 				}
 				
 			}

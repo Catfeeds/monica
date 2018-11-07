@@ -100,7 +100,6 @@ public class HttpController extends BaseController{
 			crypt.reset();
 			crypt.update(sign.getBytes("UTF-8"));
 			signature = WeiXinUtil.byteToHex(crypt.digest());
-			//System.out.println("signature:"+signature);
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
@@ -138,8 +137,6 @@ public class HttpController extends BaseController{
 
             String htmlText = new String(data, "UTF-8");
             JSONObject jsStr = JSONObject.fromObject(htmlText);
-            //System.out.println(jsStr);
-            System.out.println(jsStr.getJSONArray("Data"));
             JSONArray jsonarr = jsStr.getJSONArray("Data"); // erp数据
             PageData pd = new PageData();
             List<PageData>	varOList = itembaseService.listAll(pd); // 本地数据
@@ -159,7 +156,6 @@ public class HttpController extends BaseController{
     				}
     			}
     			if(hint == 1) {
-	            	//System.out.println(job.getString("FBasicUnit"));
 	            	pd.put("ITEMBASE_ID", this.get32UUID());
 	            	pd.put("FBASICUNIT", job.getString("FBasicUnit"));
 	            	pd.put("FORDERUNIT", job.getString("FOrderUnit"));
@@ -175,7 +171,6 @@ public class HttpController extends BaseController{
 	            	pd.put("FNUMBER", job.getString("FNumber"));
 	            	pd.put("FSALEUNIT", job.getString("FSaleUnit"));
 					pd.put("FMODIFYTIME", job.getString("FModifyTime"));
-	            	//System.out.println(pd);
 	            	itembaseService.save(pd);
 	            	count++;
     			}
@@ -232,8 +227,6 @@ public class HttpController extends BaseController{
 
             String htmlText = new String(data, "UTF-8");
             JSONObject jsStr = JSONObject.fromObject(htmlText);
-            //System.out.println(jsStr);
-            System.out.println(jsStr.getJSONArray("Data"));
             JSONArray jsonarr = jsStr.getJSONArray("Data"); // erp数据
             PageData pd = new PageData();
            List<PageData>	varOList = classify_itemService.listAll(pd); // 本地数据
@@ -253,7 +246,6 @@ public class HttpController extends BaseController{
     				}
     			}
     			if(hint == 1) {
-	            	//System.out.println(job.getString("FBasicUnit"));
 	            	pd.put("CLASSIFY_ITEM_ID", this.get32UUID());
 	            	pd.put("FNAME", job.getString("FName"));
 	            	pd.put("FPARENTID", Integer.parseInt(job.get("FParentID").toString()));
@@ -368,7 +360,6 @@ public class HttpController extends BaseController{
             String htmlText = new String(data, "UTF-8");
             JSONObject jsStr = JSONObject.fromObject(htmlText);
             //System.out.println(jsStr);
-            System.out.println(jsStr.getJSONArray("Data"));
             JSONArray jsonarr = jsStr.getJSONArray("Data"); // erp数据
             PageData pd = new PageData();
            List<PageData>	varOList = erp_depService.listAll(pd); // 本地数据
@@ -388,7 +379,6 @@ public class HttpController extends BaseController{
     				if(varOList.get(j).get("FITEMID").equals(Integer.parseInt(job.get("FItemID").toString()))){
     					hint = 0;
     					if (!varOList.get(j).get("FMODIFYTIME").equals(job.get("FModifyTime").toString())) {
-							System.out.println("修改"+ job.getString("FName"));
 							pd3.put("FMODIFYTIME", job.get("FModifyTime").toString());
 							pd3.put("ERP_DEP_ID", varOList.get(j).get("ERP_DEP_ID"));
 							pd3.put("FNAME", job.getString("FName"));
@@ -469,10 +459,7 @@ public class HttpController extends BaseController{
 
             String htmlText = new String(data, "UTF-8");
             JSONObject jsStr = JSONObject.fromObject(htmlText);
-            //System.out.println(jsStr);
-            System.out.println(jsStr.getJSONArray("Data"));
             JSONArray jsonarr = jsStr.getJSONArray("Data"); // erp数据
-           // System.out.println(jsonarr);
             PageData pd = new PageData();
            //List<PageData>	varOList = erp_depService.listAll(pd); // 本地数据
             List<PageData>	varOList =supplierService.listAll(pd);  //本地数据
@@ -522,7 +509,6 @@ public class HttpController extends BaseController{
     				}
     			}
     			if(hint == 1) {
-	            	//System.out.println(job.getString("FBasicUnit"));
 	            	pd.put("SUPPLIER_ID", this.get32UUID());
 	            	pd.put("FMODIFYTIME", job.get("FModifyTime").toString());
 	            	pd.put("FNAME", job.getString("FName"));
@@ -606,9 +592,7 @@ public class HttpController extends BaseController{
 
             String htmlText = new String(data, "UTF-8");
             JSONObject jsStr = JSONObject.fromObject(htmlText);
-            System.out.println(jsStr.getJSONArray("Data"));
             JSONArray jsonarr = jsStr.getJSONArray("Data"); // erp数据
-            //System.out.println(jsonarr);
             PageData pd = new PageData();
             List<PageData>	varOList =clientService.listAll(pd);  //本地数据
              //新增开关
@@ -627,7 +611,6 @@ public class HttpController extends BaseController{
     				if(varOList.get(j).get("FITEMID").equals(Integer.parseInt(job.get("FItemID").toString()))){
     					hint = 0;
     					if (!varOList.get(j).get("FMODIFYTIME").equals(job.get("FModifyTime").toString())) {
-							//System.out.println("修改"+ job.getString("FName"));
 							pd3.put("CLIENT_ID", varOList.get(j).get("CLIENT_ID"));
 							pd3.put("FMODIFYTIME", job.get("FModifyTime").toString());
 							pd3.put("FNAME", job.getString("FName"));
@@ -641,7 +624,6 @@ public class HttpController extends BaseController{
     				}
     			}
     			if(hint == 1) {
-	            	//System.out.println(job.getString("FBasicUnit"));
 	            	pd.put("CLIENT_ID", this.get32UUID());
 	            	pd.put("FMODIFYTIME", job.get("FModifyTime").toString());
 	            	pd.put("FNAME", job.getString("FName"));
