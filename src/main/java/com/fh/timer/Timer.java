@@ -43,41 +43,7 @@ public class Timer {
 				OutputStreamWriter outWrite = null;
 				String synStr = null;
                 while (true) {
-                	//synStr = "[{";
-                	System.out.println("开始把订单数据同步到erp服务器...");
-                    PageData pd = new PageData();
-                    Page page = new Page();
-                    try {
-						String requestUrl = ip+"/"+projectName+"/erp_Get/setSalesOrder";
-						try {
-				            URL httpclient =new URL(requestUrl);
-				            HttpURLConnection conn =(HttpURLConnection) httpclient.openConnection();
-				            conn.setConnectTimeout(50000);
-				            conn.setReadTimeout(20000);
-				            conn.setRequestMethod("GET");
-				            conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");    
-				            conn.setDoOutput(true);        
-				            conn.setDoInput(true);
-				            conn.connect();
-				            InputStream is =conn.getInputStream();
-				            ByteArrayOutputStream buff = new ByteArrayOutputStream();
-				            int c;
-				            while((c = is.read()) >= 0){
-				                buff.write(c);
-				            }
-				            byte[] data = buff.toByteArray();
-				            buff.close();
-				            String htmlText = new String(data, "UTF-8");
-				            JSONObject jsStr = JSONObject.fromObject(htmlText);
-				            System.out.println(jsStr);
-				        } catch (MalformedURLException e) {
-				            e.printStackTrace();
-				        } catch (IOException e) {
-				            e.printStackTrace();
-				        } 
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
+
                     try {  
                         Thread.sleep(timeInterval);  
                     } catch (InterruptedException e) {  

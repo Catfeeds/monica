@@ -119,8 +119,6 @@ public class ErpGetController extends BaseController{
 		}
 		page.setPd(pd);
 		List<PageData>	varList  =itemService.datalistPageInventory(page);
-		System.out.println(varList.size());
-		//System.out.println("库存查询："+varList);
 		json.put("Data", varList);
 		//System.out.println("page.getPageStr():"+page.getPageStr());
 		json.put("getPageStr", page.getPageStr());
