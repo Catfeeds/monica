@@ -28,7 +28,7 @@ import com.fh.service.${packageName}.${objectNameLower}mx.${objectName}MxManager
 
 /** 
  * 说明：${TITLE}
- * 创建人：成
+ * 创建人：FH Q313596790
  * 创建时间：${nowDate?string("yyyy-MM-dd")}
  */
 @Controller
@@ -68,8 +68,10 @@ public class ${objectName}Controller extends BaseController {
 	</#if>
 </#list>
 		${objectNameLower}Service.save(pd);
-		mv.addObject("msg","success");
-		mv.setViewName("save_result");
+		pd = ${objectNameLower}Service.findById(pd);	//根据ID读取
+		mv.setViewName("${packageName}/${objectNameLower}/${objectNameLower}_edit");
+		mv.addObject("msg", "edit");
+		mv.addObject("pd", pd);
 		return mv;
 	}
 	

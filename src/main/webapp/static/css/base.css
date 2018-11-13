@@ -22,7 +22,7 @@
 
 
 /* 搜索 */
-.search{ border:2px solid #d5d7dc;height50px; border-radius: 0.15rem; padding:0.1rem 0.6rem 0.1rem 0.1rem;}
+.search{ border:2px solid #d5d7dc;height:50px; border-radius: 0.15rem; padding:0.1rem 0.6rem 0.1rem 0.1rem;}
 .search .keywords ,.search_1 .keywords{ color: #b4b4b4; border:none; width: 100%; height: 1.6rem; line-height: 0.4rem; background: transparent; outline: none;}
 .search .btn_search{ background:none; border:none; color: #373737; top: 10%; right: 0; margin-top: -0.2rem; cursor: pointer;}
 .search_1{ border:1px solid #d5d7dc; border-radius: 0.1rem; padding:0.1rem 0.1rem 0.1rem 0.6rem;}

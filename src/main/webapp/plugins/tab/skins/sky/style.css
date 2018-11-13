@@ -2116,14 +2116,25 @@ input.spinbox-active.spinbox-down {
 
 /*动态选项卡*/
 .benma_ui_tab .tab_item1 {
-	background-image: url(tab/tab1.gif);
+	/*background-image: url(tab/tab1.gif);*/
+	background-color: #d0e7ff3b;
+	/*border:1px solid #c2c2c2;*/
+	border: solid #c2c2c2 1px;
+	border-top: solid #4c9fe6 3px;
+	box-shadow: 1px 0px 16px 2px #0000008f;
+	text-align: center;
 	background-repeat: no-repeat;
-	width: 5px;
+	/*width: 5px;*/
 	z-index: 100;
 	white-space: nowrap;
 }
 .benma_ui_tab .tab_item2 {
-	background-image: url(tab/tab2.gif);
+	/*background-image: url(tab/tab2.gif);*/
+
+	background-color: #8b9aa342;
+	border: 2px solid #cccccc;
+	border-bottom: solid #cccccc 3px;
+	text-align: center;
 	background-repeat: repeat-x;
 	white-space: nowrap;
 	z-index: 101;
@@ -2131,18 +2142,63 @@ input.spinbox-active.spinbox-down {
 .benma_ui_tab .tab_item3 {
 	background-image: url(tab/tab3.gif);
 	background-repeat: no-repeat;
-	width: 5px;
+	/*width: 5px;*/
 }
 .benma_ui_tab .tab_close {
 	background-image: url(tab/close.gif);
 	background-repeat: no-repeat;
 	position: relative;
-	top: -6px;
+	/*top: -6px;*/
 	height: 12px;
 	width: 12px;
 	font-size: 8px;
-	right: -5px;
+	right: -2px;
 }
+
+.benma_ui_tab .tab_close1 {
+	/*background-image: url("tab/emblem-noread.png");
+	height: 16px;
+	width: 16px;
+	border-style:none;
+	background-repeat:no-repeat;*/
+	border-radius: 3px;
+	position: relative;
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	line-height: 18px;
+	margin-left: 10px;
+	top: 1px;
+	text-align: center;
+	font-size: 14px;
+	color: #c2c2c2;
+	transition: all .2s;
+	-webkit-transition: all .2s;
+}
+
+.tab_close1_ed {
+	/*background-image: url("tab/emblem-noread.png");
+	height: 16px;
+	width: 16px;
+	border-style:none;
+	background-repeat:no-repeat;*/
+	border-radius: 3px;
+	background-color: #e73c3c;
+	position: relative;
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	line-height: 20px;
+	margin-left: 10px;
+	top: 1px;
+	text-align: center;
+	font-size: 14px;
+	color: #c2c2c2;
+	transition: all .2s;
+	-webkit-transition: all .2s;
+}
+
+
 .benma_ui_tab .tab_item1_bottom {
 	background-image: url(tab/tab1_bottom.gif);
 	background-repeat: no-repeat;
@@ -2162,10 +2218,10 @@ input.spinbox-active.spinbox-down {
 }
 .benma_ui_tab .tab_hr {
 	width: 100%;
-	height: 1px;
-	background-color: #4F99C6;/*标签底部线颜色*/
+	height: 2px;
+	background-color: #f4f9ff;/*标签底部线颜色*/
 	position: relative;
-	top: 24px;
+	top: 43px;
 	z-index: 113;
 	font-size: 0px;
 	display: block;
@@ -2173,7 +2229,7 @@ input.spinbox-active.spinbox-down {
 .benma_ui_tab .tab_hr_bottom {
 	width: 100%;
 	height: 2px;
-	background-color: #247bb6;/*标签底部线颜色*/
+	background-color: #77777782;/*标签底部线颜色*/
 	position: relative;
 	top: 0px;
 	z-index: 113;

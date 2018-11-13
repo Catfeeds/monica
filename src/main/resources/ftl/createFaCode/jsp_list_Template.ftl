@@ -1,5 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
@@ -43,7 +42,7 @@
 									</div>
 								</td>
 								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastStart" id="lastStart"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期" title="开始日期"/></td>
-								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastEnd" name="lastEnd"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期" title="结束日期"/></td>
+								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastEnd" id="lastEnd"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期" title="结束日期"/></td>
 								<td style="vertical-align:top;padding-left:2px;">
 								 	<select class="chosen-select form-control" name="name" id="id" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
 									<option value=""></option>
@@ -78,10 +77,14 @@
 									<c:if test="${r"${QX.cha == 1 }"}">
 									<c:forEach items="${r"${varList}"}" var="var" varStatus="vs">
 										<tr>
-											<td class='center' style="width: 30px;">${r"${vs.index+1}"}</td>
-										<#list fieldList as var>
+											<td class='center' style="width: 30px;">${r"${page.showCount*(page.currentPage-1)+vs.index+1}"}</td>
+									<#list fieldList as var>
+										<#if var[1] == 'String' && var[7] != 'null'>
+											<td class='center'>${r"${var."}DNAME${var_index+1}${r"}"}</td>
+										<#else>
 											<td class='center'>${r"${var."}${var[0]}${r"}"}</td>
-										</#list>
+										</#if>
+									</#list>
 											<td class="center">
 												<c:if test="${r"${QX.edit != 1 && QX.del != 1 }"}">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
@@ -251,19 +254,13 @@
 			 diag.Drag=true;
 			 diag.Title ="新增";
 			 diag.URL = '<%=basePath%>${objectNameLower}/goAdd.do';
-			 diag.Width = 500;
-			 diag.Height = 355;
+			 diag.Width = 800;
+			 diag.Height = 600;
 			 diag.Modal = true;				//有无遮罩窗口
 			 diag. ShowMaxButton = true;	//最大化按钮
 		     diag.ShowMinButton = true;		//最小化按钮
 			 diag.CancelEvent = function(){ //关闭事件
-				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
-					 if('${r"${page.currentPage}"}' == '0'){
-						 tosearch();
-					 }else{
-						 tosearch();
-					 }
-				}
+				tosearch();
 				diag.close();
 			 };
 			 diag.show();

@@ -42,20 +42,27 @@
 										</span>
 									</div>
 								</td>
-								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastStart" id="lastStart"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期" title="开始日期"/></td>
-								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastEnd" name="lastEnd"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期" title="结束日期"/></td>
-								<td style="vertical-align:top;padding-left:2px;">
-								 	<select class="chosen-select form-control" name="name" id="id" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
-									<option value=""></option>
-									<option value="">全部</option>
-									<option value="">1</option>
-									<option value="">2</option>
-								  	</select>
-								</td>
 								<c:if test="${r"${QX.cha == 1 }"}">
 								<td style="vertical-align:top;padding-left:2px"><a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i></a></td>
 								</c:if>
-								<c:if test="${r"${QX.toExcel == 1 }"}"><td style="vertical-align:top;padding-left:2px;"><a class="btn btn-light btn-xs" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i></a></td></c:if>
+                                <c:if test="${r"${QX.toExcel == 1 }"}"><td style="vertical-align:top;padding-left:2px;"><a class="btn btn-light btn-xs" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i>导出到EXCEL</a></td></c:if>
+                                <c:if test="${r"${QX.add == 1 }"}">
+                                    <td style="vertical-align:top;padding-left:2px">
+                                        <a class="btn btn-light btn-xs" onclick="add();">
+                                            <i class="ace-icon fa fa-pencil-square-o bigger-110 nav-search-icon yellow"></i>新增
+                                        </a>
+                                    </td>
+                                </c:if>
+                                <c:if test="${r"${QX.edit == 1 }"}">
+									<td style="vertical-align:top;padding-left:2px">
+										<a class="btn btn-light btn-xs" onclick="edit();"  data-rel="tooltip" title="修改">
+											<i class="ace-icon fa fa-cogs bigger-110 nav-search-icon green"></i>修改
+										</a>
+									</td>
+								</c:if>
+                                <c:if test="${r"${QX.del == 1 }"}">
+                                    <td style="vertical-align:top;padding-left:2px"><a class="btn btn-light btn-xs" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='ace-icon fa fa-trash-o bigger-120 nav-search-icon red'></i>删除</a></td>
+                                </c:if>
 							</tr>
 						</table>
 						<!-- 检索  -->
@@ -70,7 +77,6 @@
 								<#list fieldList as var>
 									<th class="center">${var[2]}</th>
 								</#list>
-									<th class="center">操作</th>
 								</tr>
 							</thead>
 													
@@ -80,59 +86,15 @@
 								<c:when test="${r"${not empty varList}"}">
 									<c:if test="${r"${QX.cha == 1 }"}">
 									<c:forEach items="${r"${varList}"}" var="var" varStatus="vs">
-										<tr>
+										<tr name="listBeen" id="tr${r"${var."}${objectNameUpper}_ID${r"}"}" onclick="toCheck('${r"${var."}${objectNameUpper}_ID${r"}"}')">
 											<td class='center'>
-												<label class="pos-rel"><input type='checkbox' name='ids' value="${r"${var."}${objectNameUpper}_ID${r"}"}" class="ace" /><span class="lbl"></span></label>
+												<label class="pos-rel"><input type='checkbox' id="${r"${var."}${objectNameUpper}_ID${r"}"}" name='ids' value="${r"${var."}${objectNameUpper}_ID${r"}"}" class="ace" /><span class="lbl"></span></label>
 											</td>
 											<td class='center' style="width: 30px;">${r"${vs.index+1}"}</td>
 										<#list fieldList as var>
 											<td class='center'>${r"${var."}${var[0]}${r"}"}</td>
 										</#list>
-											<td class="center">
-												<c:if test="${r"${QX.edit != 1 && QX.del != 1 }"}">
-												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
-												</c:if>
-												<div class="hidden-sm hidden-xs btn-group">
-													<c:if test="${r"${QX.edit == 1 }"}">
-													<a class="btn btn-xs btn-success" title="编辑" onclick="edit('${r"${var."}${objectNameUpper}_ID${r"}"}');">
-														<i class="ace-icon fa fa-pencil-square-o bigger-120" title="编辑"></i>
-													</a>
-													</c:if>
-													<c:if test="${r"${QX.del == 1 }"}">
-													<a class="btn btn-xs btn-danger" onclick="del('${r"${var."}${objectNameUpper}_ID${r"}"}');">
-														<i class="ace-icon fa fa-trash-o bigger-120" title="删除"></i>
-													</a>
-													</c:if>
-												</div>
-												<div class="hidden-md hidden-lg">
-													<div class="inline pos-rel">
-														<button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
-															<i class="ace-icon fa fa-cog icon-only bigger-110"></i>
-														</button>
-			
-														<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-															<c:if test="${r"${QX.edit == 1 }"}">
-															<li>
-																<a style="cursor:pointer;" onclick="edit('${r"${var."}${objectNameUpper}_ID${r"}"}');" class="tooltip-success" data-rel="tooltip" title="修改">
-																	<span class="green">
-																		<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-																	</span>
-																</a>
-															</li>
-															</c:if>
-															<c:if test="${r"${QX.del == 1 }"}">
-															<li>
-																<a style="cursor:pointer;" onclick="del('${r"${var."}${objectNameUpper}_ID${r"}"}');" class="tooltip-error" data-rel="tooltip" title="删除">
-																	<span class="red">
-																		<i class="ace-icon fa fa-trash-o bigger-120"></i>
-																	</span>
-																</a>
-															</li>
-															</c:if>
-														</ul>
-													</div>
-												</div>
-											</td>
+
 										</tr>
 									
 									</c:forEach>
@@ -154,14 +116,7 @@
 						<div class="page-header position-relative">
 						<table style="width:100%;">
 							<tr>
-								<td style="vertical-align:top;">
-									<c:if test="${r"${QX.add == 1 }"}">
-									<a class="btn btn-mini btn-success" onclick="add();">新增</a>
-									</c:if>
-									<c:if test="${r"${QX.del == 1 }"}">
-									<a class="btn btn-mini btn-danger" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='ace-icon fa fa-trash-o bigger-120'></i></a>
-									</c:if>
-								</td>
+
 								<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${r"${page.pageStr}"}</div></td>
 							</tr>
 						</table>
@@ -263,8 +218,6 @@
 			 diag.Width = 450;
 			 diag.Height = 355;
 			 diag.Modal = true;				//有无遮罩窗口
-			 diag. ShowMaxButton = true;	//最大化按钮
-		     diag.ShowMinButton = true;		//最小化按钮
 			 diag.CancelEvent = function(){ //关闭事件
 				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					 if('${r"${page.currentPage}"}' == '0'){
@@ -277,6 +230,21 @@
 			 };
 			 diag.show();
 		}
+
+        function toCheck(Id){
+           /* var tr = document.getElementsByTagName("tr");
+            for(var i = 0; i < tr.length ; i ++){ // 从第二行开始遍历，i初始为1，递增6
+                tr[i].style.backgroundColor = "";
+            }
+            $("#tr"+Id).css("background","#CCFFFF");*/
+            $("#simple-table").find("tr[name='listBeen']").css("background-color", "");
+            $("#tr" + Id).css("background-color", "#CCCC99");
+            /*if($("#"+Id).prop("checked")){
+                $("#"+Id).removeAttr("checked");
+            }else {
+                $("#"+Id).prop("checked",true);
+            }*/
+        }
 		
 		//删除
 		function del(Id){
@@ -290,28 +258,42 @@
 				}
 			});
 		}
-		
-		//修改
-		function edit(Id){
-			 top.jzts();
-			 var diag = new top.Dialog();
-			 diag.Drag=true;
-			 diag.Title ="编辑";
-			 diag.URL = '<%=basePath%>${objectNameLower}/goEdit.do?${objectNameUpper}_ID='+Id;
-			 diag.Width = 450;
-			 diag.Height = 355;
-			 diag.Modal = true;				//有无遮罩窗口
-			 diag. ShowMaxButton = true;	//最大化按钮
-		     diag.ShowMinButton = true;		//最小化按钮 
-			 diag.CancelEvent = function(){ //关闭事件
-				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
-					 tosearch();
-				}
-				diag.close();
-			 };
-			 diag.show();
-		}
-		
+        //修改
+        function edit(){
+            var str = [];
+            for(var i=0;i < document.getElementsByName('ids').length;i++){
+                if(document.getElementsByName('ids')[i].checked){
+                    str.push(document.getElementsByName('ids')[i].value);
+                }
+            }
+            if(str.length < 1){
+                alert("您没有选择任何内容!");
+                return false;
+            }else if(str.length > 1){
+                alert("您的选择内容必须要单项!");
+                return false;
+            }else{
+                var Id = str[0];
+                top.jzts();
+                var diag = new top.Dialog();
+                diag.Drag=true;
+                diag.Title ="编辑";
+                diag.URL = '<%=basePath%>${objectNameLower}/goEdit.do?${objectNameUpper}_ID='+Id;
+                diag.Width = 450;
+                diag.Height = 355;
+                diag.Modal = true;				//有无遮罩窗口
+                //diag. ShowMaxButton = true;	//最大化按钮
+                //diag.ShowMinButton = true;		//最小化按钮
+                diag.CancelEvent = function(){ //关闭事件
+                    if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+                        tosearch();
+                    }
+                    diag.close();
+                };
+                diag.show();
+            }
+        }
+
 		//批量操作
 		function makeAll(msg){
 			bootbox.confirm(msg, function(result) {

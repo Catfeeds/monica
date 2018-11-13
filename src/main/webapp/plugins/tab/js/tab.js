@@ -27,7 +27,7 @@ function TabView(f) {
     this.pid = g.pageid;
     this.tabs = null;
     this.tabContainer = null;
-    var c = '<table class="tab_item"  id="{0}" border="0" cellpadding="0" cellspacing="0"><tr><td class="tab_item1"></td><td class="tab_item2 tab_title">{1}</td><td class="tab_item2"><div class="tab_close"></div></td><td class="tab_item3"></td></tr></table>';
+    var c = '<table  class="tab_item"  id="{0}" border="0" cellpadding="0" cellspacing="0"><tr><td class="tab_item2 tab_title">{1}<span class="tab_close1"><strong>X</strong></span></td></tr></table>';
     var h = '<div class="benma_ui_tab" id="{0}"><div class="tab_hr"></div></div>';
     var i;
     if ($("#scrollContent").attr("childScrollContent") == "true") {
@@ -36,7 +36,7 @@ function TabView(f) {
         i = '<iframe id="{0}" style="overflow-x:hidden;" allowTransparency="true" frameborder="0" width="100%" height="100%" src="{1}"></iframe>'
     }
     if (g.position == "bottom") {
-        c = '<table class="tab_item_bottom"  id="{0}" border="0" cellpadding="0" cellspacing="0"><tr><td class="tab_item1_bottom"></td><td class="tab_item2_bottom tab_title">{1}</td><td class="tab_item2_bottom"><div class="tab_close tab_close_bottom"></div></td><td class="tab_item3_bottom"></td></tr></table>';
+        c = '<table class="tab_item_bottom"  id="{0}" border="0" cellpadding="0" cellspacing="0"><tr><td class="tab_item1_bottom"></td><td class="tab_item2_bottom tab_title">{1}</td><td class="tab_item2_bottom"><div class="tab_close1 tab_close_bottom"></div></td><td class="tab_item3_bottom"></td></tr></table>';
         h = '<div class="benma_ui_tab benma_ui_tab_bottom" id="{0}"><div class="tab_hr tab_hr_bottom"></div></div>'
     }
     $("#" + g.containerId).append(h.replace("{0}", this.id));
@@ -56,26 +56,40 @@ function TabView(f) {
                 l.removeClass("tab_item2_mouseover" + b);
                 k.removeClass("tab_item3_mouseover" + b)
             }).click(function () {
+                //alert("111");
                 if (a.current != null) {
-                    $(a.current).find(".tab_item1" + b).removeClass("tab_item1_selected" + b);
+                    /*$(a.current).find(".tab_item1" + b).removeClass("tab_item1_selected" + b);
                     $(a.current).find(".tab_item2" + b).removeClass("tab_item2_selected" + b);
-                    $(a.current).find(".tab_item3" + b).removeClass("tab_item3_selected" + b);
-                    $(a.current).find(".tab_close").addClass("tab_close_noselected")
+                    $(a.current).find(".tab_item3" + b).removeClass("tab_item3_selected" + b);*/
+                    $(a.current).find(".tab_item1" + b).attr("class","tab_item2" + b);
+                    $(a.current).find(".tab_item2" + b).attr("class","tab_item2" + b);
+                    $(a.current).find(".tab_item3" + b).attr("class","tab_item2" + b);
+                    $(a.current).find(".tab_close1").addClass("tab_close_noselected")
                 }
+                m.attr("class","tab_item1" + b);
+                l.attr("class","tab_item1" + b);
+                k.attr("class","tab_item1" + b);
                 m.addClass("tab_item1_selected" + b);
                 l.addClass("tab_item2_selected" + b);
                 k.addClass("tab_item3_selected" + b);
                 a.current = this;
-                $(a.current).find(".tab_close").removeClass("tab_close_noselected");
+                $(a.current).find(".tab_close1").removeClass("tab_close_noselected");
                 d($(this).attr("id"), false)
             });
-            var o = $(p).find(".tab_close").mouseover(function () {
+            var o = $(p).find(".tab_close1").mouseover(function () {
+                $(this).addClass("tab_close1_ed")
+            }).mouseout(function () {
+                $(this).removeClass("tab_close1_ed")
+            }).click(function () {
+                j(p.attr("id"))
+            });
+            /*var o = $(p).find(".tab_close").mouseover(function () {
                 $(this).addClass("tab_close_mouseover")
             }).mouseout(function () {
                 $(this).removeClass("tab_close_mouseover")
             }).click(function () {
                 j(p.attr("id"))
-            })
+            });*/
         }
     }
     function d(l, k) {
@@ -88,6 +102,7 @@ function TabView(f) {
         g.action($("#" + l), a.current_page)
     }
     function j(o) {
+        //alert(o);
         var n = $("#page_" + o);
         var k = $("#" + o);
         if ($(a.current).attr("id") == k.attr("id")) {
@@ -130,7 +145,7 @@ function TabView(f) {
             this.tabContainer.append(l);
             e($("#" + m.id));
             if (!m.isClosed) {
-                $($("#" + m.id)).find(".tab_close").hide()
+                $($("#" + m.id)).find(".tab_close1").hide()
             }
             this.activate(m.id)
         }

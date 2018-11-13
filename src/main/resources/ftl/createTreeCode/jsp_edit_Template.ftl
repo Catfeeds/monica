@@ -62,10 +62,19 @@
 								<td><input type="number" name="${var[0] }" id="${var[0] }" value="${r"${pd."}${var[0] }${r"}"}" maxlength="32" placeholder="这里输入${var[2] }" title="${var[2] }" style="width:98%;"/></td>
 							</tr>
 						<#else>
+						<#if var[7] != 'null'>
+							<tr>
+								<td style="width:75px;text-align: right;padding-top: 13px;">${var[2] }:</td>
+								<td>
+									<select name="${var[0] }" id="${var[0] }"  title="${var[2] }" style="width:98%;"></select>
+								</td>
+							</tr>
+						<#else>	
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">${var[2] }:</td>
 								<td><input type="text" name="${var[0] }" id="${var[0] }" value="${r"${pd."}${var[0] }${r"}"}" maxlength="${var[5] }" placeholder="这里输入${var[2] }" title="${var[2] }" style="width:98%;"/></td>
 							</tr>
+						</#if>
 						</#if>
 					</#if>
 				</#list>
@@ -136,6 +145,34 @@
 		$(function() {
 			//日期框
 			$('.date-picker').datepicker({autoclose: true,todayHighlight: true});
+			
+<#list fieldList as var>
+	<#if var[3] == "是">
+		<#if var[1] == 'String'>
+			<#if var[7] != 'null'>
+				var ${var[0] } = "${r"${pd."}${var[0] }${r"}"}";
+				$.ajax({
+					type: "POST",
+					url: '<%=basePath%>dictionaries/getLevels.do?tm='+new Date().getTime(),
+			    	data: {DICTIONARIES_ID:'${var[7] }'},
+					dataType:'json',
+					cache: false,
+					success: function(data){
+						 $("#${var[0] }").append("<option value=''>请选择${var[2] }</option>");
+						 $.each(data.list, function(i, dvar){
+							 if(${var[0] } == dvar.BIANMA){
+								 $("#${var[0] }").append("<option value="+dvar.BIANMA+" selected='selected'>"+dvar.NAME+"</option>");
+							 }else{
+								 $("#${var[0] }").append("<option value="+dvar.BIANMA+">"+dvar.NAME+"</option>");
+							 }
+						 });
+					}
+				});
+			</#if>
+		</#if>
+	</#if>
+</#list>
+			
 		});
 		</script>
 </body>
