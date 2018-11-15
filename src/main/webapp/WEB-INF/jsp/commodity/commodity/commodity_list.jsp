@@ -77,6 +77,14 @@
                                                 id="nav-search-icon"
                                                 class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i></a></td>
                                     </c:if>
+                                    <c:if test="${QX.edit == 1}">
+                                        <td style="vertical-align:top;padding-left:2px;">
+                                            <a class="btn btn-light btn-xs" title="编辑"
+                                               onclick="edit();">
+                                                <i class="ace-icon fa fa-cogs bigger-110 nav-search-icon green"></i>修改
+                                            </a>
+                                        </td>
+                                    </c:if>
                                 </tr>
                             </table>
                             <!-- 检索  -->
@@ -103,8 +111,6 @@
                                     <th class="center">商品价格</th>
                                     <th class="center">优惠折扣</th>
                                     <th class="center">状态</th>
-
-                                    <th class="center">操作</th>
                                 </tr>
                                 </thead>
 
@@ -114,9 +120,9 @@
                                     <c:when test="${not empty varList}">
                                         <c:if test="${QX.cha == 1 }">
                                             <c:forEach items="${varList}" var="var" varStatus="vs">
-                                                <tr>
+                                                <tr id="tr${var.COMMODITY_ID}" name="listBeen" onclick="toCheck('${var.COMMODITY_ID}')" ondblclick="editByID('${var.COMMODITY_ID}')" style="cursor: pointer;">
                                                     <td class='center'>
-                                                        <label class="pos-rel"><input type='checkbox' name='ids'
+                                                        <label class="pos-rel"><input id="${var.COMMODITY_ID}" type='checkbox' name='ids'
                                                                                       value="${var.COMMODITY_ID}"
                                                                                       class="ace"/><span
                                                                 class="lbl"></span></label>
@@ -142,68 +148,12 @@
                                                             ${var.ISPUTAWAY}
                                                     </td>
                                                     <td class='center'><a class='btn btn-xs btn-info'
-                                                                          onclick="previewPic('${var.COMMODITY_ID}');">预览封面图片</a>
+                                                                          onclick="previewPic('${var.COMMODITY_ID}');event.cancelBubble=true">预览封面图片</a>
                                                     </td>
                                                     <td class='center'>无法预览</td>
                                                     <td class='center'>${var.PRICE}</td>
                                                     <td class='center'>${var.DISCOUNT}折</td>
                                                     <td class='center'>${var.STATE}</td>
-
-                                                    <td class="center">
-                                                        <c:if test="${QX.edit != 1 && QX.del != 1 }">
-                                                            <span class="label label-large label-grey arrowed-in-right arrowed-in"><i
-                                                                    class="ace-icon fa fa-lock" title="无权限"></i></span>
-                                                        </c:if>
-                                                        <div class="hidden-sm hidden-xs btn-group">
-                                                            <c:if test="${QX.edit == 1 }">
-                                                                <a class="btn btn-xs btn-success" title="编辑"
-                                                                   onclick="edit('${var.COMMODITY_ID}');">
-                                                                    <i class="ace-icon fa fa-pencil-square-o bigger-120"
-                                                                       title="编辑"></i>
-                                                                </a>
-                                                            </c:if>
-                                                                <%-- <c:if test="${QX.del == 1 }">
-                                                                <a class="btn btn-xs btn-danger" onclick="del('${var.COMMODITY_ID}');">
-                                                                    <i class="ace-icon fa fa-trash-o bigger-120" title="删除"></i>
-                                                                </a>
-                                                                </c:if> --%>
-                                                        </div>
-                                                        <div class="hidden-md hidden-lg">
-                                                            <div class="inline pos-rel">
-                                                                <button class="btn btn-minier btn-primary dropdown-toggle"
-                                                                        data-toggle="dropdown" data-position="auto">
-                                                                    <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
-                                                                </button>
-
-                                                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-                                                                    <c:if test="${QX.edit == 1 }">
-                                                                        <li>
-                                                                            <a style="cursor:pointer;"
-                                                                               onclick="edit('${var.COMMODITY_ID}');"
-                                                                               class="tooltip-success" data-rel="tooltip"
-                                                                               title="修改">
-																	<span class="green">
-																		<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-																	</span>
-                                                                            </a>
-                                                                        </li>
-                                                                    </c:if>
-                                                                    <c:if test="${QX.del == 1 }">
-                                                                        <li>
-                                                                            <a style="cursor:pointer;"
-                                                                               onclick="del('${var.COMMODITY_ID}');"
-                                                                               class="tooltip-error" data-rel="tooltip"
-                                                                               title="删除">
-																	<span class="red">
-																		<i class="ace-icon fa fa-trash-o bigger-120"></i>
-																	</span>
-                                                                            </a>
-                                                                        </li>
-                                                                    </c:if>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </td>
                                                 </tr>
 
                                             </c:forEach>
@@ -360,22 +310,45 @@
     }
 
     //修改
-    function edit(Id) {
-        top.jzts();
-        var diag = new top.Dialog();
-        diag.Drag = true;
-        diag.Title = "编辑";
-        diag.URL = '<%=basePath%>commodity/edit_commodity.do?COMMODITY_ID=' + Id;
-        diag.Width = window.innerWidth * 0.7;
-        diag.Height = window.innerHeight * 0.7;
-        diag.Modal = true;				//有无遮罩窗口
-        diag.ShowMaxButton = true;	//最大化按钮
-        diag.ShowMinButton = true;		//最小化按钮
-        diag.CancelEvent = function () { //关闭事件
-            tosearch();
-            diag.close();
-        };
-        diag.show();
+    function edit() {
+        var str = [];
+        for(var i=0;i < document.getElementsByName('ids').length;i++){
+            if(document.getElementsByName('ids')[i].checked){
+                str.push(document.getElementsByName('ids')[i].value);
+            }
+        }
+        if(str.length < 1){
+            bootbox.dialog({
+                message: "<span class='bigger-110'>您没有选择任何内容!</span>",
+                buttons:
+                    { "button":{ "label":"确定", "className":"btn-sm btn-success"}}
+            });
+            return false;
+        }else if(str.length > 1){
+            bootbox.dialog({
+                message: "<span class='bigger-110'>您的选择内容必须要单项!</span>",
+                buttons:
+                    { "button":{ "label":"确定", "className":"btn-sm btn-success"}}
+            });
+            return false;
+        }else{
+            var Id = str[0];
+            top.jzts();
+            var diag = new top.Dialog();
+            diag.Drag = true;
+            diag.Title = "编辑";
+            diag.URL = '<%=basePath%>commodity/edit_commodity.do?COMMODITY_ID=' + Id;
+            diag.Width = window.innerWidth * 0.7;
+            diag.Height = window.innerHeight * 0.7;
+            diag.Modal = true;				//有无遮罩窗口
+            diag.ShowMaxButton = true;	//最大化按钮
+            diag.ShowMinButton = true;		//最小化按钮
+            diag.CancelEvent = function () { //关闭事件
+                tosearch();
+                diag.close();
+            };
+            diag.show();
+        }
     }
 
     //批量操作
@@ -452,6 +425,34 @@
          }
          diag.close();
          }; */
+        diag.show();
+    }
+
+    function toCheck(Id){
+        $("#simple-table").find("tr[name='listBeen']").css("background-color", "");
+        $("#tr" + Id).css("background-color", "#CCCC99");
+        if($("#"+Id).prop("checked")){
+            $("#"+Id).removeAttr("checked");
+        }else {
+            $("#"+Id).prop("checked",true);
+        }
+    }
+
+    function editByID(Id) {
+        top.jzts();
+        var diag = new top.Dialog();
+        diag.Drag = true;
+        diag.Title = "编辑";
+        diag.URL = '<%=basePath%>commodity/edit_commodity.do?COMMODITY_ID=' + Id;
+        diag.Width = window.innerWidth * 0.7;
+        diag.Height = window.innerHeight * 0.7;
+        diag.Modal = true;				//有无遮罩窗口
+        diag.ShowMaxButton = true;	//最大化按钮
+        diag.ShowMinButton = true;		//最小化按钮
+        diag.CancelEvent = function () { //关闭事件
+            tosearch();
+            diag.close();
+        };
         diag.show();
     }
 </script>

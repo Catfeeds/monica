@@ -51,7 +51,7 @@ public class CommodityService implements CommodityManager{
 	@SuppressWarnings("unchecked")
 	public List<PageData> list(Page page)throws Exception{
 		System.out.println(dao.findForList("CommodityMapper.datalistPage", page).getClass());
-		return (List<PageData>)dao.findForList("CommodityMapper.datalistPage", page);
+		return (List<PageData>) dao.findForList("CommodityMapper.datalistPage", page);
 	}
 	
 	/**列表(全部)
