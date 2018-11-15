@@ -130,7 +130,7 @@
 								<c:when test="${not empty varList}">
 									<c:if test="${QX.cha == 1 }">
 									<c:forEach items="${varList}" var="var" varStatus="vs">
-										<tr id="tr${var.SALESORDERBILL_ID}" name="listBeen" onclick="toCheck('${var.SALESORDERBILL_ID}')" style="cursor: pointer;">
+										<tr id="tr${var.SALESORDERBILL_ID}" name="listBeen" onclick="toCheck('${var.SALESORDERBILL_ID}')" ondblclick="editByID('${var.SALESORDERBILL_ID}')" style="cursor: pointer;">
 											<td class='center'>
 												<label class="pos-rel"><input id="${var.SALESORDERBILL_ID}" type='checkbox' name='ids' value="${var.SALESORDERBILL_ID}" class="ace" /><span class="lbl"></span></label>
 											</td>
@@ -339,11 +339,19 @@
 				  }
 				}
 				if(str.length < 1){
-					alert("您没有选择任何内容!");
-					return false;
+                    bootbox.dialog({
+                        message: "<span class='bigger-110'>您没有选择任何内容!</span>",
+                        buttons:
+                            { "button":{ "label":"确定", "className":"btn-sm btn-success"}}
+                    });
+                    return false;
 				}else if(str.length > 1){
-					alert("您的选择内容必须要单项!");
-					return false;
+                    bootbox.dialog({
+                        message: "<span class='bigger-110'>您的选择内容必须要单项!</span>",
+                        buttons:
+                            { "button":{ "label":"确定", "className":"btn-sm btn-success"}}
+                    });
+                    return false;
 				}else{
 					var Id = str[0];
 					 top.jzts();
@@ -489,6 +497,26 @@
                 $("#zdjl").css("display", "");
             }
             $("#weektab li").removeClass('on').eq(num).addClass('on');
+        }
+
+        function editByID(Id) {
+            top.jzts();
+            var diag = new top.Dialog();
+            diag.Drag=true;
+            diag.Title ="编辑";
+            diag.URL = '<%=basePath%>salesorderbill/goEdit.do?SALESORDERBILL_ID='+Id;
+            diag.Width = 450;
+            diag.Height = 355;
+            diag.Modal = true;				//有无遮罩窗口
+            diag. ShowMaxButton = true;	//最大化按钮
+            diag.ShowMinButton = true;		//最小化按钮
+            diag.CancelEvent = function(){ //关闭事件
+                if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+                    tosearch();
+                }
+                diag.close();
+            };
+            diag.show();
         }
 	</script>
 
