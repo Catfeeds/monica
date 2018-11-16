@@ -29,10 +29,11 @@
 					<div class="col-xs-12">
 					
 					<form action="salesorderbill/${msg }.do" name="Form" id="Form" method="post">
-						<input type="hidden" name="SALESORDERBILL_ID" id="SALESORDERBILL_ID" value="${pd.SALESORDERBILL_ID}"/>
+						<input type="hidden" id="SALESORDERBILL_ID" name="SALESORDERBILL_ID" value="${pd.SALESORDERBILL_ID}"/>
+						<input type="hidden" id="FCUSTOMERID" name="FCUSTOMERID" value="${pd.FCUSTOMERID}"/>
+						<input type="hidden" id="FSALESID" name="FSALESID" value="${pd.FSALESID}"/>
+						<input type="hidden" id="FORDERPERSON" name="FORDERPERSON" value="${pd.FORDERPERSON}"/>
 						<div id="zhongxin" style="padding-top: 13px;">
-						<%--<table id="table_report" class="table table-striped table-bordered table-hover">
-						</table>--%>
 							<table style="border-collapse:separate; border-spacing:10px;width: 100%;padding-left: 1%">
 								<tbody>
 								<tr>
@@ -40,14 +41,14 @@
 										<label>订单编号<span style="color: red;">*</span>:</label>
 									</td>
 									<td>
-										<input type="text" readonly style="width: 100%;" class="input-text" >
+										<input id="FORDERNUM" name="FORDERNUM" type="text" value="${pd.FORDERNUM}" readonly style="width: 100%;" class="input-text">
 									</td>
 
 									<td style="width:6%;text-align: right;">
 										<label>客户名称<span style="color: red;">*</span>:</label>
 									</td>
 									<td>
-										<input type="text" onclick="toCus()" style="width: 100%;cursor: pointer;
+										<input id="FCUSTOMERNAME" type="text" onclick="toCus()" style="width: 100%;cursor: pointer;
 													background: url(static/images/search.png) no-repeat;background-size: 20px 20px;
 													background-position:right;background-color: #FFFFFF;" class="input-text">
 									</td>
@@ -56,7 +57,7 @@
 										<label>订单日期<span style="color: red;">*</span>:</label>
 									</td>
 									<td>
-										<input type="date" style="width: 100%;" class="input-text">
+										<input id="FORDERDATE" name="FORDERDATE" type="date" style="width: 100%;" class="input-text">
 									</td>
 								</tr>
 
@@ -65,7 +66,7 @@
 										<label>订单类型<span style="color:red;">*</span>:</label>
 									</td>
 									<td>
-										<select class="input-text"
+										<select id="FORDERTYPE" name="FORDERTYPE" class="input-text"
 												style="vertical-align:top;width: 100%;">
 											<option></option>
 										</select>
@@ -75,7 +76,7 @@
 										<label>业务代表<span style="color: red;">*</span>:</label>
 									</td>
 									<td>
-										<input type="text" onclick="toSales()" style="width: 100%;cursor: pointer;
+										<input id="FSALESNAME" type="text" onclick="toSales()" style="width: 100%;cursor: pointer;
 													background: url(static/images/search.png) no-repeat;background-size: 20px 20px;
 													background-position:right;background-color: #FFFFFF;" class="input-text">
 									</td>
@@ -84,7 +85,7 @@
 										<label>提货日期<span style="color: red;">*</span>:</label>
 									</td>
 									<td>
-										<input type="date" style="width: 100%;" class="input-text">
+										<input id="FDELIVERYDATE" name="FDELIVERYDATE" value="${pd.FDELIVERYDATE}" type="date" style="width: 100%;" class="input-text">
 									</td>
 								</tr>
 								<tr>
@@ -92,14 +93,14 @@
 										<label>客户信用<span style="color: red;">*</span>:</label>
 									</td>
 									<td>
-										<input type="date" style="width: 100%;" class="input-text">
+										<input id="FCUSTOMERCREDIT" name="FCUSTOMERCREDIT" value="${pd.FCUSTOMERCREDIT}" type="date" style="width: 100%;" class="input-text">
 									</td>
 
 									<td style="width:6%;text-align: right;">
 										<label>订单备注:</label>
 									</td>
 									<td colspan="3">
-										<textarea style="width: 100%;resize: none;" class="input-text" type="text"></textarea>
+										<textarea id="FNOTE" name="FNOTE" style="width: 100%;resize: none;" class="input-text" type="text">${pd.FNOTE}</textarea>
 									</td>
 								</tr>
 
@@ -108,51 +109,33 @@
 										<label>包装:</label>
 									</td>
 									<td>
-										<c:if test="${msg == 'save'}">
-											<select class="input-text"
-													style="vertical-align:top;width: 100%;">
-												<option></option>
+										<select id="FPACK" name="FPACK" class="input-text"
+												style="vertical-align:top;width: 100%;">
+											<option></option>
 												<c:forEach items="${packList}" varStatus="vs" var="var">
 													<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
 												</c:forEach>
-											</select>
-										</c:if>
-
-										<c:if test="${msg == 'edit'}">
-											<select class="input-text"
-													style="vertical-align:top;width: 100%;">
-												<option></option>
-											</select>
-										</c:if>
+										</select>
 									</td>
 
 									<td style="width:6%;text-align: right;">
 										<label>喷码:</label>
 									</td>
 									<td>
-										<c:if test="${msg == 'save'}">
-											<select class="input-text"
-													style="vertical-align:top;width: 100%;">
-												<option></option>
-												<c:forEach items="${codeSpurtingList}" varStatus="vs" var="var">
-													<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
-												</c:forEach>
-											</select>
-										</c:if>
-
-										<c:if test="${msg == 'edit'}">
-											<select class="input-text"
-													style="vertical-align:top;width: 100%;">
-												<option></option>
-											</select>
-										</c:if>
+										<select id="FCODESPURTING" name="FCODESPURTING" class="input-text"
+												style="vertical-align:top;width: 100%;">
+											<option></option>
+											<c:forEach items="${codeSpurtingList}" varStatus="vs" var="var">
+												<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
+											</c:forEach>
+										</select>
 									</td>
 
 									<td rowspan="2" style="width:6%;text-align: center;">
 										<label>其它特殊要求:</label>
 									</td>
 									<td rowspan="2">
-										<textarea style="width: 100%;height:100%;resize: none;" class="input-text" type="text"></textarea>
+										<textarea id="FSPECIALREQUIREMENTS" name="FSPECIALREQUIREMENTS" style="width: 100%;height:100%;resize: none;" class="input-text" type="text">${pd.FSPECIALREQUIREMENTS}</textarea>
 									</td>
 								</tr>
 
@@ -161,44 +144,26 @@
 										<label>镜面抛:</label>
 									</td>
 									<td>
-										<c:if test="${msg == 'save'}">
-											<select class="input-text"
-													style="vertical-align:top;width: 100%;">
-												<option></option>
-												<c:forEach items="${mirrorbehindList}" varStatus="vs" var="var">
-													<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
-												</c:forEach>
-											</select>
-										</c:if>
-
-										<c:if test="${msg == 'edit'}">
-											<select class="input-text"
-													style="vertical-align:top;width: 100%;">
-												<option></option>
-											</select>
-										</c:if>
+										<select id="FMIRRORBEHIND" name="FMIRRORBEHIND" class="input-text"
+												style="vertical-align:top;width: 100%;">
+											<option></option>
+											<c:forEach items="${mirrorbehindList}" varStatus="vs" var="var">
+												<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
+											</c:forEach>
+										</select>
 									</td>
 
 									<td style="width:6%;text-align: right;">
 										<label>客户验货:</label>
 									</td>
 									<td>
-										<c:if test="${msg == 'save'}">
-											<select class="input-text"
-													style="vertical-align:top;width: 100%;">
-												<option></option>
-												<c:forEach items="${customerinspectionList}" varStatus="vs" var="var">
-													<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
-												</c:forEach>
-											</select>
-										</c:if>
-
-										<c:if test="${msg == 'edit'}">
-											<select class="input-text"
-													style="vertical-align:top;width: 100%;">
-												<option></option>
-											</select>
-										</c:if>
+										<select id="FCUSTOMERINSPECTION" name="FCUSTOMERINSPECTION" class="input-text"
+												style="vertical-align:top;width: 100%;">
+											<option></option>
+											<c:forEach items="${customerinspectionList}" varStatus="vs" var="var">
+												<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
+											</c:forEach>
+										</select>
 									</td>
 								</tr>
 
@@ -207,51 +172,33 @@
 										<label>胶水:</label>
 									</td>
 									<td>
-										<c:if test="${msg == 'save'}">
-											<select class="input-text"
-													style="vertical-align:top;width: 100%;">
-												<option></option>
-												<c:forEach items="${glueList}" varStatus="vs" var="var">
-													<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
-												</c:forEach>
-											</select>
-										</c:if>
-
-										<c:if test="${msg == 'edit'}">
-											<select class="input-text"
-													style="vertical-align:top;width: 100%;">
-												<option></option>
-											</select>
-										</c:if>
+										<select id="FGLUE" name="FGLUE" class="input-text"
+												style="vertical-align:top;width: 100%;">
+											<option></option>
+											<c:forEach items="${glueList}" varStatus="vs" var="var">
+												<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
+											</c:forEach>
+										</select>
 									</td>
 
 									<td style="width:6%;text-align: right;">
 										<label>跟柜物品:</label>
 									</td>
 									<td>
-										<c:if test="${msg == 'save'}">
-											<select class="input-text"
-													style="vertical-align:top;width: 100%;">
-												<option></option>
-												<c:forEach items="${articleList}" varStatus="vs" var="var">
-													<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
-												</c:forEach>
-											</select>
-										</c:if>
-
-										<c:if test="${msg == 'edit'}">
-											<select class="input-text"
-													style="vertical-align:top;width: 100%;">
-												<option></option>
-											</select>
-										</c:if>
+										<select id="FARTICLE" name="FARTICLE" class="input-text"
+												style="vertical-align:top;width: 100%;">
+											<option></option>
+											<c:forEach items="${articleList}" varStatus="vs" var="var">
+												<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
+											</c:forEach>
+										</select>
 									</td>
 
 									<td rowspan="2" style="width:6%;text-align: center;">
 										<label>付款计划:</label>
 									</td>
 									<td rowspan="2">
-										<textarea style="width: 100%;height:100%;resize: none;" class="input-text" type="text"></textarea>
+										<textarea id="FPAYMENTSCHEDULE" name="FPAYMENTSCHEDULE" style="width: 100%;height:100%;resize: none;" class="input-text" type="text">${pd.FPAYMENTSCHEDULE}</textarea>
 									</td>
 								</tr>
 
@@ -260,44 +207,26 @@
 										<label>标识要求:</label>
 									</td>
 									<td>
-										<c:if test="${msg == 'save'}">
-											<select class="input-text"
-													style="vertical-align:top;width: 100%;">
-												<option></option>
-												<c:forEach items="${identificationrequirementsList}" varStatus="vs" var="var">
-													<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
-												</c:forEach>
-											</select>
-										</c:if>
-
-										<c:if test="${msg == 'edit'}">
-											<select class="input-text"
-													style="vertical-align:top;width: 100%;">
-												<option></option>
-											</select>
-										</c:if>
+										<select id="FIDENTIFICATIONREQUIREMENTS" name="FIDENTIFICATIONREQUIREMENTS" class="input-text"
+												style="vertical-align:top;width: 100%;">
+											<option></option>
+											<c:forEach items="${identificationrequirementsList}" varStatus="vs" var="var">
+												<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
+											</c:forEach>
+										</select>
 									</td>
 
 									<td style="width:6%;text-align: right;">
 										<label>物流:</label>
 									</td>
 									<td>
-										<c:if test="${msg == 'save'}">
-											<select class="input-text"
-													style="vertical-align:top;width: 100%;">
-												<option></option>
-												<c:forEach items="${logisticsList}" varStatus="vs" var="var">
-													<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
-												</c:forEach>
-											</select>
-										</c:if>
-
-										<c:if test="${msg == 'edit'}">
-											<select class="input-text"
-													style="vertical-align:top;width: 100%;">
-												<option></option>
-											</select>
-										</c:if>
+										<select id="FLOGISTICS" name="FLOGISTICS" class="input-text"
+												style="vertical-align:top;width: 100%;">
+											<option></option>
+											<c:forEach items="${logisticsList}" varStatus="vs" var="var">
+												<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
+											</c:forEach>
+										</select>
 									</td>
 								</tr>
 
@@ -306,14 +235,14 @@
 										<label>制单人:</label>
 									</td>
 									<td>
-										<input type="text" readonly style="width: 100%;" class="input-text" >
+										<input id="FORDERPERSONNAME" type="text" readonly style="width: 100%;" class="input-text" >
 									</td>
 
 									<td style="width:6%;text-align: right;">
 										<label>制单日期:</label>
 									</td>
 									<td>
-										<input id="FDATE" type="text" readonly style="width: 100%;" class="input-text">
+										<input id="FORDERTIME" name="FORDERTIME" type="text" readonly style="width: 100%;" class="input-text">
 									</td>
 								</tr>
 								</tbody>
@@ -412,16 +341,81 @@
 		<script type="text/javascript">
 		$(top.hangge());
 		//保存
-		/*function save(){
-			$("#Form").submit();
+		function save(){
+            /*if($("#FCUSTOMERID").val()==""){
+                $("#FCUSTOMERNAME").tips({
+                    side:3,
+                    msg:'请选择客户',
+                    bg:'#AE81FF',
+                    time:2
+                });
+                $("#FCUSTOMERNAME").focus();
+                return false;
+            }*/
+
+            if($("#FORDERDATE").val()==""){
+                $("#FORDERDATE").tips({
+                    side:3,
+                    msg:'请选择订单日期',
+                    bg:'#AE81FF',
+                    time:2
+                });
+                $("#FORDERDATE").focus();
+                return false;
+            }
+
+            /*if($("#FORDERTYPE").val()==""){
+                $("#FORDERTYPE").tips({
+                    side:3,
+                    msg:'请选择订单类型',
+                    bg:'#AE81FF',
+                    time:2
+                });
+                $("#FORDERTYPE").focus();
+                return false;
+            }*/
+
+            /*if($("#FSALESID").val()==""){
+                $("#FSALESNAME").tips({
+                    side:3,
+                    msg:'请选择业务员',
+                    bg:'#AE81FF',
+                    time:2
+                });
+                $("#FSALESNAME").focus();
+                return false;
+            }*/
+
+            if($("#FDELIVERYDATE").val()==""){
+                $("#FDELIVERYDATE").tips({
+                    side:3,
+                    msg:'请选择提货日期',
+                    bg:'#AE81FF',
+                    time:2
+                });
+                $("#FDELIVERYDATE").focus();
+                return false;
+            }
+
+            if($("#FCUSTOMERCREDIT").val()==""){
+                $("#FCUSTOMERCREDIT").tips({
+                    side:3,
+                    msg:'请选择客户信用',
+                    bg:'#AE81FF',
+                    time:2
+                });
+                $("#FCUSTOMERCREDIT").focus();
+                return false;
+            }
+			/*$("#Form").submit();
 			$("#zhongxin").hide();
-			$("#zhongxin2").show();
-		}*/
+			$("#zhongxin2").show();*/
+		}
 		
 		$(function() {
             week_init();
             if(${msg == 'save'}){
-                if($("#FDATE").val() == null || $("#FDATE").val() == ""){
+                if($("#FORDERTIME").val() == null || $("#FORDERTIME").val() == ""){
                     var myDate = new Date();
                     var year = myDate.getFullYear();
                     var month = myDate.getMonth()+1;
@@ -431,7 +425,7 @@
                     var hour = myDate.getHours() < 10 ? "0" + myDate.getHours() : myDate.getHours();
                     var minute = myDate.getMinutes() < 10 ? "0" + myDate.getMinutes() : myDate.getMinutes();
                     var second = myDate.getSeconds() < 10 ? "0" + myDate.getSeconds() : myDate.getSeconds();
-                    $("#FDATE").val(year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second);
+                    $("#FORDERTIME").val(year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second);
                 }
             }
 			//日期框

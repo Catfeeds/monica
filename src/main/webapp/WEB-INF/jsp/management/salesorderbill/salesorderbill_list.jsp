@@ -134,23 +134,31 @@
 												<label class="pos-rel"><input id="${var.SALESORDERBILL_ID}" type='checkbox' name='ids' value="${var.SALESORDERBILL_ID}" class="ace" /><span class="lbl"></span></label>
 											</td>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
-											<td class='center'>${var.FTEMPID}</td>
-											<td class='center'>${var.FBILLNO}</td>
-											<td class='center'>${var.FDATE}</td>
-											<td class='center'>${var.FDEPTID}</td>
-											<td class='center'>${var.FCONTACT}</td>
-											<td class='center'>${var.FTELEPHONE}</td>
-											<td class='center'>${var.FBILLERID}</td>
-											<td class='center'>${var.FDATE}</td>
-											<c:if test="${var.FSTATUS==0}">
-												<td class='center'>未提交</td>
-											</c:if>
-											<c:if test="${var.FSTATUS==1}">
-												<td class='center'>已提交</td>
-											</c:if>
-											<%--<td class='center'>${var.FCHECKERID}</td>
-											<td class='center'>${var.FCHECKDATE}</td>
-											<td class='center'>${var.FREMARK}</td>--%>
+											<td class='center'>${var.FCUSTOMERNAME}</td>
+											<td class='center'>${var.FORDERNUM}</td>
+											<td class='center'>${var.FORDERDATE}</td>
+											<td class='center'>${var.FSALESNAME}</td>
+											<td class='center'>${var.FORDERTYPENAME}</td>
+											<td class='center'>
+												<c:if test="${var.FORDERSTATUS == 0}">
+													草稿
+												</c:if>
+
+												<c:if test="${var.FORDERSTATUS == 1}">
+													审核
+												</c:if>
+											</td>
+											<td class='center'>
+												<c:if test="${var.FISSYNCHRONIZATION == 0}">
+													未同步
+												</c:if>
+
+												<c:if test="${var.FISSYNCHRONIZATION == 1}">
+													已同步
+												</c:if>
+											</td>
+											<td class='center'>${var.FVERSIONS}</td>
+											<td class='center'>${var.FNOTE}</td>
 										</tr>
 									
 									</c:forEach>

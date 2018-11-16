@@ -9,42 +9,58 @@
 	
 	<!-- 字段 -->
 	<sql id="Field">
-		FTEMPID,	
-		FBILLNO,	
-		FNEEDDATE,	
-		FDEPTID,	
-		FCONTACT,	
-		FTELEPHONE,	
-		FBILLERID,	
-		FDATE,	
-		FSTATUS,	
-		FCHECKERID,	
-		FCHECKDATE,	
-		FREMARK,
-		FSYNSTATUS,
-		FCLIENTID,
-		SALESORDERBILL_ID,
-		FCustID
+		FCUSTOMERID,	
+		FORDERNUM,	
+		FORDERDATE,	
+		FSALESID,	
+		FORDERTYPE,	
+		FORDERSTATUS,	
+		FISSYNCHRONIZATION,	
+		FVERSIONS,	
+		FNOTE,	
+		FDELIVERYDATE,	
+		FCUSTOMERCREDIT,	
+		FPACK,	
+		FCODESPURTING,	
+		FSPECIALREQUIREMENTS,	
+		FMIRRORBEHIND,	
+		FCUSTOMERINSPECTION,	
+		FGLUE,	
+		FARTICLE,	
+		FPAYMENTSCHEDULE,	
+		FIDENTIFICATIONREQUIREMENTS,	
+		FLOGISTICS,	
+		FORDERPERSON,	
+		FORDERTIME,	
+		SALESORDERBILL_ID
 	</sql>
 	
 	<!-- 字段值 -->
 	<sql id="FieldValue">
-		#{FTEMPID},	
-		#{FBILLNO},	
-		#{FNEEDDATE},	
-		#{FDEPTID},	
-		#{FCONTACT},	
-		#{FTELEPHONE},	
-		#{FBILLERID},	
-		#{FDATE},	
-		#{FSTATUS},	
-		#{FCHECKERID},	
-		#{FCHECKDATE},	
-		#{FREMARK},	
-		#{FSYNSTATUS},
-		#{FCLIENTID},
-		#{SALESORDERBILL_ID},
-		#{FCustID}
+		#{FCUSTOMERID},	
+		#{FORDERNUM},	
+		#{FORDERDATE},	
+		#{FSALESID},	
+		#{FORDERTYPE},	
+		#{FORDERSTATUS},	
+		#{FISSYNCHRONIZATION},	
+		#{FVERSIONS},	
+		#{FNOTE},	
+		#{FDELIVERYDATE},	
+		#{FCUSTOMERCREDIT},	
+		#{FPACK},	
+		#{FCODESPURTING},	
+		#{FSPECIALREQUIREMENTS},	
+		#{FMIRRORBEHIND},	
+		#{FCUSTOMERINSPECTION},	
+		#{FGLUE},	
+		#{FARTICLE},	
+		#{FPAYMENTSCHEDULE},	
+		#{FIDENTIFICATIONREQUIREMENTS},	
+		#{FLOGISTICS},	
+		#{FORDERPERSON},	
+		#{FORDERTIME},	
+		#{SALESORDERBILL_ID}
 	</sql>
 	
 	<!-- 新增-->
@@ -71,44 +87,30 @@
 		update
 		<include refid="tableName"></include>
 		set 
-			FTEMPID = #{FTEMPID},
-			FBILLNO = #{FBILLNO},
-			FNEEDDATE = #{FNEEDDATE},
-			FDEPTID = #{FDEPTID},
-			FCONTACT = #{FCONTACT},
-			FTELEPHONE = #{FTELEPHONE},
-			FBILLERID = #{FBILLERID},
-			FDATE = #{FDATE},
-			FSTATUS = #{FSTATUS},
-			FSYNSTATUS = #{FSYNSTATUS},
-			FCHECKERID = #{FCHECKERID},
-			FCHECKDATE = #{FCHECKDATE},
-			FREMARK = #{FREMARK},
-			FCLIENTID = #{FCLIENTID},
+			FCUSTOMERID = #{FCUSTOMERID},
+			FORDERNUM = #{FORDERNUM},
+			FORDERDATE = #{FORDERDATE},
+			FSALESID = #{FSALESID},
+			FORDERTYPE = #{FORDERTYPE},
+			FORDERSTATUS = #{FORDERSTATUS},
+			FISSYNCHRONIZATION = #{FISSYNCHRONIZATION},
+			FVERSIONS = #{FVERSIONS},
+			FNOTE = #{FNOTE},
+			FDELIVERYDATE = #{FDELIVERYDATE},
+			FCUSTOMERCREDIT = #{FCUSTOMERCREDIT},
+			FPACK = #{FPACK},
+			FCODESPURTING = #{FCODESPURTING},
+			FSPECIALREQUIREMENTS = #{FSPECIALREQUIREMENTS},
+			FMIRRORBEHIND = #{FMIRRORBEHIND},
+			FCUSTOMERINSPECTION = #{FCUSTOMERINSPECTION},
+			FGLUE = #{FGLUE},
+			FARTICLE = #{FARTICLE},
+			FPAYMENTSCHEDULE = #{FPAYMENTSCHEDULE},
+			FIDENTIFICATIONREQUIREMENTS = #{FIDENTIFICATIONREQUIREMENTS},
+			FLOGISTICS = #{FLOGISTICS},
+			FORDERPERSON = #{FORDERPERSON},
+			FORDERTIME = #{FORDERTIME},
 		SALESORDERBILL_ID = SALESORDERBILL_ID
-		where 
-		SALESORDERBILL_ID = #{SALESORDERBILL_ID}
-	</update>
-	
-	<!-- 修改 -->
-	<update id="editSomeOrder" parameterType="pd">
-		update
-		<include refid="tableName"></include>
-		set 
-			FSTATUS = 1
-		where 
-		SALESORDERBILL_ID in 
-		<foreach item="strArr" index="index" collection="array" open="(" separator="," close=")">
-                 #{strArr}
-		</foreach>
-	</update>
-	
-	<!-- 修改 -->
-	<update id="editOrderAndSum" parameterType="pd">
-		update
-		<include refid="tableName"></include>
-		set 
-			FSTATUS = #{FSTATUS}
 		where 
 		SALESORDERBILL_ID = #{SALESORDERBILL_ID}
 	</update>
@@ -142,89 +144,6 @@
 		</if>
 	</select>
 	
-	<!-- 未同步或未同步成功订单列表 -->
-	<select id="listNotSyn" parameterType="page" resultType="pd">
-		select
-		<include refid="Field"></include>
-		from 
-		<include refid="tableName"></include>
-		where FSYNSTATUS in (0,-1,-2) and FSTATUS = 1
-		
-	</select>
-	
-	<select id="list_withFtype" parameterType="page" resultType="pd">
-		<!--SELECT
-		s.SALESORDERBILL_ID as SALESORDERBILL_ID, s.FBILLNO as FBILLNO ,
-		s.FDEPTID as FDEPTID,s.FDATE as FDATE,s.FSTATUS as FSTATUS,o.FTYPE as FTYPE,s.FSYNSTATUS as FSYNSTATUS
- 		from 
- 		TB_SALESORDERBILL s LEFT JOIN TB_SOTEMPLATE o ON s.FTEMPID = o.SOTEMPLATE_ID 
- 		where CONVERT(VARCHAR(10),s.FDATE,120) =  #{pd.FDATE} -->
- 		SELECT
-		s.SALESORDERBILL_ID as SALESORDERBILL_ID, s.FBILLNO as FBILLNO ,
-		s.FDEPTID as FDEPTID,s.FDATE as FDATE,s.FSTATUS as FSTATUS,o.FTYPE as FTYPE,s.FSYNSTATUS as FSYNSTATUS
- 		from
- 		TB_SALESORDERBILL s LEFT JOIN TB_SOTEMPLATE o ON s.FTEMPID = o.SOTEMPLATE_ID
- 		where CONVERT(VARCHAR(10),s.FDATE,120) =  #{pd.FDATE}
-		AND s.FTEMPID IN (
-		SELECT SOTEMPLATE_ID from TB_SOTEMPLATE t LEFT JOIN TB_ERP_DEP e ON t.FDEPTID = e.FITEMID
-		WHERE SOTEMPLATE_ID in
-				(SELECT SOTEMPLATE_ID from TB_SOTEMPPERMISSION WHERE QYWXUSER_ID IN
-				(SELECT QYWXUSER_ID from TB_QYWXUSER WHERE USERID = #{pd.USERID}))
-		)
-		GROUP BY s.FBILLNO, s.SALESORDERBILL_ID,
-		s.FDEPTID ,s.FDATE,s.FSTATUS ,o.FTYPE ,s.FSYNSTATUS
-		ORDER BY s.FBILLNO DESC
-	</select>
-
-	<select id="list_OrderCount" parameterType="page" resultType="pd">
-		SELECT COUNT(FDATE) as count from TB_SALESORDERBILL where CONVERT(VARCHAR(10),FDATE,120) LIKE  #{pd.FDATE} +'%'
-		<if test="pd.FSTATUS!= null and pd.FSTATUS != ''"><!-- 关键词检索 -->
-			  and FSTATUS = #{pd.FSTATUS}
-		</if>
-	</select>
-
-	<select id="list_ClientOrderCount" parameterType="page" resultType="pd">
-		SELECT COUNT(s.FCLIENTID) as value,c.FNAME as name from
-		TB_SALESORDERBILL s LEFT JOIN TB_CLIENT c ON s.FCLIENTID = c.FITEMID
-		where CONVERT(VARCHAR(10),s.FDATE,120) LIKE  #{pd.FDATE} +'%'
-		GROUP BY s.FCLIENTID ,c.FNAME
-	</select>
-
-
-	<select id="list_HisDate" parameterType="page" resultType="pd">
-		SELECT
-		s.SALESORDERBILL_ID as SALESORDERBILL_ID, s.FBILLNO as FBILLNO ,
-		s.FDEPTID as FDEPTID,s.FDATE as FDATE,s.FSTATUS as FSTATUS,o.FTYPE as FTYPE,s.FSYNSTATUS as FSYNSTATUS
- 		from
- 		TB_SALESORDERBILL s LEFT JOIN TB_SOTEMPLATE o ON s.FTEMPID = o.SOTEMPLATE_ID
-		where CONVERT(VARCHAR(10),s.FDATE,120) BETWEEN #{pd.date} AND #{pd.date1}
-		AND s.FTEMPID IN (
-		SELECT SOTEMPLATE_ID from TB_SOTEMPLATE t LEFT JOIN TB_ERP_DEP e ON t.FDEPTID = e.FITEMID
-		WHERE SOTEMPLATE_ID in
-				(SELECT SOTEMPLATE_ID from TB_SOTEMPPERMISSION WHERE QYWXUSER_ID IN
-				(SELECT QYWXUSER_ID from TB_QYWXUSER WHERE USERID = #{pd.USERID}))
-		)
-		GROUP BY s.FBILLNO, s.SALESORDERBILL_ID,
-		s.FDEPTID ,s.FDATE,s.FSTATUS ,o.FTYPE ,s.FSYNSTATUS
-		ORDER BY s.FBILLNO DESC
-		<!--SELECT
-		s.SALESORDERBILL_ID as SALESORDERBILL_ID, s.FBILLNO as FBILLNO ,
-		s.FDEPTID as FDEPTID,s.FDATE as FDATE,s.FSTATUS as FSTATUS,o.FTYPE as FTYPE,s.FSYNSTATUS as FSYNSTATUS
- 		from 
- 		TB_SALESORDERBILL s LEFT JOIN TB_SOTEMPLATE o ON s.FTEMPID = o.SOTEMPLATE_ID 
- 		where CONVERT(VARCHAR(10),s.FDATE,120) BETWEEN #{pd.date} AND #{pd.date1} -->
-	</select>
-	
-	<select id="list_withSALESORDERBILL_ID" parameterType="pd" resultType="pd">
-		SELECT 
-		s.SALESORDERBILL_ID as SALESORDERBILL_ID, s.FBILLNO as FBILLNO ,
-		s.FDEPTID as FDEPTID,s.FDATE as FDATE,s.FSTATUS as FSTATUS,o.FTYPE as FTYPE
- 		from 
- 		TB_SALESORDERBILL s LEFT JOIN TB_SOTEMPLATE o ON s.FTEMPID = o.SOTEMPLATE_ID 
- 		where s.SALESORDERBILL_ID = #{SALESORDERBILL_ID}
-	</select>
-	
-	
 	<!-- 列表(全部) -->
 	<select id="listAll" parameterType="pd" resultType="pd">
 		select
@@ -244,5 +163,4 @@
 		</foreach>
 	</delete>
 	
-	<!-- fh313596790qq(青苔) -->
 </mapper>
