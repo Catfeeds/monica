@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
+
+import com.fh.service.system.dictionaries.DictionariesManager;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -41,6 +43,9 @@ public class SalesOrderBillController extends BaseController {
 	
 	@Resource(name="salesorderbillentryService")
 	private SalesOrderBillEntryManager salesorderbillentryService;
+
+    @Resource(name="dictionariesService")
+    private DictionariesManager dictionariesService;
 	
 	/**保存
 	 * @param
@@ -126,7 +131,39 @@ public class SalesOrderBillController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		mv.setViewName("management/salesorderbill/salesorderbill_edit");
+		pd.put("PNAME","包装");
+		List<PageData> packList = dictionariesService.listByParentName(pd);
+        mv.addObject("packList", packList);
+
+        pd.put("PNAME","喷码");
+        List<PageData> codeSpurtingList = dictionariesService.listByParentName(pd);
+        mv.addObject("codeSpurtingList", codeSpurtingList);
+
+        pd.put("PNAME","镜面抛");
+        List<PageData> mirrorbehindList = dictionariesService.listByParentName(pd);
+        mv.addObject("mirrorbehindList", mirrorbehindList);
+
+        pd.put("PNAME","客户验货");
+        List<PageData> customerinspectionList = dictionariesService.listByParentName(pd);
+        mv.addObject("customerinspectionList", customerinspectionList);
+
+        pd.put("PNAME","胶水");
+        List<PageData> glueList = dictionariesService.listByParentName(pd);
+        mv.addObject("glueList", glueList);
+
+        pd.put("PNAME","跟柜物品");
+        List<PageData> articleList = dictionariesService.listByParentName(pd);
+        mv.addObject("articleList", articleList);
+
+        pd.put("PNAME","标识要求");
+        List<PageData> identificationrequirementsList = dictionariesService.listByParentName(pd);
+        mv.addObject("identificationrequirementsList", identificationrequirementsList);
+
+        pd.put("PNAME","物流");
+        List<PageData> logisticsList = dictionariesService.listByParentName(pd);
+        mv.addObject("logisticsList", logisticsList);
+
+        mv.setViewName("management/salesorderbill/salesorderbill_edit");
 		mv.addObject("msg", "save");
 		mv.addObject("pd", pd);
 		return mv;

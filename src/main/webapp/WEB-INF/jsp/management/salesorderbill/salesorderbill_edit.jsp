@@ -40,21 +40,23 @@
 										<label>订单编号<span style="color: red;">*</span>:</label>
 									</td>
 									<td>
-										<input type="text" readonly style="width: 100%" class="input-text" >
+										<input type="text" readonly style="width: 100%;" class="input-text" >
 									</td>
 
 									<td style="width:6%;text-align: right;">
 										<label>客户名称<span style="color: red;">*</span>:</label>
 									</td>
 									<td>
-										<input type="text" style="width: 100%" class="input-text">
+										<input type="text" onclick="toCus()" style="width: 100%;cursor: pointer;
+													background: url(static/images/search.png) no-repeat;background-size: 20px 20px;
+													background-position:right;background-color: #FFFFFF;" class="input-text">
 									</td>
 
 									<td style="width:6%;text-align: right;">
 										<label>订单日期<span style="color: red;">*</span>:</label>
 									</td>
 									<td>
-										<input type="date" style="width: 100%" class="input-text">
+										<input type="date" style="width: 100%;" class="input-text">
 									</td>
 								</tr>
 
@@ -73,14 +75,16 @@
 										<label>业务代表<span style="color: red;">*</span>:</label>
 									</td>
 									<td>
-										<input type="text" style="width: 100%" class="input-text">
+										<input type="text" onclick="toSales()" style="width: 100%;cursor: pointer;
+													background: url(static/images/search.png) no-repeat;background-size: 20px 20px;
+													background-position:right;background-color: #FFFFFF;" class="input-text">
 									</td>
 
 									<td style="width:6%;text-align: right;">
 										<label>提货日期<span style="color: red;">*</span>:</label>
 									</td>
 									<td>
-										<input type="date" style="width: 100%" class="input-text">
+										<input type="date" style="width: 100%;" class="input-text">
 									</td>
 								</tr>
 								<tr>
@@ -88,7 +92,7 @@
 										<label>客户信用<span style="color: red;">*</span>:</label>
 									</td>
 									<td>
-										<input type="date" style="width: 100%" class="input-text">
+										<input type="date" style="width: 100%;" class="input-text">
 									</td>
 
 									<td style="width:6%;text-align: right;">
@@ -104,20 +108,44 @@
 										<label>包装:</label>
 									</td>
 									<td>
-										<select class="input-text"
-												style="vertical-align:top;width: 100%;">
-											<option></option>
-										</select>
+										<c:if test="${msg == 'save'}">
+											<select class="input-text"
+													style="vertical-align:top;width: 100%;">
+												<option></option>
+												<c:forEach items="${packList}" varStatus="vs" var="var">
+													<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
+												</c:forEach>
+											</select>
+										</c:if>
+
+										<c:if test="${msg == 'edit'}">
+											<select class="input-text"
+													style="vertical-align:top;width: 100%;">
+												<option></option>
+											</select>
+										</c:if>
 									</td>
 
 									<td style="width:6%;text-align: right;">
 										<label>喷码:</label>
 									</td>
 									<td>
-										<select class="input-text"
-												style="vertical-align:top;width: 100%;">
-											<option></option>
-										</select>
+										<c:if test="${msg == 'save'}">
+											<select class="input-text"
+													style="vertical-align:top;width: 100%;">
+												<option></option>
+												<c:forEach items="${codeSpurtingList}" varStatus="vs" var="var">
+													<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
+												</c:forEach>
+											</select>
+										</c:if>
+
+										<c:if test="${msg == 'edit'}">
+											<select class="input-text"
+													style="vertical-align:top;width: 100%;">
+												<option></option>
+											</select>
+										</c:if>
 									</td>
 
 									<td rowspan="2" style="width:6%;text-align: center;">
@@ -133,20 +161,44 @@
 										<label>镜面抛:</label>
 									</td>
 									<td>
-										<select class="input-text"
-												style="vertical-align:top;width: 100%;">
-											<option></option>
-										</select>
+										<c:if test="${msg == 'save'}">
+											<select class="input-text"
+													style="vertical-align:top;width: 100%;">
+												<option></option>
+												<c:forEach items="${mirrorbehindList}" varStatus="vs" var="var">
+													<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
+												</c:forEach>
+											</select>
+										</c:if>
+
+										<c:if test="${msg == 'edit'}">
+											<select class="input-text"
+													style="vertical-align:top;width: 100%;">
+												<option></option>
+											</select>
+										</c:if>
 									</td>
 
 									<td style="width:6%;text-align: right;">
 										<label>客户验货:</label>
 									</td>
 									<td>
-										<select class="input-text"
-												style="vertical-align:top;width: 100%;">
-											<option></option>
-										</select>
+										<c:if test="${msg == 'save'}">
+											<select class="input-text"
+													style="vertical-align:top;width: 100%;">
+												<option></option>
+												<c:forEach items="${customerinspectionList}" varStatus="vs" var="var">
+													<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
+												</c:forEach>
+											</select>
+										</c:if>
+
+										<c:if test="${msg == 'edit'}">
+											<select class="input-text"
+													style="vertical-align:top;width: 100%;">
+												<option></option>
+											</select>
+										</c:if>
 									</td>
 								</tr>
 
@@ -155,20 +207,44 @@
 										<label>胶水:</label>
 									</td>
 									<td>
-										<select class="input-text"
-												style="vertical-align:top;width: 100%;">
-											<option></option>
-										</select>
+										<c:if test="${msg == 'save'}">
+											<select class="input-text"
+													style="vertical-align:top;width: 100%;">
+												<option></option>
+												<c:forEach items="${glueList}" varStatus="vs" var="var">
+													<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
+												</c:forEach>
+											</select>
+										</c:if>
+
+										<c:if test="${msg == 'edit'}">
+											<select class="input-text"
+													style="vertical-align:top;width: 100%;">
+												<option></option>
+											</select>
+										</c:if>
 									</td>
 
 									<td style="width:6%;text-align: right;">
 										<label>跟柜物品:</label>
 									</td>
 									<td>
-										<select class="input-text"
-												style="vertical-align:top;width: 100%;">
-											<option></option>
-										</select>
+										<c:if test="${msg == 'save'}">
+											<select class="input-text"
+													style="vertical-align:top;width: 100%;">
+												<option></option>
+												<c:forEach items="${articleList}" varStatus="vs" var="var">
+													<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
+												</c:forEach>
+											</select>
+										</c:if>
+
+										<c:if test="${msg == 'edit'}">
+											<select class="input-text"
+													style="vertical-align:top;width: 100%;">
+												<option></option>
+											</select>
+										</c:if>
 									</td>
 
 									<td rowspan="2" style="width:6%;text-align: center;">
@@ -184,20 +260,44 @@
 										<label>标识要求:</label>
 									</td>
 									<td>
-										<select class="input-text"
-												style="vertical-align:top;width: 100%;">
-											<option></option>
-										</select>
+										<c:if test="${msg == 'save'}">
+											<select class="input-text"
+													style="vertical-align:top;width: 100%;">
+												<option></option>
+												<c:forEach items="${identificationrequirementsList}" varStatus="vs" var="var">
+													<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
+												</c:forEach>
+											</select>
+										</c:if>
+
+										<c:if test="${msg == 'edit'}">
+											<select class="input-text"
+													style="vertical-align:top;width: 100%;">
+												<option></option>
+											</select>
+										</c:if>
 									</td>
 
 									<td style="width:6%;text-align: right;">
 										<label>物流:</label>
 									</td>
 									<td>
-										<select class="input-text"
-												style="vertical-align:top;width: 100%;">
-											<option></option>
-										</select>
+										<c:if test="${msg == 'save'}">
+											<select class="input-text"
+													style="vertical-align:top;width: 100%;">
+												<option></option>
+												<c:forEach items="${logisticsList}" varStatus="vs" var="var">
+													<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
+												</c:forEach>
+											</select>
+										</c:if>
+
+										<c:if test="${msg == 'edit'}">
+											<select class="input-text"
+													style="vertical-align:top;width: 100%;">
+												<option></option>
+											</select>
+										</c:if>
 									</td>
 								</tr>
 
@@ -206,14 +306,14 @@
 										<label>制单人:</label>
 									</td>
 									<td>
-										<input type="text" readonly style="width: 100%" class="input-text" >
+										<input type="text" readonly style="width: 100%;" class="input-text" >
 									</td>
 
 									<td style="width:6%;text-align: right;">
 										<label>制单日期:</label>
 									</td>
 									<td>
-										<input type="date" readonly style="width: 100%" class="input-text">
+										<input id="FDATE" type="text" readonly style="width: 100%;" class="input-text">
 									</td>
 								</tr>
 								</tbody>
@@ -320,6 +420,20 @@
 		
 		$(function() {
             week_init();
+            if(${msg == 'save'}){
+                if($("#FDATE").val() == null || $("#FDATE").val() == ""){
+                    var myDate = new Date();
+                    var year = myDate.getFullYear();
+                    var month = myDate.getMonth()+1;
+                    month = month < 10 ? '0' + month : month
+                    var day = myDate.getDate();
+                    day = day < 10 ? ('0' + day) : day;
+                    var hour = myDate.getHours() < 10 ? "0" + myDate.getHours() : myDate.getHours();
+                    var minute = myDate.getMinutes() < 10 ? "0" + myDate.getMinutes() : myDate.getMinutes();
+                    var second = myDate.getSeconds() < 10 ? "0" + myDate.getSeconds() : myDate.getSeconds();
+                    $("#FDATE").val(year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second);
+                }
+            }
 			//日期框
 			$('.date-picker').datepicker({autoclose: true,todayHighlight: true});
 		});
