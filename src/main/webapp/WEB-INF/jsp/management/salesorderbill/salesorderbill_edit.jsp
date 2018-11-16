@@ -16,6 +16,7 @@
 	<%@ include file="../../system/index/top.jsp"%>
 	<!-- 日期框 -->
 	<link rel="stylesheet" href="static/ace/css/datepicker.css" />
+	<link rel="stylesheet" href="static/css/fo.css" />
 </head>
 <body class="no-skin">
 <!-- /section:basics/navbar.layout -->
@@ -30,61 +31,192 @@
 					<form action="salesorderbill/${msg }.do" name="Form" id="Form" method="post">
 						<input type="hidden" name="SALESORDERBILL_ID" id="SALESORDERBILL_ID" value="${pd.SALESORDERBILL_ID}"/>
 						<div id="zhongxin" style="padding-top: 13px;">
-						<table id="table_report" class="table table-striped table-bordered table-hover">
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">模板id:</td>
-								<td><input type="text" name="FTEMPID" id="FTEMPID" value="${pd.FTEMPID}" maxlength="255" placeholder="这里输入模板id" title="模板id" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">订单编号:</td>
-								<td><input type="text" name="FBILLNO" id="FBILLNO" value="${pd.FBILLNO}" maxlength="255" placeholder="这里输入订单编号" title="订单编号" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">要求发货日期:</td>
-								<td><input type="text" name="FNEEDDATE" id="FNEEDDATE" value="${pd.FNEEDDATE}" maxlength="255" placeholder="这里输入要求发货日期" title="要求发货日期" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">部门ID:</td>
-								<td><input type="number" name="FDEPTID" id="FDEPTID" value="${pd.FDEPTID}" maxlength="32" placeholder="这里输入部门ID" title="部门ID" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">联络人:</td>
-								<td><input type="text" name="FCONTACT" id="FCONTACT" value="${pd.FCONTACT}" maxlength="255" placeholder="这里输入联络人" title="联络人" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">联系电话:</td>
-								<td><input type="text" name="FTELEPHONE" id="FTELEPHONE" value="${pd.FTELEPHONE}" maxlength="255" placeholder="这里输入联系电话" title="联系电话" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">制作人ID:</td>
-								<td><input type="text" name="FBILLERID" id="FBILLERID" value="${pd.FBILLERID}" maxlength="255" placeholder="这里输入制作人ID" title="制作人ID" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">制作日期:</td>
-								<td><input type="text" name="FDATE" id="FDATE" value="${pd.FDATE}" maxlength="255" placeholder="这里输入制作日期" title="制作日期" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">状态:</td>
-								<td><input type="text" name="FSTATUS" id="FSTATUS" value="${pd.FSTATUS}" maxlength="255" placeholder="这里输入状态" title="状态" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">审核人ID:</td>
-								<td><input type="text" name="FCHECKERID" id="FCHECKERID" value="${pd.FCHECKERID}" maxlength="255" placeholder="这里输入审核人ID" title="审核人ID" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">审核日期:</td>
-								<td><input type="text" name="FCHECKDATE" id="FCHECKDATE" value="${pd.FCHECKDATE}" maxlength="255" placeholder="这里输入审核日期" title="审核日期" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">备注:</td>
-								<td><input type="text" name="FREMARK" id="FREMARK" value="${pd.FREMARK}" maxlength="255" placeholder="这里输入备注" title="备注" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="text-align: center;" colspan="10">
-									<a class="btn btn-mini btn-primary" onclick="save();">保存</a>
-									<a class="btn btn-mini btn-danger" onclick="top.Dialog.close();">取消</a>
-								</td>
-							</tr>
+						<%--<table id="table_report" class="table table-striped table-bordered table-hover">
+						</table>--%>
+							<table style="border-collapse:separate; border-spacing:10px;width: 100%;padding-left: 1%">
+								<tbody>
+								<tr>
+									<td style="width:6%;text-align: right;">
+										<label>订单编号<span style="color: red;">*</span>:</label>
+									</td>
+									<td>
+										<input type="text" readonly style="width: 100%" class="input-text" >
+									</td>
+
+									<td style="width:6%;text-align: right;">
+										<label>客户名称<span style="color: red;">*</span>:</label>
+									</td>
+									<td>
+										<input type="text" style="width: 100%" class="input-text">
+									</td>
+
+									<td style="width:6%;text-align: right;">
+										<label>订单日期<span style="color: red;">*</span>:</label>
+									</td>
+									<td>
+										<input type="date" style="width: 100%" class="input-text">
+									</td>
+								</tr>
+
+								<tr>
+									<td style="width:6%;text-align: right;">
+										<label>订单类型<span style="color:red;">*</span>:</label>
+									</td>
+									<td>
+										<select class="input-text"
+												style="vertical-align:top;width: 100%;">
+											<option></option>
+										</select>
+									</td>
+
+									<td style="width:6%;text-align: right;">
+										<label>业务代表<span style="color: red;">*</span>:</label>
+									</td>
+									<td>
+										<input type="text" style="width: 100%" class="input-text">
+									</td>
+
+									<td style="width:6%;text-align: right;">
+										<label>提货日期<span style="color: red;">*</span>:</label>
+									</td>
+									<td>
+										<input type="date" style="width: 100%" class="input-text">
+									</td>
+								</tr>
+								<tr>
+									<td style="width:6%;text-align: right;">
+										<label>客户信用<span style="color: red;">*</span>:</label>
+									</td>
+									<td>
+										<input type="date" style="width: 100%" class="input-text">
+									</td>
+
+									<td style="width:6%;text-align: right;">
+										<label>订单备注:</label>
+									</td>
+									<td colspan="3">
+										<textarea style="width: 100%;resize: none;" class="input-text" type="text"></textarea>
+									</td>
+								</tr>
+
+								<tr>
+									<td style="width:6%;text-align: right;">
+										<label>包装:</label>
+									</td>
+									<td>
+										<select class="input-text"
+												style="vertical-align:top;width: 100%;">
+											<option></option>
+										</select>
+									</td>
+
+									<td style="width:6%;text-align: right;">
+										<label>喷码:</label>
+									</td>
+									<td>
+										<select class="input-text"
+												style="vertical-align:top;width: 100%;">
+											<option></option>
+										</select>
+									</td>
+
+									<td rowspan="2" style="width:6%;text-align: center;">
+										<label>其它特殊要求:</label>
+									</td>
+									<td rowspan="2">
+										<textarea style="width: 100%;height:100%;resize: none;" class="input-text" type="text"></textarea>
+									</td>
+								</tr>
+
+								<tr>
+									<td style="width:6%;text-align: right;">
+										<label>镜面抛:</label>
+									</td>
+									<td>
+										<select class="input-text"
+												style="vertical-align:top;width: 100%;">
+											<option></option>
+										</select>
+									</td>
+
+									<td style="width:6%;text-align: right;">
+										<label>客户验货:</label>
+									</td>
+									<td>
+										<select class="input-text"
+												style="vertical-align:top;width: 100%;">
+											<option></option>
+										</select>
+									</td>
+								</tr>
+
+								<tr>
+									<td style="width:6%;text-align: right;">
+										<label>胶水:</label>
+									</td>
+									<td>
+										<select class="input-text"
+												style="vertical-align:top;width: 100%;">
+											<option></option>
+										</select>
+									</td>
+
+									<td style="width:6%;text-align: right;">
+										<label>跟柜物品:</label>
+									</td>
+									<td>
+										<select class="input-text"
+												style="vertical-align:top;width: 100%;">
+											<option></option>
+										</select>
+									</td>
+
+									<td rowspan="2" style="width:6%;text-align: center;">
+										<label>付款计划:</label>
+									</td>
+									<td rowspan="2">
+										<textarea style="width: 100%;height:100%;resize: none;" class="input-text" type="text"></textarea>
+									</td>
+								</tr>
+
+								<tr>
+									<td style="width:6%;text-align: right;">
+										<label>标识要求:</label>
+									</td>
+									<td>
+										<select class="input-text"
+												style="vertical-align:top;width: 100%;">
+											<option></option>
+										</select>
+									</td>
+
+									<td style="width:6%;text-align: right;">
+										<label>物流:</label>
+									</td>
+									<td>
+										<select class="input-text"
+												style="vertical-align:top;width: 100%;">
+											<option></option>
+										</select>
+									</td>
+								</tr>
+
+								<tr>
+									<td style="width:6%;text-align: right;">
+										<label>制单人:</label>
+									</td>
+									<td>
+										<input type="text" readonly style="width: 100%" class="input-text" >
+									</td>
+
+									<td style="width:6%;text-align: right;">
+										<label>制单日期:</label>
+									</td>
+									<td>
+										<input type="date" readonly style="width: 100%" class="input-text">
+									</td>
+								</tr>
+								</tbody>
 						</table>
 						</div>
 						<div id="zhongxin2" class="center" style="display:none"><br/><br/><br/><br/><br/><img src="static/images/jiazai.gif" /><br/><h4 class="lighter block green">提交中...</h4></div>
@@ -101,6 +233,73 @@
 </div>
 <!-- /.main-container -->
 
+<div style="margin-bottom: 0px" class="weeks">
+	<ul style="margin-left: 0px;margin-bottom: 0px" class="weekItem" id="weektab">
+		<li>订单明细</li>
+		<li>变更日志</li>
+	</ul>
+	<div class="box01_c" id="spmx">
+		<a style="margin-left: 10px" class="btn btn-success btn-xs">
+			<i class="ace-icon fa glyphicon-plus bigger-110 nav-search-icon yellow"></i>新增
+		</a>
+		<a class="btn btn-primary  btn-xs">
+			<i class="ace-icon fa fa-trash-o bigger-120 nav-search-icon "></i>删除
+		</a>
+		<table id="taspmx" class="table table-striped table-bordered table-hover"
+			   style="margin-top:5px;">
+			<tr>
+				<th style="width: 35px" class="center"></th>
+				<th style="width: 50px;" class="center">序号</th>
+				<th class="center">产品编号</th>
+				<th class="center">产品名称</th>
+				<th class="center">规格型号</th>
+				<th class="center">计量单位</th>
+				<th class="center">数量</th>
+				<th class="center">单价</th>
+				<th class="center">金额</th>
+				<th class="center">备注</th>
+			</tr>
+			<tr id="trspmx">
+			</tr>
+		</table>
+	</div>
+	<div class="box01_c" style="display: none" id="xmtd">
+		<table id="taxmtd" class="table table-striped table-bordered table-hover" style="margin-top:5px;">
+			<tr>
+				<th style="width: 35px" class="center"></th>
+				<th style="width: 50px;" class="center">序号</th>
+				<th class="center">变更日期</th>
+				<th class="center">变更人</th>
+				<th class="center">变更后版本</th>
+				<th class="center">备注</th>
+			</tr>
+			<tr id="trxmtd">
+			</tr>
+		</table>
+	</div>
+</div>
+
+<br><br>
+
+<div style="text-align: right;height:45px;
+		background: url(static/login/images/topbg.png) repeat-x; position:fixed;width: 100%;z-index:10000000;bottom: 0px;";>
+	<a style="margin-top: 10px;" class="btn btn-light btn-xs">
+		<i class="ace-icon glyphicon glyphicon-ok bigger-110 nav-search-icon green"></i>审核
+	</a>
+
+	<a style="margin-top: 10px;" class="btn btn-light btn-xs">
+		<i class="ace-icon glyphicon glyphicon-edit bigger-110 nav-search-icon blue"></i>变更
+	</a>
+
+	<a style="margin-top: 10px;" class="btn btn-light btn-xs" onclick="save()">
+		<i class="ace-icon fa fa-credit-card bigger-110 nav-search-icon green"></i>保存
+	</a>
+
+	<a style="margin-top: 10px;margin-right: 10px;" class="btn btn-light btn-xs" onclick="top.Dialog.close();">
+		<i class="ace-icon fa  fa-external-link bigger-110 nav-search-icon red"></i>取消
+	</a>
+</div>
+
 
 	<!-- 页面底部js¨ -->
 	<%@ include file="../../system/index/foot.jsp"%>
@@ -113,136 +312,41 @@
 		<script type="text/javascript">
 		$(top.hangge());
 		//保存
-		function save(){
-			if($("#FTEMPID").val()==""){
-				$("#FTEMPID").tips({
-					side:3,
-		            msg:'请输入模板id',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#FTEMPID").focus();
-			return false;
-			}
-			if($("#FBILLNO").val()==""){
-				$("#FBILLNO").tips({
-					side:3,
-		            msg:'请输入订单编号',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#FBILLNO").focus();
-			return false;
-			}
-			if($("#FNEEDDATE").val()==""){
-				$("#FNEEDDATE").tips({
-					side:3,
-		            msg:'请输入要求发货日期',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#FNEEDDATE").focus();
-			return false;
-			}
-			if($("#FDEPTID").val()==""){
-				$("#FDEPTID").tips({
-					side:3,
-		            msg:'请输入部门ID',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#FDEPTID").focus();
-			return false;
-			}
-			if($("#FCONTACT").val()==""){
-				$("#FCONTACT").tips({
-					side:3,
-		            msg:'请输入联络人',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#FCONTACT").focus();
-			return false;
-			}
-			if($("#FTELEPHONE").val()==""){
-				$("#FTELEPHONE").tips({
-					side:3,
-		            msg:'请输入联系电话',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#FTELEPHONE").focus();
-			return false;
-			}
-			if($("#FBILLERID").val()==""){
-				$("#FBILLERID").tips({
-					side:3,
-		            msg:'请输入制作人ID',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#FBILLERID").focus();
-			return false;
-			}
-			if($("#FDATE").val()==""){
-				$("#FDATE").tips({
-					side:3,
-		            msg:'请输入制作日期',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#FDATE").focus();
-			return false;
-			}
-			if($("#FSTATUS").val()==""){
-				$("#FSTATUS").tips({
-					side:3,
-		            msg:'请输入状态',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#FSTATUS").focus();
-			return false;
-			}
-			if($("#FCHECKERID").val()==""){
-				$("#FCHECKERID").tips({
-					side:3,
-		            msg:'请输入审核人ID',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#FCHECKERID").focus();
-			return false;
-			}
-			if($("#FCHECKDATE").val()==""){
-				$("#FCHECKDATE").tips({
-					side:3,
-		            msg:'请输入审核日期',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#FCHECKDATE").focus();
-			return false;
-			}
-			if($("#FREMARK").val()==""){
-				$("#FREMARK").tips({
-					side:3,
-		            msg:'请输入备注',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#FREMARK").focus();
-			return false;
-			}
+		/*function save(){
 			$("#Form").submit();
 			$("#zhongxin").hide();
 			$("#zhongxin2").show();
-		}
+		}*/
 		
 		$(function() {
+            week_init();
 			//日期框
 			$('.date-picker').datepicker({autoclose: true,todayHighlight: true});
 		});
+
+        function week_init() {
+            $("#weektab li").each(function (i) {
+                $(this).click(function () {
+                    week_click(i);
+                }).hover(function () {
+                    $(this).addClass('hover');
+                }, function (event) {
+                    $(this).removeClass('hover');
+                });
+            });
+            week_click('0');
+            //$("#weekcon dl:last").css({"padding-bottom":"0","margin-bottom":"10px"});
+        }
+        function week_click(num) {
+            if (num == "0") {
+                $("#spmx").css("display", "");
+                $("#xmtd").css("display", "none");
+            } else if (num == "1") {
+                $("#spmx").css("display", "none");
+                $("#xmtd").css("display", "");
+            }
+            $("#weektab li").removeClass('on').eq(num).addClass('on');
+        }
 		</script>
 </body>
 </html>
