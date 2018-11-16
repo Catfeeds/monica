@@ -54,7 +54,15 @@ public class SalesOrderBillController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		/* TODO 仅测试数据 需重新调整 */
+		pd.put("FCUSTOMERID",this.get32UUID());
+		pd.put("FORDERNUM","模拟订单编号");
+		pd.put("FORDERTYPE",this.get32UUID());
+		pd.put("FSALESID",this.get32UUID());
+		pd.put("FORDERPERSON",this.get32UUID());
 		pd.put("SALESORDERBILL_ID", this.get32UUID());	//主键
+		pd.put("FORDERSTATUS",0);
+		pd.put("FISSYNCHRONIZATION",0);
 		salesorderbillService.save(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
@@ -87,6 +95,8 @@ public class SalesOrderBillController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		pd.put("FORDERSTATUS",0);
+		pd.put("FISSYNCHRONIZATION",0);
 		salesorderbillService.edit(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
@@ -126,6 +136,10 @@ public class SalesOrderBillController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		pd.put("PNAME","订单类型");
+		List<PageData> orderTypeList = dictionariesService.listByParentName(pd);
+		mv.addObject("orderTypeList", orderTypeList);
+
 		pd.put("PNAME","包装");
 		List<PageData> packList = dictionariesService.listByParentName(pd);
 		mv.addObject("packList", packList);
@@ -174,6 +188,42 @@ public class SalesOrderBillController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		pd = salesorderbillService.findById(pd);	//根据ID读取
+		/* TODO 处理订单类型 */
+		pd.put("PNAME","订单类型");
+		List<PageData> orderTypeList = dictionariesService.listByParentName(pd);
+		mv.addObject("orderTypeList", orderTypeList);
+
+		pd.put("PNAME","包装");
+		List<PageData> packList = dictionariesService.listByParentName(pd);
+		mv.addObject("packList", packList);
+
+		pd.put("PNAME","喷码");
+		List<PageData> codeSpurtingList = dictionariesService.listByParentName(pd);
+		mv.addObject("codeSpurtingList", codeSpurtingList);
+
+		pd.put("PNAME","镜面抛");
+		List<PageData> mirrorbehindList = dictionariesService.listByParentName(pd);
+		mv.addObject("mirrorbehindList", mirrorbehindList);
+
+		pd.put("PNAME","客户验货");
+		List<PageData> customerinspectionList = dictionariesService.listByParentName(pd);
+		mv.addObject("customerinspectionList", customerinspectionList);
+
+		pd.put("PNAME","胶水");
+		List<PageData> glueList = dictionariesService.listByParentName(pd);
+		mv.addObject("glueList", glueList);
+
+		pd.put("PNAME","跟柜物品");
+		List<PageData> articleList = dictionariesService.listByParentName(pd);
+		mv.addObject("articleList", articleList);
+
+		pd.put("PNAME","标识要求");
+		List<PageData> identificationrequirementsList = dictionariesService.listByParentName(pd);
+		mv.addObject("identificationrequirementsList", identificationrequirementsList);
+
+		pd.put("PNAME","物流");
+		List<PageData> logisticsList = dictionariesService.listByParentName(pd);
+		mv.addObject("logisticsList", logisticsList);
 		mv.setViewName("management/salesorderbill/salesorderbill_edit");
 		mv.addObject("msg", "edit");
 		mv.addObject("pd", pd);

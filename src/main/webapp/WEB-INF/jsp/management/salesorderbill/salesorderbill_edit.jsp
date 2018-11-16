@@ -30,7 +30,7 @@
 					
 					<form action="salesorderbill/${msg }.do" name="Form" id="Form" method="post">
 						<input type="hidden" id="SALESORDERBILL_ID" name="SALESORDERBILL_ID" value="${pd.SALESORDERBILL_ID}"/>
-						<input type="hidden" id="FCUSTOMERID" name="FCUSTOMERID" value="${pd.FCUSTOMERID}"/>
+						<input type="hidden" id="FCLIENTID" name="FCLIENTID" value="${pd.FCLIENTID}"/>
 						<input type="hidden" id="FSALESID" name="FSALESID" value="${pd.FSALESID}"/>
 						<input type="hidden" id="FORDERPERSON" name="FORDERPERSON" value="${pd.FORDERPERSON}"/>
 						<div id="zhongxin" style="padding-top: 13px;">
@@ -48,7 +48,7 @@
 										<label>客户名称<span style="color: red;">*</span>:</label>
 									</td>
 									<td>
-										<input id="FCUSTOMERNAME" type="text" onclick="toCus()" style="width: 100%;cursor: pointer;
+										<input id="FCLIENTNAME" type="text" onclick="toClient()" style="width: 100%;cursor: pointer;
 													background: url(static/images/search.png) no-repeat;background-size: 20px 20px;
 													background-position:right;background-color: #FFFFFF;" class="input-text">
 									</td>
@@ -57,7 +57,7 @@
 										<label>订单日期<span style="color: red;">*</span>:</label>
 									</td>
 									<td>
-										<input id="FORDERDATE" name="FORDERDATE" type="date" style="width: 100%;" class="input-text">
+										<input id="FORDERDATE" name="FORDERDATE" type="date" value="${pd.FORDERDATE}" style="width: 100%;" class="input-text">
 									</td>
 								</tr>
 
@@ -68,7 +68,10 @@
 									<td>
 										<select id="FORDERTYPE" name="FORDERTYPE" class="input-text"
 												style="vertical-align:top;width: 100%;">
-											<option></option>
+											<option value="${pd.FORDERTYPEID}">${pd.FORDERTYPENAME}</option>
+											<c:forEach items="${orderTypeList}" var="var" varStatus="vs">
+												<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
+											</c:forEach>
 										</select>
 									</td>
 
@@ -93,7 +96,7 @@
 										<label>客户信用<span style="color: red;">*</span>:</label>
 									</td>
 									<td>
-										<input id="FCUSTOMERCREDIT" name="FCUSTOMERCREDIT" value="${pd.FCUSTOMERCREDIT}" type="date" style="width: 100%;" class="input-text">
+										<input id="FCLIENTCREDIT" name="FCLIENTCREDIT" value="${pd.FCLIENTCREDIT}" type="date" style="width: 100%;" class="input-text">
 									</td>
 
 									<td style="width:6%;text-align: right;">
@@ -111,7 +114,7 @@
 									<td>
 										<select id="FPACK" name="FPACK" class="input-text"
 												style="vertical-align:top;width: 100%;">
-											<option></option>
+											<option value="${pd.FPACKID}">${pd.FPACKNAME}</option>
 												<c:forEach items="${packList}" varStatus="vs" var="var">
 													<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
 												</c:forEach>
@@ -124,7 +127,7 @@
 									<td>
 										<select id="FCODESPURTING" name="FCODESPURTING" class="input-text"
 												style="vertical-align:top;width: 100%;">
-											<option></option>
+											<option value="${pd.FCODESPURTINGID}">${pd.FCODESPURTINGNAME}</option>
 											<c:forEach items="${codeSpurtingList}" varStatus="vs" var="var">
 												<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
 											</c:forEach>
@@ -146,7 +149,7 @@
 									<td>
 										<select id="FMIRRORBEHIND" name="FMIRRORBEHIND" class="input-text"
 												style="vertical-align:top;width: 100%;">
-											<option></option>
+											<option value="${pd.FMIRRORBEHINDID}">${pd.FMIRRORBEHINDNAME}</option>
 											<c:forEach items="${mirrorbehindList}" varStatus="vs" var="var">
 												<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
 											</c:forEach>
@@ -157,9 +160,9 @@
 										<label>客户验货:</label>
 									</td>
 									<td>
-										<select id="FCUSTOMERINSPECTION" name="FCUSTOMERINSPECTION" class="input-text"
+										<select id="FCLIENTINSPECTION" name="FCLIENTINSPECTION" class="input-text"
 												style="vertical-align:top;width: 100%;">
-											<option></option>
+											<option value="${pd.FCLIENTINSPECTIONID}">${pd.FCLIENTINSPECTIONNAME}</option>
 											<c:forEach items="${customerinspectionList}" varStatus="vs" var="var">
 												<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
 											</c:forEach>
@@ -174,7 +177,7 @@
 									<td>
 										<select id="FGLUE" name="FGLUE" class="input-text"
 												style="vertical-align:top;width: 100%;">
-											<option></option>
+											<option value="${pd.FGLUEID}">${pd.FGLUENAME}</option>
 											<c:forEach items="${glueList}" varStatus="vs" var="var">
 												<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
 											</c:forEach>
@@ -187,7 +190,7 @@
 									<td>
 										<select id="FARTICLE" name="FARTICLE" class="input-text"
 												style="vertical-align:top;width: 100%;">
-											<option></option>
+											<option value="${pd.FARTICLEID}">${pd.FARTICLENAME}</option>
 											<c:forEach items="${articleList}" varStatus="vs" var="var">
 												<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
 											</c:forEach>
@@ -209,7 +212,7 @@
 									<td>
 										<select id="FIDENTIFICATIONREQUIREMENTS" name="FIDENTIFICATIONREQUIREMENTS" class="input-text"
 												style="vertical-align:top;width: 100%;">
-											<option></option>
+											<option value="${pd.FIDENTIFICATIONREQUIREMENTSID}">${pd.FIDENTIFICATIONREQUIREMENTSNAME}</option>
 											<c:forEach items="${identificationrequirementsList}" varStatus="vs" var="var">
 												<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
 											</c:forEach>
@@ -222,7 +225,7 @@
 									<td>
 										<select id="FLOGISTICS" name="FLOGISTICS" class="input-text"
 												style="vertical-align:top;width: 100%;">
-											<option></option>
+											<option value="${pd.FLOGISTICSID}">${pd.FLOGISTICSNAME}</option>
 											<c:forEach items="${logisticsList}" varStatus="vs" var="var">
 												<option value="${var.DICTIONARIES_ID}">${var.FNAME}</option>
 											</c:forEach>
@@ -242,7 +245,7 @@
 										<label>制单日期:</label>
 									</td>
 									<td>
-										<input id="FORDERTIME" name="FORDERTIME" type="text" readonly style="width: 100%;" class="input-text">
+										<input id="FORDERTIME" name="FORDERTIME" value="${pd.FORDERTIME}" type="text" readonly style="width: 100%;" class="input-text"/>
 									</td>
 								</tr>
 								</tbody>
@@ -342,14 +345,14 @@
 		$(top.hangge());
 		//保存
 		function save(){
-            /*if($("#FCUSTOMERID").val()==""){
-                $("#FCUSTOMERNAME").tips({
+            /*if($("#FCLIENTID").val()==""){
+                $("#FCLIENTNAME").tips({
                     side:3,
                     msg:'请选择客户',
                     bg:'#AE81FF',
                     time:2
                 });
-                $("#FCUSTOMERNAME").focus();
+                $("#FCLIENTNAME").focus();
                 return false;
             }*/
 
@@ -364,7 +367,7 @@
                 return false;
             }
 
-            /*if($("#FORDERTYPE").val()==""){
+            if($("#FORDERTYPE").val()==""){
                 $("#FORDERTYPE").tips({
                     side:3,
                     msg:'请选择订单类型',
@@ -373,7 +376,7 @@
                 });
                 $("#FORDERTYPE").focus();
                 return false;
-            }*/
+            }
 
             /*if($("#FSALESID").val()==""){
                 $("#FSALESNAME").tips({
@@ -397,19 +400,19 @@
                 return false;
             }
 
-            if($("#FCUSTOMERCREDIT").val()==""){
-                $("#FCUSTOMERCREDIT").tips({
+            if($("#FCLIENTCREDIT").val()==""){
+                $("#FCLIENTCREDIT").tips({
                     side:3,
                     msg:'请选择客户信用',
                     bg:'#AE81FF',
                     time:2
                 });
-                $("#FCUSTOMERCREDIT").focus();
+                $("#FCLIENTCREDIT").focus();
                 return false;
             }
-			/*$("#Form").submit();
+			$("#Form").submit();
 			$("#zhongxin").hide();
-			$("#zhongxin2").show();*/
+			$("#zhongxin2").show();
 		}
 		
 		$(function() {
@@ -455,6 +458,53 @@
             }
             $("#weektab li").removeClass('on').eq(num).addClass('on');
         }
+
+        function toClient(){
+            top.jzts();
+            var diag = new top.Dialog();
+            diag.Drag=true;
+            diag.Title ="选择客户";
+            diag.URL = '<%=basePath%>client/getClassClient.do';
+            diag.Width = window.innerWidth * 1.2;
+            diag.Height = window.innerHeight * 1.2;
+            diag.Modal = true;				//有无遮罩窗口
+            diag.CancelEvent = function(){ //关闭事件
+               /* if(isAdmin == "true"){
+                    var iframe = diag.innerFrame.contentWindow.document.getElementById('treeFrame').contentWindow;
+                    var msg = iframe.document.getElementById('msg').value;
+                    var EMPLOYEE_ID = iframe.document.getElementById('EMPLOYEE_ID').value;
+                }else {
+                    var msg = diag.innerFrame.contentWindow.document.getElementById('msg').value;
+                    var EMPLOYEE_ID = diag.innerFrame.contentWindow.document.getElementById('EMPLOYEE_ID').value;
+                }
+                if(msg == "save"){
+                    $("#FEMPID").val(EMPLOYEE_ID);
+                    $.ajax({
+                        async: false,
+                        cache: false,
+                        type: 'POST',
+                        data : {
+                            EMPLOYEE_ID : EMPLOYEE_ID
+                        },
+                        url: '<%=basePath%>employee/findEmplByID',
+                        success: function (data) {
+                            var pd = data.pd;
+                            console.log(pd);
+                            $("#FORG").val(pd.CNAME);
+                            $("#SALES").val(pd.FNAME);
+                            $("#FORGID").val(pd.FCOMPANYID);
+                            $("#FDEPTID").val(pd.FDEPTID);
+                        },
+                        error: function () {
+                            alert("请求失败");
+                        }
+                    });
+                    //findEmplByID
+                }*/
+                diag.close();
+            };
+            diag.show();
+		}
 		</script>
 </body>
 </html>

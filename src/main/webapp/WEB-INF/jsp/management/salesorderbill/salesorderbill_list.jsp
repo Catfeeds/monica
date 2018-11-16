@@ -69,29 +69,28 @@
 									<div class="nav-search">
 										客户:<span class="input-icon">
 												<input type="text" placeholder="这里输入关键词" class="nav-search-input"
-													   autocomplete="off" name="FNAME" id="FNAME" value="${pd.FNAME }" placeholder="这里输入关键词"/>
+													   autocomplete="off" name="FCLIENTNAME" id="FCLIENTNAME" value="${pd.FCLIENTNAME }" placeholder="这里输入关键词"/>
 												<i class="ace-icon fa fa-search nav-search-icon"></i>
 											</span>
 
 										销售员:<span class="input-icon">
 										<input type="text" placeholder="这里输入关键词" class="nav-search-input"
-											   autocomplete="off" name="salesName" id="salesName" value="${pd.salesName }" placeholder="这里输入关键词"/>
+											   autocomplete="off" name="FSALESNAME" id="FSALESNAME" value="${pd.FSALESNAME }" placeholder="这里输入关键词"/>
 										<i class="ace-icon fa fa-search nav-search-icon"></i>
 										</span>
 
 										订单编号:<span class="input-icon">
 											<input type="text" placeholder="这里输入关键词" class="nav-search-input"
-												   autocomplete="off" name="FMOBILE" id="FMOBILE" value="${pd.FMOBILE }" placeholder="这里输入关键词"/>
+												   autocomplete="off" name="FORDERNUM" id="FORDERNUM" value="${pd.FORDERNUM }" placeholder="这里输入关键词"/>
 											<i class="ace-icon fa fa-search nav-search-icon"></i>
 											</span>
 
 										状态:<span class="input-icon">
-											<select style="width: 90px;" name="FSTATUSID" id="FSTATUSID" data-placeholder="" class="nav-search-input"
+											<select style="width: 90px;" name="FORDERSTATUS" id="FORDERSTATUS" data-placeholder="" class="nav-search-input"
 													style="vertical-align:top;width: 150px;">
-												<option value="${pd.FSTATUSID}" name="${pd.FSTATUSID}">${pd.GNAME}</option>
-												<c:forEach items="${listDicsSta}" var="var" varStatus="vs">
-													<option value="${var.DICTIONARIES_ID}" name="${var.NAME}">${var.NAME}</option>
-												</c:forEach>
+												<option></option>
+												<option value="0">草稿</option>
+												<option value="1">审核</option>
 											</select>
 										  </span>
 									</div>
@@ -134,7 +133,7 @@
 												<label class="pos-rel"><input id="${var.SALESORDERBILL_ID}" type='checkbox' name='ids' value="${var.SALESORDERBILL_ID}" class="ace" /><span class="lbl"></span></label>
 											</td>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
-											<td class='center'>${var.FCUSTOMERNAME}</td>
+											<td class='center'>${var.FCLIENTNAME}</td>
 											<td class='center'>${var.FORDERNUM}</td>
 											<td class='center'>${var.FORDERDATE}</td>
 											<td class='center'>${var.FSALESNAME}</td>
@@ -519,6 +518,13 @@
             };
             diag.show();
         }
+
+        function reset(){
+		    $("#FCLIENTNAME").val('');
+		    $("#FSALESNAME").val('');
+		    $("#FORDERNUM").val('');
+			$("#FORDERSTATUS").val('');
+		}
 	</script>
 
 

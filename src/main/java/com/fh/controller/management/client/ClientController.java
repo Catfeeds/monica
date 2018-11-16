@@ -223,6 +223,22 @@ public class ClientController extends BaseController {
 		map.put("list", pdList);
 		return AppUtil.returnObject(pd, map);
 	}
+
+	@RequestMapping(value = "/getClassClient")
+	public ModelAndView getClassClient(Page page) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		PageData pd = this.getPageData();
+		String keywords = pd.getString("keywords");				//关键词检索条件
+		if(null != keywords && !"".equals(keywords)){
+			pd.put("keywords", keywords.trim());
+		}
+		page.setPd(pd);
+		List<PageData>	varList = clientService.list(page);	//列出Employee列表
+		/* TODO 选择客户 */
+		mv.setViewName("management/employee/toClient_tree");
+		mv.addObject("varList", varList);
+		return mv;
+	}
 	
 	 /**导出到excel
 	 * @param

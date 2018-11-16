@@ -9,7 +9,7 @@
 	
 	<!-- 字段 -->
 	<sql id="Field">
-		FCUSTOMERID,	
+		FCLIENTID,	
 		FORDERNUM,	
 		FORDERDATE,	
 		FSALESID,	
@@ -19,12 +19,12 @@
 		FVERSIONS,	
 		FNOTE,	
 		FDELIVERYDATE,	
-		FCUSTOMERCREDIT,	
+		FCLIENTCREDIT,
 		FPACK,	
 		FCODESPURTING,	
 		FSPECIALREQUIREMENTS,	
 		FMIRRORBEHIND,	
-		FCUSTOMERINSPECTION,	
+		FCLIENTINSPECTION,
 		FGLUE,	
 		FARTICLE,	
 		FPAYMENTSCHEDULE,	
@@ -37,7 +37,7 @@
 	
 	<!-- 字段值 -->
 	<sql id="FieldValue">
-		#{FCUSTOMERID},	
+		#{FCLIENTID},	
 		#{FORDERNUM},	
 		#{FORDERDATE},	
 		#{FSALESID},	
@@ -47,12 +47,12 @@
 		#{FVERSIONS},	
 		#{FNOTE},	
 		#{FDELIVERYDATE},	
-		#{FCUSTOMERCREDIT},	
+		#{FCLIENTCREDIT},
 		#{FPACK},	
 		#{FCODESPURTING},	
 		#{FSPECIALREQUIREMENTS},	
 		#{FMIRRORBEHIND},	
-		#{FCUSTOMERINSPECTION},	
+		#{FCLIENTINSPECTION},
 		#{FGLUE},	
 		#{FARTICLE},	
 		#{FPAYMENTSCHEDULE},	
@@ -87,7 +87,7 @@
 		update
 		<include refid="tableName"></include>
 		set 
-			FCUSTOMERID = #{FCUSTOMERID},
+			FCLIENTID = #{FCLIENTID},
 			FORDERNUM = #{FORDERNUM},
 			FORDERDATE = #{FORDERDATE},
 			FSALESID = #{FSALESID},
@@ -97,12 +97,12 @@
 			FVERSIONS = #{FVERSIONS},
 			FNOTE = #{FNOTE},
 			FDELIVERYDATE = #{FDELIVERYDATE},
-			FCUSTOMERCREDIT = #{FCUSTOMERCREDIT},
+			FCLIENTCREDIT = #{FCLIENTCREDIT},
 			FPACK = #{FPACK},
 			FCODESPURTING = #{FCODESPURTING},
 			FSPECIALREQUIREMENTS = #{FSPECIALREQUIREMENTS},
 			FMIRRORBEHIND = #{FMIRRORBEHIND},
-			FCUSTOMERINSPECTION = #{FCUSTOMERINSPECTION},
+			FCLIENTINSPECTION = #{FCLIENTINSPECTION},
 			FGLUE = #{FGLUE},
 			FARTICLE = #{FARTICLE},
 			FPAYMENTSCHEDULE = #{FPAYMENTSCHEDULE},
@@ -117,21 +117,57 @@
 	
 	<!-- 通过ID获取数据 -->
 	<select id="findById" parameterType="pd" resultType="pd">
-		select 
-		<include refid="Field"></include>
-		from 
-		<include refid="tableName"></include>
-		where 
-			SALESORDERBILL_ID = #{SALESORDERBILL_ID}
+		SELECT
+			logistics.DICTIONARIES_ID AS FLOGISTICSID,
+			logistics.NAME AS FLOGISTICSNAME,
+			identificationrequirements.DICTIONARIES_ID AS FIDENTIFICATIONREQUIREMENTSID,
+			identificationrequirements.NAME AS FIDENTIFICATIONREQUIREMENTSNAME,
+			article.DICTIONARIES_ID AS FARTICLEID,
+			article.NAME AS FARTICLENAME,
+			glue.DICTIONARIES_ID AS FGLUEID,
+			glue.NAME AS FGLUENAME,
+			customerinspection.DICTIONARIES_ID AS FCLIENTINSPECTIONID,
+			customerinspection.NAME AS FCLIENTINSPECTIONNAME,
+			mirrorbehind.DICTIONARIES_ID AS FMIRRORBEHINDID,
+			mirrorbehind.NAME AS FMIRRORBEHINDNAME,
+			codespurting.DICTIONARIES_ID AS FCODESPURTINGID,
+			codespurting.NAME AS FCODESPURTINGNAME,
+			pack.DICTIONARIES_ID AS FPACKID,
+			pack.NAME AS FPACKNAME,
+			ordertype.DICTIONARIES_ID AS FORDERTYPEID,
+			ordertype.NAME AS FORDERTYPENAME,
+			bill.*
+		FROM TB_SALESORDERBILL AS bill
+		LEFT JOIN sys_dictionaries AS ordertype
+		ON bill.FORDERTYPE = ordertype.DICTIONARIES_ID
+		LEFT JOIN sys_dictionaries AS pack
+		ON bill.FPACK = pack.DICTIONARIES_ID
+		LEFT JOIN sys_dictionaries AS codespurting
+		ON bill.FCODESPURTING = codespurting.DICTIONARIES_ID
+		LEFT JOIN sys_dictionaries AS mirrorbehind
+		ON bill.FMIRRORBEHIND = mirrorbehind.DICTIONARIES_ID
+		LEFT JOIN sys_dictionaries AS customerinspection
+		ON bill.FCLIENTINSPECTION = customerinspection.DICTIONARIES_ID
+		LEFT JOIN sys_dictionaries AS glue
+		ON bill.FGLUE = glue.DICTIONARIES_ID
+		LEFT JOIN sys_dictionaries AS article
+		ON bill.FARTICLE = article.DICTIONARIES_ID
+		LEFT JOIN sys_dictionaries AS identificationrequirements
+		ON bill.FIDENTIFICATIONREQUIREMENTS = identificationrequirements.DICTIONARIES_ID
+		LEFT JOIN sys_dictionaries AS logistics
+		ON bill.FLOGISTICS = logistics.DICTIONARIES_ID
+		WHERE bill.SALESORDERBILL_ID = #{SALESORDERBILL_ID}
 	</select>
 	
 	<!-- 列表 -->
 	<select id="datalistPage" parameterType="page" resultType="pd">
-		select
-		<include refid="Field"></include>
-		from 
-		<include refid="tableName"></include>
-		where 1=1
+		SELECT
+			ordertype.NAME AS FORDERTYPENAME,
+			bill.*
+		FROM TB_SALESORDERBILL AS bill
+		LEFT JOIN sys_dictionaries AS ordertype
+		ON bill.FORDERTYPE = ordertype.DICTIONARIES_ID
+		WHERE 1=1
 		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
 			and
 				(
