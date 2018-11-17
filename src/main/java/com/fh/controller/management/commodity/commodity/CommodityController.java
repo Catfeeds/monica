@@ -133,14 +133,14 @@ public class CommodityController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		String FPARENTID = pd.getString("fparentid");
 		String keywords = pd.getString("keywords");				//关键词检索条件
 		String keywords1 = pd.getString("keywords1");
-		String treeKey = pd.getString("treeKey");
 		if(null != keywords && !"".equals(keywords)){
 			pd.put("keywords", keywords.trim());
 		}
-		if(null != treeKey && !"".equals(treeKey)){
-			pd.put("treeKey", Integer.parseInt(treeKey));
+		if(null != FPARENTID && !"".equals(FPARENTID)){
+			pd.put("fparentid", FPARENTID);
 		}
 		if(null != keywords1 && !"".equals(keywords1)){
 			pd.put("keywords1", keywords1.trim());
@@ -151,8 +151,9 @@ public class CommodityController extends BaseController {
 			pd.put("treeKey",tvarList.get(i).getString("CK")); 
 		}
 		List<PageData>	varList = commodityService.list(page);	//列出Commodity列表
-		if(null != treeKey && !"".equals(treeKey)){
-			pd.put("treeKey", Integer.parseInt(treeKey));
+		if(null != FPARENTID && !"".equals(FPARENTID)){
+			pd.put("FPARENTID", Integer.parseInt(FPARENTID));
+			//pd.put("treeKey", treeKey);
 		}
 		mv.setViewName("commodity/commodity/commodity_list");
 		mv.addObject("varList", varList);
