@@ -27,7 +27,7 @@ import com.fh.service.information.attachedmx.AttachedMxManager;
 /** 
  * 说明：明细表
  * 创建人：成
- * 创建时间：2016-04-17
+ * 创建时间：
  */
 @Controller
 @RequestMapping(value="/attachedmx")

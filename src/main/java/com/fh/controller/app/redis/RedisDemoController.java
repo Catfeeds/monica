@@ -20,7 +20,7 @@ import com.fh.util.PageData;
 
 /** RedisDemo
  * @author 成
- * 2016.5.8
+ *
  */
 @Controller
 @RequestMapping(value="/appRedisDemo")

@@ -30,7 +30,7 @@ import com.fh.service.system.fhsms.FhsmsManager;
 /** 
  * 说明：站内信
  * 创建人：成
- * 创建时间：2016-01-17
+ * 创建时间：
  */
 @Controller
 @RequestMapping(value="/fhsms")

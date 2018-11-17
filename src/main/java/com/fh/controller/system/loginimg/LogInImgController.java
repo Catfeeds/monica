@@ -27,7 +27,7 @@ import com.fh.service.system.loginimg.LogInImgManager;
 /** 
  * 说明：登录页面背景图片
  * 创建人：成
- * 创建时间：2016-06-03
+ * 创建时间：
  */
 @Controller
 @RequestMapping(value="/loginimg")

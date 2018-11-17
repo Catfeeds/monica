@@ -36,27 +36,27 @@
 						<form action="salesorderbill/list.do" method="post" name="Form" id="Form">
 						<table style="margin-top:5px;">
 							<tr>
-								<a style="margin-left: 3px" class="btn btn-light btn-mini" data-rel="tooltip" title="同步">
+								<a style="margin-left: 3px" class="btn btn-light btn-xs" data-rel="tooltip" title="同步">
 									<i class="ace-icon glyphicon glyphicon-retweet bigger-110 nav-search-icon blue"></i>同步
 								</a>
 								<c:if test="${QX.add == 1 }">
-									<a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="add();">
+									<a style="margin-left: 3px" class="btn btn-light btn-xs" onclick="add();">
 										<i class="ace-icon fa fa-pencil-square-o bigger-110 nav-search-icon yellow"></i>新增
 									</a>
 								</c:if>
-								<a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="edit();"  data-rel="tooltip" title="修改">
+								<a style="margin-left: 3px" class="btn btn-light btn-xs" onclick="edit();"  data-rel="tooltip" title="修改">
 									<i class="ace-icon fa fa-cogs bigger-110 nav-search-icon green"></i>修改
 								</a>
-								<a style="margin-left: 3px" class="btn btn-light btn-mini" data-rel="tooltip" title="变更">
+								<a style="margin-left: 3px" class="btn btn-light btn-xs" data-rel="tooltip" title="变更">
 									<i class="ace-icon glyphicon glyphicon-edit bigger-110 nav-search-icon blue"></i>变更
 								</a>
 								<c:if test="${QX.del == 1 }">
-									<a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='ace-icon fa fa-trash-o bigger-120 nav-search-icon red'></i>删除</a>
+									<a style="margin-left: 3px" class="btn btn-light btn-xs" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='ace-icon fa fa-trash-o bigger-120 nav-search-icon red'></i>删除</a>
 								</c:if>
-									<a style="margin-left: 3px" class="btn btn-light btn-mini" data-rel="tooltip" title="审批">
+									<a style="margin-left: 3px" class="btn btn-light btn-xs" data-rel="tooltip" title="审批">
 										<i class="ace-icon glyphicon glyphicon-ok bigger-110 nav-search-icon green"></i>审批
 									</a>
-								<c:if test="${QX.toExcel == 1 }"><a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i>导出到EXCEL</a></c:if>
+								<c:if test="${QX.toExcel == 1 }"><a style="margin-left: 3px" class="btn btn-light btn-xs" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i>导出到EXCEL</a></c:if>
 								<label style="float: right;margin-top: 5px;margin-right: 15px">
 									<input id="isDetail" <c:if test="${pd.isDetail == 'true'}">checked</c:if>
 										   name="isDetail" class="ace ace-switch ace-switch-5" type="checkbox">

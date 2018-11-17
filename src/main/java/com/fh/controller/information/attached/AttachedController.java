@@ -31,7 +31,7 @@ import com.fh.service.information.attachedmx.AttachedMxManager;
 /** 
  * 说明：主附结构
  * 创建人：成
- * 创建时间：2016-04-17
+ * 创建时间：
  */
 @Controller
 @RequestMapping(value="/attached")

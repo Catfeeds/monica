@@ -32,8 +32,8 @@ import com.fh.service.weixin.textmsg.TextmsgService;
 
 /** 
  * 类名称：TextmsgController
- * 创建人：FH 
- * 创建时间：2015-05-05
+ * 创建人：
+ * 创建时间：
  */
 @Controller
 @RequestMapping(value="/textmsg")

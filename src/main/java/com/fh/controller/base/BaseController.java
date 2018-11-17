@@ -14,7 +14,7 @@ import com.fh.util.UuidUtil;
 
 /**
  * @author 成
- * 修改时间：2015、12、11
+ * 修改时间：
  */
 public class BaseController {
 	

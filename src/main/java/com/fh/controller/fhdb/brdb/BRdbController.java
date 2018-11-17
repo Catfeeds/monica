@@ -33,7 +33,7 @@ import com.fh.service.fhdb.brdb.BRdbManager;
 /** 
  * 说明：数据库管理(备份和还原)
  * 创建人：成
- * 创建时间：2016-03-30
+ * 创建时间：
  */
 @Controller
 @RequestMapping(value="/brdb")

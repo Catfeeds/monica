@@ -299,14 +299,16 @@ public class CommodityController extends BaseController {
 	public Map<String, Object> synchronization(Page page) {
 		 Map<String, Object> json = new HashMap<String, Object>();
 		//新增开关
-		int hint = 0; //0为开启，1为关闭
+		int hint = 0; //1为开启，即存在相应商品      0为关闭
 		int count = 0;
 		 //page.setPd(pd);
 		PageData pd1 = new PageData();
 		pd1 = this.getPageData();
 		page.setShowCount(100000);
 		 try {
+		 	//远程接口数据  todo接口
 			List<PageData>	varList = itemService.list(page);
+			//获取的本地
 			List<PageData> varOList = commodityService.listAll(pd1);
 			for (int i = 0; i < varList.size(); i++) {
 				hint = 1;

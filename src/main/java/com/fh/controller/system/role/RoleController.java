@@ -34,7 +34,7 @@ import com.fh.util.Tools;
 /** 
  * 类名称：RoleController 角色权限管理
  * 创建人：成
- * 修改时间：2015年11月6日
+ * 修改时间：
  * @version
  */
 @Controller

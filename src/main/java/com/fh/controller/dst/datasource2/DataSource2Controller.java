@@ -27,7 +27,7 @@ import com.fh.service.dst.datasource2.DataSource2Manager;
 /** 
  * 说明：第2数据源例子
  * 创建人：成
- * 创建时间：2016-04-29
+ * 创建时间：
  */
 @Controller
 @RequestMapping(value="/datasource2")

@@ -8,7 +8,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 /**  
  * redis Dao 
  * @author 成 
- * 修改时间：2016、5、2
+ * 修改时间：
  */   
 public abstract class AbstractBaseRedisDao<K, V> {  
       

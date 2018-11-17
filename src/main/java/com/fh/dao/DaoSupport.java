@@ -11,7 +11,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 /**
  * @author 成
- * 修改时间：2015、12、11
+ * 修改时间：
  */
 @Repository("daoSupport")
 public class DaoSupport implements DAO {

@@ -31,85 +31,34 @@
 						<div class="col-xs-12">
 							
 						<!-- 检索  -->
-						<form action="client/list.do" method="post" name="Form" id="Form">
-							<table style="margin-top:5px;">
-								<tr>
-									<a style="margin-left: 3px" class="btn btn-light btn-mini" data-rel="tooltip" title="同步">
-										<i class="ace-icon glyphicon glyphicon-retweet bigger-110 nav-search-icon blue"></i>同步
-									</a>
-									<c:if test="${QX.add == 1 }">
-										<a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="add();">
-											<i class="ace-icon fa fa-pencil-square-o bigger-110 nav-search-icon yellow"></i>新增
-										</a>
-									</c:if>
-									<a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="edit();"  data-rel="tooltip" title="修改">
-										<i class="ace-icon fa fa-cogs bigger-110 nav-search-icon green"></i>修改
-									</a>
-									<a style="margin-left: 3px" class="btn btn-light btn-mini" data-rel="tooltip" title="变更">
-										<i class="ace-icon glyphicon glyphicon-edit bigger-110 nav-search-icon blue"></i>变更
-									</a>
-									<c:if test="${QX.del == 1 }">
-										<a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='ace-icon fa fa-trash-o bigger-120 nav-search-icon red'></i>删除</a>
-									</c:if>
-									<c:if test="${QX.toExcel == 1 }"><a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i>导出到EXCEL</a></c:if>
-									<%--<label style="float: right;margin-top: 5px;margin-right: 15px">
-										<input id="isDetail" <c:if test="${pd.isDetail == 'true'}">checked</c:if>
-											   name="isDetail" class="ace ace-switch ace-switch-5" type="checkbox">
-										<span class="lbl"></span>
-									</label>--%>
-								</tr>//dfsdfsa
-
-								<tr>
-									<td>
-										<div class="nav-search">
-											客户:<span class="input-icon">
-												<input type="text" placeholder="这里输入关键词" class="nav-search-input"
-													   autocomplete="off" name="FCLIENTNAME" id="FCLIENTNAME" value="${pd.FCLIENTNAME }" placeholder="这里输入关键词"/>
-												<i class="ace-icon fa fa-search nav-search-icon"></i>
-											</span>
-
-											销售员:<span class="input-icon">
-										<input type="text" placeholder="这里输入关键词" class="nav-search-input"
-											   autocomplete="off" name="FSALESNAME" id="FSALESNAME" value="${pd.FSALESNAME }" placeholder="这里输入关键词"/>
-										<i class="ace-icon fa fa-search nav-search-icon"></i>
-										</span>
-
-											订单编号:<span class="input-icon">
-											<input type="text" placeholder="这里输入关键词" class="nav-search-input"
-												   autocomplete="off" name="FORDERNUM" id="FORDERNUM" value="${pd.FORDERNUM }" placeholder="这里输入关键词"/>
-											<i class="ace-icon fa fa-search nav-search-icon"></i>
-											</span>
-
-										</div>
-									</td>
-									<td style="vertical-align:top;padding-left:2px;">
-										<div style="margin-top: 1px;"><a id="globelSearch" class="btn btn-light btn-mini" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i>查询</a></div></td>
-									<td style="vertical-align:top;padding-left:2px;margin-top: 2px;">
-										<div style="margin-top: 1px;"><a class="btn btn-light btn-mini" onclick="reset();"  title="重置"><i id="nav-search-icon" class="ace-icon glyphicon glyphicon-repeat bigger-110 nav-search-icon blue"></i>重置</a></div></td>
-								</tr>
-							</table>
-						<%--<table style="margin-top:5px;">
+						<form action="client/toClientBy_tree.do?treeKey=${pd.treeKey}" method="post" name="Form" id="Form">
+							<input type="hidden" name="msg" id="msg"/>
+							<input type="hidden" name="CLIENT_ID" id="CLIENT_ID"/>
+						<table style="margin-top:5px;">
 							<tr>
 								<td>
 									<div class="nav-search">
 										<span class="input-icon">
-											<input type="text" placeholder="这里输入关键词" class="nav-search-input" id="nav-search-input" autocomplete="off" name="keywords" value="${pd.keywords }" placeholder="这里输入关键词"/>
+											<input type="text" placeholder="客户名称" class="nav-search-input" id="nav-search-input" autocomplete="off" name="keywords" value="${pd.keywords }"/>
 											<i class="ace-icon fa fa-search nav-search-icon"></i>
 										</span>
 									</div>
 								</td>
 								<c:if test="${QX.cha == 1 }">
-								<td style="vertical-align:top;padding-left:2px"><a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i>查询</a></td>
+								<td style="padding-left:2px"><a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i></a></td>
 								</c:if>
-								<td  style="vertical-align:top;padding-left:5px"><a
-										style="width: 100%;"
-									class="btn btn-light btn-xs" onclick="updateItem()"><i
-											id="nav-search-icon"
-											class="ace-icon fa fa-refresh bigger-110 nav-search-icon blue"></i>同步客户资料
-									</a></td>
-								<c:if test="${QX.toExcel == 1 }"><td style="vertical-align:top;padding-left:2px;"><a class="btn btn-light btn-xs" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i></a></td></c:if>
+								<td style="vertical-align:top;padding-left:2px">
+									<a style="margin-top: 2px;" class="btn btn-light btn-xs" onclick="save()">
+										<i class="ace-icon fa fa-credit-card bigger-110 nav-search-icon green"></i>提交
+									</a>
+								</td>
+								<td style="vertical-align:top;padding-left:2px">
+									<a style="margin-top: 2px;margin-right: 10px;" class="btn btn-light btn-xs" onclick="top.Dialog.close();">
+										<i class="ace-icon fa  fa-external-link bigger-110 nav-search-icon red"></i>取消
+									</a>
+								</td>
 							</tr>
-						</table>--%>
+						</table>
 						<!-- 检索  -->
 					
 						<table id="simple-table" class="table table-striped table-bordered table-hover" style="margin-top:5px;">	
@@ -122,10 +71,6 @@
 									<th class="center">FItemID</th>
 									<th class="center">客户编码</th>
 									<th class="center">客户名称</th>
-									<th class="center">FParentID</th>
-									<th class="center">FModifyTime</th>
-									<th class="center">FDeleted</th>
-									<%--<th class="center">操作</th>--%>
 								</tr>
 							</thead>
 													
@@ -135,7 +80,7 @@
 								<c:when test="${not empty varList}">
 									<c:if test="${QX.cha == 1 }">
 									<c:forEach items="${varList}" var="var" varStatus="vs">
-										<tr id="tr${var.CLIENT_ID}" name="listBeen" onclick="toCheck('${var.CLIENT_ID}')" ondblclick="editByID('${var.CLIENT_ID}')" style="cursor: pointer;">
+										<tr id="tr${var.CLIENT_ID}" name="listBeen" onclick="toCheck('${var.CLIENT_ID}')" ondblclick="save('${var.CLIENT_ID}');top.Dialog.close();" style="cursor: pointer;">
 											<td class='center'>
 												<label class="pos-rel"><input id="${var.CLIENT_ID}" type='checkbox' name='ids' value="${var.CLIENT_ID}" class="ace" /><span class="lbl"></span></label>
 											</td>
@@ -143,54 +88,6 @@
 											<td class='center'>${var.FITEMID}</td>
 											<td class='center'>${var.FNUMBER}</td>
 											<td class='center'>${var.FNAME}</td>
-											<td class='center'>${var.FPARENTID}</td>
-											<td class='center'>${var.FMODIFYTIME}</td>
-											<td class='center'>${var.FDELETED}</td>
-											<%--<td class="center">
-												<c:if test="${QX.edit != 1 && QX.del != 1 }">
-												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
-												</c:if>
-												<div class="hidden-sm hidden-xs btn-group">
-													<c:if test="${QX.edit == 1 }">
-													<a class="btn btn-xs btn-success" title="编辑" onclick="edit('${var.CLIENT_ID}');">
-														<i class="ace-icon fa fa-pencil-square-o bigger-120" title="编辑"></i>
-													</a>
-													</c:if>
-													<c:if test="${QX.del == 1 }">
-													<a class="btn btn-xs btn-danger" onclick="del('${var.CLIENT_ID}');">
-														<i class="ace-icon fa fa-trash-o bigger-120" title="删除"></i>
-													</a>
-													</c:if>
-												</div>
-												<div class="hidden-md hidden-lg">
-													<div class="inline pos-rel">
-														<button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
-															<i class="ace-icon fa fa-cog icon-only bigger-110"></i>
-														</button>
-
-														<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-															<c:if test="${QX.edit == 1 }">
-															<li>
-																<a style="cursor:pointer;" onclick="edit('${var.CLIENT_ID}');" class="tooltip-success" data-rel="tooltip" title="修改">
-																	<span class="green">
-																		<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-																	</span>
-																</a>
-															</li>
-															</c:if>
-															<c:if test="${QX.del == 1 }">
-															<li>
-																<a style="cursor:pointer;" onclick="del('${var.CLIENT_ID}');" class="tooltip-error" data-rel="tooltip" title="删除">
-																	<span class="red">
-																		<i class="ace-icon fa fa-trash-o bigger-120"></i>
-																	</span>
-																</a>
-															</li>
-															</c:if>
-														</ul>
-													</div>
-												</div>
-											</td>--%>
 										</tr>
 									
 									</c:forEach>
@@ -212,14 +109,6 @@
 						<div class="page-header position-relative">
 						<table style="width:100%;">
 							<tr>
-								<%--<td style="vertical-align:top;">
-									<c:if test="${QX.add == 1 }">
-									<a class="btn btn-mini btn-success" onclick="add();">新增</a>
-									</c:if>
-									<c:if test="${QX.del == 1 }">
-									<a class="btn btn-mini btn-danger" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='ace-icon fa fa-trash-o bigger-120'></i></a>
-									</c:if>
-								</td>--%>
 								<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>
 							</tr>
 						</table>
@@ -431,18 +320,6 @@
 					}
 				});
 		}
-		
-		//导出excel
-		function toExcel(){
-			window.location.href='<%=basePath%>client/excel.do';
-		}
-
-        function reset(){
-            $("#FCLIENTNAME").val('');
-            $("#FSALESNAME").val('');
-            $("#FORDERNUM").val('');
-            $("#FORDERSTATUS").val('');
-        }
 
         function toCheck(Id){
             $("#simple-table").find("tr[name='listBeen']").css("background-color", "");
@@ -452,32 +329,42 @@
             }else {
                 $("#"+Id).prop("checked",true);
             }
+        }
 
-            if($("#isDetail").prop("checked")){
-                back();
-                setTimeout("changecss()",300);
+        function save(CID) {
+            var Id;
+            if(CID == null || CID == ''){
+                var str = [];
+                for(var i=0;i < document.getElementsByName('ids').length;i++){
+                    if(document.getElementsByName('ids')[i].checked){
+                        str.push(document.getElementsByName('ids')[i].value);
+                    }
+                }
+                if(str.length < 1){
+                    alert("您没有选择任何内容!");
+                    return false;
+                }else if(str.length > 1){
+                    alert("您的选择内容必须要单项!");
+                    return false;
+                }else{
+                    Id = str[0];
+                    $("#msg").val("save");
+                    $("#CLIENT_ID").val(Id);
+                    top.Dialog.close();
+                }
+            } else {
+                Id = CID;
+                $("#msg").val("save");
+                $("#CLIENT_ID").val(Id);
+                top.Dialog.close();
             }
 
-            //changecss();
         }
-
-        function editByID(Id) {
-            top.jzts();
-            var diag = new top.Dialog();
-            diag.Drag=true;
-            diag.Title ="编辑";
-            diag.URL = '<%=basePath%>client/goEdit.do?CLIENT_ID='+Id;
-            diag.Width = 450;
-            diag.Height = 355;
-            diag.Modal = true;				//有无遮罩窗口
-            diag.CancelEvent = function(){ //关闭事件
-                if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
-                    tosearch();
-                }
-                diag.close();
-            };
-            diag.show();
-        }
+		
+		//导出excel
+		function toExcel(){
+			window.location.href='<%=basePath%>client/excel.do';
+		}
 	</script>
 
 

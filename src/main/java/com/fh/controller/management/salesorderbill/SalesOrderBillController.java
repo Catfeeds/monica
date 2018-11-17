@@ -54,12 +54,6 @@ public class SalesOrderBillController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		/* TODO 仅测试数据 需重新调整 */
-		pd.put("FCUSTOMERID",this.get32UUID());
-		pd.put("FORDERNUM","模拟订单编号");
-		pd.put("FORDERTYPE",this.get32UUID());
-		pd.put("FSALESID",this.get32UUID());
-		pd.put("FORDERPERSON",this.get32UUID());
 		pd.put("SALESORDERBILL_ID", this.get32UUID());	//主键
 		pd.put("FORDERSTATUS",0);
 		pd.put("FISSYNCHRONIZATION",0);
@@ -188,7 +182,6 @@ public class SalesOrderBillController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		pd = salesorderbillService.findById(pd);	//根据ID读取
-		/* TODO 处理订单类型 */
 		pd.put("PNAME","订单类型");
 		List<PageData> orderTypeList = dictionariesService.listByParentName(pd);
 		mv.addObject("orderTypeList", orderTypeList);
