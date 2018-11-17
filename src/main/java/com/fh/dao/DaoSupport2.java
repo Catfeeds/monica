@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 /**
  * 第2数据源
  * @author 成
- * 修改时间：2016、04、29
+ * 修改时间：
  */
 @Repository("daoSupport2")
 public class DaoSupport2 implements DAO {

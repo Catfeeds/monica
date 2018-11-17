@@ -38,10 +38,10 @@ import com.fh.util.Tools;
  * 
 * 类名称：WeixinController.java
 * 类描述： 微信公共平台开发 
-* @author FH 313596790
+* @author
 * 作者单位： 
 * 联系方式：
-* 创建时间：2014年7月10日
+* 创建时间：
 * @version 1.0
  */
 @Controller

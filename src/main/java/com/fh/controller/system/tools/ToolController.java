@@ -32,7 +32,7 @@ import com.fh.util.express.GetExpressMsg;
 /** 
  * 类名称：ToolController 系统工具
  * 创建人：成
- * 修改时间：2017年2月13日
+ * 修改时间：
  * @version
  */
 @Controller

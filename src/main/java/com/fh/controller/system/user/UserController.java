@@ -44,8 +44,8 @@ import com.fh.util.Tools;
 
 /** 
  * 类名称：UserController
- * 创建人：FH fh313596790qq(青苔)
- * 更新时间：2015年11月3日
+ * 创建人：
+ * 更新时间：
  * @version
  */
 @Controller

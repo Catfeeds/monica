@@ -25,8 +25,8 @@ import com.fh.util.Tools;
  */
 /** 
  * 说明：明细表
- * 创建人：FH Q 3 13596 790
- * 创建时间：2016-05-19
+ * 创建人：
+ * 创建时间：
  */
 @Controller
 @RequestMapping(value="/linkage")

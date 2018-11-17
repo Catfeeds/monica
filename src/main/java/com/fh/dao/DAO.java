@@ -1,7 +1,7 @@
 package com.fh.dao;
 /**
  * @author 成
- * 修改时间：2015、12、11
+ * 修改时间：
  */
 public interface DAO {
 	

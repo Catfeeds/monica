@@ -27,7 +27,7 @@ import com.fh.util.PageData;
 /** 
  * 说明：SQL编辑器
  * 创建人：成
- * 创建时间：2016-03-30
+ * 创建时间：
  */
 @Controller
 @RequestMapping(value="/sqledit")

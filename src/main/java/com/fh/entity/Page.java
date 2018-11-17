@@ -7,7 +7,7 @@ import com.fh.util.Tools;
 /**
  * 分页类
  * @author 成
- * 创建时间：2014年6月28日
+ * 创建时间：
  */
 public class Page {
 	

@@ -31,7 +31,7 @@ import com.fh.service.system.dictionaries.DictionariesManager;
 /** 
  * 说明：数据字典
  * 创建人：成
- * 创建时间：2015-12-16
+ * 创建时间：
  */
 @Controller
 @RequestMapping(value="/dictionaries")
