@@ -57,7 +57,7 @@
 											   name="isDetail" class="ace ace-switch ace-switch-5" type="checkbox">
 										<span class="lbl"></span>
 									</label>--%>
-								</tr>
+								</tr>//dfsdfsa
 
 								<tr>
 									<td>
