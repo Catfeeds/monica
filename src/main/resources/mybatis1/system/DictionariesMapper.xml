@@ -57,8 +57,8 @@
 	</delete>
 
 	<select id="listByParentName" parameterType="pd" resultType="pd">
-	SELECT NAME as title,NAME as value from sys_dictionaries where PARENT_ID IN
-	( select DICTIONARIES_ID from sys_dictionaries where NAME = #{PNAME})
+		SELECT TOP 1000000000 DICTIONARIES_ID as DICTIONARIES_ID,NAME as FNAME from sys_dictionaries where PARENT_ID IN
+		( select DICTIONARIES_ID from sys_dictionaries where NAME = #{PNAME}) ORDER BY ORDER_BY
 	</select>
 
 	<!-- 修改 -->

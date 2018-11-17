@@ -680,14 +680,15 @@ public class HttpController extends BaseController{
 		pd = this.getPageData();
 		Page page = new Page();
 		page.setPd(pd);
-		List<PageData> synList = salesorderbillService.listNotSyn(page);
+		/* TODO */
+		/*List<PageData> synList = salesorderbillService.listNotSyn(page);*/
 		List<PageData> synEntryList = salesorderbillentryService.list_salesOrderEntry(page);
-		json.put("Data", synList);
+		/*json.put("Data", synList);
 		json.put("synEntryList", synEntryList);
 		for (PageData pageData : synList) {
 			pageData.put("FSYNSTATUS",1);
 			salesorderbillService.edit(pageData);
-		}
+		}*/
 		return json;
 	}
 	

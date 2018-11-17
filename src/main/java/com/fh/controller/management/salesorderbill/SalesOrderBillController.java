@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
+
+import com.fh.service.system.dictionaries.DictionariesManager;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -24,12 +26,11 @@ import com.fh.util.PageData;
 import com.fh.util.Jurisdiction;
 import com.fh.util.Tools;
 import com.fh.service.management.salesorderbill.SalesOrderBillManager;
-import com.fh.service.management.salesorderbillentry.SalesOrderBillEntryManager;
 
 /** 
- * 说明：销售订单
+ * 说明：订单表
  * 创建人：成
- * 创建时间：2018-01-18
+ * 创建时间：2018-11-16
  */
 @Controller
 @RequestMapping(value="/salesorderbill")
@@ -38,9 +39,9 @@ public class SalesOrderBillController extends BaseController {
 	String menuUrl = "salesorderbill/list.do"; //菜单地址(权限用)
 	@Resource(name="salesorderbillService")
 	private SalesOrderBillManager salesorderbillService;
-	
-	@Resource(name="salesorderbillentryService")
-	private SalesOrderBillEntryManager salesorderbillentryService;
+
+	@Resource(name="dictionariesService")
+	private DictionariesManager dictionariesService;
 	
 	/**保存
 	 * @param
@@ -53,7 +54,15 @@ public class SalesOrderBillController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		/* TODO 仅测试数据 需重新调整 */
+		pd.put("FCUSTOMERID",this.get32UUID());
+		pd.put("FORDERNUM","模拟订单编号");
+		pd.put("FORDERTYPE",this.get32UUID());
+		pd.put("FSALESID",this.get32UUID());
+		pd.put("FORDERPERSON",this.get32UUID());
 		pd.put("SALESORDERBILL_ID", this.get32UUID());	//主键
+		pd.put("FORDERSTATUS",0);
+		pd.put("FISSYNCHRONIZATION",0);
 		salesorderbillService.save(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
@@ -71,7 +80,6 @@ public class SalesOrderBillController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		salesorderbillService.delete(pd);
-		salesorderbillentryService.deleteBySALESORDERBILL_ID(pd);
 		out.write("success");
 		out.close();
 	}
@@ -87,6 +95,8 @@ public class SalesOrderBillController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		pd.put("FORDERSTATUS",0);
+		pd.put("FISSYNCHRONIZATION",0);
 		salesorderbillService.edit(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
@@ -126,6 +136,42 @@ public class SalesOrderBillController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		pd.put("PNAME","订单类型");
+		List<PageData> orderTypeList = dictionariesService.listByParentName(pd);
+		mv.addObject("orderTypeList", orderTypeList);
+
+		pd.put("PNAME","包装");
+		List<PageData> packList = dictionariesService.listByParentName(pd);
+		mv.addObject("packList", packList);
+
+		pd.put("PNAME","喷码");
+		List<PageData> codeSpurtingList = dictionariesService.listByParentName(pd);
+		mv.addObject("codeSpurtingList", codeSpurtingList);
+
+		pd.put("PNAME","镜面抛");
+		List<PageData> mirrorbehindList = dictionariesService.listByParentName(pd);
+		mv.addObject("mirrorbehindList", mirrorbehindList);
+
+		pd.put("PNAME","客户验货");
+		List<PageData> customerinspectionList = dictionariesService.listByParentName(pd);
+		mv.addObject("customerinspectionList", customerinspectionList);
+
+		pd.put("PNAME","胶水");
+		List<PageData> glueList = dictionariesService.listByParentName(pd);
+		mv.addObject("glueList", glueList);
+
+		pd.put("PNAME","跟柜物品");
+		List<PageData> articleList = dictionariesService.listByParentName(pd);
+		mv.addObject("articleList", articleList);
+
+		pd.put("PNAME","标识要求");
+		List<PageData> identificationrequirementsList = dictionariesService.listByParentName(pd);
+		mv.addObject("identificationrequirementsList", identificationrequirementsList);
+
+		pd.put("PNAME","物流");
+		List<PageData> logisticsList = dictionariesService.listByParentName(pd);
+		mv.addObject("logisticsList", logisticsList);
+
 		mv.setViewName("management/salesorderbill/salesorderbill_edit");
 		mv.addObject("msg", "save");
 		mv.addObject("pd", pd);
@@ -142,6 +188,42 @@ public class SalesOrderBillController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		pd = salesorderbillService.findById(pd);	//根据ID读取
+		/* TODO 处理订单类型 */
+		pd.put("PNAME","订单类型");
+		List<PageData> orderTypeList = dictionariesService.listByParentName(pd);
+		mv.addObject("orderTypeList", orderTypeList);
+
+		pd.put("PNAME","包装");
+		List<PageData> packList = dictionariesService.listByParentName(pd);
+		mv.addObject("packList", packList);
+
+		pd.put("PNAME","喷码");
+		List<PageData> codeSpurtingList = dictionariesService.listByParentName(pd);
+		mv.addObject("codeSpurtingList", codeSpurtingList);
+
+		pd.put("PNAME","镜面抛");
+		List<PageData> mirrorbehindList = dictionariesService.listByParentName(pd);
+		mv.addObject("mirrorbehindList", mirrorbehindList);
+
+		pd.put("PNAME","客户验货");
+		List<PageData> customerinspectionList = dictionariesService.listByParentName(pd);
+		mv.addObject("customerinspectionList", customerinspectionList);
+
+		pd.put("PNAME","胶水");
+		List<PageData> glueList = dictionariesService.listByParentName(pd);
+		mv.addObject("glueList", glueList);
+
+		pd.put("PNAME","跟柜物品");
+		List<PageData> articleList = dictionariesService.listByParentName(pd);
+		mv.addObject("articleList", articleList);
+
+		pd.put("PNAME","标识要求");
+		List<PageData> identificationrequirementsList = dictionariesService.listByParentName(pd);
+		mv.addObject("identificationrequirementsList", identificationrequirementsList);
+
+		pd.put("PNAME","物流");
+		List<PageData> logisticsList = dictionariesService.listByParentName(pd);
+		mv.addObject("logisticsList", logisticsList);
 		mv.setViewName("management/salesorderbill/salesorderbill_edit");
 		mv.addObject("msg", "edit");
 		mv.addObject("pd", pd);
@@ -187,35 +269,57 @@ public class SalesOrderBillController extends BaseController {
 		pd = this.getPageData();
 		Map<String,Object> dataMap = new HashMap<String,Object>();
 		List<String> titles = new ArrayList<String>();
-		titles.add("模板id");	//1
+		titles.add("客户ID");	//1
 		titles.add("订单编号");	//2
-		titles.add("要求发货日期");	//3
-		titles.add("部门ID");	//4
-		titles.add("联络人");	//5
-		titles.add("联系电话");	//6
-		titles.add("制作人ID");	//7
-		titles.add("制作日期");	//8
-		titles.add("状态");	//9
-		titles.add("审核人ID");	//10
-		titles.add("审核日期");	//11
-		titles.add("备注");	//12
+		titles.add("订单日期");	//3
+		titles.add("业务员ID");	//4
+		titles.add("订单类型");	//5
+		titles.add("状态");	//6
+		titles.add("同步状态");	//7
+		titles.add("版本");	//8
+		titles.add("备注");	//9
+		titles.add("提货日期");	//10
+		titles.add("客户信用");	//11
+		titles.add("包装");	//12
+		titles.add("喷码");	//13
+		titles.add("其他特殊要求");	//14
+		titles.add("镜面抛");	//15
+		titles.add("客户验货");	//16
+		titles.add("胶水");	//17
+		titles.add("跟柜物品");	//18
+		titles.add("付款计划");	//19
+		titles.add("标识要求");	//20
+		titles.add("物流");	//21
+		titles.add("制单人");	//22
+		titles.add("制单时间");	//23
 		dataMap.put("titles", titles);
 		List<PageData> varOList = salesorderbillService.listAll(pd);
 		List<PageData> varList = new ArrayList<PageData>();
 		for(int i=0;i<varOList.size();i++){
 			PageData vpd = new PageData();
-			vpd.put("var1", varOList.get(i).getString("FTEMPID"));	    //1
-			vpd.put("var2", varOList.get(i).getString("FBILLNO"));	    //2
-			vpd.put("var3", varOList.get(i).getString("FNEEDDATE"));	    //3
-			vpd.put("var4", varOList.get(i).get("FDEPTID").toString());	//4
-			vpd.put("var5", varOList.get(i).getString("FCONTACT"));	    //5
-			vpd.put("var6", varOList.get(i).getString("FTELEPHONE"));	    //6
-			vpd.put("var7", varOList.get(i).getString("FBILLERID"));	    //7
-			vpd.put("var8", varOList.get(i).getString("FDATE"));	    //8
-			vpd.put("var9", varOList.get(i).getString("FSTATUS"));	    //9
-			vpd.put("var10", varOList.get(i).getString("FCHECKERID"));	    //10
-			vpd.put("var11", varOList.get(i).getString("FCHECKDATE"));	    //11
-			vpd.put("var12", varOList.get(i).getString("FREMARK"));	    //12
+			vpd.put("var1", varOList.get(i).getString("FCUSTOMERID"));	    //1
+			vpd.put("var2", varOList.get(i).getString("FORDERNUM"));	    //2
+			vpd.put("var3", varOList.get(i).getString("FORDERDATE"));	    //3
+			vpd.put("var4", varOList.get(i).getString("FSALESID"));	    //4
+			vpd.put("var5", varOList.get(i).getString("FORDERTYPE"));	    //5
+			vpd.put("var6", varOList.get(i).get("FORDERSTATUS").toString());	//6
+			vpd.put("var7", varOList.get(i).get("FISSYNCHRONIZATION").toString());	//7
+			vpd.put("var8", varOList.get(i).getString("FVERSIONS"));	    //8
+			vpd.put("var9", varOList.get(i).getString("FNOTE"));	    //9
+			vpd.put("var10", varOList.get(i).getString("FDELIVERYDATE"));	    //10
+			vpd.put("var11", varOList.get(i).getString("FCUSTOMERCREDIT"));	    //11
+			vpd.put("var12", varOList.get(i).getString("FPACK"));	    //12
+			vpd.put("var13", varOList.get(i).getString("FCODESPURTING"));	    //13
+			vpd.put("var14", varOList.get(i).getString("FSPECIALREQUIREMENTS"));	    //14
+			vpd.put("var15", varOList.get(i).getString("FMIRRORBEHIND"));	    //15
+			vpd.put("var16", varOList.get(i).getString("FCUSTOMERINSPECTION"));	    //16
+			vpd.put("var17", varOList.get(i).getString("FGLUE"));	    //17
+			vpd.put("var18", varOList.get(i).getString("FARTICLE"));	    //18
+			vpd.put("var19", varOList.get(i).getString("FPAYMENTSCHEDULE"));	    //19
+			vpd.put("var20", varOList.get(i).getString("FIDENTIFICATIONREQUIREMENTS"));	    //20
+			vpd.put("var21", varOList.get(i).getString("FLOGISTICS"));	    //21
+			vpd.put("var22", varOList.get(i).getString("FORDERPERSON"));	    //22
+			vpd.put("var23", varOList.get(i).getString("FORDERTIME"));	    //23
 			varList.add(vpd);
 		}
 		dataMap.put("varList", varList);

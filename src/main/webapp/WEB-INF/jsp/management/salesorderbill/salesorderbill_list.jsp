@@ -18,6 +18,9 @@
 <%@ include file="../../system/index/top.jsp"%>
 <!-- 日期框 -->
 <link rel="stylesheet" href="static/ace/css/datepicker.css" />
+<link rel="stylesheet" href="static/css/fo.css" />
+<link rel="stylesheet" href="static/cehua/css/style.css"> <!-- Resource style -->
+<script src="static/cehua/js/modernizr.js"></script> <!-- Modernizr -->
 </head>
 <body class="no-skin">
 
@@ -29,38 +32,73 @@
 				<div class="page-content">
 					<div class="row">
 						<div class="col-xs-12">
-							
 						<!-- 检索  -->
 						<form action="salesorderbill/list.do" method="post" name="Form" id="Form">
 						<table style="margin-top:5px;">
 							<tr>
+								<a style="margin-left: 3px" class="btn btn-light btn-mini" data-rel="tooltip" title="同步">
+									<i class="ace-icon glyphicon glyphicon-retweet bigger-110 nav-search-icon blue"></i>同步
+								</a>
+								<c:if test="${QX.add == 1 }">
+									<a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="add();">
+										<i class="ace-icon fa fa-pencil-square-o bigger-110 nav-search-icon yellow"></i>新增
+									</a>
+								</c:if>
+								<a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="edit();"  data-rel="tooltip" title="修改">
+									<i class="ace-icon fa fa-cogs bigger-110 nav-search-icon green"></i>修改
+								</a>
+								<a style="margin-left: 3px" class="btn btn-light btn-mini" data-rel="tooltip" title="变更">
+									<i class="ace-icon glyphicon glyphicon-edit bigger-110 nav-search-icon blue"></i>变更
+								</a>
+								<c:if test="${QX.del == 1 }">
+									<a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='ace-icon fa fa-trash-o bigger-120 nav-search-icon red'></i>删除</a>
+								</c:if>
+									<a style="margin-left: 3px" class="btn btn-light btn-mini" data-rel="tooltip" title="审批">
+										<i class="ace-icon glyphicon glyphicon-ok bigger-110 nav-search-icon green"></i>审批
+									</a>
+								<c:if test="${QX.toExcel == 1 }"><a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i>导出到EXCEL</a></c:if>
+								<label style="float: right;margin-top: 5px;margin-right: 15px">
+									<input id="isDetail" <c:if test="${pd.isDetail == 'true'}">checked</c:if>
+										   name="isDetail" class="ace ace-switch ace-switch-5" type="checkbox">
+									<span class="lbl"></span>
+								</label>
+							</tr>
+
+							<tr>
 								<td>
 									<div class="nav-search">
-										<span class="input-icon">
-											<input type="text" placeholder="这里输入关键词" class="nav-search-input" id="nav-search-input" autocomplete="off" name="keywords" value="${pd.keywords }" placeholder="这里输入关键词"/>
-											<i class="ace-icon fa fa-search nav-search-icon"></i>
+										客户:<span class="input-icon">
+												<input type="text" placeholder="这里输入关键词" class="nav-search-input"
+													   autocomplete="off" name="FCLIENTNAME" id="FCLIENTNAME" value="${pd.FCLIENTNAME }" placeholder="这里输入关键词"/>
+												<i class="ace-icon fa fa-search nav-search-icon"></i>
+											</span>
+
+										销售员:<span class="input-icon">
+										<input type="text" placeholder="这里输入关键词" class="nav-search-input"
+											   autocomplete="off" name="FSALESNAME" id="FSALESNAME" value="${pd.FSALESNAME }" placeholder="这里输入关键词"/>
+										<i class="ace-icon fa fa-search nav-search-icon"></i>
 										</span>
+
+										订单编号:<span class="input-icon">
+											<input type="text" placeholder="这里输入关键词" class="nav-search-input"
+												   autocomplete="off" name="FORDERNUM" id="FORDERNUM" value="${pd.FORDERNUM }" placeholder="这里输入关键词"/>
+											<i class="ace-icon fa fa-search nav-search-icon"></i>
+											</span>
+
+										状态:<span class="input-icon">
+											<select style="width: 90px;" name="FORDERSTATUS" id="FORDERSTATUS" data-placeholder="" class="nav-search-input"
+													style="vertical-align:top;width: 150px;">
+												<option></option>
+												<option value="0">草稿</option>
+												<option value="1">审核</option>
+											</select>
+										  </span>
 									</div>
 								</td>
-								<c:if test="${QX.cha == 1 }">
-								<td style="vertical-align:top;padding-left:2px"><a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i>查询</a></td>
-								</c:if>
-								<c:if test="${QX.toExcel == 1 }"><td style="vertical-align:top;padding-left:2px;"><a class="btn btn-light btn-xs" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i>导出到EXCEL</a></td></c:if>
-								<c:if test="${QX.add == 1 }">
-									<td style="vertical-align:top;padding-left:2px">
-										<a class="btn btn-light btn-xs" onclick="add();">
-											<i class="ace-icon fa fa-pencil-square-o bigger-110 nav-search-icon yellow"></i>新增
-										</a>
-									</td>
-								</c:if>
-								<td style="vertical-align:top;padding-left:2px">
-									<a class="btn btn-light btn-xs" onclick="edit();"  data-rel="tooltip" title="修改">
-											<i class="ace-icon fa fa-cogs bigger-110 nav-search-icon green"></i>修改
-									</a>
-								</td>
-								<c:if test="${QX.del == 1 }">
-								<td style="vertical-align:top;padding-left:2px"><a class="btn btn-light btn-xs" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='ace-icon fa fa-trash-o bigger-120 nav-search-icon red'></i>删除</a></td>
-								</c:if>
+								<td style="vertical-align:top;padding-left:2px;">
+									<div style="margin-top: 1px;"><a id="globelSearch" class="btn btn-light btn-mini" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i>查询</a></div></td>
+								<td style="vertical-align:top;padding-left:2px;margin-top: 2px;">
+									<div style="margin-top: 1px;"><a class="btn btn-light btn-mini" onclick="reset();"  title="重置"><i id="nav-search-icon" class="ace-icon glyphicon glyphicon-repeat bigger-110 nav-search-icon blue"></i>重置</a></div></td>
 							</tr>
 						</table>
 						<!-- 检索  -->
@@ -72,17 +110,14 @@
 									<label class="pos-rel"><input type="checkbox" class="ace" id="zcheckbox" /><span class="lbl"></span></label>
 									</th>
 									<th class="center" style="width:50px;">序号</th>
-									<th class="center">模板id</th>
+									<th class="center">客户</th>
 									<th class="center">订单编号</th>
-									<th class="center">要求发货日期</th>
-									<th class="center">部门ID</th>
-									<th class="center">联络人</th>
-									<th class="center">联系电话</th>
-									<th class="center">制作人ID</th>
-									<th class="center">制作日期</th>
+									<th class="center">订单日期</th>
+									<th class="center">业务员</th>
+									<th class="center">订单类型</th>
 									<th class="center">状态</th>
-									<th class="center">审核人ID</th>
-									<th class="center">审核日期</th>
+									<th class="center">同步状态</th>
+									<th class="center">版本</th>
 									<th class="center">备注</th>
 								</tr>
 							</thead>
@@ -93,28 +128,36 @@
 								<c:when test="${not empty varList}">
 									<c:if test="${QX.cha == 1 }">
 									<c:forEach items="${varList}" var="var" varStatus="vs">
-										<tr>
+										<tr id="tr${var.SALESORDERBILL_ID}" name="listBeen" onclick="toCheck('${var.SALESORDERBILL_ID}')" ondblclick="editByID('${var.SALESORDERBILL_ID}')" style="cursor: pointer;">
 											<td class='center'>
-												<label class="pos-rel"><input type='checkbox' name='ids' value="${var.SALESORDERBILL_ID}" class="ace" /><span class="lbl"></span></label>
+												<label class="pos-rel"><input id="${var.SALESORDERBILL_ID}" type='checkbox' name='ids' value="${var.SALESORDERBILL_ID}" class="ace" /><span class="lbl"></span></label>
 											</td>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
-											<td class='center'>${var.FTEMPID}</td>
-											<td class='center'>${var.FBILLNO}</td>
-											<td class='center'>${var.FNEEDDATE}</td>
-											<td class='center'>${var.FDEPTID}</td>
-											<td class='center'>${var.FCONTACT}</td>
-											<td class='center'>${var.FTELEPHONE}</td>
-											<td class='center'>${var.FBILLERID}</td>
-											<td class='center'>${var.FDATE}</td>
-											<c:if test="${var.FSTATUS==0}">
-												<td class='center'>未提交</td>
-											</c:if>
-											<c:if test="${var.FSTATUS==1}">
-												<td class='center'>已提交</td>
-											</c:if>
-											<td class='center'>${var.FCHECKERID}</td>
-											<td class='center'>${var.FCHECKDATE}</td>
-											<td class='center'>${var.FREMARK}</td>
+											<td class='center'>${var.FCLIENTNAME}</td>
+											<td class='center'>${var.FORDERNUM}</td>
+											<td class='center'>${var.FORDERDATE}</td>
+											<td class='center'>${var.FSALESNAME}</td>
+											<td class='center'>${var.FORDERTYPENAME}</td>
+											<td class='center'>
+												<c:if test="${var.FORDERSTATUS == 0}">
+													草稿
+												</c:if>
+
+												<c:if test="${var.FORDERSTATUS == 1}">
+													审核
+												</c:if>
+											</td>
+											<td class='center'>
+												<c:if test="${var.FISSYNCHRONIZATION == 0}">
+													未同步
+												</c:if>
+
+												<c:if test="${var.FISSYNCHRONIZATION == 1}">
+													已同步
+												</c:if>
+											</td>
+											<td class='center'>${var.FVERSIONS}</td>
+											<td class='center'>${var.FNOTE}</td>
 										</tr>
 									
 									</c:forEach>
@@ -149,15 +192,40 @@
 				</div>
 				<!-- /.page-content -->
 			</div>
-		</div>
 		<!-- /.main-content -->
 
 		<!-- 返回顶部 -->
 		<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
 			<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
 		</a>
-
 	</div>
+
+	<nav class="cd-nav-container" id="cd-nav">
+		<div style="margin-bottom: 0px;/*height: 30%*/" class="weeks">
+			<ul style="margin-left: 0px;margin-bottom: 0px" class="weekItem" id="weektab">
+				<a onclick="back();" style="position:absolute;right: 0px" class="cd-close-nav"></a>
+			</ul>
+			<div class="box01_c" id="lxr">
+				<table id="talxr" class="table table-striped table-bordered table-hover"
+					   style="margin-top:5px;">
+					<tr>
+						<th style="width: 50px;" class="center">序号</th>
+						<th class="center">商品编码</th>
+						<th class="center">商品名称</th>
+						<th class="center">规格型号</th>
+						<th class="center">单位</th>
+						<th class="center">订单数量</th>
+						<th class="center">单价</th>
+						<th class="center">金额</th>
+						<th class="center">要求到货日</th>
+						<th class="center">备注</th>
+					</tr>
+					<tr id="trlxr">
+					</tr>
+				</table>
+			</div>
+		</div>
+	</nav>
 	<!-- /.main-container -->
 
 	<!-- basic scripts -->
@@ -180,52 +248,55 @@
 			top.jzts();
 			$("#Form").submit();
 		}
-		$(function() {
-		
-			//日期框
-			$('.date-picker').datepicker({
-				autoclose: true,
-				todayHighlight: true
-			});
-			
-			//下拉框
-			if(!ace.vars['touch']) {
-				$('.chosen-select').chosen({allow_single_deselect:true}); 
-				$(window)
-				.off('resize.chosen')
-				.on('resize.chosen', function() {
-					$('.chosen-select').each(function() {
-						 var $this = $(this);
-						 $this.next().css({'width': $this.parent().width()});
-					});
-				}).trigger('resize.chosen');
-				$(document).on('settings.ace.chosen', function(e, event_name, event_val) {
-					if(event_name != 'sidebar_collapsed') return;
-					$('.chosen-select').each(function() {
-						 var $this = $(this);
-						 $this.next().css({'width': $this.parent().width()});
-					});
-				});
-				$('#chosen-multiple-style .btn').on('click', function(e){
-					var target = $(this).find('input[type=radio]');
-					var which = parseInt(target.val());
-					if(which == 2) $('#form-field-select-4').addClass('tag-input-style');
-					 else $('#form-field-select-4').removeClass('tag-input-style');
-				});
-			}
-			
-			
-			//复选框全选控制
-			var active_class = 'active';
-			$('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
-				var th_checked = this.checked;//checkbox inside "TH" table header
-				$(this).closest('table').find('tbody > tr').each(function(){
-					var row = this;
-					if(th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
-					else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
-				});
-			});
-		});
+
+        $(function() {
+            week_init();
+            //alert($(window).height());
+            $("body").height($(window).height());
+            //日期框
+            $('.date-picker').datepicker({
+                autoclose: true,
+                todayHighlight: true
+            });
+
+            //下拉框
+            if(!ace.vars['touch']) {
+                $('.chosen-select').chosen({allow_single_deselect:true});
+                $(window)
+                    .off('resize.chosen')
+                    .on('resize.chosen', function() {
+                        $('.chosen-select').each(function() {
+                            var $this = $(this);
+                            $this.next().css({'width': $this.parent().width()});
+                        });
+                    }).trigger('resize.chosen');
+                $(document).on('settings.ace.chosen', function(e, event_name, event_val) {
+                    if(event_name != 'sidebar_collapsed') return;
+                    $('.chosen-select').each(function() {
+                        var $this = $(this);
+                        $this.next().css({'width': $this.parent().width()});
+                    });
+                });
+                $('#chosen-multiple-style .btn').on('click', function(e){
+                    var target = $(this).find('input[type=radio]');
+                    var which = parseInt(target.val());
+                    if(which == 2) $('#form-field-select-4').addClass('tag-input-style');
+                    else $('#form-field-select-4').removeClass('tag-input-style');
+                });
+            }
+
+
+            //复选框全选控制
+            var active_class = 'active';
+            $('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
+                var th_checked = this.checked;//checkbox inside "TH" table header
+                $(this).closest('table').find('tbody > tr').each(function(){
+                    var row = this;
+                    if(th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
+                    else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
+                });
+            });
+        });
 		
 		//新增
 		function add(){
@@ -234,11 +305,9 @@
 			 diag.Drag=true;
 			 diag.Title ="新增";
 			 diag.URL = '<%=basePath%>salesorderbill/goAdd.do';
-			 diag.Width = 450;
-			 diag.Height = 355;
+             diag.Width = window.innerWidth;
+             diag.Height = window.innerHeight;
 			 diag.Modal = true;				//有无遮罩窗口
-			 diag. ShowMaxButton = true;	//最大化按钮
-		     diag.ShowMinButton = true;		//最小化按钮
 			 diag.CancelEvent = function(){ //关闭事件
 				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					 if('${page.currentPage}' == '0'){
@@ -274,11 +343,19 @@
 				  }
 				}
 				if(str.length < 1){
-					alert("您没有选择任何内容!");
-					return false;
+                    bootbox.dialog({
+                        message: "<span class='bigger-110'>您没有选择任何内容!</span>",
+                        buttons:
+                            { "button":{ "label":"确定", "className":"btn-sm btn-success"}}
+                    });
+                    return false;
 				}else if(str.length > 1){
-					alert("您的选择内容必须要单项!");
-					return false;
+                    bootbox.dialog({
+                        message: "<span class='bigger-110'>您的选择内容必须要单项!</span>",
+                        buttons:
+                            { "button":{ "label":"确定", "className":"btn-sm btn-success"}}
+                    });
+                    return false;
 				}else{
 					var Id = str[0];
 					 top.jzts();
@@ -286,11 +363,9 @@
 					 diag.Drag=true;
 					 diag.Title ="编辑";
 					 diag.URL = '<%=basePath%>salesorderbill/goEdit.do?SALESORDERBILL_ID='+Id;
-					 diag.Width = 450;
-					 diag.Height = 355;
+                     diag.Width = window.innerWidth;
+                     diag.Height = window.innerHeight;
 					 diag.Modal = true;				//有无遮罩窗口
-					 diag. ShowMaxButton = true;	//最大化按钮
-				     diag.ShowMinButton = true;		//最小化按钮 
 					 diag.CancelEvent = function(){ //关闭事件
 						 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 							 tosearch();
@@ -350,6 +425,105 @@
 		//导出excel
 		function toExcel(){
 			window.location.href='<%=basePath%>salesorderbill/excel.do';
+		}
+
+        function toCheck(Id){
+            $("#simple-table").find("tr[name='listBeen']").css("background-color", "");
+            $("#tr" + Id).css("background-color", "#CCCC99");
+            if($("#"+Id).prop("checked")){
+                $("#"+Id).removeAttr("checked");
+            }else {
+                $("#"+Id).prop("checked",true);
+            }
+
+            if($("#isDetail").prop("checked")){
+                back();
+                setTimeout("changecss()",300);
+            }
+
+            //changecss();
+        }
+
+        function changecss(){
+            $("#cd-nav").attr("class", "cd-nav-container is-visible");
+        }
+
+        function back(){
+            $("#cd-nav").attr("class", "cd-nav-container");
+        }
+
+        function week_init() {
+            $("#weektab li").each(function (i) {
+                $(this).click(function () {
+                    week_click(i);
+                }).hover(function () {
+                    $(this).addClass('hover');
+                }, function (event) {
+                    $(this).removeClass('hover');
+                });
+            });
+            week_click('0');
+            //$("#weekcon dl:last").css({"padding-bottom":"0","margin-bottom":"10px"});
+        }
+
+        function week_click(num) {
+            if (num == "0") {
+                $("#lxr").css("display", "");
+                $("#gjjl").css("display", "none");
+                $("#xsjl").css("display", "none");
+                $("#tpjl").css("display", "none");
+                $("#zdjl").css("display", "none");
+            } else if (num == "1") {
+                $("#lxr").css("display", "none");
+                $("#gjjl").css("display", "");
+                $("#xsjl").css("display", "none");
+                $("#tpjl").css("display", "none");
+                $("#zdjl").css("display", "none");
+            } else if (num == "2") {
+                $("#lxr").css("display", "none");
+                $("#gjjl").css("display", "none");
+                $("#xsjl").css("display", "");
+                $("#tpjl").css("display", "none");
+                $("#zdjl").css("display", "none");
+            } else if (num == "3") {
+                $("#lxr").css("display", "none");
+                $("#gjjl").css("display", "none");
+                $("#xsjl").css("display", "none");
+                $("#tpjl").css("display", "");
+                $("#zdjl").css("display", "none");
+            } else if (num == "4") {
+                $("#lxr").css("display", "none");
+                $("#gjjl").css("display", "none");
+                $("#xsjl").css("display", "none");
+                $("#tpjl").css("display", "none");
+                $("#zdjl").css("display", "");
+            }
+            $("#weektab li").removeClass('on').eq(num).addClass('on');
+        }
+
+        function editByID(Id) {
+            top.jzts();
+            var diag = new top.Dialog();
+            diag.Drag=true;
+            diag.Title ="编辑";
+            diag.URL = '<%=basePath%>salesorderbill/goEdit.do?SALESORDERBILL_ID='+Id;
+            diag.Width = window.innerWidth;
+            diag.Height = window.innerHeight;
+            diag.Modal = true;				//有无遮罩窗口
+            diag.CancelEvent = function(){ //关闭事件
+                if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+                    tosearch();
+                }
+                diag.close();
+            };
+            diag.show();
+        }
+
+        function reset(){
+		    $("#FCLIENTNAME").val('');
+		    $("#FSALESNAME").val('');
+		    $("#FORDERNUM").val('');
+			$("#FORDERSTATUS").val('');
 		}
 	</script>
 
