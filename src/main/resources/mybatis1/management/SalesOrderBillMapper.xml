@@ -19,7 +19,7 @@
 		FVERSIONS,	
 		FNOTE,	
 		FDELIVERYDATE,	
-		FCLIENTCREDIT,
+		FORDERAMOUNT,
 		FPACK,	
 		FCODESPURTING,	
 		FSPECIALREQUIREMENTS,	
@@ -31,7 +31,8 @@
 		FIDENTIFICATIONREQUIREMENTS,	
 		FLOGISTICS,	
 		FORDERPERSON,	
-		FORDERTIME,	
+		FORDERTIME,
+		FISCANCELLATION,
 		SALESORDERBILL_ID
 	</sql>
 	
@@ -47,7 +48,7 @@
 		#{FVERSIONS},	
 		#{FNOTE},	
 		#{FDELIVERYDATE},	
-		#{FCLIENTCREDIT},
+		#{FORDERAMOUNT},
 		#{FPACK},	
 		#{FCODESPURTING},	
 		#{FSPECIALREQUIREMENTS},	
@@ -59,7 +60,8 @@
 		#{FIDENTIFICATIONREQUIREMENTS},	
 		#{FLOGISTICS},	
 		#{FORDERPERSON},	
-		#{FORDERTIME},	
+		#{FORDERTIME},
+		#{FISCANCELLATION},
 		#{SALESORDERBILL_ID}
 	</sql>
 	
@@ -92,12 +94,10 @@
 			FORDERDATE = #{FORDERDATE},
 			FSALESID = #{FSALESID},
 			FORDERTYPE = #{FORDERTYPE},
-			FORDERSTATUS = #{FORDERSTATUS},
-			FISSYNCHRONIZATION = #{FISSYNCHRONIZATION},
 			FVERSIONS = #{FVERSIONS},
 			FNOTE = #{FNOTE},
 			FDELIVERYDATE = #{FDELIVERYDATE},
-			FCLIENTCREDIT = #{FCLIENTCREDIT},
+			FORDERAMOUNT = #{FORDERAMOUNT},
 			FPACK = #{FPACK},
 			FCODESPURTING = #{FCODESPURTING},
 			FSPECIALREQUIREMENTS = #{FSPECIALREQUIREMENTS},
@@ -184,6 +184,7 @@
 				-->
 				)
 		</if>
+		AND bill.FISCANCELLATION = 0
 	</select>
 	
 	<!-- 列表(全部) -->
@@ -196,13 +197,26 @@
 	
 	<!-- 批量删除 -->
 	<delete id="deleteAll" parameterType="String">
-		delete from
-		<include refid="tableName"></include>
-		where 
-			SALESORDERBILL_ID in
+		UPDATE
+			<include refid="tableName"></include>
+		SET
+			FISCANCELLATION = 1
+		WHERE
+			SALESORDERBILL_ID IN
 		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
                  #{item}
 		</foreach>
 	</delete>
+
+	<!-- 更新流水号 -->
+	<select id="updateSerialNumber" parameterType="pd" resultType="pd">
+		SELECT
+			TOP 1
+			FORDERNUM
+		FROM TB_SALESORDERBILL
+		WHERE
+	  		FORDERNUM LIKE #{NUMBER}+'%'
+	  	ORDER BY FORDERNUM DESC
+	</select>
 	
 </mapper>

@@ -53,6 +53,14 @@ public interface SalesOrderBillManager{
 	 * @throws Exception
 	 */
 	public void deleteAll(String[] ArrayDATA_IDS)throws Exception;
+
+	/**
+	 * 更新流水号
+	 * @param pd
+	 * @return
+	 * @throws Exception
+	 */
+	public PageData updateSerialNumber(PageData pd) throws Exception;
 	
 }
 

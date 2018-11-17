@@ -93,10 +93,10 @@
 								</tr>
 								<tr>
 									<td style="width:6%;text-align: right;">
-										<label>客户信用<span style="color: red;">*</span>:</label>
+										<label>订单金额<span style="color: red;">*</span>:</label>
 									</td>
 									<td>
-										<input id="FCLIENTCREDIT" name="FCLIENTCREDIT" value="${pd.FCLIENTCREDIT}" type="date" style="width: 100%;" class="input-text">
+										<input id="FORDERAMOUNT" name="FORDERAMOUNT" value="${pd.FORDERAMOUNT}" type="number" min="0" step="0.01" style="width: 100%;" class="input-text">
 									</td>
 
 									<td style="width:6%;text-align: right;">
@@ -400,14 +400,14 @@
                 return false;
             }
 
-            if($("#FCLIENTCREDIT").val()==""){
-                $("#FCLIENTCREDIT").tips({
+            if($("#FORDERAMOUNT").val()==""){
+                $("#FORDERAMOUNT").tips({
                     side:3,
-                    msg:'请选择客户信用',
+                    msg:'请输入订单金额',
                     bg:'#AE81FF',
                     time:2
                 });
-                $("#FCLIENTCREDIT").focus();
+                $("#FORDERAMOUNT").focus();
                 return false;
             }
 			$("#Form").submit();

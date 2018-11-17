@@ -77,6 +77,10 @@ public class SalesOrderBillService implements SalesOrderBillManager{
 	public void deleteAll(String[] ArrayDATA_IDS)throws Exception{
 		dao.delete("SalesOrderBillMapper.deleteAll", ArrayDATA_IDS);
 	}
-	
+
+	public PageData updateSerialNumber(PageData pd) throws Exception {
+		return (PageData) dao.findForObject("SalesOrderBillMapper.updateSerialNumber",pd);
+	}
+
 }
 
