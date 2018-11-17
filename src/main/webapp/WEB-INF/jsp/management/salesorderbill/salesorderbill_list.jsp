@@ -370,9 +370,7 @@
                      diag.Height = window.innerHeight;
 					 diag.Modal = true;				//有无遮罩窗口
 					 diag.CancelEvent = function(){ //关闭事件
-						 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
-							 tosearch();
-						}
+						 tosearch();
 						diag.close();
 					 };
 					 diag.show();
@@ -514,9 +512,7 @@
             diag.Height = window.innerHeight;
             diag.Modal = true;				//有无遮罩窗口
             diag.CancelEvent = function(){ //关闭事件
-                if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
-                    tosearch();
-                }
+                tosearch();
                 diag.close();
             };
             diag.show();

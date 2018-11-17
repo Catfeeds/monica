@@ -315,9 +315,12 @@
 
 <div style="text-align: right;height:45px;
 		background: url(static/login/images/topbg.png) repeat-x; position:fixed;width: 100%;z-index:10000000;bottom: 0px;";>
-	<a style="margin-top: 10px;" class="btn btn-light btn-xs">
-		<i class="ace-icon glyphicon glyphicon-ok bigger-110 nav-search-icon green"></i>审核
-	</a>
+
+	<c:if test="${msg == 'edit'}">
+		<a style="margin-top: 10px;" onclick="approve('您确定审批该订单吗?')" class="btn btn-light btn-xs">
+			<i class="ace-icon glyphicon glyphicon-ok bigger-110 nav-search-icon green"></i>审批
+		</a>
+	</c:if>
 
 	<a style="margin-top: 10px;" class="btn btn-light btn-xs">
 		<i class="ace-icon glyphicon glyphicon-edit bigger-110 nav-search-icon blue"></i>变更
@@ -337,6 +340,8 @@
 	<%@ include file="../../system/index/foot.jsp"%>
 	<!-- 下拉框 -->
 	<script src="static/ace/js/chosen.jquery.js"></script>
+	<!-- 删除时确认窗口 -->
+	<script src="static/ace/js/bootbox.js"></script>
 	<!-- 日期框 -->
 	<script src="static/ace/js/date-time/bootstrap-datepicker.js"></script>
 	<!--提示框-->
@@ -495,6 +500,42 @@
             };
             diag.show();
 		}
+
+        function approve(msg){
+            bootbox.confirm(msg, function(result) {
+                if(result) {
+                    var Id = $("#SALESORDERBILL_ID").val();
+					$.ajax({
+						async:false,
+						cache:false,
+						url:'<%=basePath%>salesorderbill/approve.do',
+						type:'POST',
+						data:{
+							SALESORDERBILL_ID:Id
+						},
+						datatype:'JSON',
+						success:function (obj) {
+							if(obj.msg == '1'){
+								bootbox.alert({
+									size: "small",
+									title: "成功",
+									message: "该订单已成功审批!"
+
+								});
+                                return false;
+							} else {
+								bootbox.alert({
+									size: "small",
+									title:"失败",
+									message: "该订单已通过审批,无法重复操作!"
+								});
+								return false;
+							}
+						}
+					});
+                }
+            });
+        }
 		</script>
 </body>
 </html>
