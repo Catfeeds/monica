@@ -31,7 +31,6 @@ public class TimerProcedure {
 				OutputStreamWriter outWrite = null;
 				String synStr = null;
                 while (true) {
-                	System.out.println("开始把订单数据同步到erp服务器...");
 					//pd = (PageData)dao.findForObject("InterfaceIPMapper.findByNew", pd);
                     try {
                         Thread.sleep(timeInterval);
