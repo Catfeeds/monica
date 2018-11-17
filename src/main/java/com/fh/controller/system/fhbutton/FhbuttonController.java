@@ -30,7 +30,7 @@ import com.fh.service.system.fhbutton.FhbuttonManager;
 /** 
  * 说明：按钮管理
  * 创建人：成
- * 创建时间：2016-01-15
+ * 创建时间：
  */
 @Controller
 @RequestMapping(value="/fhbutton")

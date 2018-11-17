@@ -36,7 +36,7 @@ import com.fh.service.fhoa.fhfile.FhfileManager;
 /** 
  * 说明：文件管理
  * 创建人：成
- * 创建时间：2016-05-27
+ * 创建时间：
  */
 @Controller
 @RequestMapping(value="/fhfile")

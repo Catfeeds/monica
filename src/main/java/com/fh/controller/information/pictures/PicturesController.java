@@ -40,7 +40,7 @@ import com.fh.service.information.pictures.PicturesManager;
 /** 
  * 类名称：图片管理
  * 创建人：成
- * 创建时间：2015-03-21
+ * 创建时间：
  */
 @Controller
 @RequestMapping(value="/pictures")

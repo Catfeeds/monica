@@ -32,7 +32,7 @@ import com.fh.service.weixin.mymenu.MyMenuManager;
 /** 
  * 说明：微信自定义菜单
  * 创建人：成
- * 创建时间：2016-10-30
+ * 创建时间：
  */
 @Controller
 @RequestMapping(value="/mymenu")

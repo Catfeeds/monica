@@ -33,7 +33,7 @@ import com.fh.util.PageData;
 /** 
  * 类名称：会员管理
  * 创建人：成
- * 修改时间：2014年11月17日
+ * 修改时间：
  * @version
  */
 @Controller

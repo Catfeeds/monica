@@ -25,7 +25,7 @@ import com.fh.util.Tools;
 /** 
  * 说明：代码编辑器
  * 创建人：成
- * 创建时间：2017-06-10
+ * 创建时间：
  */
 @Controller
 @RequestMapping(value="/codeeditor")
