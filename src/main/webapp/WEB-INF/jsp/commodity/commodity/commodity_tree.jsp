@@ -113,6 +113,7 @@
 			},
 			callback : {
 				onClick : function(event, treeId, treeNode, clickFlag) {
+				    debugger;
 					// 判断是否父节点  
 					if (!treeNode.isParent) {
 						/* alert("treeId自动编号：" + treeNode.tId + ", 节点id是："
@@ -120,13 +121,13 @@
 								
 					}
 					//var treeKey = encodeURI(encodeURI(treeNode.name));
-					var treeKey = treeNode.id;
+					var fparentid = treeNode.id;
 					//alert(treeKey);
 					if(treeNode.id == 1){
 						keywords ="";
-						$("#treeFrame").attr("src","<%=basePath%>commodity/list?treeKey="+treeKey);
+						$("#treeFrame").attr("src","<%=basePath%>commodity/list?fparentid="+fparentid);
 					}
-					$("#treeFrame").attr("src","<%=basePath%>commodity/list?treeKey="+treeKey);
+					$("#treeFrame").attr("src","<%=basePath%>commodity/list?fparentid="+fparentid);
 					//$("#treeFrame").attr("src","http://www.baidu.com");
 				}
 			}

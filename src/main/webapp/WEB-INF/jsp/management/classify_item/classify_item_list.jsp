@@ -44,18 +44,52 @@
 								</td>
 								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastStart" id="lastStart"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期" title="开始日期"/></td>
 								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastEnd" name="lastEnd"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期" title="结束日期"/></td>
-								<td  style="vertical-align:top;padding-left:5px"><a
-										style="width: 100%;"
-										class="btn btn-light btn-xs" onclick="updateItem()">同步物料分类资料<i
-										id="nav-search-icon"
-										class="ace-icon fa fa-refresh bigger-110 nav-search-icon blue"></i>
-								</a></td>
+
 								<c:if test="${QX.cha == 1 }">
-								<td style="vertical-align:top;padding-left:2px"><a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i></a></td>
+									<td style="vertical-align:top;padding-left:2px">
+										<a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索">
+											<i id="nav-search-icon" class="ace-icon fa fa-search bigger-120 nav-search-icon blue"></i>查询
+										</a>
+									</td>
+									<td style="vertical-align:top;padding-left:2px">
+										<a class="btn btn-light btn-xs" onclick="Form_reset()"  title="重置">
+											<i id="nav-repeat-icon" class="ace-icon fa fa-repeat bigger-120"></i>重置
+										</a>
+									</td>
 								</c:if>
-								<c:if test="${QX.toExcel == 1 }"><td style="vertical-align:top;padding-left:2px;"><a class="btn btn-light btn-xs" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i></a></td></c:if>
 							</tr>
 						</table>
+							<div class="row" style="margin-top:5px;">
+								<div class="col-xs-12">
+									<p>
+										<c:if test="${QX.add == 1 }">
+											<a class="btn btn-light btn-xs" onclick="add();">
+												<i id="nav-save-icon" class="ace-icon fa fa-plus bigger-120 green"></i>新增
+											</a>
+										</c:if>
+										<c:if test="${QX.edit == 1 }">
+											<a class="btn btn-light btn-xs" onclick="edit('');" data-rel="tooltip" title="修改">
+												<i class="ace-icon fa fa-pencil-square-o bigger-120 orange"></i>修改
+											</a>
+										</c:if>
+										<c:if test="${QX.del == 1 }">
+											<a class="btn btn-light btn-xs" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除">
+												<i class="ace-icon fa fa-trash-o bigger-125 red"></i>删除
+											</a>
+										</c:if>
+
+										<a class="btn btn-light btn-xs" onclick="updateItem()">
+											<i id="nav-refresh-icon" class="ace-icon fa fa-refresh bigger-120 blue"></i>同步
+										</a>
+
+										<c:if test="${QX.toExcel == 1 }">
+											<a class="btn btn-light btn-xs" onclick="toExcel();" title="导出到EXCEL">
+												<i id="nav-download-icon" class="ace-icon fa fa-download bigger-120 purple"></i>导出Excel
+											</a>
+										</c:if>
+									</p>
+								</div>
+							</div>
 						<!-- 检索  -->
 					
 						<table id="simple-table" class="table table-striped table-bordered table-hover" style="margin-top:5px;">	
@@ -70,7 +104,7 @@
 									<th class="center">名称</th>
 									<th class="center">父ID</th>
 									<th class="center">FModifyTime</th>
-									<th class="center">操作</th>
+									<%--<th class="center">操作</th>--%>
 								</tr>
 							</thead>
 													
@@ -90,7 +124,7 @@
 											<td class='center'>${var.FNAME}</td>
 											<td class='center'>${var.FPARENTID}</td>
 											<td class='center'>${var.FMODIFYTIME}</td>
-											<td class="center">
+											<%--<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
 												</c:if>
@@ -111,7 +145,7 @@
 														<button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
 															<i class="ace-icon fa fa-cog icon-only bigger-110"></i>
 														</button>
-			
+
 														<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 															<c:if test="${QX.edit == 1 }">
 															<li>
@@ -134,7 +168,7 @@
 														</ul>
 													</div>
 												</div>
-											</td>
+											</td>--%>
 										</tr>
 									
 									</c:forEach>
@@ -156,20 +190,21 @@
 						<div class="page-header position-relative">
 						<table style="width:100%;">
 							<tr>
-								<td style="vertical-align:top;">
+								<%--<td style="vertical-align:top;">
 									<c:if test="${QX.add == 1 }">
 									<a class="btn btn-mini btn-success" onclick="add();">新增</a>
 									</c:if>
 									<c:if test="${QX.del == 1 }">
 									<a class="btn btn-mini btn-danger" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='ace-icon fa fa-trash-o bigger-120'></i></a>
 									</c:if>
+								</td>--%>
+								<td style="vertical-align:top;">
+									<div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div>
 								</td>
-								<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>
 							</tr>
 						</table>
 						</div>
 						</form>
-					
 						</div>
 						<!-- /.col -->
 					</div>
@@ -208,7 +243,11 @@
 			top.jzts();
 			$("#Form").submit();
 		}
-		$(function() {
+        //重置
+        function Form_reset(){
+            document.getElementById("Form").reset();
+        }
+        $(function() {
 		
 			//日期框
 			$('.date-picker').datepicker({
