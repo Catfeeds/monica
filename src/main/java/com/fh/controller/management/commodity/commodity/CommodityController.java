@@ -152,8 +152,8 @@ public class CommodityController extends BaseController {
 		}
 		List<PageData>	varList = commodityService.list(page);	//列出Commodity列表
 		if(null != FPARENTID && !"".equals(FPARENTID)){
-			pd.put("FPARENTID", Integer.parseInt(FPARENTID));
-			//pd.put("treeKey", treeKey);
+			//pd.put("fparentid", Integer.parseInt(FPARENTID));
+			pd.put("fparentid", FPARENTID);
 		}
 		mv.setViewName("commodity/commodity/commodity_list");
 		mv.addObject("varList", varList);

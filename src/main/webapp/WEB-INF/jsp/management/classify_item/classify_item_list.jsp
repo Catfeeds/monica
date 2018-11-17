@@ -32,33 +32,6 @@
 							
 						<!-- 检索  -->
 						<form action="classify_item/list.do" method="post" name="Form" id="Form">
-						<table style="margin-top:5px;">
-							<tr>
-								<td>
-									<div class="nav-search">
-										<span class="input-icon">
-											<input type="text" placeholder="这里输入关键词" class="nav-search-input" id="nav-search-input" autocomplete="off" name="keywords" value="${pd.keywords }" placeholder="这里输入关键词"/>
-											<i class="ace-icon fa fa-search nav-search-icon"></i>
-										</span>
-									</div>
-								</td>
-								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastStart" id="lastStart"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期" title="开始日期"/></td>
-								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastEnd" name="lastEnd"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期" title="结束日期"/></td>
-
-								<c:if test="${QX.cha == 1 }">
-									<td style="vertical-align:top;padding-left:2px">
-										<a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索">
-											<i id="nav-search-icon" class="ace-icon fa fa-search bigger-120 nav-search-icon blue"></i>查询
-										</a>
-									</td>
-									<td style="vertical-align:top;padding-left:2px">
-										<a class="btn btn-light btn-xs" onclick="Form_reset()"  title="重置">
-											<i id="nav-repeat-icon" class="ace-icon fa fa-repeat bigger-120"></i>重置
-										</a>
-									</td>
-								</c:if>
-							</tr>
-						</table>
 							<div class="row" style="margin-top:5px;">
 								<div class="col-xs-12">
 									<p>
@@ -90,6 +63,33 @@
 									</p>
 								</div>
 							</div>
+						<table style="margin-top:3px;">
+							<tr>
+								<td>
+									<div class="nav-search">
+										<span class="input-icon">
+											<input type="text" placeholder="这里输入关键词" class="nav-search-input" id="nav-search-input" autocomplete="off" name="keywords" value="${pd.keywords }" placeholder="这里输入关键词"/>
+											<i class="ace-icon fa fa-search nav-search-icon"></i>
+										</span>
+									</div>
+								</td>
+								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastStart" id="lastStart"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期" title="开始日期"/></td>
+								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastEnd" name="lastEnd"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期" title="结束日期"/></td>
+
+								<c:if test="${QX.cha == 1 }">
+									<td style="vertical-align:top;padding-left:2px">
+										<a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索">
+											<i id="nav-search-icon" class="ace-icon fa fa-search bigger-120 nav-search-icon blue"></i>查询
+										</a>
+									</td>
+									<td style="vertical-align:top;padding-left:2px">
+										<a class="btn btn-light btn-xs" onclick="Form_reset()"  title="重置">
+											<i id="nav-repeat-icon" class="ace-icon fa fa-repeat bigger-120"></i>重置
+										</a>
+									</td>
+								</c:if>
+							</tr>
+						</table>
 						<!-- 检索  -->
 					
 						<table id="simple-table" class="table table-striped table-bordered table-hover" style="margin-top:5px;">	
