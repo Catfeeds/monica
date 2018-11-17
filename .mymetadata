@@ -4,7 +4,7 @@
   name="monica"
   id="myeclipse.1508743419931"
   context-root="/monica"
-  j2ee-spec="1.7"
+  j2ee-spec="1.8"
   archive="monica.war">
   <attributes>
     <attribute name="webrootdir" value="src/main/webapp" />
