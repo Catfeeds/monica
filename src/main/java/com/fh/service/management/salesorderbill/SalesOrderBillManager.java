@@ -61,6 +61,13 @@ public interface SalesOrderBillManager{
 	 * @throws Exception
 	 */
 	public PageData updateSerialNumber(PageData pd) throws Exception;
+
+	/**
+	 * 审批订单
+	 * @param pd
+	 * @throws Exception
+	 */
+	public void orderApproval(PageData pd) throws Exception;
 	
 }
 

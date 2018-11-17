@@ -174,15 +174,16 @@
 		LEFT JOIN TB_CLIENT AS client
 		ON bill.FCLIENTID = client.CLIENT_ID
 		WHERE 1=1
-		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
-			and
-				(
-				<!--	根据需求自己加检索条件
-					字段1 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
-					 or 
-					字段2 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
-				-->
-				)
+		<if test="pd.FCLIENTNAME != null and pd.FCLIENTNAME != ''">
+			AND client.FNAME LIKE '%'+#{pd.FCLIENTNAME}+'%'
+		</if>
+
+		<if test="pd.FORDERNUM != null and pd.FORDERNUM != ''">
+			AND bill.FORDERNUM LIKE '%'+#{pd.FORDERNUM}+'%'
+		</if>
+
+		<if test="pd.FORDERSTATUS != null and pd.FORDERSTATUS != ''">
+			AND bill.FORDERSTATUS = #{pd.FORDERSTATUS}
 		</if>
 		AND bill.FISCANCELLATION = 0
 	</select>
@@ -218,5 +219,15 @@
 	  		FORDERNUM LIKE #{NUMBER}+'%'
 	  	ORDER BY FORDERNUM DESC
 	</select>
+
+	<!-- 审批订单 -->
+	<update id="orderApproval" parameterType="pd">
+		UPDATE
+			<include refid="tableName"></include>
+		SET
+			FORDERSTATUS = 1
+		WHERE
+			SALESORDERBILL_ID = #{SALESORDERBILL_ID}
+	</update>
 	
 </mapper>

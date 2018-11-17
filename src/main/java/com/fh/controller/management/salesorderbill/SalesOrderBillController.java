@@ -103,9 +103,13 @@ public class SalesOrderBillController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		String keywords = pd.getString("keywords");				//关键词检索条件
-		if(null != keywords && !"".equals(keywords)){
-			pd.put("keywords", keywords.trim());
+		String clientName = pd.getString("FCLIENTNAME");				//关键词检索条件
+		if(null != clientName && !"".equals(clientName)){
+			pd.put("FCLIENTNAME", clientName.trim());
+		}
+		String orderNum = pd.getString("FORDERNUM");				//关键词检索条件
+		if(null != orderNum && !"".equals(orderNum)){
+			pd.put("FORDERNUM", orderNum.trim());
 		}
 		page.setPd(pd);
 		List<PageData>	varList = salesorderbillService.list(page);	//列出SalesOrderBill列表
@@ -266,6 +270,21 @@ public class SalesOrderBillController extends BaseController {
 		pdList.add(pd);
 		map.put("list", pdList);
 		return AppUtil.returnObject(pd, map);
+	}
+
+	@RequestMapping(value = "/approve")
+	@ResponseBody
+	public Map<String,String> approve() throws Exception{
+		Map<String,String> resultMap = new HashMap<>();
+		PageData pd = this.getPageData();
+		PageData checkPd = salesorderbillService.findById(pd);
+		if("0".equals(checkPd.get("FORDERSTATUS").toString())){
+			salesorderbillService.orderApproval(pd);
+			resultMap.put("msg","1");
+		} else {
+			resultMap.put("msg","0");
+		}
+		return resultMap;
 	}
 	
 	 /**导出到excel

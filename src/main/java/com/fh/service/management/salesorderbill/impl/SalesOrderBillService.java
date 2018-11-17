@@ -75,11 +75,15 @@ public class SalesOrderBillService implements SalesOrderBillManager{
 	 * @throws Exception
 	 */
 	public void deleteAll(String[] ArrayDATA_IDS)throws Exception{
-		dao.delete("SalesOrderBillMapper.deleteAll", ArrayDATA_IDS);
+		dao.update("SalesOrderBillMapper.deleteAll", ArrayDATA_IDS);
 	}
 
 	public PageData updateSerialNumber(PageData pd) throws Exception {
 		return (PageData) dao.findForObject("SalesOrderBillMapper.updateSerialNumber",pd);
+	}
+
+	public void orderApproval(PageData pd) throws Exception {
+		dao.update("SalesOrderBillMapper.orderApproval",pd);
 	}
 
 }
