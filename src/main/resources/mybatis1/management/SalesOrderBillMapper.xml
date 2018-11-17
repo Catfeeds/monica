@@ -118,6 +118,7 @@
 	<!-- 通过ID获取数据 -->
 	<select id="findById" parameterType="pd" resultType="pd">
 		SELECT
+			client.FNAME AS FCLIENTNAME,
 			logistics.DICTIONARIES_ID AS FLOGISTICSID,
 			logistics.NAME AS FLOGISTICSNAME,
 			identificationrequirements.DICTIONARIES_ID AS FIDENTIFICATIONREQUIREMENTSID,
@@ -156,6 +157,8 @@
 		ON bill.FIDENTIFICATIONREQUIREMENTS = identificationrequirements.DICTIONARIES_ID
 		LEFT JOIN sys_dictionaries AS logistics
 		ON bill.FLOGISTICS = logistics.DICTIONARIES_ID
+		LEFT JOIN TB_CLIENT AS client
+		ON bill.FCLIENTID = client.CLIENT_ID
 		WHERE bill.SALESORDERBILL_ID = #{SALESORDERBILL_ID}
 	</select>
 	
@@ -163,10 +166,13 @@
 	<select id="datalistPage" parameterType="page" resultType="pd">
 		SELECT
 			ordertype.NAME AS FORDERTYPENAME,
+			client.FNAME AS FCLIENTNAME,
 			bill.*
 		FROM TB_SALESORDERBILL AS bill
 		LEFT JOIN sys_dictionaries AS ordertype
 		ON bill.FORDERTYPE = ordertype.DICTIONARIES_ID
+		LEFT JOIN TB_CLIENT AS client
+		ON bill.FCLIENTID = client.CLIENT_ID
 		WHERE 1=1
 		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
 			and

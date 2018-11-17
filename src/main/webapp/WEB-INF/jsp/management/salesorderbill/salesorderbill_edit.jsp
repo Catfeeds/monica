@@ -48,7 +48,7 @@
 										<label>客户名称<span style="color: red;">*</span>:</label>
 									</td>
 									<td>
-										<input id="FCLIENTNAME" type="text" onclick="toClient()" style="width: 100%;cursor: pointer;
+										<input id="FCLIENTNAME" value="${pd.FCLIENTNAME}" type="text" onclick="toClient()" style="width: 100%;cursor: pointer;
 													background: url(static/images/search.png) no-repeat;background-size: 20px 20px;
 													background-position:right;background-color: #FFFFFF;" class="input-text">
 									</td>
@@ -345,7 +345,7 @@
 		$(top.hangge());
 		//保存
 		function save(){
-            /*if($("#FCLIENTID").val()==""){
+            if($("#FCLIENTID").val()==""){
                 $("#FCLIENTNAME").tips({
                     side:3,
                     msg:'请选择客户',
@@ -354,7 +354,7 @@
                 });
                 $("#FCLIENTNAME").focus();
                 return false;
-            }*/
+            }
 
             if($("#FORDERDATE").val()==""){
                 $("#FORDERDATE").tips({
@@ -464,43 +464,33 @@
             var diag = new top.Dialog();
             diag.Drag=true;
             diag.Title ="选择客户";
-            diag.URL = '<%=basePath%>client/getClassClient.do';
+            diag.URL = '<%=basePath%>client/listTree_select.do';
             diag.Width = window.innerWidth * 1.2;
             diag.Height = window.innerHeight * 1.2;
             diag.Modal = true;				//有无遮罩窗口
             diag.CancelEvent = function(){ //关闭事件
-               /* if(isAdmin == "true"){
-                    var iframe = diag.innerFrame.contentWindow.document.getElementById('treeFrame').contentWindow;
-                    var msg = iframe.document.getElementById('msg').value;
-                    var EMPLOYEE_ID = iframe.document.getElementById('EMPLOYEE_ID').value;
-                }else {
-                    var msg = diag.innerFrame.contentWindow.document.getElementById('msg').value;
-                    var EMPLOYEE_ID = diag.innerFrame.contentWindow.document.getElementById('EMPLOYEE_ID').value;
-                }
+                var iframe = diag.innerFrame.contentWindow.document.getElementById('treeFrame').contentWindow;
+                var msg = iframe.document.getElementById('msg').value;
+                var CLIENT_ID = iframe.document.getElementById('CLIENT_ID').value;
                 if(msg == "save"){
-                    $("#FEMPID").val(EMPLOYEE_ID);
+                    $("#FCLIENTID").val(CLIENT_ID);
                     $.ajax({
                         async: false,
                         cache: false,
                         type: 'POST',
                         data : {
-                            EMPLOYEE_ID : EMPLOYEE_ID
+                            CLIENT_ID : CLIENT_ID
                         },
-                        url: '<%=basePath%>employee/findEmplByID',
+                        url: '<%=basePath%>client/findClientByID',
                         success: function (data) {
                             var pd = data.pd;
-                            console.log(pd);
-                            $("#FORG").val(pd.CNAME);
-                            $("#SALES").val(pd.FNAME);
-                            $("#FORGID").val(pd.FCOMPANYID);
-                            $("#FDEPTID").val(pd.FDEPTID);
+                            $("#FCLIENTNAME").val(pd.FNAME);
                         },
                         error: function () {
                             alert("请求失败");
                         }
                     });
-                    //findEmplByID
-                }*/
+                }
                 diag.close();
             };
             diag.show();
