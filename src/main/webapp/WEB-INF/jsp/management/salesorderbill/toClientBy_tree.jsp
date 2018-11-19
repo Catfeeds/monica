@@ -45,16 +45,16 @@
 									</div>
 								</td>
 								<c:if test="${QX.cha == 1 }">
-								<td style="padding-left:2px"><a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i></a></td>
+								<td style="padding-left:2px"><a id="globelSearch" class="btn btn-light btn-mini" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i></a></td>
 								</c:if>
 								<td style="vertical-align:top;padding-left:2px">
-									<a style="margin-top: 2px;" class="btn btn-light btn-xs" onclick="save()">
+									<a style="margin-top: 2px;" class="btn btn-light btn-mini" onclick="save()">
 										<i class="ace-icon fa fa-credit-card bigger-110 nav-search-icon green"></i>提交
 									</a>
 								</td>
 								<td style="vertical-align:top;padding-left:2px">
-									<a style="margin-top: 2px;margin-right: 10px;" class="btn btn-light btn-xs" onclick="top.Dialog.close();">
-										<i class="ace-icon fa  fa-external-link bigger-110 nav-search-icon red"></i>取消
+									<a style="margin-top: 2px;margin-right: 10px;" class="btn btn-light btn-mini" onclick="top.Dialog.close();">
+										<i class="ace-icon fa fa-external-link bigger-110 nav-search-icon red"></i>取消
 									</a>
 								</td>
 							</tr>
@@ -68,7 +68,6 @@
 									<label class="pos-rel"><input type="checkbox" class="ace" id="zcheckbox" /><span class="lbl"></span></label>
 									</th>
 									<th class="center" style="width:50px;">序号</th>
-									<th class="center">FItemID</th>
 									<th class="center">客户编码</th>
 									<th class="center">客户名称</th>
 								</tr>
@@ -85,7 +84,6 @@
 												<label class="pos-rel"><input id="${var.CLIENT_ID}" type='checkbox' name='ids' value="${var.CLIENT_ID}" class="ace" /><span class="lbl"></span></label>
 											</td>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
-											<td class='center'>${var.FITEMID}</td>
 											<td class='center'>${var.FNUMBER}</td>
 											<td class='center'>${var.FNAME}</td>
 										</tr>
@@ -360,6 +358,13 @@
             }
 
         }
+
+        //回车搜索
+        $("body").keydown(function() {
+            if (event.keyCode == "13") {//keyCode=13是回车键
+                $('#globelSearch').click();
+            }
+        });
 		
 		//导出excel
 		function toExcel(){

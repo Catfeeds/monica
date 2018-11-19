@@ -31,55 +31,43 @@
 						<div class="col-xs-12">
 							
 						<!-- 检索  -->
-						<form action="client/list.do" method="post" name="Form" id="Form">
+						<form action="client/list.do?treeKey=${pd.treeKey}" method="post" name="Form" id="Form">
+							<%--<input type="hidden" name="treeKey" value="${pd.treeKey}">--%>
 							<table style="margin-top:5px;">
 								<tr>
-									<a style="margin-left: 3px" class="btn btn-light btn-mini" data-rel="tooltip" title="同步">
+									<a style="margin-left: 3px" class="btn btn-light btn-xs" data-rel="tooltip" title="同步">
 										<i class="ace-icon glyphicon glyphicon-retweet bigger-110 nav-search-icon blue"></i>同步
 									</a>
 									<c:if test="${QX.add == 1 }">
-										<a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="add();">
+										<a style="margin-left: 3px" class="btn btn-light btn-xs" onclick="add();">
 											<i class="ace-icon fa fa-pencil-square-o bigger-110 nav-search-icon yellow"></i>新增
 										</a>
 									</c:if>
-									<a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="edit();"  data-rel="tooltip" title="修改">
+									<a style="margin-left: 3px" class="btn btn-light btn-xs" onclick="edit();"  data-rel="tooltip" title="修改">
 										<i class="ace-icon fa fa-cogs bigger-110 nav-search-icon green"></i>修改
 									</a>
-									<a style="margin-left: 3px" class="btn btn-light btn-mini" data-rel="tooltip" title="变更">
+									<a style="margin-left: 3px" class="btn btn-light btn-xs" data-rel="tooltip" title="变更">
 										<i class="ace-icon glyphicon glyphicon-edit bigger-110 nav-search-icon blue"></i>变更
 									</a>
 									<c:if test="${QX.del == 1 }">
-										<a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='ace-icon fa fa-trash-o bigger-120 nav-search-icon red'></i>删除</a>
+										<a style="margin-left: 3px" class="btn btn-light btn-xs" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='ace-icon fa fa-trash-o bigger-120 nav-search-icon red'></i>删除</a>
 									</c:if>
-									<c:if test="${QX.toExcel == 1 }"><a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i>导出到EXCEL</a></c:if>
+									<c:if test="${QX.toExcel == 1 }"><a style="margin-left: 3px" class="btn btn-light btn-xs" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i>导出到EXCEL</a></c:if>
 									<%--<label style="float: right;margin-top: 5px;margin-right: 15px">
 										<input id="isDetail" <c:if test="${pd.isDetail == 'true'}">checked</c:if>
 											   name="isDetail" class="ace ace-switch ace-switch-5" type="checkbox">
 										<span class="lbl"></span>
 									</label>--%>
-								</tr>//dfsdfsa
+								</tr>
 
 								<tr>
 									<td>
 										<div class="nav-search">
-											客户:<span class="input-icon">
-												<input type="text" placeholder="这里输入关键词" class="nav-search-input"
-													   autocomplete="off" name="FCLIENTNAME" id="FCLIENTNAME" value="${pd.FCLIENTNAME }" placeholder="这里输入关键词"/>
-												<i class="ace-icon fa fa-search nav-search-icon"></i>
-											</span>
-
-											销售员:<span class="input-icon">
+											客户名称:<span class="input-icon">
 										<input type="text" placeholder="这里输入关键词" class="nav-search-input"
-											   autocomplete="off" name="FSALESNAME" id="FSALESNAME" value="${pd.FSALESNAME }" placeholder="这里输入关键词"/>
+											   autocomplete="off" name="keywords" id="FNAME" value="${pd.keywords }" placeholder="这里输入关键词"/>
 										<i class="ace-icon fa fa-search nav-search-icon"></i>
 										</span>
-
-											订单编号:<span class="input-icon">
-											<input type="text" placeholder="这里输入关键词" class="nav-search-input"
-												   autocomplete="off" name="FORDERNUM" id="FORDERNUM" value="${pd.FORDERNUM }" placeholder="这里输入关键词"/>
-											<i class="ace-icon fa fa-search nav-search-icon"></i>
-											</span>
-
 										</div>
 									</td>
 									<td style="vertical-align:top;padding-left:2px;">
@@ -119,12 +107,12 @@
 									<label class="pos-rel"><input type="checkbox" class="ace" id="zcheckbox" /><span class="lbl"></span></label>
 									</th>
 									<th class="center" style="width:50px;">序号</th>
-									<th class="center">FItemID</th>
+									<%--<th class="center">FItemID</th>--%>
 									<th class="center">客户编码</th>
 									<th class="center">客户名称</th>
-									<th class="center">FParentID</th>
-									<th class="center">FModifyTime</th>
-									<th class="center">FDeleted</th>
+									<%--<th class="center">FParentID</th>--%>
+									<th class="center">修改时间</th>
+									<%--<th class="center">FDeleted</th>--%>
 									<%--<th class="center">操作</th>--%>
 								</tr>
 							</thead>
@@ -140,12 +128,12 @@
 												<label class="pos-rel"><input id="${var.CLIENT_ID}" type='checkbox' name='ids' value="${var.CLIENT_ID}" class="ace" /><span class="lbl"></span></label>
 											</td>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
-											<td class='center'>${var.FITEMID}</td>
+											<%--<td class='center'>${var.FITEMID}</td>--%>
 											<td class='center'>${var.FNUMBER}</td>
 											<td class='center'>${var.FNAME}</td>
-											<td class='center'>${var.FPARENTID}</td>
+											<%--<td class='center'>${var.FPARENTID}</td>--%>
 											<td class='center'>${var.FMODIFYTIME}</td>
-											<td class='center'>${var.FDELETED}</td>
+											<%--<td class='center'>${var.FDELETED}</td>--%>
 											<%--<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
@@ -350,25 +338,65 @@
 		}
 		
 		//修改
-		function edit(Id){
-			 top.jzts();
-			 var diag = new top.Dialog();
-			 diag.Drag=true;
-			 diag.Title ="编辑";
-			 diag.URL = '<%=basePath%>client/goEdit.do?CLIENT_ID='+Id;
-			 diag.Width = 450;
-			 diag.Height = 355;
-			 diag.Modal = true;				//有无遮罩窗口
-			 diag. ShowMaxButton = true;	//最大化按钮
-		     diag.ShowMinButton = true;		//最小化按钮 
-			 diag.CancelEvent = function(){ //关闭事件
-				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
-					 tosearch();
-				}
-				diag.close();
-			 };
-			 diag.show();
+		function edit(){
+            var str = [];
+            for(var i=0;i < document.getElementsByName('ids').length;i++){
+                if(document.getElementsByName('ids')[i].checked){
+                    str.push(document.getElementsByName('ids')[i].value);
+                }
+            }
+            if(str.length < 1){
+                bootbox.dialog({
+                    message: "<span class='bigger-110'>您没有选择任何内容!</span>",
+                    buttons:
+                        { "button":{ "label":"确定", "className":"btn-sm btn-success"}}
+                });
+                return false;
+            }else if(str.length > 1){
+                bootbox.dialog({
+                    message: "<span class='bigger-110'>您的选择内容必须要单项!</span>",
+                    buttons:
+                        { "button":{ "label":"确定", "className":"btn-sm btn-success"}}
+                });
+                return false;
+            }else{
+                var Id = str[0];
+                top.jzts();
+                var diag = new top.Dialog();
+                diag.Drag=true;
+                diag.Title ="编辑";
+                diag.URL = '<%=basePath%>client/goEdit.do?CLIENT_ID='+Id;
+                diag.Width = 450;
+                diag.Height = 355;
+                diag.Modal = true;				//有无遮罩窗口
+                diag.CancelEvent = function(){ //关闭事件
+                    if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+                        tosearch();
+                    }
+                    diag.close();
+                };
+                diag.show();
+			}
 		}
+
+        //双击修改
+        function editByID(Id) {
+            top.jzts();
+            var diag = new top.Dialog();
+            diag.Drag=true;
+            diag.Title ="编辑";
+            diag.URL = '<%=basePath%>client/goEdit.do?CLIENT_ID='+Id;
+            diag.Width = 450;
+            diag.Height = 355;
+            diag.Modal = true;				//有无遮罩窗口
+            diag.CancelEvent = function(){ //关闭事件
+                if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+                    tosearch();
+                }
+                diag.close();
+            };
+            diag.show();
+        }
 		
 		//批量操作
 		function makeAll(msg){
@@ -437,13 +465,12 @@
 			window.location.href='<%=basePath%>client/excel.do';
 		}
 
+		//重置
         function reset(){
-            $("#FCLIENTNAME").val('');
-            $("#FSALESNAME").val('');
-            $("#FORDERNUM").val('');
-            $("#FORDERSTATUS").val('');
+            $("#FNAME").val('');
         }
 
+        //点击样式
         function toCheck(Id){
             $("#simple-table").find("tr[name='listBeen']").css("background-color", "");
             $("#tr" + Id).css("background-color", "#CCCC99");
@@ -459,24 +486,6 @@
             }
 
             //changecss();
-        }
-
-        function editByID(Id) {
-            top.jzts();
-            var diag = new top.Dialog();
-            diag.Drag=true;
-            diag.Title ="编辑";
-            diag.URL = '<%=basePath%>client/goEdit.do?CLIENT_ID='+Id;
-            diag.Width = 450;
-            diag.Height = 355;
-            diag.Modal = true;				//有无遮罩窗口
-            diag.CancelEvent = function(){ //关闭事件
-                if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
-                    tosearch();
-                }
-                diag.close();
-            };
-            diag.show();
         }
 	</script>
 

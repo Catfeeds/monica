@@ -36,27 +36,29 @@
 						<form action="salesorderbill/list.do" method="post" name="Form" id="Form">
 						<table style="margin-top:5px;">
 							<tr>
-								<a style="margin-left: 3px" class="btn btn-light btn-xs" data-rel="tooltip" title="同步">
+								<a style="margin-left: 3px" class="btn btn-light btn-mini" data-rel="tooltip" title="同步">
 									<i class="ace-icon glyphicon glyphicon-retweet bigger-110 nav-search-icon blue"></i>同步
 								</a>
 								<c:if test="${QX.add == 1 }">
-									<a style="margin-left: 3px" class="btn btn-light btn-xs" onclick="add();">
+									<a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="add();">
 										<i class="ace-icon fa fa-pencil-square-o bigger-110 nav-search-icon yellow"></i>新增
 									</a>
 								</c:if>
-								<a style="margin-left: 3px" class="btn btn-light btn-xs" onclick="edit();"  data-rel="tooltip" title="修改">
-									<i class="ace-icon fa fa-cogs bigger-110 nav-search-icon green"></i>修改
-								</a>
-								<a style="margin-left: 3px" class="btn btn-light btn-xs" data-rel="tooltip" title="变更">
+								<c:if test="${QX.edit == 1}">
+									<a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="edit();"  data-rel="tooltip" title="修改">
+										<i class="ace-icon fa fa-cogs bigger-110 nav-search-icon green"></i>修改
+									</a>
+								</c:if>
+								<a style="margin-left: 3px" class="btn btn-light btn-mini" data-rel="tooltip" title="变更">
 									<i class="ace-icon glyphicon glyphicon-edit bigger-110 nav-search-icon blue"></i>变更
 								</a>
 								<c:if test="${QX.del == 1 }">
-									<a style="margin-left: 3px" class="btn btn-light btn-xs" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='ace-icon fa fa-trash-o bigger-120 nav-search-icon red'></i>删除</a>
+									<a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='ace-icon fa fa-trash-o bigger-120 nav-search-icon red'></i>删除</a>
 								</c:if>
-									<a style="margin-left: 3px" class="btn btn-light btn-xs" data-rel="tooltip" title="审批">
+									<a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="approve('您确定审批该订单吗?');" data-rel="tooltip" title="审批">
 										<i class="ace-icon glyphicon glyphicon-ok bigger-110 nav-search-icon green"></i>审批
 									</a>
-								<c:if test="${QX.toExcel == 1 }"><a style="margin-left: 3px" class="btn btn-light btn-xs" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i>导出到EXCEL</a></c:if>
+								<c:if test="${QX.toExcel == 1 }"><a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i>导出到EXCEL</a></c:if>
 								<label style="float: right;margin-top: 5px;margin-right: 15px">
 									<input id="isDetail" <c:if test="${pd.isDetail == 'true'}">checked</c:if>
 										   name="isDetail" class="ace ace-switch ace-switch-5" type="checkbox">
@@ -90,7 +92,7 @@
 													style="vertical-align:top;width: 150px;">
 												<option></option>
 												<option value="0">草稿</option>
-												<option value="1">审核</option>
+												<option value="1">已审核</option>
 											</select>
 										  </span>
 									</div>
@@ -144,7 +146,7 @@
 												</c:if>
 
 												<c:if test="${var.FORDERSTATUS == 1}">
-													审核
+													已审核
 												</c:if>
 											</td>
 											<td class='center'>
@@ -241,6 +243,8 @@
 	<script src="static/ace/js/date-time/bootstrap-datepicker.js"></script>
 	<!--提示框-->
 	<script type="text/javascript" src="static/js/jquery.tips.js"></script>
+	<%-- dialog --%>
+	<script src="static/js/dialog-plus.js"></script>
 	<script type="text/javascript">
 		$(top.hangge());//关闭加载状态
 		//检索
@@ -251,7 +255,6 @@
 
         $(function() {
             week_init();
-            //alert($(window).height());
             $("body").height($(window).height());
             //日期框
             $('.date-picker').datepicker({
@@ -367,9 +370,7 @@
                      diag.Height = window.innerHeight;
 					 diag.Modal = true;				//有无遮罩窗口
 					 diag.CancelEvent = function(){ //关闭事件
-						 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
-							 tosearch();
-						}
+						 tosearch();
 						diag.close();
 					 };
 					 diag.show();
@@ -390,7 +391,7 @@
 					if(str==''){
 						bootbox.dialog({
 							message: "<span class='bigger-110'>您没有选择任何内容!</span>",
-							buttons: 			
+							buttons:
 							{ "button":{ "label":"确定", "className":"btn-sm btn-success"}}
 						});
 						$("#zcheckbox").tips({
@@ -511,9 +512,7 @@
             diag.Height = window.innerHeight;
             diag.Modal = true;				//有无遮罩窗口
             diag.CancelEvent = function(){ //关闭事件
-                if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
-                    tosearch();
-                }
+                tosearch();
                 diag.close();
             };
             diag.show();
@@ -525,6 +524,72 @@
 		    $("#FORDERNUM").val('');
 			$("#FORDERSTATUS").val('');
 		}
+
+		function approve(msg){
+            bootbox.confirm(msg, function(result) {
+                if(result) {
+                    var str = [];
+                    for(var i=0;i < document.getElementsByName('ids').length;i++){
+                        if(document.getElementsByName('ids')[i].checked){
+                            str.push(document.getElementsByName('ids')[i].value);
+                        }
+                    }
+                    if(str.length < 1){
+                        bootbox.dialog({
+                            message: "<span class='bigger-110'>您没有选择任何内容!</span>",
+                            buttons:
+                                { "button":{ "label":"确定", "className":"btn-sm btn-success"}}
+                        });
+                        return false;
+                    }else if(str.length > 1){
+                        bootbox.dialog({
+                            message: "<span class='bigger-110'>您的选择内容必须要单项!</span>",
+                            buttons:
+                                { "button":{ "label":"确定", "className":"btn-sm btn-success"}}
+                        });
+                        return false;
+                    }else{
+                        var Id = str[0];
+						$.ajax({
+							async:false,
+							cache:false,
+							url:'<%=basePath%>salesorderbill/approve.do',
+							type:'POST',
+							data:{
+                                SALESORDERBILL_ID:Id
+							},
+							datatype:'JSON',
+							success:function (obj) {
+								if(obj.msg == '1'){
+                                    bootbox.alert({
+                                        size: "small",
+                                        title: "成功",
+                                        message: "该订单已成功审批!",
+                                        callback: function(){
+                                            window.location = '<%=basePath%>salesorderbill/list.do';
+                                        }
+                                    });
+								} else {
+                                    bootbox.alert({
+                                        size: "small",
+                                        title:"失败",
+                                        message: "该订单已通过审批,无法重复操作!"
+                                    });
+                                    return false;
+								}
+                            }
+						});
+                    }
+                }
+            });
+		}
+
+        //回车搜索
+        $("body").keydown(function() {
+            if (event.keyCode == "13") {//keyCode=13是回车键
+                $('#globelSearch').click();
+            }
+        });
 	</script>
 
 
