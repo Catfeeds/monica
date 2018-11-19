@@ -137,17 +137,19 @@ public class SalesOrderBillController extends BaseController {
 		pd.put("NUMBER",number);
 		PageData serialNumPd = salesorderbillService.updateSerialNumber(pd);
 		if(serialNumPd == null){
-			FORDERNUM.append("001");
+			FORDERNUM.append("0001");
 		} else {
 			String serialNum = serialNumPd.getString("FORDERNUM");
-			serialNum = serialNum.substring(serialNum.length()-3);
+			serialNum = serialNum.substring(serialNum.length()-4);
 			Integer num = Integer.parseInt(serialNum);
 			num++;
 			if (num.toString().length() == 1){
-				serialNum = "00"+num.toString();
+				serialNum = "000"+num.toString();
 			} else if (num.toString().length() == 2){
+				serialNum = "00"+num.toString();
+			} else if (num.toString().length() == 3){
 				serialNum = "0"+num.toString();
-			} else {
+			} else if (num.toString().length() == 4){
 				serialNum = num.toString();
 			}
 			FORDERNUM.append(serialNum);

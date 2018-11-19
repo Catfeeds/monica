@@ -39,44 +39,10 @@ setTimeout("top.hangge()",500);
 									<i class="ace-icon fa fa-times"></i>
 								</button>
 								<i class="ace-icon fa fa-check green"></i>
-								欢迎使用 麦香坊后台管理系统&nbsp;&nbsp;
+								欢迎使用 莫尔卡后台管理系统&nbsp;&nbsp;
 
 							</div>
-							<%--<div style="height: 550px">
-								<div id="main" style="width: 100%;height:40%;"></div>
-								<div style="width: 100%;height:40%;">
-									<table style="width: 100%;height: 100%">
-										<tr>
-											<td style="width: 90%;">
-												<div id="main1" style="width: 100%;height:100%;"></div>
-											</td>
-											<td style="width: 10%">
-												<div id="" style="width: 100%;height:100%;margin-top: 0px;margin-right: 20px">
-													<select id="month">
-														<option value ="">按月搜索</option>
-														<option value ="01">一月</option>
-														<option value="02">二月</option>
-														<option value="03">三月</option>
-														<option value="04">四月</option>
-														<option value="05">五月</option>
-														<option value="06">六月</option>
-														<option value="07">七月</option>
-														<option value="08">八月</option>
-														<option value="09">九月</option>
-														<option value="10">十月</option>
-														<option value="11">十一月</option>
-														<option value="12">十二月</option>
-													</select>
-												</div>
-											</td>
-										</tr>
 
-									</table>
-								</div>
-							</div>--%>
-
-							
-							<%--<div id="main" style="width: 600px;height:300px;"></div>--%>
 							<script type="text/javascript">
 								var myChart = echarts.init(document.getElementById('main'));
 								var myChart1 = echarts.init(document.getElementById('main1'));
