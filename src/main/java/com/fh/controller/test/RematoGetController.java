@@ -2,9 +2,12 @@ package com.fh.controller.test;
 
 import com.fh.controller.base.BaseController;
 import com.fh.service.management.interfaceip.InterfaceIPManager;
+import com.fh.util.Const;
 import com.fh.util.PageData;
+import com.fh.util.Tools;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,10 +22,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Controller
+@RequestMapping(value="/rematoget")
 public class RematoGetController extends BaseController {
 
     @Resource(name="interfaceipService")
     private InterfaceIPManager interfaceipService;
+
+
 
     public String getIpAndProjectName()throws Exception{
         String ip = null;
@@ -40,10 +47,18 @@ public class RematoGetController extends BaseController {
     public Map<String, Object> getCustomer() throws Exception{
         Map<String, Object> json = new HashMap<String, Object>();
         String requestUrl = this.getIpAndProjectName()+"/远程接口名";
-
+        //调用方式  0为远程接口方式，1为多数据源调用方式
+        String todoType = Tools.readTxtFile("admin/config/TYPE.txt");
+        JSONArray jsonarr = null;
         try {
-            //执行接口调用
-            JSONArray jsonarr = this.executeInter(requestUrl,"GET");
+            if(todoType.equals("0")){
+                //执行接口调用
+                jsonarr = this.executeInter(requestUrl,"GET");
+            }else {
+                //多数据源连接，erp数据库
+                List<PageData> jsonlist = null;  //null换成service查询数据
+                jsonarr = JSONArray.fromObject(jsonlist);
+            }
             PageData pd = new PageData();
             //查询本地数据
             List<PageData> varOList = null;//clientService.listAll(pd);  //本地数据
