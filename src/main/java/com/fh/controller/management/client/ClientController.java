@@ -55,7 +55,6 @@ public class ClientController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		pd.put("CLIENT_ID", this.get32UUID());	//主键
-		pd.put("FMODIFYTIME", this.getNowDate());
 		clientService.save(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
@@ -88,7 +87,6 @@ public class ClientController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		pd.put("FMODIFYTIME", this.getNowDate());
 		clientService.edit(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
