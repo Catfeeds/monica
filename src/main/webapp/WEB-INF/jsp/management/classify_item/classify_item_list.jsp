@@ -45,11 +45,11 @@
 												<i class="ace-icon fa fa-pencil-square-o bigger-120 orange"></i>修改
 											</a>
 										</c:if>
-										<c:if test="${QX.del == 1 }">
+										<%--<c:if test="${QX.del == 1 }">
 											<a class="btn btn-light btn-xs" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除">
 												<i class="ace-icon fa fa-trash-o bigger-125 red"></i>删除
 											</a>
-										</c:if>
+										</c:if>--%>
 
 										<a class="btn btn-light btn-xs" onclick="updateItem()" title="同步">
 											<i id="nav-refresh-icon" class="ace-icon fa fa-refresh bigger-120 blue"></i>同步
@@ -67,10 +67,16 @@
 							<tr>
 								<td>
 									<div class="nav-search">
-										<span class="input-icon">
-											<input type="text" placeholder="这里输入关键词" class="input-group input-group-sm" id="nav-search-input" autocomplete="off" name="keywords" value="${pd.keywords }" placeholder="这里输入关键词"/>
-											<i class="ace-icon fa fa-search nav-search-icon-sm blue"></i>
-										</span>
+                                        <span class="input-icon">
+											    <input type="text" placeholder="按商品名称进行搜索" class="nav-search-input"
+                                                       id="nav-input" autocomplete="off" name="keywords1"
+                                                       value="${pd.keywords }" placeholder="这里输入关键词"/>
+                                                <i class="ace-icon fa fa-search nav-search-icon"></i>
+                                            </span>
+										<%--<span class="input-icon">
+											<input type="text" placeholder="这里输入关键词" id="nav-search-input" autocomplete="off" name="keywords" value="${pd.keywords }" placeholder="这里输入关键词"/>
+											<i class="ace-icon fa fa-search nav-search-icon blue"></i>
+										</span>--%>
 									</div>
 								</td>
 								<%--<td style="padding-left:2px;">
@@ -82,7 +88,7 @@
 
 								<c:if test="${QX.cha == 1 }">
 									<td style="vertical-align:top;padding-left:2px">
-										<a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索">
+										<a class="btn btn-light btn-xs" onclick="tosearch();"  title="查询">
 											<i id="nav-search-icon" class="ace-icon fa fa-search bigger-120 nav-search-icon blue"></i>查询
 										</a>
 									</td>
@@ -118,9 +124,9 @@
 								<c:when test="${not empty varList}">
 									<c:if test="${QX.cha == 1 }">
 									<c:forEach items="${varList}" var="var" varStatus="vs">
-										<tr>
+										<tr id="ItemId_${var.CLASSIFY_ITEM_ID}" name='listBeen' onclick="toCheck('${var.CLASSIFY_ITEM_ID}')" ondblclick="editByID('${var.CLASSIFY_ITEM_ID}')" style="cursor: pointer;">
 											<td class='center'>
-												<label class="pos-rel"><input type='checkbox' name='ids' value="${var.CLASSIFY_ITEM_ID}" class="ace" /><span class="lbl"></span></label>
+												<label class="pos-rel"><input type='checkbox' name='ids' id="${var.CLASSIFY_ITEM_ID}" value="${var.CLASSIFY_ITEM_ID}" class="ace" /><span class="lbl"></span></label>
 											</td>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
 											<%--<td class='center'>${var.FITEMID}</td>--%>
@@ -353,25 +359,79 @@
 		}
 		
 		//修改
-		function edit(Id){
-			 top.jzts();
-			 var diag = new top.Dialog();
-			 diag.Drag=true;
-			 diag.Title ="编辑";
-			 diag.URL = '<%=basePath%>classify_item/goEdit.do?CLASSIFY_ITEM_ID='+Id;
-			 diag.Width = 450;
-			 diag.Height = 355;
-			 diag.Modal = true;				//有无遮罩窗口
-			 diag. ShowMaxButton = true;	//最大化按钮
-		     diag.ShowMinButton = true;		//最小化按钮 
-			 diag.CancelEvent = function(){ //关闭事件
-				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
-					 tosearch();
-				}
-				diag.close();
-			 };
-			 diag.show();
+		function edit(){
+            var str = [];
+            for(var i=0;i < document.getElementsByName('ids').length;i++){
+                if(document.getElementsByName('ids')[i].checked){
+                    str.push(document.getElementsByName('ids')[i].value);
+                }
+            }
+            if(str.length < 1){
+                bootbox.dialog({
+                    title: "提示",
+                    message: "<span class='bigger-110'>您没有选择任何内容!</span>",
+                    buttons:
+                        { "button":{ "label":"确定", "className":"btn-sm btn-success"}}
+                });
+                return false;
+            }else if(str.length > 1){
+                bootbox.dialog({
+                    title: "提示",
+                    message: "<span class='bigger-110'>您的选择内容必须要单项!</span>",
+                    buttons:
+                        { "button":{ "label":"确定", "className":"btn-sm btn-success"}}
+                });
+                return false;
+            }else {
+                var Id = str[0];
+                top.jzts();
+                var diag = new top.Dialog();
+                diag.Drag = true;
+                diag.Title = "编辑";
+                diag.URL = '<%=basePath%>classify_item/goEdit.do?CLASSIFY_ITEM_ID=' + Id;
+                diag.Width = 750;
+                diag.Height = 355;
+                diag.Modal = true;				//有无遮罩窗口
+                diag.ShowMaxButton = true;	//最大化按钮
+                diag.ShowMinButton = true;		//最小化按钮
+                diag.CancelEvent = function () { //关闭事件
+                    if (diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none') {
+                        tosearch();
+                    }
+                    diag.close();
+                };
+                diag.show();
+            }
 		}
+        //双击列表一行数据
+        function editByID(Id) {
+            top.jzts();
+            var diag = new top.Dialog();
+            diag.Drag=true;
+            diag.Title ="编辑";
+            diag.URL = '<%=basePath%>classify_item/goEdit.do?CLASSIFY_ITEM_ID='+Id;
+            diag.Width = 450;
+            diag.Height = 355;
+            diag.Modal = true;				//有无遮罩窗口
+            diag.CancelEvent = function(){ //关闭事件
+                if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+                    tosearch();
+                }
+                diag.close();
+            };
+            diag.show();
+        }
+
+        //单击列表一行，选中复选框
+        function toCheck(Id){
+            $("#simple-table").find("tr[name='listBeen']").css("background-color", "");
+            $("#ItemId_" + Id).css("background-color", "#CCCC99");
+            if($("#"+Id).prop("checked")){
+                $("#"+Id).removeAttr("checked");
+            }else {
+                $("#"+Id).prop("checked",true);
+            }
+        }
 		
 		//批量操作
 		function makeAll(msg){
