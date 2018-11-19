@@ -46,12 +46,12 @@
 									<a style="margin-left: 3px" class="btn btn-light btn-xs" onclick="edit();"  data-rel="tooltip" title="修改">
 										<i class="ace-icon fa fa-cogs bigger-110 nav-search-icon green"></i>修改
 									</a>
-									<a style="margin-left: 3px" class="btn btn-light btn-xs" data-rel="tooltip" title="变更">
+									<%--<a style="margin-left: 3px" class="btn btn-light btn-xs" data-rel="tooltip" title="变更">
 										<i class="ace-icon glyphicon glyphicon-edit bigger-110 nav-search-icon blue"></i>变更
-									</a>
-									<c:if test="${QX.del == 1 }">
+									</a>--%>
+									<%--<c:if test="${QX.del == 1 }">
 										<a style="margin-left: 3px" class="btn btn-light btn-xs" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='ace-icon fa fa-trash-o bigger-120 nav-search-icon red'></i>删除</a>
-									</c:if>
+									</c:if>--%>
 									<c:if test="${QX.toExcel == 1 }"><a style="margin-left: 3px" class="btn btn-light btn-xs" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i>导出到EXCEL</a></c:if>
 									<%--<label style="float: right;margin-top: 5px;margin-right: 15px">
 										<input id="isDetail" <c:if test="${pd.isDetail == 'true'}">checked</c:if>

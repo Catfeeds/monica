@@ -222,9 +222,10 @@ public class ErpGetController extends BaseController{
 
 	@RequestMapping(value="/getClient")
 	@ResponseBody
-	public  Map<String, Object> getClient(Page page) throws Exception{
+	public  Map<String, Object> getClient() throws Exception{
 		Map<String, Object> json = new HashMap<String, Object>();
-		List<PageData>	varList  =itemService.listClient(page);
+		PageData pd = new PageData();
+		List<PageData>	varList  =itemService.listClient(pd);
 		System.out.println("---------"+varList);
 		json.put("Data", varList);
 		return json;

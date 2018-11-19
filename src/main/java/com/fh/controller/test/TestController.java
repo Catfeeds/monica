@@ -43,17 +43,6 @@ public class TestController extends BaseController{
 	@Resource(name="itemService")
 	ItemService itemService;
 	
-	@RequestMapping(value="/ceshi")
-	@ResponseBody
-	public  String getAjax(){
-		System.out.println("test_controller");
-		//stockService.lt();
-		return "成功";
-		
-	}
-
-
-	
 	@RequestMapping(value="/test_getUser")
 	@ResponseBody
 	public  Map<String, Object> test_getUser() throws Exception{
@@ -61,16 +50,13 @@ public class TestController extends BaseController{
 		Map<String, Object> json = new HashMap<String, Object>();
 		//2.获取access_token:根据企业id和通讯录密钥获取access_token,并拼接请求url
 		String accessToken= WeiXinUtil.getAccessToken(WeiXinParamesUtil.corpId, WeiXinParamesUtil.contactsSecret).getToken();
-		//String accessToken2= WeiXinUtil.getAccessToken(WeiXinParamesUtil.corpId, WeiXinParamesUtil.contactsSecret).getToken();
 		System.out.println("accessToken:"+accessToken);
-		//System.out.println("accessToken:"+accessToken2);
 		//1.获取部门ID以及是否获取子部门成员
 		String departmentId="1";
 		String fetchChild="1";
 		Contacts_UserService cus = new Contacts_UserService();
 		JSONObject jsonObject = cus.getDepartmentUser(accessToken, departmentId, fetchChild);
 		JSONArray userlist=(JSONArray) jsonObject.get("userlist");
-		@SuppressWarnings("unchecked")
 		Iterator<Object> it = userlist.iterator();
 		String userid = null;
 		String openidString = null;
@@ -123,19 +109,6 @@ public class TestController extends BaseController{
 			}
 			hint = 0;
 		}
-		/*for (int j = 0; j < pages.size(); j++) {
-			while (it.hasNext()) {
-				JSONObject obj = (JSONObject) it.next();
-				if(pages.get(j).getString("USERID").equals(obj.getString("userid"))){
-					dint = 1;
-				}
-			} 
-			if (dint != 1) {
-				pd.put("USERID",pages.get(j).getString("USERID"));
-				qywxuserService.delete(pd);
-			}
-			dint = 0;
-		}*/
 		json.put("result", "成功");
 		return json;
 		
@@ -153,123 +126,5 @@ public class TestController extends BaseController{
 		json.put("result", "成功");
 		return json;
 	}
-	
-	@RequestMapping(value="/test_getUserByDb")
-	@ResponseBody
-	public  Map<String, Object> test_getUserByDb() throws Exception{
-		Map<String, Object> json = new HashMap<String, Object>();
-		PageData pd = new PageData();
-		pd = this.getPageData();
-		String keywords = "2";				//关键词检索条件
-		if(null != keywords && !"".equals(keywords)){
-			pd.put("keywords", keywords.trim());
-		}
-		Page page = new Page();
-		page.setPd(pd);
-		List<PageData>	userList =qywxuserService.list(page);	
-		json.put("result", userList);
-		return json;
-	}
-	
-	@RequestMapping(value="/test_db")
-	@ResponseBody
-	public  Map<String, Object> test_db() throws Exception{
-		Map<String, Object> json = new HashMap<String, Object>();
-		/*T_ICItemExample t_ICItemExample = new T_ICItemExample();
-		T_ICItemExample.Criteria criteria = t_ICItemExample.createCriteria();
-		criteria.andFnameLike("浴巾");*/
-		/*List<T_ICItem> t_ICItems = t_icitemmapper.selectByOther(null);
-		System.out.println(t_ICItems.size());*/
-		int pn = 1;
-		PageHelper.startPage(pn,3);//每页的条数
-		JdbcUtil jdbcUtil = new JdbcUtil();
-		List<PageData> jsonObj = jdbcUtil.getAll("FW0231浴巾架＿有标");
-		PageInfo<PageData> varListPage=new PageInfo<PageData>(jsonObj,1); //5表示要连续显示的页数
-		json.put("result",jsonObj);
-		return json;
-		
-		
-	}
-	
 
-	@RequestMapping(value="/test_dbItem")
-	@ResponseBody
-	public  Map<String, Object> test_dbItem(Page page) throws Exception{
-		Map<String, Object> json = new HashMap<String, Object>();
-		PageData pd = new PageData();
-		pd = this.getPageData();
-		String keywords = "浴巾";
-		pd.put("keywords", keywords.trim());
-		page.setPd(pd);
-		List<PageData>	varList = itemService.list(page);
-		json.put("result",varList);
-		return json;
-		
-		
-	}
-	
-
-	//z_ARSummary
-	/**
-	 * @Year		INT, --年份
-	 	@Period		INT, --期间
-		@CustNum	VARCHAR(255), --客户名称
-		@EmpName	VARCHAR(255) --业务员
-	 * 
-	 * <p>Title: test_z_ARSummary</p>
-	 * <p>Description: </p>
-	 * @param page
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping(value="/z_ARSummary")
-	@ResponseBody
-	public  Map<String, Object> test_z_ARSummary(Page page) throws Exception{
-		Map<String, Object> json = new HashMap<String, Object>();
-		PageData pd = new PageData();
-		pd = this.getPageData();
-		pd.put("Year", 2017);
-		pd.put("Period",2);
-		pd.put("CustNum","");
-		pd.put("EmpName","");
-		page.setPd(pd);
-		List<PageData>	varList = itemService.list_z_ARSummary(page);
-		json.put("result",varList);
-		return json;
-		
-		
-	}
-	
-	@RequestMapping(value="/load")
-	public ModelAndView load(Page page) throws Exception{
-		/*logBefore(logger, Jurisdiction.getUsername()+"列表NewForWx");*/
-		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限(无权查看时页面会有提示,如果不注释掉这句代码就无法进入列表页面,所以根据情况是否加入本句代码)
-		ModelAndView mv = this.getModelAndView();
-		PageData pd = new PageData();
-		pd = this.getPageData();
-		String keywords = pd.getString("keywords");				//关键词检索条件
-		String treeKey = pd.getString("treeKey");
-		String showCount = pd.getString("showCount");
-		if(null != keywords && !"".equals(keywords)){
-			pd.put("keywords", keywords.trim());
-		}
-		if(null != treeKey && !"".equals(treeKey)){
-			pd.put("treeKey", URLDecoder.decode(treeKey, "UTF-8").trim());
-		}
-		if(null == showCount || "".equals(showCount)){
-			page.setShowCount(150);
-		}
-		
-		page.setPd(pd);
-		List<PageData> list_tree =  itemService.list_tree(page);
-		List<PageData>	varList = itemService.list(page);
-		mv.addObject("varList", varList);
-		mv.addObject("list_tree", list_tree);
-		mv.setViewName("item/wxic");
-		mv.addObject("pd", pd);
-		//mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
-		return mv;
-		
-		
-	}
 }

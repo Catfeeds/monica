@@ -37,7 +37,7 @@ public interface ItemManager {
 	 * @param page
 	 * @throws Exception
 	 */
-	public List<PageData> listClient(Page page)throws Exception;
+	public List<PageData> listClient(PageData pd)throws Exception;
 	
 	/**临时表订单资料
 	 * @param page
