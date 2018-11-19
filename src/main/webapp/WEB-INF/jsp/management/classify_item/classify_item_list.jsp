@@ -36,7 +36,7 @@
 								<div class="col-xs-12">
 									<p>
 										<c:if test="${QX.add == 1 }">
-											<a class="btn btn-light btn-xs" onclick="add();">
+											<a class="btn btn-light btn-xs" onclick="add();" title="新增">
 												<i id="nav-save-icon" class="ace-icon fa fa-plus bigger-120 green"></i>新增
 											</a>
 										</c:if>
@@ -51,7 +51,7 @@
 											</a>
 										</c:if>
 
-										<a class="btn btn-light btn-xs" onclick="updateItem()">
+										<a class="btn btn-light btn-xs" onclick="updateItem()" title="同步">
 											<i id="nav-refresh-icon" class="ace-icon fa fa-refresh bigger-120 blue"></i>同步
 										</a>
 
@@ -73,12 +73,12 @@
 										</span>
 									</div>
 								</td>
-								<td style="padding-left:2px;">
+								<%--<td style="padding-left:2px;">
 									<input class="span10 date-picker" name="lastStart" id="lastStart"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="开始日期" title="开始日期"/>
 								</td>
 								<td style="padding-left:2px;">
 									<input class="span10 date-picker" name="lastEnd" name="lastEnd"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="结束日期" title="结束日期"/>
-								</td>
+								</td>--%>
 
 								<c:if test="${QX.cha == 1 }">
 									<td style="vertical-align:top;padding-left:2px">
@@ -103,11 +103,11 @@
 									<label class="pos-rel"><input type="checkbox" class="ace" id="zcheckbox" /><span class="lbl"></span></label>
 									</th>
 									<th class="center" style="width:50px;">序号</th>
-									<th class="center">FItemID</th>
+									<%--<th class="center">FItemID</th>--%>
 									<th class="center">编号</th>
 									<th class="center">名称</th>
-									<th class="center">父ID</th>
-									<th class="center">FModifyTime</th>
+									<%--<th class="center">父ID</th>--%>
+									<th class="center">更新时间</th>
 									<%--<th class="center">操作</th>--%>
 								</tr>
 							</thead>
@@ -123,10 +123,10 @@
 												<label class="pos-rel"><input type='checkbox' name='ids' value="${var.CLASSIFY_ITEM_ID}" class="ace" /><span class="lbl"></span></label>
 											</td>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
-											<td class='center'>${var.FITEMID}</td>
+											<%--<td class='center'>${var.FITEMID}</td>--%>
 											<td class='center'>${var.FNUMBER}</td>
 											<td class='center'>${var.FNAME}</td>
-											<td class='center'>${var.FPARENTID}</td>
+											<%--<td class='center'>${var.FPARENTID}</td>--%>
 											<td class='center'>${var.FMODIFYTIME}</td>
 											<%--<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
@@ -321,11 +321,11 @@
 			 diag.Drag=true;
 			 diag.Title ="新增";
 			 diag.URL = '<%=basePath%>classify_item/goAdd.do';
-			 diag.Width = 450;
+			 diag.Width = 750;
 			 diag.Height = 355;
 			 diag.Modal = true;				//有无遮罩窗口
-			 diag. ShowMaxButton = true;	//最大化按钮
-		     diag.ShowMinButton = true;		//最小化按钮
+			 diag. ShowMaxButton = false;	//最大化按钮
+		     diag.ShowMinButton = false;		//最小化按钮
 			 diag.CancelEvent = function(){ //关闭事件
 				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					 if('${page.currentPage}' == '0'){
