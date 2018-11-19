@@ -1,6 +1,7 @@
 package com.fh.controller.test;
 
 import com.fh.controller.base.BaseController;
+import com.fh.service.management.client.ClientManager;
 import com.fh.service.management.interfaceip.InterfaceIPManager;
 import com.fh.util.Const;
 import com.fh.util.PageData;
@@ -29,6 +30,9 @@ public class RematoGetController extends BaseController {
     @Resource(name="interfaceipService")
     private InterfaceIPManager interfaceipService;
 
+    @Resource(name="clientService")
+    private ClientManager clientService;
+
     public String getIpAndProjectName()throws Exception{
         String ip = null;
         String projectName = null;
@@ -45,7 +49,7 @@ public class RematoGetController extends BaseController {
     @ResponseBody
     public Map<String, Object> getCustomer() throws Exception{
         Map<String, Object> json = new HashMap<String, Object>();
-        String requestUrl = this.getIpAndProjectName()+"/远程接口名";
+        String requestUrl = this.getIpAndProjectName()+"/erp_get/erp_cus";
         //调用方式  0为远程接口方式，1为多数据源调用方式
         String todoType = Tools.readTxtFile("admin/config/TYPE.txt");
         JSONArray jsonarr = null;
@@ -60,7 +64,7 @@ public class RematoGetController extends BaseController {
             }
             PageData pd = new PageData();
             //查询本地数据
-            List<PageData> varOList = null;//clientService.listAll(pd);  //本地数据
+            List<PageData> varOList = clientService.listAll(pd);//clientService.listAll(pd);  //本地数据
             JSONObject job = null;
             //新增开关
             int hint = 0; //1为开启，0为关闭
@@ -71,6 +75,7 @@ public class RematoGetController extends BaseController {
             int dcount = 0;
             int ecount = 0;
             PageData pd3 = new PageData();
+            System.out.println(jsonarr.size());
             for (int i = 0; i < jsonarr.size(); i++) {
                 //初始化新增开关
                 hint = 1;
@@ -90,7 +95,7 @@ public class RematoGetController extends BaseController {
                             pd3.put("FDELETED", Integer.parseInt(job.get("FDeleted").toString()));
                             pd3.put("FPARENTID", Integer.parseInt(job.get("FParentID").toString()));
                             //执行修改（找到对应的service）
-                            //clientService.edit(pd3);
+                            clientService.edit(pd3);
                             ecount ++ ;
                         }
                         continue;
@@ -106,7 +111,7 @@ public class RematoGetController extends BaseController {
                     pd.put("FDELETED", Integer.parseInt(job.get("FDeleted").toString()));
                     pd.put("FPARENTID", Integer.parseInt(job.get("FParentID").toString()));
                     //执行保存（找到对应的service）
-                    //clientService.save(pd);
+                    clientService.save(pd);
                     count++;
                 }
             }
