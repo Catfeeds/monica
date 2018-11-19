@@ -3,7 +3,6 @@ package com.fh.controller.test;
 import com.fh.controller.base.BaseController;
 import com.fh.service.management.client.ClientManager;
 import com.fh.service.management.interfaceip.InterfaceIPManager;
-import com.fh.util.Const;
 import com.fh.util.PageData;
 import com.fh.util.Tools;
 import net.sf.json.JSONArray;
@@ -24,8 +23,8 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping(value="/rematoget")
-public class RematoGetController extends BaseController {
+@RequestMapping(value="/shirorematoget")
+public class ShiroRematoGetController extends BaseController {
 
     @Resource(name="interfaceipService")
     private InterfaceIPManager interfaceipService;
@@ -41,6 +40,7 @@ public class RematoGetController extends BaseController {
         PageData pd = new PageData();
         pd = interfaceipService.findByNew(pd);
         ip = pd.getString("IP");
+        System.out.println("ip:"+ip);
         projectName = pd.getString("PROJECTNAME");
         return ip+"/"+projectName;
     }
