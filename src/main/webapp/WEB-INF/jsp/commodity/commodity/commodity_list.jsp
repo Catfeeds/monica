@@ -33,13 +33,39 @@
                         <!-- 检索  -->
                         <%----%>
                         <form action="commodity/list.do?treeKey=${pd.treeKey }" method="post" name="Form" id="Form">
+                            <div class="row" style="margin-top:5px;">
+                                <div class="col-xs-12">
+                                    <p>
+                                        <c:if test="${QX.edit == 1 }">
+                                            <a class="btn btn-light btn-xs" onclick="edit('');" data-rel="tooltip" title="修改">
+                                                <i class="ace-icon fa fa-pencil-square-o bigger-120 orange"></i>修改
+                                            </a>
+                                        </c:if>
+                                        <%--<c:if test="${QX.del == 1 }">
+                                            <a class="btn btn-light btn-xs" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除">
+                                                <i class="ace-icon fa fa-trash-o bigger-125 red"></i>删除
+                                            </a>
+                                        </c:if>--%>
+
+                                        <a class="btn btn-light btn-xs" onclick="updateItem()" title="同步">
+                                            <i id="nav-refresh-icon" class="ace-icon fa fa-refresh bigger-120 blue"></i>同步
+                                        </a>
+
+                                        <c:if test="${QX.toExcel == 1 }">
+                                            <a class="btn btn-light btn-xs" onclick="toExcel();" title="导出到EXCEL">
+                                                <i id="nav-download-icon" class="ace-icon fa fa-download bigger-120 purple"></i>导出Excel
+                                            </a>
+                                        </c:if>
+                                    </p>
+                                </div>
+                            </div>
                             <table style="margin-top:5px;">
                                 <tr>
                                     <td>
                                         <div class="nav-search">
                                             商品代码:  <span class="input-icon">
 											<input type="text" placeholder="按商品代码进行搜索" class="nav-search-input"
-                                                   id="nav-search-input" autocomplete="off" name="keywords"
+                                                   id="nav1-input" autocomplete="off" name="keywords"
                                                    value="${pd.keywords }" placeholder="这里输入关键词"/>
 											<i class="ace-icon fa fa-search nav-search-icon"></i>
 										</span>
@@ -67,25 +93,17 @@
                                           </select>
                                     </td> -->
                                     <c:if test="${QX.cha == 1 }">
-                                        <td style="vertical-align:top;padding-left:2px"><a class="btn btn-light btn-xs"
-                                                                                           onclick="tosearch();" title="检索"><i
+                                        <td style="vertical-align:top;padding-left:2px">
+                                            <a class="btn btn-light btn-xs" onclick="tosearch();" title="查询"><i
                                                 id="nav-search-icon"
-                                                class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i></a></td>
-                                    </c:if>
-                                    <c:if test="${QX.toExcel == 1 }">
-                                        <td style="vertical-align:top;padding-left:2px;"><a class="btn btn-light btn-xs"
-                                                                                            onclick="toExcel();" title="导出到EXCEL"><i
-                                                id="nav-search-icon"
-                                                class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i></a></td>
-                                    </c:if>
-                                    <c:if test="${QX.edit == 1}">
-                                        <td style="vertical-align:top;padding-left:2px;">
-                                            <a class="btn btn-light btn-xs" title="编辑"
-                                               onclick="edit();">
-                                                <i class="ace-icon fa fa-cogs bigger-110 nav-search-icon green"></i>修改
+                                                class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i>查询
+                                            </a>
+                                            <a class="btn btn-light btn-xs" onclick="Form_reset()"  title="重置">
+                                                <i id="nav-repeat-icon" class="ace-icon fa fa-repeat bigger-120"></i>重置
                                             </a>
                                         </td>
                                     </c:if>
+
                                 </tr>
                             </table>
                             <!-- 检索  -->
@@ -230,6 +248,10 @@
     function tosearch() {
         top.jzts();
         $("#Form").submit();
+    }
+    //重置
+    function Form_reset(){
+        document.getElementById("Form").reset();
     }
     $(function () {
 
