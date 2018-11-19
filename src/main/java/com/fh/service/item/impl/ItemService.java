@@ -65,9 +65,9 @@ public class ItemService implements ItemManager {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<PageData> listClient(Page page) throws Exception {
+	public List<PageData> listClient(PageData pd) throws Exception {
 		// TODO Auto-generated method stub
-		return (List<PageData>)dao2.findForList("ItemManager.listClient", page);
+		return (List<PageData>)dao2.findForList("ItemManager.listClient", pd);
 	}
 	
 	@SuppressWarnings("unchecked")

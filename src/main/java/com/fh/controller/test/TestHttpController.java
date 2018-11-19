@@ -595,7 +595,7 @@ public class TestHttpController extends BaseController{
             PageData pd = new PageData();
             List<PageData>	varOList =clientService.listAll(pd);  //本地数据
              //新增开关
-    		int hint = 0; //0为开启，1为关闭
+    		int hint = 0; //1为开启，0为关闭
     		//删除开关
     		int dint = 0; //开0,关1
     		//int dstr = 0;
@@ -660,9 +660,7 @@ public class TestHttpController extends BaseController{
         } catch (IOException e) {
             e.printStackTrace();
         } 
-		
 		return json;
-		
 	}
 	
 	@Resource(name="salesorderbillService")

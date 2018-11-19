@@ -145,7 +145,7 @@
 	</select>
 	
 	<!-- 客户资料 -->
-	<select id="listClient" parameterType="page" resultType="pd">
+	<select id="listClient" parameterType="pd" resultType="pd">
 		Select FItemID,FNumber,FName,FParentID,FModifyTime,FDeleted 
 		From t_Item 
 		Where FItemClassID=1
