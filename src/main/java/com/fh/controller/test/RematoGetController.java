@@ -62,6 +62,7 @@ public class RematoGetController extends BaseController {
                 List<PageData> jsonlist = null;  //null换成service查询数据
                 jsonarr = JSONArray.fromObject(jsonlist);
             }
+            System.out.println(jsonarr.size());
             PageData pd = new PageData();
             //查询本地数据
             List<PageData> varOList = clientService.listAll(pd);  //本地数据
@@ -75,7 +76,7 @@ public class RematoGetController extends BaseController {
             int ecount = 0;
             PageData pd3 = new PageData();
             if(jsonarr.size() > 0 ){
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < jsonarr.size(); i++) {
                     hint = 1;
                     JSONObject job = jsonarr.getJSONObject(i);
                     if (varOList.size() > 0){
