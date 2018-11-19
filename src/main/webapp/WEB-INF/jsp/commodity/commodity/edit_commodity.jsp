@@ -37,20 +37,21 @@
 							<input type="hidden"  value="${pd.STATE}" name="STATE" id="STATE"/>
 							<%-- <input type="hidden" name="FITEMID" id="FITEMID" value="${pd.FITEMID}"/>
 							<input type="hidden" name="FPARENTID" id="FPARENTID" value="${pd.FPARENTID}"/> --%>
-							<table class="table table-border table-bg table-bordered">
+							<table style="border-collapse:separate; border-spacing:10px;width: 100%;padding-left: 1%">
 								<tbody>
 									<tr class="warning">
 										<th width="20%"><label>商品名称：</label></th>
 										<th><input type="text" style="width: 250px" value="${pd.FNAME}"
 											class="input-text"  name="FNAME"
 											id="FNAME"></th>
-									</tr>
-									<tr class="warning">
+
+
 										<th width="20%"><label>商品代码：</label></th>
 										<th><input type="text" style="width: 250px" value="${pd.FNUMBER}"
 											class="input-text"  name="FNUMBER"
 											id="FNUMBER"></th>
 									</tr>
+
 									<tr class="warning">
 										<th width="20%"><label>商品状态：</label></th>
 										<%-- <input type="text" style="width: 250px" value="${pd.STATE}"
@@ -77,8 +78,7 @@
 											     <span class="lbl">折扣商品</span>
 											 </label>
 										</td>
-									</tr>
-									<tr class="active">
+
 										<th><label>商品规格：</label></th>
 										<td><textarea style="width: 400px" cols="" rows=""
 												class="textarea" name="FMODEL" id="FMODEL" value="${pd.FMODEL}"
@@ -90,7 +90,7 @@
 											<label style="float:left;padding-left: 12px;"><input class="ace" name="form-field-radio" id="form-field-radio1" onclick="isPutaway('上架');" <c:if test="${pd.ISPUTAWAY == '上架' }">checked="checked"</c:if> type="radio" value="icon-edit"><span class="lbl">上架</span></label>
 											<label style="float:left;padding-left: 5px;"><input class="ace" name="form-field-radio" id="form-field-radio2" onclick="isPutaway('未上架');" <c:if test="${pd.ISPUTAWAY == '未上架' }">checked="checked"</c:if> type="radio" value="icon-edit"><span class="lbl">未上架</span></label>
 										</td>
-									</tr>
+
 									<%-- <tr>
 										<td style="width:70px;text-align: left;padding-top: 13px;">是否为头条：</td>
 										<td>
@@ -107,7 +107,6 @@
 										</select>
 										</th>
 									</tr> -->
-									<tr class="success">
 										<th><label>商品价格：</label></th>
 										<td><input type="number" style="width: 80px"  value="${pd.PRICE}"
 											class="input-text" placeholder="" name="PRICE"
@@ -118,14 +117,15 @@
 										<td><input type="number" style="width: 80px"  value="${pd.DISCOUNT}"
 											class="input-text" placeholder="" name="DISCOUNT"
 											id="DISCOUNT">   折</td>
-									</tr>
+
 									<!-- <tr class="active">
 										<th><label>原文跳转网址：</label></th>
 										<td><input type="text" style="width: 300px"
 											class="input-text" placeholder="填写原文跳转网址...（可选填）" name="content_source_url"
 											id="content_source_url"></td>
 									</tr> -->
-									<tr class="active" style="display: none">
+
+
 										<th><label>图片网址：</label></th>
 										<td><input type="text" style="width: 300px"
 											class="input-text" placeholder="" name="INVENTORY"
@@ -135,8 +135,7 @@
 										<th><label>内容：</label></th>
 										<td><input type="text" style="width: 300px"
 											class="input-text" placeholder="" name="FNOTE" id="FNOTE" value="${pd.FNOTE}"></td>
-									</tr>
-									<tr class="success">
+
 										<th><label>封面图片：</label></th>
 										<td><input type="text" style="width: 250px" 
 											class="input-text" name="MAIN_PIC" id="MAIN_PIC"  value="${pd1.PIC_URL}" readonly="readonly"> <input
@@ -145,7 +144,7 @@
 									</tr>
 								</tbody>
 							</table>
-							<div>
+							<%--<div>
 								<label style="margin-left: 7px">文章内容：</label>
 							</div>
 							<div style="margin-top: 5px;border-color: #FFDAC8;width:100%;">
@@ -158,10 +157,9 @@
 
 								<!-- <button onclick="getContent()">获得内容</button> -->
 							</div>
-							<br>
-							<table style="width:100%;height: 10px">
-								
-							</table>
+							<table style="width:100%;height: 10px">--%>
+								<%----%>
+							<%--</table>--%>
 							<table style="width:100%;margin-left: 10px">
 								<tr>
 									<td ><a class="btn btn-success"
@@ -170,11 +168,7 @@
 							</table>
 							<br />
 							</form>
-							
-							
-
 							<!-- ------------------------------------------------------------------------------- -->
-							
 						</div>
 						<!-- /.col -->
 					</div>
