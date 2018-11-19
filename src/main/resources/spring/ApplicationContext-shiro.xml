@@ -34,6 +34,7 @@
 			<property name="filterChainDefinitions">
 				<value>
 				/test/**		 			= anon
+				/rematoget/**  		        = anon
 				/dataAnalysis/**			= anon
 				/officeautomation/**		= anon
 				/erp_Get/**					= anon

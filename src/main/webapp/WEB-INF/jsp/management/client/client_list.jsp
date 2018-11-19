@@ -35,7 +35,7 @@
 							<%--<input type="hidden" name="treeKey" value="${pd.treeKey}">--%>
 							<table style="margin-top:5px;">
 								<tr>
-									<a style="margin-left: 3px" class="btn btn-light btn-xs" data-rel="tooltip" title="同步">
+									<a style="margin-left: 3px" class="btn btn-light btn-xs" data-rel="tooltip" title="同步" href="<%=basePath%>rematoget/getCustomer.do">
 										<i class="ace-icon glyphicon glyphicon-retweet bigger-110 nav-search-icon blue"></i>同步
 									</a>
 									<c:if test="${QX.add == 1 }">
