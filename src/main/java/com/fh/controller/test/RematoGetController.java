@@ -29,8 +29,6 @@ public class RematoGetController extends BaseController {
     @Resource(name="interfaceipService")
     private InterfaceIPManager interfaceipService;
 
-
-
     public String getIpAndProjectName()throws Exception{
         String ip = null;
         String projectName = null;
@@ -42,6 +40,7 @@ public class RematoGetController extends BaseController {
         return ip+"/"+projectName;
     }
 
+    //例子：客户
     @RequestMapping(value="/getCustomer")
     @ResponseBody
     public Map<String, Object> getCustomer() throws Exception{
@@ -62,6 +61,7 @@ public class RematoGetController extends BaseController {
             PageData pd = new PageData();
             //查询本地数据
             List<PageData> varOList = null;//clientService.listAll(pd);  //本地数据
+            JSONObject job = null;
             //新增开关
             int hint = 0; //1为开启，0为关闭
             //删除开关
@@ -72,8 +72,9 @@ public class RematoGetController extends BaseController {
             int ecount = 0;
             PageData pd3 = new PageData();
             for (int i = 0; i < jsonarr.size(); i++) {
+                //初始化新增开关
                 hint = 1;
-                JSONObject job = jsonarr.getJSONObject(i);
+                job = jsonarr.getJSONObject(i);
                 for (int j = 0; j < varOList.size(); j++) {
                     //判断本地数据和erp数据是否已经存在FITEMID
                     if(varOList.get(j).get("FITEMID").equals(Integer.parseInt(job.get("FItemID").toString()))){
@@ -92,6 +93,7 @@ public class RematoGetController extends BaseController {
                             //clientService.edit(pd3);
                             ecount ++ ;
                         }
+                        continue;
                     }
                 }
                 //如果上面没有把开关关闭，即执行保存
@@ -113,10 +115,12 @@ public class RematoGetController extends BaseController {
             for (int j = 0; j < varOList.size(); j++) {
                 dint = 1;  //初始化开关
                 for (int i = 0; i < jsonarr.size(); i++) {
-                    JSONObject job = jsonarr.getJSONObject(i);
+                    job = jsonarr.getJSONObject(i);
                     if(Integer.parseInt(job.get("FItemID").toString()) == Integer.parseInt(varOList.get(j).get("FITEMID").toString())){
                         dint = 0; //erp存在改数据，关闭删除
+                        continue;
                     }
+
                 }
                 //当没有检查到erp存在对应FITEMID的话，关闭删除没有设定，执行删除
                 if(dint == 1){
@@ -168,4 +172,6 @@ public class RematoGetController extends BaseController {
         }
         return jsonarr;
     }
+
+
 }

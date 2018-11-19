@@ -72,13 +72,4 @@ public class BaseController {
 		logger.info("");
 	}
 
-	/**得到当前系统时间
-	 * @return
-	 */
-	public String getNowDate() {
-		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String nowDate = sdf.format(date);
-		return nowDate;
-	}
 }
