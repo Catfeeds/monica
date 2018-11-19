@@ -3,11 +3,7 @@ package com.fh.controller.management.salesorderbill;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import javax.annotation.Resource;
 
 import com.fh.service.system.dictionaries.DictionariesManager;
@@ -54,15 +50,10 @@ public class SalesOrderBillController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		/* TODO 仅测试数据 需重新调整 */
-		pd.put("FCUSTOMERID",this.get32UUID());
-		pd.put("FORDERNUM","模拟订单编号");
-		pd.put("FORDERTYPE",this.get32UUID());
-		pd.put("FSALESID",this.get32UUID());
-		pd.put("FORDERPERSON",this.get32UUID());
-		pd.put("SALESORDERBILL_ID", this.get32UUID());	//主键
 		pd.put("FORDERSTATUS",0);
 		pd.put("FISSYNCHRONIZATION",0);
+		pd.put("FISCANCELLATION",0);
+		pd.put("SALESORDERBILL_ID", this.get32UUID());	//主键
 		salesorderbillService.save(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
@@ -95,8 +86,6 @@ public class SalesOrderBillController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		pd.put("FORDERSTATUS",0);
-		pd.put("FISSYNCHRONIZATION",0);
 		salesorderbillService.edit(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
@@ -114,9 +103,13 @@ public class SalesOrderBillController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		String keywords = pd.getString("keywords");				//关键词检索条件
-		if(null != keywords && !"".equals(keywords)){
-			pd.put("keywords", keywords.trim());
+		String clientName = pd.getString("FCLIENTNAME");				//关键词检索条件
+		if(null != clientName && !"".equals(clientName)){
+			pd.put("FCLIENTNAME", clientName.trim());
+		}
+		String orderNum = pd.getString("FORDERNUM");				//关键词检索条件
+		if(null != orderNum && !"".equals(orderNum)){
+			pd.put("FORDERNUM", orderNum.trim());
 		}
 		page.setPd(pd);
 		List<PageData>	varList = salesorderbillService.list(page);	//列出SalesOrderBill列表
@@ -136,6 +129,32 @@ public class SalesOrderBillController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		//生成订单编号
+		StringBuffer FORDERNUM = new StringBuffer();
+		Calendar calendar = Calendar.getInstance();
+		String number = "SALORD" + (calendar.get(Calendar.YEAR)+"").substring(2) + (calendar.get(Calendar.MONTH) + 1);
+		FORDERNUM.append(number);
+		pd.put("NUMBER",number);
+		PageData serialNumPd = salesorderbillService.updateSerialNumber(pd);
+		if(serialNumPd == null){
+			FORDERNUM.append("0001");
+		} else {
+			String serialNum = serialNumPd.getString("FORDERNUM");
+			serialNum = serialNum.substring(serialNum.length()-4);
+			Integer num = Integer.parseInt(serialNum);
+			num++;
+			if (num.toString().length() == 1){
+				serialNum = "000"+num.toString();
+			} else if (num.toString().length() == 2){
+				serialNum = "00"+num.toString();
+			} else if (num.toString().length() == 3){
+				serialNum = "0"+num.toString();
+			} else if (num.toString().length() == 4){
+				serialNum = num.toString();
+			}
+			FORDERNUM.append(serialNum);
+		}
+		pd.put("FORDERNUM",FORDERNUM.toString());
 		pd.put("PNAME","订单类型");
 		List<PageData> orderTypeList = dictionariesService.listByParentName(pd);
 		mv.addObject("orderTypeList", orderTypeList);
@@ -188,7 +207,6 @@ public class SalesOrderBillController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		pd = salesorderbillService.findById(pd);	//根据ID读取
-		/* TODO 处理订单类型 */
 		pd.put("PNAME","订单类型");
 		List<PageData> orderTypeList = dictionariesService.listByParentName(pd);
 		mv.addObject("orderTypeList", orderTypeList);
@@ -254,6 +272,21 @@ public class SalesOrderBillController extends BaseController {
 		pdList.add(pd);
 		map.put("list", pdList);
 		return AppUtil.returnObject(pd, map);
+	}
+
+	@RequestMapping(value = "/approve")
+	@ResponseBody
+	public Map<String,String> approve() throws Exception{
+		Map<String,String> resultMap = new HashMap<String,String>();
+		PageData pd = this.getPageData();
+		PageData checkPd = salesorderbillService.findById(pd);
+		if("0".equals(checkPd.get("FORDERSTATUS").toString())){
+			salesorderbillService.orderApproval(pd);
+			resultMap.put("msg","1");
+		} else {
+			resultMap.put("msg","0");
+		}
+		return resultMap;
 	}
 	
 	 /**导出到excel

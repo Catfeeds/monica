@@ -27,40 +27,56 @@
 				<div class="row">
 					<div class="col-xs-12">
 					
-					<form action="classify_item/${msg }.do" name="Form" id="Form" method="post">
-						<input type="hidden" name="CLASSIFY_ITEM_ID" id="CLASSIFY_ITEM_ID" value="${pd.CLASSIFY_ITEM_ID}"/>
-						<div id="zhongxin" style="padding-top: 13px;">
-						<table id="table_report" class="table table-striped table-bordered table-hover">
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">FItemID:</td>
-								<td><input type="number" name="FITEMID" id="FITEMID" value="${pd.FITEMID}" maxlength="32" placeholder="这里输入FItemID" title="FItemID" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">编号:</td>
-								<td><input type="text" name="FNUMBER" id="FNUMBER" value="${pd.FNUMBER}" maxlength="255" placeholder="这里输入编号" title="编号" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">名称:</td>
-								<td><input type="text" name="FNAME" id="FNAME" value="${pd.FNAME}" maxlength="255" placeholder="这里输入名称" title="名称" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">父ID:</td>
-								<td><input type="number" name="FPARENTID" id="FPARENTID" value="${pd.FPARENTID}" maxlength="32" placeholder="这里输入父ID" title="父ID" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">FModifyTime:</td>
-								<td><input type="text" name="FMODIFYTIME" id="FMODIFYTIME" value="${pd.FMODIFYTIME}" maxlength="255" placeholder="这里输入FModifyTime" title="FModifyTime" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="text-align: center;" colspan="10">
-									<a class="btn btn-mini btn-primary" onclick="save();">保存</a>
-									<a class="btn btn-mini btn-danger" onclick="top.Dialog.close();">取消</a>
-								</td>
-							</tr>
-						</table>
-						</div>
-						<div id="zhongxin2" class="center" style="display:none"><br/><br/><br/><br/><br/><img src="static/images/jiazai.gif" /><br/><h4 class="lighter block green">提交中...</h4></div>
-					</form>
+						<form action="classify_item/${msg }.do" name="Form" id="Form" method="post" class="">
+							<input type="hidden" name="CLASSIFY_ITEM_ID" id="CLASSIFY_ITEM_ID" value="${pd.CLASSIFY_ITEM_ID}"/>
+								<div id="zhongxin" style="padding-top: 13px;" class="container form-group">
+									<div class="row">
+										<div class="col-xs-3"></div>
+										<div class="col-xs-3"></div>
+										<div class="col-xs-3"></div>
+										<div class="col-xs-3"></div>
+									</div>
+
+									<table id="table_report" style="border-collapse:separate; border-spacing:10px;width: 100%;padding-left: 1%">
+										<tr>
+											<td style="width:75px;text-align: right;padding-top: 13px;">FItemID:</td>
+											<td><input type="number" name="FITEMID" id="FITEMID" value="${pd.FITEMID}" maxlength="32" placeholder="这里输入FItemID" title="FItemID" style="width:98%;"/></td>
+										</tr>
+										<tr>
+											<td style="width:75px;text-align: right;padding-top: 13px;">编号:</td>
+											<td><input type="text" name="FNUMBER" id="FNUMBER" value="${pd.FNUMBER}" maxlength="255" placeholder="这里输入编号" title="编号" style="width:98%;"/></td>
+										</tr>
+										<tr>
+											<td style="width:75px;text-align: right;padding-top: 13px;">名称:</td>
+											<td><input type="text" name="FNAME" id="FNAME" value="${pd.FNAME}" maxlength="255" placeholder="这里输入名称" title="名称" style="width:98%;"/></td>
+										</tr>
+										<tr>
+											<td style="width:75px;text-align: right;padding-top: 13px;">父ID:</td>
+											<td><input type="number" name="FPARENTID" id="FPARENTID" value="${pd.FPARENTID}" maxlength="32" placeholder="这里输入父ID" title="父ID" style="width:98%;"/></td>
+										</tr>
+										<tr>
+											<td style="width:75px;text-align: right;padding-top: 13px;">更新时间:</td>
+											<td><input type="text" name="FMODIFYTIME" id="FMODIFYTIME" value="${pd.FMODIFYTIME}" maxlength="255" placeholder="这里输入更新时间" title="FModifyTime" style="width:98%;"/></td>
+										</tr>
+										<tr>
+											<td style="text-align: center;" colspan="10">
+												<a class="btn btn-mini btn-primary" onclick="save();">保存</a>
+												<a class="btn btn-mini btn-danger" onclick="top.Dialog.close();">取消</a>
+											</td>
+										</tr>
+									</table>
+								</div>
+							<div id="zhongxin2" class="center" style="display:none">
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+								<img src="static/images/jiazai.gif" />
+								<br/>
+								<h4 class="lighter block green">提交中...</h4>
+							</div>
+						</form>
 					</div>
 					<!-- /.col -->
 				</div>

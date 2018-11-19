@@ -19,7 +19,7 @@
 		FVERSIONS,	
 		FNOTE,	
 		FDELIVERYDATE,	
-		FCLIENTCREDIT,
+		FORDERAMOUNT,
 		FPACK,	
 		FCODESPURTING,	
 		FSPECIALREQUIREMENTS,	
@@ -31,7 +31,8 @@
 		FIDENTIFICATIONREQUIREMENTS,	
 		FLOGISTICS,	
 		FORDERPERSON,	
-		FORDERTIME,	
+		FORDERTIME,
+		FISCANCELLATION,
 		SALESORDERBILL_ID
 	</sql>
 	
@@ -47,7 +48,7 @@
 		#{FVERSIONS},	
 		#{FNOTE},	
 		#{FDELIVERYDATE},	
-		#{FCLIENTCREDIT},
+		#{FORDERAMOUNT},
 		#{FPACK},	
 		#{FCODESPURTING},	
 		#{FSPECIALREQUIREMENTS},	
@@ -59,7 +60,8 @@
 		#{FIDENTIFICATIONREQUIREMENTS},	
 		#{FLOGISTICS},	
 		#{FORDERPERSON},	
-		#{FORDERTIME},	
+		#{FORDERTIME},
+		#{FISCANCELLATION},
 		#{SALESORDERBILL_ID}
 	</sql>
 	
@@ -92,12 +94,10 @@
 			FORDERDATE = #{FORDERDATE},
 			FSALESID = #{FSALESID},
 			FORDERTYPE = #{FORDERTYPE},
-			FORDERSTATUS = #{FORDERSTATUS},
-			FISSYNCHRONIZATION = #{FISSYNCHRONIZATION},
 			FVERSIONS = #{FVERSIONS},
 			FNOTE = #{FNOTE},
 			FDELIVERYDATE = #{FDELIVERYDATE},
-			FCLIENTCREDIT = #{FCLIENTCREDIT},
+			FORDERAMOUNT = #{FORDERAMOUNT},
 			FPACK = #{FPACK},
 			FCODESPURTING = #{FCODESPURTING},
 			FSPECIALREQUIREMENTS = #{FSPECIALREQUIREMENTS},
@@ -118,6 +118,7 @@
 	<!-- 通过ID获取数据 -->
 	<select id="findById" parameterType="pd" resultType="pd">
 		SELECT
+			client.FNAME AS FCLIENTNAME,
 			logistics.DICTIONARIES_ID AS FLOGISTICSID,
 			logistics.NAME AS FLOGISTICSNAME,
 			identificationrequirements.DICTIONARIES_ID AS FIDENTIFICATIONREQUIREMENTSID,
@@ -156,6 +157,8 @@
 		ON bill.FIDENTIFICATIONREQUIREMENTS = identificationrequirements.DICTIONARIES_ID
 		LEFT JOIN sys_dictionaries AS logistics
 		ON bill.FLOGISTICS = logistics.DICTIONARIES_ID
+		LEFT JOIN TB_CLIENT AS client
+		ON bill.FCLIENTID = client.CLIENT_ID
 		WHERE bill.SALESORDERBILL_ID = #{SALESORDERBILL_ID}
 	</select>
 	
@@ -163,21 +166,26 @@
 	<select id="datalistPage" parameterType="page" resultType="pd">
 		SELECT
 			ordertype.NAME AS FORDERTYPENAME,
+			client.FNAME AS FCLIENTNAME,
 			bill.*
 		FROM TB_SALESORDERBILL AS bill
 		LEFT JOIN sys_dictionaries AS ordertype
 		ON bill.FORDERTYPE = ordertype.DICTIONARIES_ID
+		LEFT JOIN TB_CLIENT AS client
+		ON bill.FCLIENTID = client.CLIENT_ID
 		WHERE 1=1
-		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
-			and
-				(
-				<!--	根据需求自己加检索条件
-					字段1 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
-					 or 
-					字段2 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
-				-->
-				)
+		<if test="pd.FCLIENTNAME != null and pd.FCLIENTNAME != ''">
+			AND client.FNAME LIKE '%'+#{pd.FCLIENTNAME}+'%'
 		</if>
+
+		<if test="pd.FORDERNUM != null and pd.FORDERNUM != ''">
+			AND bill.FORDERNUM LIKE '%'+#{pd.FORDERNUM}+'%'
+		</if>
+
+		<if test="pd.FORDERSTATUS != null and pd.FORDERSTATUS != ''">
+			AND bill.FORDERSTATUS = #{pd.FORDERSTATUS}
+		</if>
+		AND bill.FISCANCELLATION = 0
 	</select>
 	
 	<!-- 列表(全部) -->
@@ -190,13 +198,36 @@
 	
 	<!-- 批量删除 -->
 	<delete id="deleteAll" parameterType="String">
-		delete from
-		<include refid="tableName"></include>
-		where 
-			SALESORDERBILL_ID in
+		UPDATE
+			<include refid="tableName"></include>
+		SET
+			FISCANCELLATION = 1
+		WHERE
+			SALESORDERBILL_ID IN
 		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
                  #{item}
 		</foreach>
 	</delete>
+
+	<!-- 更新流水号 -->
+	<select id="updateSerialNumber" parameterType="pd" resultType="pd">
+		SELECT
+			TOP 1
+			FORDERNUM
+		FROM TB_SALESORDERBILL
+		WHERE
+	  		FORDERNUM LIKE #{NUMBER}+'%'
+	  	ORDER BY FORDERNUM DESC
+	</select>
+
+	<!-- 审批订单 -->
+	<update id="orderApproval" parameterType="pd">
+		UPDATE
+			<include refid="tableName"></include>
+		SET
+			FORDERSTATUS = 1
+		WHERE
+			SALESORDERBILL_ID = #{SALESORDERBILL_ID}
+	</update>
 	
 </mapper>

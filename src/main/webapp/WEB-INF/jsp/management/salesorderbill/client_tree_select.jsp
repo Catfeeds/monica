@@ -38,16 +38,11 @@
 						<div class="col-xs-12">
 							<table style="width:100%;" border="0">
 								<tr>
-									<td style="width:12%;" valign="top" bgcolor="#F9F9F9"><!-- <a
-										style="width: 100%;margin-top: 5px"
-										class="btn btn-light btn-xs" onclick="updateDep()">同步用户信息<i
-											id="nav-search-icon"
-											class="ace-icon fa fa-refresh bigger-110 nav-search-icon blue"></i> 
-									</a>-->
+									<td style="width:12%;" valign="top" bgcolor="#F9F9F9">
 										<ul id="treeDemo" class="ztree"></ul></td>
 									<td style="width:88%;" valign="top"><iframe
 											name="treeFrame" id="treeFrame" frameborder="0"
-											src="<%=basePath%>commodity/list"
+											src="<%=basePath%>client/toClientBy_tree"
 											style="margin:0 auto;width:100%;height:100%;"></iframe></td>
 								</tr>
 							</table>
@@ -91,7 +86,7 @@
                 cache:false,  
                 type:'POST',  
                 //dataType:"String",  
-                url:'<%=basePath%>icinventory/dateTree',
+                url:'<%=basePath%>client/dateTree',
 				success : function(data) {
 					//alert(data) ;
 					zNodes = data;
@@ -113,21 +108,20 @@
 			},
 			callback : {
 				onClick : function(event, treeId, treeNode, clickFlag) {
-				    debugger;
-					// 判断是否父节点  
+					// 判断是否父节点
 					if (!treeNode.isParent) {
 						/* alert("treeId自动编号：" + treeNode.tId + ", 节点id是："
 								+ treeNode.id + ", 节点文本是：" + treeNode.name); */
-								
+
 					}
 					//var treeKey = encodeURI(encodeURI(treeNode.name));
-					var fparentid = treeNode.id;
+					var treeKey = treeNode.id;
 					//alert(treeKey);
 					if(treeNode.id == 1){
 						keywords ="";
-						$("#treeFrame").attr("src","<%=basePath%>commodity/list?fparentid="+fparentid);
+						$("#treeFrame").attr("src","<%=basePath%>client/toClientBy_tree?treeKey="+treeKey);
 					}
-					$("#treeFrame").attr("src","<%=basePath%>commodity/list?fparentid="+fparentid);
+					$("#treeFrame").attr("src","<%=basePath%>client/toClientBy_tree?treeKey="+treeKey);
 					//$("#treeFrame").attr("src","http://www.baidu.com");
 				}
 			}

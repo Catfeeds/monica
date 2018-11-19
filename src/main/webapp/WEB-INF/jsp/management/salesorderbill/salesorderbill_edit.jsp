@@ -48,7 +48,7 @@
 										<label>客户名称<span style="color: red;">*</span>:</label>
 									</td>
 									<td>
-										<input id="FCLIENTNAME" type="text" onclick="toClient()" style="width: 100%;cursor: pointer;
+										<input id="FCLIENTNAME" value="${pd.FCLIENTNAME}" type="text" onclick="toClient()" style="width: 100%;cursor: pointer;
 													background: url(static/images/search.png) no-repeat;background-size: 20px 20px;
 													background-position:right;background-color: #FFFFFF;" class="input-text">
 									</td>
@@ -93,10 +93,10 @@
 								</tr>
 								<tr>
 									<td style="width:6%;text-align: right;">
-										<label>客户信用<span style="color: red;">*</span>:</label>
+										<label>订单金额<span style="color: red;">*</span>:</label>
 									</td>
 									<td>
-										<input id="FCLIENTCREDIT" name="FCLIENTCREDIT" value="${pd.FCLIENTCREDIT}" type="date" style="width: 100%;" class="input-text">
+										<input id="FORDERAMOUNT" name="FORDERAMOUNT" value="${pd.FORDERAMOUNT}" type="number" min="0" step="0.01" style="width: 100%;" class="input-text">
 									</td>
 
 									<td style="width:6%;text-align: right;">
@@ -315,9 +315,12 @@
 
 <div style="text-align: right;height:45px;
 		background: url(static/login/images/topbg.png) repeat-x; position:fixed;width: 100%;z-index:10000000;bottom: 0px;";>
-	<a style="margin-top: 10px;" class="btn btn-light btn-xs">
-		<i class="ace-icon glyphicon glyphicon-ok bigger-110 nav-search-icon green"></i>审核
-	</a>
+
+	<c:if test="${msg == 'edit'}">
+		<a style="margin-top: 10px;" onclick="approve('您确定审批该订单吗?')" class="btn btn-light btn-xs">
+			<i class="ace-icon glyphicon glyphicon-ok bigger-110 nav-search-icon green"></i>审批
+		</a>
+	</c:if>
 
 	<a style="margin-top: 10px;" class="btn btn-light btn-xs">
 		<i class="ace-icon glyphicon glyphicon-edit bigger-110 nav-search-icon blue"></i>变更
@@ -337,6 +340,8 @@
 	<%@ include file="../../system/index/foot.jsp"%>
 	<!-- 下拉框 -->
 	<script src="static/ace/js/chosen.jquery.js"></script>
+	<!-- 删除时确认窗口 -->
+	<script src="static/ace/js/bootbox.js"></script>
 	<!-- 日期框 -->
 	<script src="static/ace/js/date-time/bootstrap-datepicker.js"></script>
 	<!--提示框-->
@@ -345,7 +350,7 @@
 		$(top.hangge());
 		//保存
 		function save(){
-            /*if($("#FCLIENTID").val()==""){
+            if($("#FCLIENTID").val()==""){
                 $("#FCLIENTNAME").tips({
                     side:3,
                     msg:'请选择客户',
@@ -354,7 +359,7 @@
                 });
                 $("#FCLIENTNAME").focus();
                 return false;
-            }*/
+            }
 
             if($("#FORDERDATE").val()==""){
                 $("#FORDERDATE").tips({
@@ -400,14 +405,14 @@
                 return false;
             }
 
-            if($("#FCLIENTCREDIT").val()==""){
-                $("#FCLIENTCREDIT").tips({
+            if($("#FORDERAMOUNT").val()==""){
+                $("#FORDERAMOUNT").tips({
                     side:3,
-                    msg:'请选择客户信用',
+                    msg:'请输入订单金额',
                     bg:'#AE81FF',
                     time:2
                 });
-                $("#FCLIENTCREDIT").focus();
+                $("#FORDERAMOUNT").focus();
                 return false;
             }
 			$("#Form").submit();
@@ -464,47 +469,73 @@
             var diag = new top.Dialog();
             diag.Drag=true;
             diag.Title ="选择客户";
-            diag.URL = '<%=basePath%>client/getClassClient.do';
+            diag.URL = '<%=basePath%>client/listTree_select.do';
             diag.Width = window.innerWidth * 1.2;
             diag.Height = window.innerHeight * 1.2;
             diag.Modal = true;				//有无遮罩窗口
             diag.CancelEvent = function(){ //关闭事件
-               /* if(isAdmin == "true"){
-                    var iframe = diag.innerFrame.contentWindow.document.getElementById('treeFrame').contentWindow;
-                    var msg = iframe.document.getElementById('msg').value;
-                    var EMPLOYEE_ID = iframe.document.getElementById('EMPLOYEE_ID').value;
-                }else {
-                    var msg = diag.innerFrame.contentWindow.document.getElementById('msg').value;
-                    var EMPLOYEE_ID = diag.innerFrame.contentWindow.document.getElementById('EMPLOYEE_ID').value;
-                }
+                var iframe = diag.innerFrame.contentWindow.document.getElementById('treeFrame').contentWindow;
+                var msg = iframe.document.getElementById('msg').value;
+                var CLIENT_ID = iframe.document.getElementById('CLIENT_ID').value;
                 if(msg == "save"){
-                    $("#FEMPID").val(EMPLOYEE_ID);
+                    $("#FCLIENTID").val(CLIENT_ID);
                     $.ajax({
                         async: false,
                         cache: false,
                         type: 'POST',
                         data : {
-                            EMPLOYEE_ID : EMPLOYEE_ID
+                            CLIENT_ID : CLIENT_ID
                         },
-                        url: '<%=basePath%>employee/findEmplByID',
+                        url: '<%=basePath%>client/findClientByID',
                         success: function (data) {
                             var pd = data.pd;
-                            console.log(pd);
-                            $("#FORG").val(pd.CNAME);
-                            $("#SALES").val(pd.FNAME);
-                            $("#FORGID").val(pd.FCOMPANYID);
-                            $("#FDEPTID").val(pd.FDEPTID);
+                            $("#FCLIENTNAME").val(pd.FNAME);
                         },
                         error: function () {
                             alert("请求失败");
                         }
                     });
-                    //findEmplByID
-                }*/
+                }
                 diag.close();
             };
             diag.show();
 		}
+
+        function approve(msg){
+            bootbox.confirm(msg, function(result) {
+                if(result) {
+                    var Id = $("#SALESORDERBILL_ID").val();
+					$.ajax({
+						async:false,
+						cache:false,
+						url:'<%=basePath%>salesorderbill/approve.do',
+						type:'POST',
+						data:{
+							SALESORDERBILL_ID:Id
+						},
+						datatype:'JSON',
+						success:function (obj) {
+							if(obj.msg == '1'){
+								bootbox.alert({
+									size: "small",
+									title: "成功",
+									message: "该订单已成功审批!"
+
+								});
+                                return false;
+							} else {
+								bootbox.alert({
+									size: "small",
+									title:"失败",
+									message: "该订单已通过审批,无法重复操作!"
+								});
+								return false;
+							}
+						}
+					});
+                }
+            });
+        }
 		</script>
 </body>
 </html>

@@ -101,8 +101,8 @@
 		from 
 		<include refid="tableName"></include>
 		where 1=1
-		<if test="pd.treeKey!= null and pd.treeKey != ''"><!-- 关键词检索 -->
-			and  INVENTORY = #{pd.treeKey}
+		<if test="pd.fparentid!= null and pd.fparentid != ''"><!-- 关键词检索 -->
+			and  FPARENTID = #{pd.fparentid}
 		</if>
 		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
 			and

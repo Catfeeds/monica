@@ -55,6 +55,7 @@ public class ClientController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		pd.put("CLIENT_ID", this.get32UUID());	//主键
+		pd.put("FMODIFYTIME", this.getNowDate());
 		clientService.save(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
@@ -87,6 +88,7 @@ public class ClientController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		pd.put("FMODIFYTIME", this.getNowDate());
 		clientService.edit(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
@@ -101,6 +103,28 @@ public class ClientController extends BaseController {
 		// mv.addObject("zNodes", jsStr);
 		mv.setViewName("management/client/client_tree");
 		return mv;
+	}
+
+	@RequestMapping(value="/listTree_select")
+	public ModelAndView listTree_select() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		//mv.addObject("zNodes", jsStr);
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		mv.addObject("pd", pd);
+		mv.setViewName("management/salesorderbill/client_tree_select");
+		return mv;
+	}
+
+	@RequestMapping(value="/findClientByID")
+	@ResponseBody
+	public Map<String, Object> findClientByID() throws Exception{
+		PageData pd = new PageData();
+		Map<String, Object> json = new HashMap<String, Object>();
+		pd = this.getPageData();
+		pd = clientService.findById(pd);	//根据ID读取
+		json.put("pd", pd);
+		return json;
 	}
 	
 	@RequestMapping(value = "/dateTree")
@@ -161,6 +185,30 @@ public class ClientController extends BaseController {
 		page.setPd(pd);
 		List<PageData>	varList = clientService.list(page);	//列出Client列表
 		mv.setViewName("management/client/client_list");
+		mv.addObject("varList", varList);
+		mv.addObject("pd", pd);
+		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
+		return mv;
+	}
+
+	@RequestMapping(value="/toClientBy_tree")
+	public ModelAndView toClientBy_tree(Page page) throws Exception{
+		logBefore(logger, Jurisdiction.getUsername()+"列表Client");
+		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限(无权查看时页面会有提示,如果不注释掉这句代码就无法进入列表页面,所以根据情况是否加入本句代码)
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		String keywords = pd.getString("keywords");				//关键词检索条件
+		if(null != keywords && !"".equals(keywords)){
+			pd.put("keywords", keywords.trim());
+		}
+		String treeKey = pd.getString("treeKey");				//关键词检索条件
+		if(null != treeKey && !"".equals(treeKey)){
+			pd.put("treeKey", treeKey.trim());
+		}
+		page.setPd(pd);
+		List<PageData>	varList = clientService.list(page);	//列出Client列表
+		mv.setViewName("management/salesorderbill/toClientBy_tree");
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
