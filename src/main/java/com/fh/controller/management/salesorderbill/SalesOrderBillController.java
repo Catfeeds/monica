@@ -275,7 +275,7 @@ public class SalesOrderBillController extends BaseController {
 	@RequestMapping(value = "/approve")
 	@ResponseBody
 	public Map<String,String> approve() throws Exception{
-		Map<String,String> resultMap = new HashMap<>();
+		Map<String,String> resultMap = new HashMap<String,String>();
 		PageData pd = this.getPageData();
 		PageData checkPd = salesorderbillService.findById(pd);
 		if("0".equals(checkPd.get("FORDERSTATUS").toString())){

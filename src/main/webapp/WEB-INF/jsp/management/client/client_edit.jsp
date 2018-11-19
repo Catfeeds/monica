@@ -44,12 +44,12 @@
 								<td><input type="text" name="FNAME" id="FNAME" value="${pd.FNAME}" maxlength="255" placeholder="这里输入客户名称" title="客户名称" style="width:98%;"/></td>
 							</tr>
 							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">FParentID:</td>
-								<td><input type="number" name="FPARENTID" id="FPARENTID" value="${pd.FPARENTID}" maxlength="32" placeholder="这里输入FParentID" title="FParentID" style="width:98%;"/></td>
+								<td style="width:75px;text-align: right;padding-top: 13px;">父级ID:</td>
+								<td><input type="number" name="FPARENTID" id="FPARENTID" value="${pd.FPARENTID}" maxlength="32" placeholder="这里输入父级ID" title="FParentID" style="width:98%;"/></td>
 							</tr>
 							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">FModifyTime:</td>
-								<td><input type="text" name="FMODIFYTIME" id="FMODIFYTIME" value="${pd.FMODIFYTIME}" maxlength="255" placeholder="这里输入FModifyTime" title="FModifyTime" style="width:98%;"/></td>
+								<td style="width:75px;text-align: right;padding-top: 13px;">修改时间:</td>
+								<td><input type="text" name="FMODIFYTIME" id="FMODIFYTIME" value="${pd.FMODIFYTIME}" readonly style="width:100%;"/></td>
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">FDeleted:</td>
@@ -130,7 +130,7 @@
 				$("#FPARENTID").focus();
 			return false;
 			}
-			if($("#FMODIFYTIME").val()==""){
+			/*if($("#FMODIFYTIME").val()==""){
 				$("#FMODIFYTIME").tips({
 					side:3,
 		            msg:'请输入FModifyTime',
@@ -139,7 +139,7 @@
 		        });
 				$("#FMODIFYTIME").focus();
 			return false;
-			}
+			}*/
 			if($("#FDELETED").val()==""){
 				$("#FDELETED").tips({
 					side:3,
