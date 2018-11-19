@@ -63,7 +63,7 @@
                                 <tr>
                                     <td>
                                         <div class="nav-search">
-                                            商品代码:  <span class="input-icon">
+                                            商品代码： <span class="input-icon">
 											<input type="text" placeholder="按商品代码进行搜索" class="nav-search-input"
                                                    id="nav1-input" autocomplete="off" name="keywords"
                                                    value="${pd.keywords }" placeholder="这里输入关键词"/>
@@ -74,7 +74,7 @@
                                     <td width="15px"></td>
                                     <td>
                                         <div class="nav-search">
-                                            商品名称:  <span class="input-icon">
+                                            商品名称：  <span class="input-icon">
 											<input type="text" placeholder="按商品名称进行搜索" class="nav-search-input"
                                                    id="nav-search-input" autocomplete="off" name="keywords1"
                                                    value="${pd.keywords1 }" placeholder="这里输入关键词"/>
