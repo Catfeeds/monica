@@ -359,24 +359,49 @@
 		}
 		
 		//修改
-		function edit(Id){
-			 top.jzts();
-			 var diag = new top.Dialog();
-			 diag.Drag=true;
-			 diag.Title ="编辑";
-			 diag.URL = '<%=basePath%>classify_item/goEdit.do?CLASSIFY_ITEM_ID='+Id;
-			 diag.Width = 450;
-			 diag.Height = 355;
-			 diag.Modal = true;				//有无遮罩窗口
-			 diag. ShowMaxButton = true;	//最大化按钮
-		     diag.ShowMinButton = true;		//最小化按钮 
-			 diag.CancelEvent = function(){ //关闭事件
-				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
-					 tosearch();
-				}
-				diag.close();
-			 };
-			 diag.show();
+		function edit(){
+            var str = [];
+            for(var i=0;i < document.getElementsByName('ids').length;i++){
+                if(document.getElementsByName('ids')[i].checked){
+                    str.push(document.getElementsByName('ids')[i].value);
+                }
+            }
+            if(str.length < 1){
+                bootbox.dialog({
+                    title: "提示",
+                    message: "<span class='bigger-110'>您没有选择任何内容!</span>",
+                    buttons:
+                        { "button":{ "label":"确定", "className":"btn-sm btn-success"}}
+                });
+                return false;
+            }else if(str.length > 1){
+                bootbox.dialog({
+                    title: "提示",
+                    message: "<span class='bigger-110'>您的选择内容必须要单项!</span>",
+                    buttons:
+                        { "button":{ "label":"确定", "className":"btn-sm btn-success"}}
+                });
+                return false;
+            }else {
+                var Id = str[0];
+                top.jzts();
+                var diag = new top.Dialog();
+                diag.Drag = true;
+                diag.Title = "编辑";
+                diag.URL = '<%=basePath%>classify_item/goEdit.do?CLASSIFY_ITEM_ID=' + Id;
+                diag.Width = 750;
+                diag.Height = 355;
+                diag.Modal = true;				//有无遮罩窗口
+                diag.ShowMaxButton = true;	//最大化按钮
+                diag.ShowMinButton = true;		//最小化按钮
+                diag.CancelEvent = function () { //关闭事件
+                    if (diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none') {
+                        tosearch();
+                    }
+                    diag.close();
+                };
+                diag.show();
+            }
 		}
         //双击列表一行数据
         function editByID(Id) {
