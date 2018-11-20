@@ -75,15 +75,13 @@ public class ICInventoryController extends BaseController {
 		}else {
 			currentPage = "0";
 		}
-		//String showCount  = pd.getString("showCount");
-		/*if (null != keywords && !"".equals(keywords)) {
+		if (null != keywords && !"".equals(keywords)) {
 			pd.put("keywords", keywords.trim());
-		}*/
+		}
 		if (null != treeKey && !"".equals(treeKey)) {
 			pd.put("treeKey", treeKey);
 		}
 		page.setPd(pd);
-		//System.out.println(pd);
 		String requestUrl = this.getIpAndProjectName()+"/erp_Get/erp_getInventory?currentPage="+currentPage+"&treeKey="+treeKey;
 				//+"&keywords="+keywords;
 		try {
@@ -121,8 +119,9 @@ public class ICInventoryController extends BaseController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		//List<PageData> varList = itemService.list(page);
+		List<PageData> varList = itemService.list(page);
 		mv.setViewName("item/icinventory");
+		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
 		mv.addObject("QX", Jurisdiction.getHC()); // 按钮权限
 		return mv;
