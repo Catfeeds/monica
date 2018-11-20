@@ -199,7 +199,7 @@ public class RematoGetController extends BaseController {
         //调用方式  0为远程接口方式，1为多数据源调用方式
         String todoType = Tools.readTxtFile("admin/config/TYPE.txt");
         JSONArray jsonarr = null;
-        System.out.println(DateUtil.getDateTimeStr());
+        //System.out.println(DateUtil.getDateTimeStr());
         try {
             PageData pd = new PageData();
             //多数据源连接，erp数据库
@@ -217,7 +217,7 @@ public class RematoGetController extends BaseController {
             int dcount = 0;
             int ecount = 0;
             PageData pd3 = new PageData();
-            System.out.println(DateUtil.getDateTimeStr());
+            //System.out.println(DateUtil.getDateTimeStr());
             if(jsonarr.size() > 0 ){
                 for (int i = 0; i < jsonarr.size(); i++) {
                     hint = 1;
@@ -259,7 +259,7 @@ public class RematoGetController extends BaseController {
                     }
                 }
             }
-            System.out.println(DateUtil.getDateTimeStr());
+            //System.out.println(DateUtil.getDateTimeStr());
             //在这里做一次嵌套for循环，必须分开做，反向判断
             PageData pd2 = new PageData();
             if(varOList.size() > 0){
@@ -288,7 +288,7 @@ public class RematoGetController extends BaseController {
             System.out.println("修改数据"+ecount);
             System.out.println("删除数据"+dcount);
             json.put("Data", "新增数据"+count+"条；"+"修改数据"+ecount+"条；"+"删除数据"+dcount+"条。");
-            System.out.println(DateUtil.getDateTimeStr());
+            //System.out.println(DateUtil.getDateTimeStr());
             System.gc();
         } catch (Exception e) {
             e.printStackTrace();
@@ -304,7 +304,7 @@ public class RematoGetController extends BaseController {
         //调用方式  0为远程接口方式，1为多数据源调用方式
         String todoType = Tools.readTxtFile("admin/config/TYPE.txt");
         JSONArray jsonarr = null;
-        System.out.println(DateUtil.getDateTimeStr());
+        //System.out.println(DateUtil.getDateTimeStr());
         try {
             PageData pd = new PageData();
             if(todoType.equals("0")){
@@ -452,7 +452,7 @@ public class RematoGetController extends BaseController {
             System.out.println("修改数据"+ecount);
             System.out.println("删除数据"+dcount);
             json.put("Data", "新增数据"+count+"条；"+"修改数据"+ecount+"条；"+"删除数据"+dcount+"条。");
-            System.out.println(DateUtil.getDateTimeStr());
+            //System.out.println(DateUtil.getDateTimeStr());
             System.gc();
         } catch (Exception e) {
             e.printStackTrace();

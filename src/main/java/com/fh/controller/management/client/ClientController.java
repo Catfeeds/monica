@@ -294,7 +294,6 @@ public class ClientController extends BaseController {
 		}
 		page.setPd(pd);
 		List<PageData>	varList = clientService.list(page);	//列出Employee列表
-		/* TODO 选择客户 */
 		mv.setViewName("management/employee/toClient_tree");
 		mv.addObject("varList", varList);
 		return mv;

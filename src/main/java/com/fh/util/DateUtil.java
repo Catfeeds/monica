@@ -23,28 +23,25 @@ public class DateUtil {
 	private final static SimpleDateFormat sdfTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private final static SimpleDateFormat sdfTimes = new SimpleDateFormat("yyyyMMddHHmmss");
 
-
 	public static String getDateStr(){
 		Calendar calendar = Calendar.getInstance();
-		StringBuffer dateStr = new StringBuffer();
-		dateStr.append(calendar.get(calendar.YEAR)+"-");
-		DecimalFormat df = new DecimalFormat("00");
-		dateStr.append(df.format((calendar.get(calendar.MONTH)+1))+"-");
-		dateStr.append(df.format(calendar.get(calendar.DATE)));
-		return dateStr.toString();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String dateStr = sdf.format(calendar.getTime());
+		return dateStr;
 	}
 
-	public static String getDateTimeStr(){
+	public static String  getDateTimeStr(){
 		Calendar calendar = Calendar.getInstance();
-		StringBuffer dateStr = new StringBuffer();
-		dateStr.append(calendar.get(calendar.YEAR)+"-");
-		DecimalFormat df = new DecimalFormat("00");
-		dateStr.append(df.format((calendar.get(calendar.MONTH)+1))+"-");
-		dateStr.append(df.format(calendar.get(calendar.DATE))+" ");
-		dateStr.append(df.format(calendar.get(calendar.HOUR))+":");
-		dateStr.append(df.format(calendar.get(calendar.MINUTE))+":");
-		dateStr.append(df.format(calendar.get(calendar.SECOND)));
-		return dateStr.toString();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String dateTimeStr = sdf.format(calendar.getTime());
+		return dateTimeStr;
+	}
+
+	public static String getTimeStr(){
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		String timeStr = sdf.format(calendar.getTime());
+		return timeStr;
 	}
 
 	/**
@@ -207,31 +204,4 @@ public class DateUtil {
         String dateStr = sdf.format(date);
         return dateStr;
     }
-
-
-	/**
-	 * 获取当前时间
- 	 * @return
-	 */
-	public static String getTimeStr(){
-		Calendar calendar = Calendar.getInstance();
-		StringBuffer timeStr = new StringBuffer();
-		if(calendar.get(calendar.HOUR) < 10){
-			timeStr.append("0"+(calendar.get(calendar.HOUR))+":");
-		} else {
-			timeStr.append(calendar.get(calendar.HOUR)+":");
-		}
-		if(calendar.get(calendar.MINUTE) < 10){
-			timeStr.append("0"+(calendar.get(calendar.MINUTE))+":");
-		} else {
-			timeStr.append(calendar.get(calendar.MINUTE)+":");
-		}
-		if(calendar.get(calendar.SECOND) < 10){
-			timeStr.append("0"+(calendar.get(calendar.SECOND)));
-		} else {
-			timeStr.append(calendar.get(calendar.SECOND));
-		}
-		return timeStr.toString();
-	}
-    
 }
