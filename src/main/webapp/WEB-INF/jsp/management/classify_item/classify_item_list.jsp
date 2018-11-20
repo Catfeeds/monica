@@ -368,7 +368,6 @@
             }
             if(str.length < 1){
                 bootbox.dialog({
-                    title: "提示",
                     message: "<span class='bigger-110'>您没有选择任何内容!</span>",
                     buttons:
                         { "button":{ "label":"确定", "className":"btn-sm btn-success"}}
@@ -376,7 +375,6 @@
                 return false;
             }else if(str.length > 1){
                 bootbox.dialog({
-                    title: "提示",
                     message: "<span class='bigger-110'>您的选择内容必须要单项!</span>",
                     buttons:
                         { "button":{ "label":"确定", "className":"btn-sm btn-success"}}

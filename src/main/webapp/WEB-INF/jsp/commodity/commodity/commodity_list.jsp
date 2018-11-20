@@ -47,7 +47,7 @@
                                             </a>
                                         </c:if>--%>
 
-                                        <a class="btn btn-light btn-xs" onclick="updateItem()" title="同步">
+                                        <a class="btn btn-light btn-xs" onclick="synchro()" title="同步">
                                             <i id="nav-refresh-icon" class="ace-icon fa fa-refresh bigger-120 blue"></i>同步
                                         </a>
 
@@ -299,6 +299,9 @@
             });
         });
     });
+    function synchro(){
+        window.location.href='<%=basePath%>rematoget/getCustomer';
+    }
 
     //新增
     function add() {
@@ -349,6 +352,7 @@
             return false;
         }else if(str.length > 1){
             bootbox.dialog({
+
                 message: "<span class='bigger-110'>您的选择内容必须要单项!</span>",
                 buttons:
                     { "button":{ "label":"确定", "className":"btn-sm btn-success"}}

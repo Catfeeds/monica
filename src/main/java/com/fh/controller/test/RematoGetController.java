@@ -33,18 +33,18 @@ public class RematoGetController extends BaseController {
     @Resource(name="clientService")
     private ClientManager clientService;
 
-
-
     public String getIpAndProjectName()throws Exception{
         String ip = null;
         String projectName = null;
         PageData pd = new PageData();
         pd = interfaceipService.findByNew(pd);
         ip = pd.getString("IP");
+        System.out.println("ip:"+ip);
         projectName = pd.getString("PROJECTNAME");
         return ip+"/"+projectName;
     }
 
+    //例子：客户
     @RequestMapping(value="/getCustomer")
     @ResponseBody
     public Map<String, Object> getCustomer() throws Exception{
@@ -62,10 +62,10 @@ public class RematoGetController extends BaseController {
                 List<PageData> jsonlist = null;  //null换成service查询数据
                 jsonarr = JSONArray.fromObject(jsonlist);
             }
-            System.out.println(jsonarr.size());
             PageData pd = new PageData();
             //查询本地数据
             List<PageData> varOList = clientService.listAll(pd);  //本地数据
+            JSONObject job = null;
             //新增开关
             int hint = 0; //1为开启，0为关闭
             //删除开关
@@ -75,68 +75,62 @@ public class RematoGetController extends BaseController {
             int dcount = 0;
             int ecount = 0;
             PageData pd3 = new PageData();
-            if(jsonarr.size() > 0 ){
-                for (int i = 0; i < jsonarr.size(); i++) {
-                    hint = 1;
-                    JSONObject job = jsonarr.getJSONObject(i);
-                    if (varOList.size() > 0){
-                        for (int j = 0; j < varOList.size(); j++) {
-                            //判断本地数据和erp数据是否已经存在FITEMID
-                            if(varOList.get(j).get("FITEMID").equals(Integer.parseInt(job.get("FItemID").toString()))){
-                                //存在即把开关关闭
-                                hint = 0;
-                                //判断本地数据和erp的FMODIFYTIME和本地FMODIFYTIME是否相等，如果不相等即进行修改
-                                if (!varOList.get(j).get("FMODIFYTIME").equals(job.get("FModifyTime").toString())) {
-                                    pd3.put("CLIENT_ID", varOList.get(j).get("CLIENT_ID"));
-                                    pd3.put("FMODIFYTIME", job.get("FModifyTime").toString());
-                                    pd3.put("FNAME", job.getString("FName"));
-                                    pd3.put("FNUMBER", job.getString("FNumber"));
-                                    pd3.put("FITEMID", Integer.parseInt(job.get("FItemID").toString()));
-                                    pd3.put("FDELETED", Integer.parseInt(job.get("FDeleted").toString()));
-                                    pd3.put("FPARENTID", Integer.parseInt(job.get("FParentID").toString()));
-                                    //执行修改（找到对应的service）
-                                    //clientService.edit(pd3);
-                                    ecount ++ ;
-                                }
-                            }
+            for (int i = 0; i < jsonarr.size(); i++) {
+                //初始化新增开关
+                hint = 1;
+                job = jsonarr.getJSONObject(i);
+                for (int j = 0; j < varOList.size(); j++) {
+                    //判断本地数据和erp数据是否已经存在FITEMID
+                    if(varOList.get(j).get("FITEMID").equals(Integer.parseInt(job.get("FItemID").toString()))){
+                        //存在即把开关关闭
+                        hint = 0;
+                        //判断本地数据和erp的FMODIFYTIME和本地FMODIFYTIME是否相等，如果不相等即进行修改
+                        if (!varOList.get(j).get("FMODIFYTIME").equals(job.get("FModifyTime").toString())) {
+                            pd3.put("CLIENT_ID", varOList.get(j).get("CLIENT_ID"));
+                            pd3.put("FMODIFYTIME", job.get("FModifyTime").toString());
+                            pd3.put("FNAME", job.getString("FName"));
+                            pd3.put("FNUMBER", job.getString("FNumber"));
+                            pd3.put("FITEMID", Integer.parseInt(job.get("FItemID").toString()));
+                            pd3.put("FDELETED", Integer.parseInt(job.get("FDeleted").toString()));
+                            pd3.put("FPARENTID", Integer.parseInt(job.get("FParentID").toString()));
+                            //执行修改（找到对应的service）
+                            clientService.edit(pd3);
+                            ecount ++ ;
                         }
+                        continue;
                     }
-                    //如果上面没有把开关关闭，即执行保存
-                    if(hint == 1) {
-                        pd.put("CLIENT_ID", this.get32UUID());
-                        pd.put("FMODIFYTIME", job.get("FModifyTime").toString());
-                        pd.put("FNAME", job.getString("FName"));
-                        pd.put("FNUMBER", job.getString("FNumber"));
-                        pd.put("FITEMID", Integer.parseInt(job.get("FItemID").toString()));
-                        pd.put("FDELETED", Integer.parseInt(job.get("FDeleted").toString()));
-                        pd.put("FPARENTID", Integer.parseInt(job.get("FParentID").toString()));
-                        //执行保存（找到对应的service）
-                        clientService.save(pd);
-                        count++;
-                    }
+                }
+                //如果上面没有把开关关闭，即执行保存
+                if(hint == 1) {
+                    pd.put("CLIENT_ID", this.get32UUID());
+                    pd.put("FMODIFYTIME", job.get("FModifyTime").toString());
+                    pd.put("FNAME", job.getString("FName"));
+                    pd.put("FNUMBER", job.getString("FNumber"));
+                    pd.put("FITEMID", Integer.parseInt(job.get("FItemID").toString()));
+                    pd.put("FDELETED", Integer.parseInt(job.get("FDeleted").toString()));
+                    pd.put("FPARENTID", Integer.parseInt(job.get("FParentID").toString()));
+                    //执行保存（找到对应的service）
+                    clientService.save(pd);
+                    count++;
                 }
             }
             //在这里做一次嵌套for循环，必须分开做，反向判断
             PageData pd2 = new PageData();
-            if(varOList.size() > 0){
-                for (int j = 0; j < varOList.size(); j++) {
-                    dint = 1;  //初始化开关
-                    if(jsonarr.size() > 0){
-                        for (int i = 0; i < jsonarr.size(); i++) {
-                            JSONObject job = jsonarr.getJSONObject(i);
-                            if(Integer.parseInt(job.get("FItemID").toString()) == Integer.parseInt(varOList.get(j).get("FITEMID").toString())){
-                                dint = 0; //erp存在改数据，关闭删除
-                            }
-                        }
-                        //当没有检查到erp存在对应FITEMID的话，关闭删除没有设定，执行删除
-                        if(dint == 1){
-                            pd2.put("FITEMID",Integer.parseInt(varOList.get(j).get("FITEMID").toString()));
-                            clientService.deleteByFITEMID(pd2);
-                            dcount ++ ;
-                        }
-                    }else {
-                        //逻辑全部删除
+            for (int j = 0; j < varOList.size(); j++) {
+                dint = 1;  //初始化开关
+                for (int i = 0; i < jsonarr.size(); i++) {
+                    job = jsonarr.getJSONObject(i);
+                    if(Integer.parseInt(job.get("FItemID").toString()) == Integer.parseInt(varOList.get(j).get("FITEMID").toString())){
+                        dint = 0; //erp存在改数据，关闭删除
+                        continue;
                     }
+
+                }
+                //当没有检查到erp存在对应FITEMID的话，关闭删除没有设定，执行删除
+                if(dint == 1){
+                    pd2.put("FITEMID",Integer.parseInt(varOList.get(j).get("FITEMID").toString()));
+                    clientService.deleteByFITEMID(pd2);
+                    dcount ++ ;
                 }
             }
             System.out.println("=====数据处理完成=====");
@@ -182,4 +176,6 @@ public class RematoGetController extends BaseController {
         }
         return jsonarr;
     }
+
+
 }
