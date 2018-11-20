@@ -58,6 +58,14 @@ public interface CommodityManager{
 	 * 树查询
 	 */
 	public List<PageData> tree_data(Page page)throws Exception;
+
+	/**
+	 * 根据多个id查询商品
+	 * @param pd
+	 * @return
+	 * @throws Exception
+	 */
+	public List<PageData> findCommoditiesByIds(PageData pd) throws Exception;
 	
 }
 

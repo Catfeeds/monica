@@ -271,7 +271,7 @@
 		<li>变更日志</li>
 	</ul>
 	<div class="box01_c" id="spmx">
-		<a style="margin-left: 10px" class="btn btn-success btn-xs">
+		<a onclick="addCommodities();" style="margin-left: 10px" class="btn btn-success btn-xs">
 			<i class="ace-icon fa glyphicon-plus bigger-110 nav-search-icon yellow"></i>新增
 		</a>
 		<a class="btn btn-primary  btn-xs">
@@ -342,6 +342,8 @@
 	<script src="static/ace/js/chosen.jquery.js"></script>
 	<!-- 删除时确认窗口 -->
 	<script src="static/ace/js/bootbox.js"></script>
+	<!-- ace scripts -->
+	<script src="static/ace/js/ace/ace.js"></script>
 	<!-- 日期框 -->
 	<script src="static/ace/js/date-time/bootstrap-datepicker.js"></script>
 	<!--提示框-->
@@ -536,6 +538,56 @@
                 }
             });
         }
+
+        function addCommodities() {
+            top.jzts();
+            var diag = new top.Dialog();
+            diag.Drag = true;
+            diag.Title = "添加商品";
+            diag.URL = '<%=basePath%>commodity/listTree_select.do';
+            diag.Width = window.innerWidth * 1.2;
+            diag.Height = window.innerHeight * 1.2;
+            diag.Modal = true;				//有无遮罩窗口
+            diag.CancelEvent = function () { //关闭事件
+                var iframe = diag.innerFrame.contentWindow.document.getElementById('treeFrame').contentWindow;
+                var msg = iframe.document.getElementById('msg').value;
+                if (msg == 'save') {
+                    var FCOMMODITYIDS = iframe.document.getElementById('FCOMMODITYIDS').value;
+                    $.ajax({
+                        async: false,
+                        cache: false,
+                        url: '<%=basePath%>commodity/findCommoditiesByIds.do',
+                        type: 'POST',
+                        data: {
+                            FCOMMODITYIDS: FCOMMODITYIDS
+                        },
+                        datatype: 'JSON',
+                        success: function (obj) {
+                            var commoditiesList = obj.commoditiesList;
+                            console.log(commoditiesList);
+                            var tr = '';
+                            for (var i = 0; i < commoditiesList.length; i++) {
+                                tr += '<tr>';
+                                tr += '<td class="center"><label class="pos-rel"><input id="'+commoditiesList[i].COMMODITY_ID+'" type="checkbox" name="ids" value="'+commoditiesList[i].COMMODITY_ID+'" class="ace" /><span class="lbl"></span></label></td>';
+                                tr += '<td class="center">1</td>';
+                                tr += '<td class="center">'+commoditiesList[i].FNUMBER+'</td>';
+                                tr += '<td class="center">'+commoditiesList[i].FNAME+'</td>';
+                                tr += '<td class="center">'+commoditiesList[i].FMODEL+'</td>';
+                                tr += '<td class="center"></td>';
+                                tr += '<td class="center">'+commoditiesList[i].FQTY+'</td>';
+                                tr += '<td class="center">'+commoditiesList[i].PRICE+'</td>';
+                                tr += '<td class="center"><input type="text"/></td>';
+                                tr += '<td class="center">'+commoditiesList[i].FNOTE+'</td>';
+                                tr += '</tr>';
+                            }
+                            $("#trspmx").before(tr);
+                        }
+                    });
+                }
+                diag.close();
+            	};
+            diag.show();
+        	}
 		</script>
 </body>
 </html>

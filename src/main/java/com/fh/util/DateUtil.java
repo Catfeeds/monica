@@ -1,9 +1,6 @@
 package com.fh.util;
 
-import org.junit.Test;
-
 import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -30,7 +27,7 @@ public class DateUtil {
 		return dateStr;
 	}
 
-	public static String  getDateTimeStr(){
+	public static String getDateTimeStr(){
 		Calendar calendar = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String dateTimeStr = sdf.format(calendar.getTime());
