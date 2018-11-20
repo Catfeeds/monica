@@ -18,7 +18,9 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import com.fh.service.dst.datasource2.DataSource2Manager;
+import com.fh.service.item.ItemManager;
 import com.fh.service.management.interfaceip.InterfaceIPManager;
+import com.fh.util.*;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -31,11 +33,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.fh.controller.base.BaseController;
 import com.fh.entity.Page;
-import com.fh.util.AppUtil;
-import com.fh.util.ObjectExcelView;
-import com.fh.util.PageData;
-import com.fh.util.Jurisdiction;
-import com.fh.util.Tools;
 import com.fh.service.management.client.ClientManager;
 
 /** 
@@ -54,8 +51,8 @@ public class ClientController extends BaseController {
 	@Resource(name="interfaceipService")
 	private InterfaceIPManager interfaceipService;
 
-	@Resource(name="datasource2Service")
-	private DataSource2Manager dataSource2Service;
+	@Resource(name="itemService")
+	private ItemManager itemService;
 	
 	/**保存
 	 * @param
@@ -358,26 +355,25 @@ public class ClientController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/getCustomer")
+	@RequestMapping(value="/batchInsert")
 	@ResponseBody
-	public Map<String, Object> getCustomer() throws Exception{
+	public Map<String, Object> batchInsert() throws Exception{
 		Map<String, Object> json = new HashMap<String, Object>();
 		String requestUrl = this.getIpAndProjectName()+"/erp_get/erp_cus";
 		//调用方式  0为远程接口方式，1为多数据源调用方式
 		String todoType = Tools.readTxtFile("admin/config/TYPE.txt");
 		JSONArray jsonarr = null;
+		System.out.println(DateUtil.getDateTimeStr());
 		try {
+			PageData pd = new PageData();
 			if(todoType.equals("0")){
 				//执行接口调用
 				jsonarr = this.executeInter(requestUrl,"GET");
 			}else {
 				//多数据源连接，erp数据库
-				PageData pd4 = new PageData();
-				List<PageData> jsonlist = dataSource2Service.listAll(pd4);  //null换成service查询数据
+				List<PageData> jsonlist = itemService.listClient(pd);  //null换成service查询数据
 				jsonarr = JSONArray.fromObject(jsonlist);
 			}
-			System.out.println(jsonarr.size());
-			PageData pd = new PageData();
 			//查询本地数据
 			List<PageData> varOList = clientService.listAll(pd);  //本地数据
 			//新增开关
@@ -388,11 +384,64 @@ public class ClientController extends BaseController {
 			int count = 0;
 			int dcount = 0;
 			int ecount = 0;
+			StringBuffer strbuf = new StringBuffer();
+			JSONObject job = null;
 			PageData pd3 = new PageData();
+			List<PageData> strlist = new ArrayList<PageData>();
 			if(jsonarr.size() > 0 ){
-				for (int i = 0; i < jsonarr.size(); i++) {
+				int num = 100; //设置每次100条
+				int remainder = jsonarr.size() % num;  //取到余数
+				int numcount = jsonarr.size() / num;  //次数
+				for (int x = 0; x < numcount; x++) {
+					strlist.clear();
+					for (int i = num * x; i < num * (x + 1); i++) {
+						hint = 1;
+						job = jsonarr.getJSONObject(i);
+						if (varOList.size() > 0){
+							for (int j = 0; j < varOList.size(); j++) {
+								//判断本地数据和erp数据是否已经存在FITEMID
+								if(varOList.get(j).get("FITEMID").equals(Integer.parseInt(job.get("FItemID").toString()))){
+									//存在即把开关关闭
+									hint = 0;
+									//判断本地数据和erp的FMODIFYTIME和本地FMODIFYTIME是否相等，如果不相等即进行修改
+									if (!varOList.get(j).get("FMODIFYTIME").equals(job.get("FModifyTime").toString())) {
+										pd3.put("CLIENT_ID", varOList.get(j).get("CLIENT_ID"));
+										pd3.put("FMODIFYTIME", job.get("FModifyTime").toString());
+										pd3.put("FNAME", job.getString("FName"));
+										pd3.put("FNUMBER", job.getString("FNumber"));
+										pd3.put("FITEMID", Integer.parseInt(job.get("FItemID").toString()));
+										pd3.put("FDELETED", Integer.parseInt(job.get("FDeleted").toString()));
+										pd3.put("FPARENTID", Integer.parseInt(job.get("FParentID").toString()));
+										//执行修改（找到对应的service）
+										clientService.edit(pd3);
+										ecount ++ ;
+									}
+								}
+							}
+						}
+						//如果上面没有把开关关闭，即执行保存
+						if(hint == 1) {
+							PageData pdCus = new PageData();
+							pdCus.put("CLIENT_ID", this.get32UUID());
+							pdCus.put("FMODIFYTIME", job.get("FModifyTime").toString());
+							pdCus.put("FNAME", job.getString("FName"));
+							pdCus.put("FNUMBER", job.getString("FNumber"));
+							pdCus.put("FITEMID", Integer.parseInt(job.get("FItemID").toString()));
+							pdCus.put("FDELETED", Integer.parseInt(job.get("FDeleted").toString()));
+							pdCus.put("FPARENTID", Integer.parseInt(job.get("FParentID").toString()));
+							strlist.add(pdCus);
+							count++;
+						}
+					}
+					//System.out.println(strlist);
+					if(strlist.size() > 0){
+						clientService.saveByList(strlist);
+					}
+				}
+				strlist.clear();
+				for (int i = (jsonarr.size() - remainder); i < jsonarr.size(); i++) {
 					hint = 1;
-					JSONObject job = jsonarr.getJSONObject(i);
+					job = jsonarr.getJSONObject(i);
 					if (varOList.size() > 0){
 						for (int j = 0; j < varOList.size(); j++) {
 							//判断本地数据和erp数据是否已经存在FITEMID
@@ -417,17 +466,21 @@ public class ClientController extends BaseController {
 					}
 					//如果上面没有把开关关闭，即执行保存
 					if(hint == 1) {
-						pd.put("CLIENT_ID", this.get32UUID());
-						pd.put("FMODIFYTIME", job.get("FModifyTime").toString());
-						pd.put("FNAME", job.getString("FName"));
-						pd.put("FNUMBER", job.getString("FNumber"));
-						pd.put("FITEMID", Integer.parseInt(job.get("FItemID").toString()));
-						pd.put("FDELETED", Integer.parseInt(job.get("FDeleted").toString()));
-						pd.put("FPARENTID", Integer.parseInt(job.get("FParentID").toString()));
-						//执行保存（找到对应的service）
-						clientService.save(pd);
+						PageData pdCus = new PageData();
+						pdCus.put("CLIENT_ID", this.get32UUID());
+						pdCus.put("FMODIFYTIME", job.get("FModifyTime").toString());
+						pdCus.put("FNAME", job.getString("FName"));
+						pdCus.put("FNUMBER", job.getString("FNumber"));
+						pdCus.put("FITEMID", Integer.parseInt(job.get("FItemID").toString()));
+						pdCus.put("FDELETED", Integer.parseInt(job.get("FDeleted").toString()));
+						pdCus.put("FPARENTID", Integer.parseInt(job.get("FParentID").toString()));
+						strlist.add(pdCus);
 						count++;
 					}
+				}
+				//System.out.println(strlist);
+				if(strlist.size() > 0){
+					clientService.saveByList(strlist);
 				}
 			}
 			//在这里做一次嵌套for循环，必须分开做，反向判断
@@ -437,7 +490,7 @@ public class ClientController extends BaseController {
 					dint = 1;  //初始化开关
 					if(jsonarr.size() > 0){
 						for (int i = 0; i < jsonarr.size(); i++) {
-							JSONObject job = jsonarr.getJSONObject(i);
+							job = jsonarr.getJSONObject(i);
 							if(Integer.parseInt(job.get("FItemID").toString()) == Integer.parseInt(varOList.get(j).get("FITEMID").toString())){
 								dint = 0; //erp存在改数据，关闭删除
 							}
@@ -458,6 +511,8 @@ public class ClientController extends BaseController {
 			System.out.println("修改数据"+ecount);
 			System.out.println("删除数据"+dcount);
 			json.put("Data", "新增数据"+count+"条；"+"修改数据"+ecount+"条；"+"删除数据"+dcount+"条。");
+			System.out.println(DateUtil.getDateTimeStr());
+			System.gc();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

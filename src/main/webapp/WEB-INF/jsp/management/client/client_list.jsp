@@ -35,15 +35,15 @@
 							<%--<input type="hidden" name="treeKey" value="${pd.treeKey}">--%>
 							<table style="margin-top:5px;">
 								<tr>
-									<a style="margin-left: 3px" class="btn btn-light btn-xs" data-rel="tooltip" title="同步" onclick="sync()">
+									<a style="margin-left: 3px" class="btn btn-light btn-mini" data-rel="tooltip" title="同步" onclick="sync()">
 										<i class="ace-icon glyphicon glyphicon-retweet bigger-110 nav-search-icon blue"></i>同步
 									</a>
-									<c:if test="${QX.add == 1 }">
+									<%--<c:if test="${QX.add == 1 }">
 										<a style="margin-left: 3px" class="btn btn-light btn-xs" onclick="add();">
 											<i class="ace-icon fa fa-pencil-square-o bigger-110 nav-search-icon yellow"></i>新增
 										</a>
-									</c:if>
-									<a style="margin-left: 3px" class="btn btn-light btn-xs" onclick="edit();"  data-rel="tooltip" title="修改">
+									</c:if>--%>
+									<a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="edit();"  data-rel="tooltip" title="修改">
 										<i class="ace-icon fa fa-cogs bigger-110 nav-search-icon green"></i>修改
 									</a>
 									<%--<a style="margin-left: 3px" class="btn btn-light btn-xs" data-rel="tooltip" title="变更">
@@ -52,7 +52,7 @@
 									<%--<c:if test="${QX.del == 1 }">
 										<a style="margin-left: 3px" class="btn btn-light btn-xs" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='ace-icon fa fa-trash-o bigger-120 nav-search-icon red'></i>删除</a>
 									</c:if>--%>
-									<c:if test="${QX.toExcel == 1 }"><a style="margin-left: 3px" class="btn btn-light btn-xs" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i>导出到EXCEL</a></c:if>
+									<c:if test="${QX.toExcel == 1 }"><a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i>导出到EXCEL</a></c:if>
 									<%--<label style="float: right;margin-top: 5px;margin-right: 15px">
 										<input id="isDetail" <c:if test="${pd.isDetail == 'true'}">checked</c:if>
 											   name="isDetail" class="ace ace-switch ace-switch-5" type="checkbox">
@@ -64,10 +64,10 @@
 									<td>
 										<div class="nav-search">
 											客户名称:<span class="input-icon">
-										<input type="text" placeholder="这里输入关键词" class="nav-search-input"
-											   autocomplete="off" name="keywords" id="FNAME" value="${pd.keywords }" placeholder="这里输入关键词"/>
-										<i class="ace-icon fa fa-search nav-search-icon"></i>
-										</span>
+														<input type="text" placeholder="这里输入关键词" class="nav-search-input"
+															   autocomplete="off" name="keywords" id="FNAME" value="${pd.keywords }" placeholder="这里输入关键词"/>
+														<i class="ace-icon fa fa-search nav-search-icon"></i>
+													</span>
 										</div>
 									</td>
 									<td style="vertical-align:top;padding-left:2px;">
@@ -111,7 +111,7 @@
 									<th class="center">客户编码</th>
 									<th class="center">客户名称</th>
 									<%--<th class="center">FParentID</th>--%>
-									<th class="center">修改时间</th>
+									<%--<th class="center">修改时间</th>--%>
 									<%--<th class="center">FDeleted</th>--%>
 									<%--<th class="center">操作</th>--%>
 								</tr>
@@ -132,7 +132,7 @@
 											<td class='center'>${var.FNUMBER}</td>
 											<td class='center'>${var.FNAME}</td>
 											<%--<td class='center'>${var.FPARENTID}</td>--%>
-											<td class='center'>${var.FMODIFYTIME}</td>
+											<%--<td class='center'>${var.FMODIFYTIME}</td>--%>
 											<%--<td class='center'>${var.FDELETED}</td>--%>
 											<%--<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
@@ -490,10 +490,14 @@
         
         //同步
 		function sync() {
-			top.jzts();
-			var url = '<%=basePath%>client/getCustomer.do';
-			$.get(url, function () {
-				tosearch();
+            bootbox.confirm("同步需要一定的时间，是否确定同步？", function(result) {
+                if(result) {
+                    top.jzts();
+                    var url = "<%=basePath%>client/batchInsert.do";
+                    $.get(url,function(data){
+                        tosearch();
+                    });
+                }
             });
         }
 	</script>
