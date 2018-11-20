@@ -1,6 +1,7 @@
 package com.fh.util;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -19,6 +20,30 @@ public class DateUtil {
 	private final static SimpleDateFormat sdfDays = new SimpleDateFormat("yyyyMMdd");
 	private final static SimpleDateFormat sdfTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private final static SimpleDateFormat sdfTimes = new SimpleDateFormat("yyyyMMddHHmmss");
+
+
+	public static String getDateStr(){
+		Calendar calendar = Calendar.getInstance();
+		StringBuffer dateStr = new StringBuffer();
+		dateStr.append(calendar.get(calendar.YEAR)+"-");
+		DecimalFormat df = new DecimalFormat("00");
+		dateStr.append(df.format((calendar.get(calendar.MONTH)+1))+"-");
+		dateStr.append(df.format(calendar.get(calendar.DATE)));
+		return dateStr.toString();
+	}
+
+	public static String getDateTimeStr(){
+		Calendar calendar = Calendar.getInstance();
+		StringBuffer dateStr = new StringBuffer();
+		dateStr.append(calendar.get(calendar.YEAR)+"-");
+		DecimalFormat df = new DecimalFormat("00");
+		dateStr.append(df.format((calendar.get(calendar.MONTH)+1))+"-");
+		dateStr.append(df.format(calendar.get(calendar.DATE))+" ");
+		dateStr.append(df.format(calendar.get(calendar.HOUR))+":");
+		dateStr.append(df.format(calendar.get(calendar.MINUTE))+":");
+		dateStr.append(df.format(calendar.get(calendar.SECOND)));
+		return dateStr.toString();
+	}
 
 	/**
 	 * 获取YYYY格式

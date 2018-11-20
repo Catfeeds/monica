@@ -199,7 +199,7 @@ public class RematoGetController extends BaseController {
         //调用方式  0为远程接口方式，1为多数据源调用方式
         String todoType = Tools.readTxtFile("admin/config/TYPE.txt");
         JSONArray jsonarr = null;
-        System.out.println(DateUtil.getSdfTimes());
+        System.out.println(DateUtil.getDateTimeStr());
         try {
             PageData pd = new PageData();
             //多数据源连接，erp数据库
@@ -217,7 +217,7 @@ public class RematoGetController extends BaseController {
             int dcount = 0;
             int ecount = 0;
             PageData pd3 = new PageData();
-            System.out.println(DateUtil.getSdfTimes());
+            System.out.println(DateUtil.getDateTimeStr());
             if(jsonarr.size() > 0 ){
                 for (int i = 0; i < jsonarr.size(); i++) {
                     hint = 1;
@@ -259,7 +259,7 @@ public class RematoGetController extends BaseController {
                     }
                 }
             }
-            System.out.println(DateUtil.getSdfTimes());
+            System.out.println(DateUtil.getDateTimeStr());
             //在这里做一次嵌套for循环，必须分开做，反向判断
             PageData pd2 = new PageData();
             if(varOList.size() > 0){
@@ -288,7 +288,7 @@ public class RematoGetController extends BaseController {
             System.out.println("修改数据"+ecount);
             System.out.println("删除数据"+dcount);
             json.put("Data", "新增数据"+count+"条；"+"修改数据"+ecount+"条；"+"删除数据"+dcount+"条。");
-            System.out.println(DateUtil.getSdfTimes());
+            System.out.println(DateUtil.getDateTimeStr());
             System.gc();
         } catch (Exception e) {
             e.printStackTrace();
@@ -296,20 +296,25 @@ public class RematoGetController extends BaseController {
         return json;
     }
 
-    @RequestMapping(value="/test1")
+    @RequestMapping(value="/batchInsert")
     @ResponseBody
-    public Map<String, Object> test1() throws Exception{
+    public Map<String, Object> batchInsert() throws Exception{
         Map<String, Object> json = new HashMap<String, Object>();
         String requestUrl = this.getIpAndProjectName()+"/erp_get/erp_cus";
         //调用方式  0为远程接口方式，1为多数据源调用方式
         String todoType = Tools.readTxtFile("admin/config/TYPE.txt");
         JSONArray jsonarr = null;
-        System.out.println(DateUtil.getSdfTimes());
+        System.out.println(DateUtil.getDateTimeStr());
         try {
             PageData pd = new PageData();
-            //多数据源连接，erp数据库
-            List<PageData> jsonlist = itemService.listClient(pd);  //null换成service查询数据
-            jsonarr = JSONArray.fromObject(jsonlist);
+            if(todoType.equals("0")){
+                //执行接口调用
+                jsonarr = this.executeInter(requestUrl,"GET");
+            }else {
+                //多数据源连接，erp数据库
+                List<PageData> jsonlist = itemService.listClient(pd);  //null换成service查询数据
+                jsonarr = JSONArray.fromObject(jsonlist);
+            }
             //查询本地数据
             List<PageData> varOList = clientService.listAll(pd);  //本地数据
             //新增开关
@@ -349,7 +354,7 @@ public class RematoGetController extends BaseController {
                                         pd3.put("FDELETED", Integer.parseInt(job.get("FDeleted").toString()));
                                         pd3.put("FPARENTID", Integer.parseInt(job.get("FParentID").toString()));
                                         //执行修改（找到对应的service）
-                                        //clientService.edit(pd3);
+                                        clientService.edit(pd3);
                                         ecount ++ ;
                                     }
                                 }
@@ -394,7 +399,7 @@ public class RematoGetController extends BaseController {
                                     pd3.put("FDELETED", Integer.parseInt(job.get("FDeleted").toString()));
                                     pd3.put("FPARENTID", Integer.parseInt(job.get("FParentID").toString()));
                                     //执行修改（找到对应的service）
-                                    //clientService.edit(pd3);
+                                    clientService.edit(pd3);
                                     ecount ++ ;
                                 }
                             }
@@ -447,7 +452,7 @@ public class RematoGetController extends BaseController {
             System.out.println("修改数据"+ecount);
             System.out.println("删除数据"+dcount);
             json.put("Data", "新增数据"+count+"条；"+"修改数据"+ecount+"条；"+"删除数据"+dcount+"条。");
-            System.out.println(DateUtil.getSdfTimes());
+            System.out.println(DateUtil.getDateTimeStr());
             System.gc();
         } catch (Exception e) {
             e.printStackTrace();
@@ -455,4 +460,22 @@ public class RematoGetController extends BaseController {
         return json;
     }
 
+    @Test
+    public void type(){
+        String str= "!1111";
+        Integer i = 1111;
+        System.out.println(str.getClass());
+        System.out.println(i.getClass());
+        System.out.println(t(str));
+    }
+
+    public String t(Object i){
+        String te = null;
+        if(i instanceof Integer){
+            te = "1";
+        }else if(i instanceof String){
+            te = "2";
+        }
+        return te;
+    }
 }
