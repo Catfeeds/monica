@@ -265,9 +265,4 @@ public class DateUtil {
 		return timeStr.toString();
 	}
     
-    public static void main(String[] args) {
-    	System.out.println(getDays());
-    	System.out.println(getAfterDayWeek("3"));
-    }
-
 }
