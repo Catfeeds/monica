@@ -17,7 +17,9 @@ public interface ClientManager{
 	 * @throws Exception
 	 */
 	public void save(PageData pd)throws Exception;
-	
+
+	public void saveByList(List<PageData> list)throws Exception;
+
 	/**删除
 	 * @param pd
 	 * @throws Exception
