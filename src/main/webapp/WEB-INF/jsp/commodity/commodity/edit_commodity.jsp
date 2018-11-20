@@ -37,14 +37,15 @@
 							<input type="hidden"  value="${pd.STATE}" name="STATE" id="STATE"/>
 							<%-- <input type="hidden" name="FITEMID" id="FITEMID" value="${pd.FITEMID}"/>
 							<input type="hidden" name="FPARENTID" id="FPARENTID" value="${pd.FPARENTID}"/> --%>
+
+
 							<table style="border-collapse:separate; border-spacing:10px;width: 100%;padding-left: 1%">
 								<tbody>
 									<tr class="warning">
-										<th width="20%"><label>商品名称：</label></th>
+										<th><label>商品名称：</label></th>
 										<th><input type="text" style="width: 250px" value="${pd.FNAME}"
 											class="input-text"  name="FNAME"
 											id="FNAME"></th>
-
 
 										<th width="20%"><label>商品代码：</label></th>
 										<th><input type="text" style="width: 250px" value="${pd.FNUMBER}"
@@ -53,7 +54,7 @@
 									</tr>
 
 									<tr class="warning">
-										<th width="20%"><label>商品状态：</label></th>
+										<th><label>商品状态：</label></th>
 										<%-- <input type="text" style="width: 250px" value="${pd.STATE}"
 											class="input-text"  name="STATE"
 											id="STATE">
@@ -85,7 +86,7 @@
 												placeholder="">${pd.FMODEL}</textarea></td>
 									</tr>
 									<tr>
-										<td style="width:70px;text-align: left;padding-top: 13px;">商品上下架：</td>
+										<td style="text-align: left;padding-top: 13px;">商品上下架：</td>
 										<td>
 											<label style="float:left;padding-left: 12px;"><input class="ace" name="form-field-radio" id="form-field-radio1" onclick="isPutaway('上架');" <c:if test="${pd.ISPUTAWAY == '上架' }">checked="checked"</c:if> type="radio" value="icon-edit"><span class="lbl">上架</span></label>
 											<label style="float:left;padding-left: 5px;"><input class="ace" name="form-field-radio" id="form-field-radio2" onclick="isPutaway('未上架');" <c:if test="${pd.ISPUTAWAY == '未上架' }">checked="checked"</c:if> type="radio" value="icon-edit"><span class="lbl">未上架</span></label>
@@ -137,7 +138,7 @@
 											class="input-text" placeholder="" name="FNOTE" id="FNOTE" value="${pd.FNOTE}"></td>
 
 										<th><label>封面图片：</label></th>
-										<td><input type="text" style="width: 250px" 
+										<td><input type="text" style="width: 250px"
 											class="input-text" name="MAIN_PIC" id="MAIN_PIC"  value="${pd1.PIC_URL}" readonly="readonly"> <input
 											class="btn btn-warning radius" style="margin-left: 20px"
 											onclick="updatePic()" type="button" value="选择上传图片"></td>
