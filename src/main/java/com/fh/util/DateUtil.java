@@ -1,6 +1,9 @@
 package com.fh.util;
 
+import org.junit.Test;
+
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -19,6 +22,30 @@ public class DateUtil {
 	private final static SimpleDateFormat sdfDays = new SimpleDateFormat("yyyyMMdd");
 	private final static SimpleDateFormat sdfTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private final static SimpleDateFormat sdfTimes = new SimpleDateFormat("yyyyMMddHHmmss");
+
+
+	public static String getDateStr(){
+		Calendar calendar = Calendar.getInstance();
+		StringBuffer dateStr = new StringBuffer();
+		dateStr.append(calendar.get(calendar.YEAR)+"-");
+		DecimalFormat df = new DecimalFormat("00");
+		dateStr.append(df.format((calendar.get(calendar.MONTH)+1))+"-");
+		dateStr.append(df.format(calendar.get(calendar.DATE)));
+		return dateStr.toString();
+	}
+
+	public static String getDateTimeStr(){
+		Calendar calendar = Calendar.getInstance();
+		StringBuffer dateStr = new StringBuffer();
+		dateStr.append(calendar.get(calendar.YEAR)+"-");
+		DecimalFormat df = new DecimalFormat("00");
+		dateStr.append(df.format((calendar.get(calendar.MONTH)+1))+"-");
+		dateStr.append(df.format(calendar.get(calendar.DATE))+" ");
+		dateStr.append(df.format(calendar.get(calendar.HOUR))+":");
+		dateStr.append(df.format(calendar.get(calendar.MINUTE))+":");
+		dateStr.append(df.format(calendar.get(calendar.SECOND)));
+		return dateStr.toString();
+	}
 
 	/**
 	 * 获取YYYY格式
@@ -180,10 +207,87 @@ public class DateUtil {
         String dateStr = sdf.format(date);
         return dateStr;
     }
-    
-    public static void main(String[] args) {
-    	System.out.println(getDays());
-    	System.out.println(getAfterDayWeek("3"));
-    }
 
+	/**
+	 * 获得当前日期
+	 * @return
+	 */
+	public static String getDateStr(){
+		Calendar calendar = Calendar.getInstance();
+		StringBuffer dateStr = new StringBuffer();
+		dateStr.append(calendar.get(calendar.YEAR)+"-");
+		if((calendar.get(calendar.MONTH)+1) < 10){
+			dateStr.append("0"+(calendar.get(calendar.MONTH)+1)+"-");
+		} else {
+			dateStr.append(calendar.get(calendar.MONTH)+1+"-");
+		}
+		if(calendar.get(calendar.DATE) < 10){
+			dateStr.append("0"+(calendar.get(calendar.DATE)));
+		} else {
+			dateStr.append(calendar.get(calendar.DATE));
+		}
+		return dateStr.toString();
+	}
+
+	/**
+	 * 获得当前日期和时间
+ 	 * @return
+	 */
+	public static String getDateTimeStr(){
+		Calendar calendar = Calendar.getInstance();
+		StringBuffer dateTimeStr = new StringBuffer();
+		dateTimeStr.append(calendar.get(calendar.YEAR)+"-");
+		if((calendar.get(calendar.MONTH)+1) < 10){
+			dateTimeStr.append("0"+(calendar.get(calendar.MONTH)+1)+"-");
+		} else {
+			dateTimeStr.append(calendar.get(calendar.MONTH)+1+"-");
+		}
+		if(calendar.get(calendar.DATE) < 10){
+			dateTimeStr.append("0"+(calendar.get(calendar.DATE))+" ");
+		} else {
+			dateTimeStr.append(calendar.get(calendar.DATE)+" ");
+		}
+		if(calendar.get(calendar.HOUR) < 10){
+			dateTimeStr.append("0"+(calendar.get(calendar.HOUR))+":");
+		} else {
+			dateTimeStr.append(calendar.get(calendar.HOUR)+":");
+		}
+		if(calendar.get(calendar.MINUTE) < 10){
+			dateTimeStr.append("0"+(calendar.get(calendar.MINUTE))+":");
+		} else {
+			dateTimeStr.append(calendar.get(calendar.MINUTE)+":");
+		}
+		if(calendar.get(calendar.SECOND) < 10){
+			dateTimeStr.append("0"+(calendar.get(calendar.SECOND)));
+		} else {
+			dateTimeStr.append(calendar.get(calendar.SECOND));
+		}
+		return dateTimeStr.toString();
+	}
+
+	/**
+	 * 获取当前时间
+ 	 * @return
+	 */
+	public static String getTimeStr(){
+		Calendar calendar = Calendar.getInstance();
+		StringBuffer timeStr = new StringBuffer();
+		if(calendar.get(calendar.HOUR) < 10){
+			timeStr.append("0"+(calendar.get(calendar.HOUR))+":");
+		} else {
+			timeStr.append(calendar.get(calendar.HOUR)+":");
+		}
+		if(calendar.get(calendar.MINUTE) < 10){
+			timeStr.append("0"+(calendar.get(calendar.MINUTE))+":");
+		} else {
+			timeStr.append(calendar.get(calendar.MINUTE)+":");
+		}
+		if(calendar.get(calendar.SECOND) < 10){
+			timeStr.append("0"+(calendar.get(calendar.SECOND)));
+		} else {
+			timeStr.append(calendar.get(calendar.SECOND));
+		}
+		return timeStr.toString();
+	}
+    
 }

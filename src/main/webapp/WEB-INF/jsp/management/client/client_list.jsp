@@ -35,7 +35,7 @@
 							<%--<input type="hidden" name="treeKey" value="${pd.treeKey}">--%>
 							<table style="margin-top:5px;">
 								<tr>
-									<a style="margin-left: 3px" class="btn btn-light btn-xs" data-rel="tooltip" title="同步" href="<%=basePath%>rematoget/getCustomer.do">
+									<a style="margin-left: 3px" class="btn btn-light btn-xs" data-rel="tooltip" title="同步" onclick="sync()">
 										<i class="ace-icon glyphicon glyphicon-retweet bigger-110 nav-search-icon blue"></i>同步
 									</a>
 									<c:if test="${QX.add == 1 }">
@@ -486,6 +486,15 @@
             }
 
             //changecss();
+        }
+        
+        //同步
+		function sync() {
+			top.jzts();
+			var url = '<%=basePath%>client/getCustomer.do';
+			$.get(url, function () {
+				tosearch();
+            });
         }
 	</script>
 

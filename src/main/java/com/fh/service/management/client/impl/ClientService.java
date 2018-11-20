@@ -27,6 +27,14 @@ public class ClientService implements ClientManager{
 	public void save(PageData pd)throws Exception{
 		dao.save("ClientMapper.save", pd);
 	}
+
+	/**通过list集合新增
+	 * @param list
+	 * @throws Exception
+	 */
+	public void saveByList(List<PageData> list)throws Exception{
+		dao.save("ClientMapper.saveByList", list);
+	}
 	
 	/**删除
 	 * @param pd
