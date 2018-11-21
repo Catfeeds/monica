@@ -84,6 +84,10 @@ public class CommodityService implements CommodityManager{
 	public List<PageData> tree_data(Page page)throws Exception{
 		return (List<PageData>)dao.findForList("CommodityMapper.tree_data", page);
 	}
-	
+
+	public List<PageData> findCommoditiesByIds(PageData pd) throws Exception {
+		return (List<PageData>) dao.findForList("CommodityMapper.findCommoditiesByIds",pd);
+	}
+
 }
 

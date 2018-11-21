@@ -50,11 +50,12 @@ public class SalesOrderBillController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		pd.put("FORDERSTATUS",0);
-		pd.put("FISSYNCHRONIZATION",0);
-		pd.put("FISCANCELLATION",0);
+		/* TODO 检查订单明细json后保存 */
+		pd.put("FORDERSTATUS",0); //草稿
+		pd.put("FISSYNCHRONIZATION",0);//未同步
+		pd.put("FISCANCELLATION",0);//未作废
 		pd.put("SALESORDERBILL_ID", this.get32UUID());	//主键
-		salesorderbillService.save(pd);
+		//salesorderbillService.save(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
 		return mv;

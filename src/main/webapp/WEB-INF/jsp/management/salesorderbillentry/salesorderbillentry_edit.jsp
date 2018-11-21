@@ -32,44 +32,20 @@
 						<div id="zhongxin" style="padding-top: 13px;">
 						<table id="table_report" class="table table-striped table-bordered table-hover">
 							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">序号:</td>
-								<td><input type="number" name="FENTRYID" id="FENTRYID" value="${pd.FENTRYID}" maxlength="32" placeholder="这里输入序号" title="序号" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">物料ID:</td>
-								<td><input type="number" name="FITEMID" id="FITEMID" value="${pd.FITEMID}" maxlength="32" placeholder="这里输入物料ID" title="物料ID" style="width:98%;"/></td>
+								<td style="width:75px;text-align: right;padding-top: 13px;">商品id:</td>
+								<td><input type="text" name="FCOMMODITYID" id="FCOMMODITYID" value="${pd.FCOMMODITYID}" maxlength="32" placeholder="这里输入商品id" title="商品id" style="width:98%;"/></td>
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">数量:</td>
-								<td><input type="number" name="FAUXQTY" id="FAUXQTY" value="${pd.FAUXQTY}" maxlength="32" placeholder="这里输入数量" title="数量" style="width:98%;"/></td>
+								<td><input type="number" name="FQTY" id="FQTY" value="${pd.FQTY}" maxlength="32" placeholder="这里输入数量" title="数量" style="width:98%;"/></td>
 							</tr>
 							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">要求到货时间:</td>
-								<td><input type="text" name="FDATE" id="FDATE" value="${pd.FDATE}" maxlength="255" placeholder="这里输入要求到货时间" title="要求到货时间" style="width:98%;"/></td>
+								<td style="width:75px;text-align: right;padding-top: 13px;">商品金额:</td>
+								<td><input type="number" name="FAMOUNT" id="FAMOUNT" value="${pd.FAMOUNT}" maxlength="32" placeholder="这里输入商品金额" title="商品金额" style="width:98%;"/></td>
 							</tr>
 							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">不含税单价:</td>
-								<td><input type="number" name="FAUXPRICE" id="FAUXPRICE" value="${pd.FAUXPRICE}" maxlength="32" placeholder="这里输入不含税单价" title="不含税单价" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">不含金额:</td>
-								<td><input type="number" name="FAMOUNT" id="FAMOUNT" value="${pd.FAMOUNT}" maxlength="32" placeholder="这里输入不含金额" title="不含金额" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">税率:</td>
-								<td><input type="number" name="FTAXRATE" id="FTAXRATE" value="${pd.FTAXRATE}" maxlength="32" placeholder="这里输入税率" title="税率" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">含税单价:</td>
-								<td><input type="number" name="FALLPRICE" id="FALLPRICE" value="${pd.FALLPRICE}" maxlength="32" placeholder="这里输入含税单价" title="含税单价" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">含税金额:</td>
-								<td><input type="number" name="FALLAMOUNT" id="FALLAMOUNT" value="${pd.FALLAMOUNT}" maxlength="32" placeholder="这里输入含税金额" title="含税金额" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">备注:</td>
-								<td><input type="text" name="FREMARK" id="FREMARK" value="${pd.FREMARK}" maxlength="255" placeholder="这里输入备注" title="备注" style="width:98%;"/></td>
+								<td style="width:75px;text-align: right;padding-top: 13px;">订单id:</td>
+								<td><input type="text" name="FSALESORDERBILLID" id="FSALESORDERBILLID" value="${pd.FSALESORDERBILLID}" maxlength="32" placeholder="这里输入订单id" title="订单id" style="width:98%;"/></td>
 							</tr>
 							<tr>
 								<td style="text-align: center;" colspan="10">
@@ -106,104 +82,44 @@
 		$(top.hangge());
 		//保存
 		function save(){
-			if($("#FENTRYID").val()==""){
-				$("#FENTRYID").tips({
+			if($("#FCOMMODITYID").val()==""){
+				$("#FCOMMODITYID").tips({
 					side:3,
-		            msg:'请输入序号',
+		            msg:'请输入商品id',
 		            bg:'#AE81FF',
 		            time:2
 		        });
-				$("#FENTRYID").focus();
+				$("#FCOMMODITYID").focus();
 			return false;
 			}
-			if($("#FITEMID").val()==""){
-				$("#FITEMID").tips({
-					side:3,
-		            msg:'请输入物料ID',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#FITEMID").focus();
-			return false;
-			}
-			if($("#FAUXQTY").val()==""){
-				$("#FAUXQTY").tips({
+			if($("#FQTY").val()==""){
+				$("#FQTY").tips({
 					side:3,
 		            msg:'请输入数量',
 		            bg:'#AE81FF',
 		            time:2
 		        });
-				$("#FAUXQTY").focus();
-			return false;
-			}
-			if($("#FDATE").val()==""){
-				$("#FDATE").tips({
-					side:3,
-		            msg:'请输入要求到货时间',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#FDATE").focus();
-			return false;
-			}
-			if($("#FAUXPRICE").val()==""){
-				$("#FAUXPRICE").tips({
-					side:3,
-		            msg:'请输入不含税单价',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#FAUXPRICE").focus();
+				$("#FQTY").focus();
 			return false;
 			}
 			if($("#FAMOUNT").val()==""){
 				$("#FAMOUNT").tips({
 					side:3,
-		            msg:'请输入不含金额',
+		            msg:'请输入商品金额',
 		            bg:'#AE81FF',
 		            time:2
 		        });
 				$("#FAMOUNT").focus();
 			return false;
 			}
-			if($("#FTAXRATE").val()==""){
-				$("#FTAXRATE").tips({
+			if($("#FSALESORDERBILLID").val()==""){
+				$("#FSALESORDERBILLID").tips({
 					side:3,
-		            msg:'请输入税率',
+		            msg:'请输入订单id',
 		            bg:'#AE81FF',
 		            time:2
 		        });
-				$("#FTAXRATE").focus();
-			return false;
-			}
-			if($("#FALLPRICE").val()==""){
-				$("#FALLPRICE").tips({
-					side:3,
-		            msg:'请输入含税单价',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#FALLPRICE").focus();
-			return false;
-			}
-			if($("#FALLAMOUNT").val()==""){
-				$("#FALLAMOUNT").tips({
-					side:3,
-		            msg:'请输入含税金额',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#FALLAMOUNT").focus();
-			return false;
-			}
-			if($("#FREMARK").val()==""){
-				$("#FREMARK").tips({
-					side:3,
-		            msg:'请输入备注',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#FREMARK").focus();
+				$("#FSALESORDERBILLID").focus();
 			return false;
 			}
 			$("#Form").submit();

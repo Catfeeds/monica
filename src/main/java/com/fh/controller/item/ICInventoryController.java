@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 
 import com.fh.service.management.interfaceip.InterfaceIPManager;
 import com.fh.service.management.warehouse.WarehouseManager;
-import com.fh.util.DateUtil;
+import com.fh.util.*;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -31,9 +31,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fh.controller.base.BaseController;
 import com.fh.entity.Page;
 import com.fh.service.item.impl.ItemService;
-import com.fh.util.Jurisdiction;
-import com.fh.util.ObjectExcelView;
-import com.fh.util.PageData;
 
 @Controller
 @RequestMapping(value = "/icinventory")
@@ -82,14 +79,32 @@ public class ICInventoryController extends BaseController {
 			pd.put("treeKey", treeKey.trim());
 		}
 		page.setPd(pd);
-		String requestUrl = this.getIpAndProjectName()+"/erp_Get/erp_getInventory?currentPage="+currentPage+"&treeKey="+treeKey;
-				//+"&keywords="+keywords;
+		//调用方式  0为多数据源调用方式，1为远程接口方式
+		String todoType = Tools.readTxtFile("admin/config/TYPE.txt");
+		if ("0".equals(todoType)) {
+			List<PageData> varList = itemService.list(page);
+			mv.addObject("varList", varList);
+		} else {
+			String requestUrl = this.getIpAndProjectName()+"/erp_Get/erp_getInventory?currentPage="+currentPage+"&treeKey="+treeKey;
+			//+"&keywords="+keywords;
+			JSONArray jsonarr = this.execute(requestUrl, "GET");
+			List<PageData> listInventory = jsonarr;
+			mv.addObject("varList", listInventory);
+		}
+		mv.setViewName("item/icinventory");
+		mv.addObject("pd", pd);
+		mv.addObject("QX", Jurisdiction.getHC()); // 按钮权限
+		return mv;
+	}
+
+	public JSONArray execute(String url, String type) {
+		JSONArray jsonarr = null;
 		try {
-			URL httpclient =new URL(requestUrl);
+			URL httpclient =new URL(url);
 			HttpURLConnection conn =(HttpURLConnection) httpclient.openConnection();
 			conn.setConnectTimeout(50000);
 			conn.setReadTimeout(20000);
-			conn.setRequestMethod("GET");
+			conn.setRequestMethod(type);
 			conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
 			conn.setDoOutput(true);
 			conn.setDoInput(true);
@@ -107,7 +122,7 @@ public class ICInventoryController extends BaseController {
 			String htmlText = new String(data, "UTF-8");
 			JSONObject jsStr = JSONObject.fromObject(htmlText);
 			//System.out.println(jsStr);
-			JSONArray jsonarr = jsStr.getJSONArray("Data"); // erp数据
+			jsonarr = jsStr.getJSONArray("Data"); // erp数据
 			//String jsonPageStr = jsStr.getString("getPageStr"); // 分页
 			//String jsonPage = jsStr.getString("page"); // 分页
 			//System.out.println(jsonPageStr);
@@ -119,12 +134,7 @@ public class ICInventoryController extends BaseController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		List<PageData> varList = itemService.list(page);
-		mv.setViewName("item/icinventory");
-		mv.addObject("varList", varList);
-		mv.addObject("pd", pd);
-		mv.addObject("QX", Jurisdiction.getHC()); // 按钮权限
-		return mv;
+		return jsonarr;
 	}
 
 	public void getWarehouse() throws Exception{

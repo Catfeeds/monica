@@ -9,33 +9,19 @@
 	
 	<!-- 字段 -->
 	<sql id="Field">
-		FENTRYID,	
-		FITEMID,	
-		FAUXQTY,	
-		FDATE,	
-		FAUXPRICE,	
+		FCOMMODITYID,	
+		FQTY,	
 		FAMOUNT,	
-		FTAXRATE,	
-		FALLPRICE,	
-		FALLAMOUNT,	
-		FREMARK,	
-		SALESORDERBILL_ID,
+		FSALESORDERBILLID,	
 		SALESORDERBILLENTRY_ID
 	</sql>
 	
 	<!-- 字段值 -->
 	<sql id="FieldValue">
-		#{FENTRYID},	
-		#{FITEMID},	
-		#{FAUXQTY},	
-		#{FDATE},	
-		#{FAUXPRICE},	
+		#{FCOMMODITYID},	
+		#{FQTY},	
 		#{FAMOUNT},	
-		#{FTAXRATE},	
-		#{FALLPRICE},	
-		#{FALLAMOUNT},	
-		#{FREMARK},	
-		#{SALESORDERBILL_ID},
+		#{FSALESORDERBILLID},	
 		#{SALESORDERBILLENTRY_ID}
 	</sql>
 	
@@ -58,42 +44,18 @@
 			SALESORDERBILLENTRY_ID = #{SALESORDERBILLENTRY_ID}
 	</delete>
 	
-	<!-- 删除-->
-	<delete id="deleteBySALESORDERBILL_ID" parameterType="pd">
-		delete from
-		<include refid="tableName"></include>
-		where 
-			SALESORDERBILL_ID = #{SALESORDERBILL_ID}
-	</delete>
-	
 	<!-- 修改 -->
 	<update id="edit" parameterType="pd">
 		update
 		<include refid="tableName"></include>
 		set 
-			FENTRYID = #{FENTRYID},
-			FITEMID = #{FITEMID},
-			FAUXQTY = #{FAUXQTY},
-			FDATE = #{FDATE},
-			FAUXPRICE = #{FAUXPRICE},
+			FCOMMODITYID = #{FCOMMODITYID},
+			FQTY = #{FQTY},
 			FAMOUNT = #{FAMOUNT},
-			FTAXRATE = #{FTAXRATE},
-			FALLPRICE = #{FALLPRICE},
-			FALLAMOUNT = #{FALLAMOUNT},
-			FREMARK = #{FREMARK},
-			SALESORDERBILL_ID = #{SALESORDERBILL_ID},
+			FSALESORDERBILLID = #{FSALESORDERBILLID},
 		SALESORDERBILLENTRY_ID = SALESORDERBILLENTRY_ID
 		where 
 		SALESORDERBILLENTRY_ID = #{SALESORDERBILLENTRY_ID}
-	</update>
-	
-	<update id="toEditOrder" parameterType="pd">
-		update
-		<include refid="tableName"></include>
-		set 
-			FAUXQTY = #{FAUXQTY}
-		where 
-		FITEMID = #{FITEMID} and FENTRYID = #{FENTRYID} and SALESORDERBILL_ID = #{SALESORDERBILL_ID}
 	</update>
 	
 	<!-- 通过ID获取数据 -->
@@ -104,17 +66,6 @@
 		<include refid="tableName"></include>
 		where 
 			SALESORDERBILLENTRY_ID = #{SALESORDERBILLENTRY_ID}
-	</select>
-	
-	<select id="list_oneOrder" parameterType="page" resultType="pd">
-		select * from 
-		TB_SALESORDERBILLENTRY s LEFT JOIN TB_ITEMBASE i ON s.FITEMID = i.FITEMID
-		where SALESORDERBILL_ID = #{pd.SALESORDERBILL_ID}
-	</select>
-	
-	<select id="list_salesOrderEntry" parameterType="page" resultType="pd">
-		SELECT * from TB_SALESORDERBILLENTRY e LEFT JOIN TB_SALESORDERBILL s ON
-		s.SALESORDERBILL_ID = e.SALESORDERBILL_ID WHERE s.FSYNSTATUS in (0,-1,-2) and s.FSTATUS = 1
 	</select>
 	
 	<!-- 列表 -->
@@ -155,5 +106,4 @@
 		</foreach>
 	</delete>
 	
-	<!-- fh313596790qq(青苔) -->
 </mapper>
