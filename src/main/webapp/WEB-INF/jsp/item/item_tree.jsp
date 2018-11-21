@@ -128,10 +128,10 @@
 					//var treeKey = encodeURI(encodeURI(treeNode.name));
 					var treeKey = treeNode.id;
 					//alert(treeKey);
-					/*if(treeNode.id == 1){
+					if(treeNode.id == 1){
 						keywords ="";
 						$("#treeFrame").attr("src","<%=basePath%>icinventory/list?treeKey="+treeKey);
-					}*/
+					}
 					$("#treeFrame").attr("src","<%=basePath%>icinventory/list?treeKey="+treeKey);
 					//$("#treeFrame").attr("src","http://www.baidu.com");
 				}
