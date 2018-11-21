@@ -36,16 +36,17 @@
 							<tr>
 								<td>
 									<div class="nav-search">
-										<span class="input-icon">
-											<input type="text" placeholder="这里输入关键词" class="nav-search-input" id="nav-search-input" autocomplete="off" name="keywords" value="${pd.keywords }" placeholder="这里输入关键词"/>
+										商品名称:<span class="input-icon">
+											<input type="text" placeholder="这里输入关键词" class="nav-search-input" id="keywords" autocomplete="off" name="keywords" value="${pd.keywords }" placeholder="这里输入关键词"/>
 											<i class="ace-icon fa fa-search nav-search-icon"></i>
 										</span>
 									</div>
 								</td>
-								<c:if test="${QX.cha == 1 }">
-								<td style="vertical-align:top;padding-left:2px"><a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i></a></td>
-								</c:if>
-								<c:if test="${QX.toExcel == 1 }"><td style="vertical-align:top;padding-left:2px;"><a class="btn btn-light btn-xs" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i></a></td></c:if>
+								<td style="vertical-align:top;padding-left:2px;">
+									<div style="margin-top: 1px;"><a id="globelSearch" class="btn btn-light btn-mini" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i>查询</a></div></td>
+								<td style="vertical-align:top;padding-left:2px;margin-top: 2px;">
+									<div style="margin-top: 1px;"><a class="btn btn-light btn-mini" onclick="reset();"  title="重置"><i id="nav-search-icon" class="ace-icon glyphicon glyphicon-repeat bigger-110 nav-search-icon blue"></i>重置</a></div></td>
+								<c:if test="${QX.toExcel == 1 }"><td style="vertical-align:top;padding-left:2px;"><a class="btn btn-light btn-mini" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i>导出到EXCEL</a></td></c:if>
 							</tr>
 						</table>
 						<!-- 检索  -->
@@ -156,7 +157,7 @@
 									<a class="btn btn-mini btn-danger" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='ace-icon fa fa-trash-o bigger-120'></i></a>
 									</c:if>
 								</td> --%>
-								<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${jsonPageStr}</div></td>
+								<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>
 							</tr>
 						</table>
 						</div>
@@ -356,7 +357,9 @@
 			window.location.href='<%=basePath%>icinventory/excel.do';
 		}
 		
-		
+		function reset() {
+            $("#keywords").val('');
+        }
 		
 	</script>
 
