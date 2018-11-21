@@ -343,6 +343,16 @@ public class SalesOrderBillController extends BaseController {
 		}
 		return resultMap;
 	}
+
+	@RequestMapping(value = "/findEntryListByOrderId")
+	@ResponseBody
+	public Map<String,List<PageData>> findEntryListByOrderId() throws Exception{
+		Map<String,List<PageData>> resultList = new HashMap<>();
+		PageData pd = this.getPageData();
+		List<PageData> entryList = salesorderbillentryService.findEntryListByOrderId(pd);
+		resultList.put("entryList",entryList);
+		return resultList;
+	}
 	
 	 /**导出到excel
 	 * @param

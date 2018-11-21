@@ -440,9 +440,44 @@
             if($("#isDetail").prop("checked")){
                 back();
                 setTimeout("changecss()",300);
+                selectEntry(Id);
             }
 
             //changecss();
+        }
+
+        function selectEntry(Id) {
+            $.ajax({
+                async:false,
+                cache:false,
+                url:'<%=basePath%>salesorderbill/findEntryListByOrderId.do',
+                type:'POST',
+				data:{
+                    SALESORDERBILL_ID:Id
+				},
+				datatype:'JSON',
+				success:function (data){
+                    var entryList = data.entryList;
+                    var tr = '';
+                    $("#talxr").find("tr[name='ajaxn']").remove();
+                    for(var i=0;i < entryList.length;i++){
+                        tr += '<tr name="ajaxn">';
+                        tr += 	'<td class="center">'+(i+1)+'</td>';
+                        tr += 	'<td class="center">'+entryList[i].FNUMBER+'</td>';
+                        tr += 	'<td class="center">'+entryList[i].FCOMMODITYNAME+'</td>';
+                        tr += 	'<td class="center">'+entryList[i].FMODEL+'</td>';
+                        tr += 	'<td class="center"></td>';
+                        tr += 	'<td class="center">'+entryList[i].FQTY+'</td>';
+                        tr += 	'<td class="center">'+entryList[i].FPRICE+'</td>';
+                        tr += 	'<td class="center">'+entryList[i].FAMOUNT+'</td>';
+                        tr += 	'<td class="center">'+entryList[i].FARRIVALTIME+'</td>';
+                        tr += 	'<td class="center">'+entryList[i].FNOTE+'</td>';
+                        tr += "</tr>";
+                    }
+                    $("#trlxr").before(tr);
+                    tr = '';
+				}
+            });
         }
 
         function changecss(){

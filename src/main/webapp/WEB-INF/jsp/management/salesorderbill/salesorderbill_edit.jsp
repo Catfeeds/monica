@@ -697,7 +697,7 @@
                 strJson = strJson.substring(0, strJson.length - 1);
                 strJson += ']'
                 $("#strJson").val(strJson);
-                console.log(strJson);
+                //console.log(strJson);
             }
 
             function delectCommodities(){
@@ -723,34 +723,26 @@
                     return false;
                 }else{
                     var Id = str[0];
-                    if(${msg == 'save'}){
-                        $("#tr"+Id).remove();
-                        bootbox.alert({
-                            size: "small",
-                            title:"成功",
-                            message: "删除成功!"
-                        });
-                    } else {
-                        $.ajax({
-							async:false,
-							cache:false,
-							url:'<%=basePath%>salesorderbillentry/delete.do',
-							data:{
-                                SALESORDERBILLENTRY_ID:Id
-							},
-							datatype:'JSON',
-							success:function (obj){
-								if(obj.msg == '1'){
-                                    $("#tr"+Id).remove();
-                                    bootbox.alert({
-                                        size: "small",
-                                        title:"成功",
-                                        message: "删除成功!"
-                                    });
-								}
+					$.ajax({
+						async:false,
+						cache:false,
+						url:'<%=basePath%>salesorderbillentry/delete.do',
+						type:'POST',
+						data:{
+							SALESORDERBILLENTRY_ID:Id
+						},
+						datatype:'JSON',
+						success:function (obj){
+							if(obj.msg == '1'){
+								$("#tr"+Id).remove();
+								bootbox.alert({
+									size: "small",
+									title:"成功",
+									message: "删除成功!"
+								});
 							}
-						});
-                    }
+						}
+					});
                 }
         	}
 
