@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
+
+import com.fh.util.*;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -20,10 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.fh.controller.base.BaseController;
 import com.fh.entity.Page;
-import com.fh.util.AppUtil;
-import com.fh.util.ObjectExcelView;
-import com.fh.util.PageData;
-import com.fh.util.Jurisdiction;
 import com.fh.service.management.commodity.CommodityManager;
 import com.fh.service.management.commoditypic.CommodityPicManager;
 import com.fh.service.item.impl.ItemService;
@@ -121,7 +119,56 @@ public class CommodityController extends BaseController {
 		mv.setViewName("commodity/commodity/commodity_tree");
 		return mv;
 	}
-	
+
+	//树
+	@RequestMapping(value="/listTree_select")
+	public ModelAndView listTree_select() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		//mv.addObject("zNodes", jsStr);
+		mv.setViewName("management/salesorderbill/commodity_tree_select");
+		return mv;
+	}
+
+	/**列表
+	 * @param page
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/toCommodityBy_tree")
+	public ModelAndView toCommodityBy_tree(Page page) throws Exception{
+		logBefore(logger, Jurisdiction.getUsername()+"列表Commodity");
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限(无权查看时页面会有提示,如果不注释掉这句代码就无法进入列表页面,所以根据情况是否加入本句代码)
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		String FPARENTID = pd.getString("fparentid");
+		String keywords = pd.getString("keywords");				//关键词检索条件
+		String keywords1 = pd.getString("keywords1");
+		if(null != keywords && !"".equals(keywords)){
+			pd.put("keywords", keywords.trim());
+		}
+		if(null != FPARENTID && !"".equals(FPARENTID)){
+			pd.put("fparentid", FPARENTID);
+		}
+		if(null != keywords1 && !"".equals(keywords1)){
+			pd.put("keywords1", keywords1.trim());
+		}
+		page.setPd(pd);
+		List<PageData>	tvarList = itemService.tree_dataByid(page);
+		for (int i = 0; i < tvarList.size(); i++) {
+			pd.put("treeKey",tvarList.get(i).getString("CK"));
+		}
+		List<PageData>	varList = commodityService.list(page);	//列出Commodity列表
+		if(null != FPARENTID && !"".equals(FPARENTID)){
+			//pd.put("fparentid", Integer.parseInt(FPARENTID));
+			pd.put("fparentid", FPARENTID);
+		}
+		mv.setViewName("management/salesorderbill/toCommodityBy_tree");
+		mv.addObject("varList", varList);
+		mv.addObject("pd", pd);
+		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
+		return mv;
+	}
+
 	/**列表
 	 * @param page
 	 * @throws Exception
@@ -236,6 +283,23 @@ public class CommodityController extends BaseController {
 		pdList.add(pd);
 		map.put("list", pdList);
 		return AppUtil.returnObject(pd, map);
+	}
+
+	@RequestMapping(value = "/findCommoditiesByIds")
+	@ResponseBody
+	public Map<String,List<PageData>> findCommoditiesByIds() throws Exception{
+		Map<String,List<PageData>> resultMap = new HashMap<>();
+		PageData pd = this.getPageData();
+		String[] ids = pd.getString("FCOMMODITYIDS").split(",");
+		List<String> idsList = new ArrayList<>();
+		for (int i = 0; i < ids.length; i++) {
+			idsList.add(ids[i]);
+		}
+		String sql = EncapsulationUtil.encapsulateIds(idsList);
+		pd.put("sql",sql);
+		List<PageData> commoditiesList = commodityService.findCommoditiesByIds(pd);
+		resultMap.put("commoditiesList",commoditiesList);
+		return resultMap;
 	}
 	
 	 /**导出到excel

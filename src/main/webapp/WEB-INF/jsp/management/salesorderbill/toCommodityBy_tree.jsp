@@ -29,36 +29,10 @@
             <div class="page-content">
                 <div class="row">
                     <div class="col-xs-12">
-
                         <!-- 检索  -->
-                        <%----%>
-                        <form action="commodity/list.do?treeKey=${pd.treeKey }" method="post" name="Form" id="Form">
-                            <div class="row" style="margin-top:5px;">
-                                <div class="col-xs-12">
-                                    <p>
-                                        <c:if test="${QX.edit == 1 }">
-                                            <a class="btn btn-light btn-xs" onclick="edit('');" data-rel="tooltip" title="修改">
-                                                <i class="ace-icon fa fa-pencil-square-o bigger-120 orange"></i>修改
-                                            </a>
-                                        </c:if>
-                                        <%--<c:if test="${QX.del == 1 }">
-                                            <a class="btn btn-light btn-xs" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除">
-                                                <i class="ace-icon fa fa-trash-o bigger-125 red"></i>删除
-                                            </a>
-                                        </c:if>--%>
-
-                                        <a class="btn btn-light btn-xs" onclick="synchro()" title="同步">
-                                            <i id="nav-refresh-icon" class="ace-icon fa fa-refresh bigger-120 blue"></i>同步
-                                        </a>
-
-                                        <c:if test="${QX.toExcel == 1 }">
-                                            <a class="btn btn-light btn-xs" onclick="toExcel();" title="导出到EXCEL">
-                                                <i id="nav-download-icon" class="ace-icon fa fa-download bigger-120 purple"></i>导出Excel
-                                            </a>
-                                        </c:if>
-                                    </p>
-                                </div>
-                            </div>
+                        <form action="commodity/toCommodityBy_tree.do?treeKey=${pd.treeKey }" method="post" name="Form" id="Form">
+                            <input type="hidden" id="msg"/>
+                            <input type="hidden" id="FCOMMODITYIDS"/>
                             <table style="margin-top:5px;">
                                 <tr>
                                     <td>
@@ -82,16 +56,6 @@
 										</span>
                                         </div>
                                     </td>
-                                    <!-- <td style="padding-left:2px;"><input class="span10 date-picker" name="lastStart" id="lastStart"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期" title="开始日期"/></td>
-                                    <td style="padding-left:2px;"><input class="span10 date-picker" name="lastEnd" name="lastEnd"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期" title="结束日期"/></td>
-                                    <td style="vertical-align:top;padding-left:2px;">
-                                         <select class="chosen-select form-control" name="name" id="id" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
-                                        <option value=""></option>
-                                        <option value="">全部</option>
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                          </select>
-                                    </td> -->
                                     <c:if test="${QX.cha == 1 }">
                                         <td style="vertical-align:top;padding-left:2px">
                                             <a class="btn btn-light btn-xs" onclick="tosearch();" title="查询"><i
@@ -103,7 +67,16 @@
                                             </a>
                                         </td>
                                     </c:if>
+                                    
+                                    <td style="vertical-align:top;padding-left:2px">
+                                        <a class="btn btn-light btn-xs" onclick="submitCommodities();" data-rel="tooltip" title="提交">
+                                          <i class="ace-icon fa fa-pencil-square-o bigger-120 orange"></i>提交
+                                        </a>
 
+                                        <a class="btn btn-light btn-xs" onclick="top.Dialog.close();" data-rel="tooltip" title="取消">
+                                            <i class="ace-icon fa fa-pencil-square-o bigger-120 orange"></i>取消
+                                        </a>
+                                    </td>
                                 </tr>
                             </table>
                             <!-- 检索  -->
@@ -117,8 +90,6 @@
                                                 class="lbl"></span></label>
                                     </th>
                                     <th class="center" style="width:50px;">序号</th>
-                                    <!-- <th class="center">FItemID</th>
-                                    <th class="center">FParentID</th> -->
                                     <th class="center">商品代码</th>
                                     <th class="center">商品名称</th>
                                     <th class="center">规格</th>
@@ -139,7 +110,7 @@
                                     <c:when test="${not empty varList}">
                                         <c:if test="${QX.cha == 1 }">
                                             <c:forEach items="${varList}" var="var" varStatus="vs">
-                                                <tr id="tr${var.COMMODITY_ID}" name="listBeen" onclick="toCheck('${var.COMMODITY_ID}')" ondblclick="editByID('${var.COMMODITY_ID}')" style="cursor: pointer;">
+                                                <tr id="tr${var.COMMODITY_ID}" name="listBeen" onclick="toCheck('${var.COMMODITY_ID}')" style="cursor: pointer;">
                                                     <td class='center'>
                                                         <label class="pos-rel"><input id="${var.COMMODITY_ID}" type='checkbox' name='ids'
                                                                                       value="${var.COMMODITY_ID}"
@@ -160,7 +131,7 @@
                                                                     style="color: #990000"
                                                                 </c:when>
                                                                 <c:otherwise>
-                                                                    style="color:#3333FF "
+                                                                    style="color:#3333FF"
                                                                 </c:otherwise>
                                                             </c:choose>
                                                     >
@@ -194,14 +165,6 @@
                             <div class="page-header position-relative">
                                 <table style="width:100%;">
                                     <tr>
-                                        <td style="vertical-align:top;">
-                                            <%-- <c:if test="${QX.add == 1 }">
-                                            <a class="btn btn-mini btn-success" onclick="add();">新增</a>
-                                            </c:if>
-                                            <c:if test="${QX.del == 1 }">
-                                            <a class="btn btn-mini btn-danger" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='ace-icon fa fa-trash-o bigger-120'></i></a>
-                                            </c:if> --%>
-                                        </td>
                                         <td style="vertical-align:top;">
                                             <div class="pagination"
                                                  style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div>
@@ -299,144 +262,6 @@
             });
         });
     });
-    //同步
-    function synchro(){
-        bootbox.confirm("同步需要一定的时间是否确认同步吗?", function(result) {
-            if(result) {
-                top.jzts();
-                var url = "<%=basePath%>rematoget/batchInsert.do";
-                $.get(url,function(data){
-                    nextPage(${page.currentPage});
-                });
-            }
-        });
-    }
-
-    //新增
-    function add() {
-        top.jzts();
-        var diag = new top.Dialog();
-        diag.Drag = true;
-        diag.Title = "新增";
-        diag.URL = '<%=basePath%>commodity/goAdd.do';
-        diag.Width = 450;
-        diag.Height = 355;
-        diag.Modal = true;				//有无遮罩窗口
-        diag.ShowMaxButton = false;	//最大化按钮
-        diag.ShowMinButton = false;		//最小化按钮
-        diag.CancelEvent = function () { //关闭事件
-            tosearch();
-            diag.close();
-        };
-        diag.show();
-    }
-
-    //删除
-    function del(Id) {
-        bootbox.confirm("确定要删除吗?", function (result) {
-            if (result) {
-                top.jzts();
-                var url = "<%=basePath%>commodity/delete.do?COMMODITY_ID=" + Id + "&tm=" + new Date().getTime();
-                $.get(url, function (data) {
-                    tosearch();
-                });
-            }
-        });
-    }
-
-    //修改
-    function edit() {
-        var str = [];
-        for(var i=0;i < document.getElementsByName('ids').length;i++){
-            if(document.getElementsByName('ids')[i].checked){
-                str.push(document.getElementsByName('ids')[i].value);
-            }
-        }
-        if(str.length < 1){
-            bootbox.dialog({
-                message: "<span class='bigger-110'>您没有选择任何内容!</span>",
-                buttons:
-                    { "button":{ "label":"确定", "className":"btn-sm btn-success"}}
-            });
-            return false;
-        }else if(str.length > 1){
-            bootbox.dialog({
-
-                message: "<span class='bigger-110'>您的选择内容必须要单项!</span>",
-                buttons:
-                    { "button":{ "label":"确定", "className":"btn-sm btn-success"}}
-            });
-            return false;
-        }else{
-            var Id = str[0];
-            top.jzts();
-            var diag = new top.Dialog();
-            diag.Drag = true;
-            diag.Title = "编辑";
-            diag.URL = '<%=basePath%>commodity/edit_commodity.do?COMMODITY_ID=' + Id;
-            diag.Width = window.innerWidth * 0.8;
-            diag.Height = window.innerHeight * 0.7;
-            diag.Modal = true;				//有无遮罩窗口
-            diag.ShowMaxButton = false;	//最大化按钮
-            diag.ShowMinButton = false;		//最小化按钮
-            diag.CancelEvent = function () { //关闭事件
-                tosearch();
-                diag.close();
-            };
-            diag.show();
-        }
-    }
-
-    //批量操作
-    function makeAll(msg) {
-        bootbox.confirm(msg, function (result) {
-            if (result) {
-                var str = '';
-                for (var i = 0; i < document.getElementsByName('ids').length; i++) {
-                    if (document.getElementsByName('ids')[i].checked) {
-                        if (str == '') str += document.getElementsByName('ids')[i].value;
-                        else str += ',' + document.getElementsByName('ids')[i].value;
-                    }
-                }
-                if (str == '') {
-                    bootbox.dialog({
-                        message: "<span class='bigger-110'>您没有选择任何内容!</span>",
-                        buttons: {"button": {"label": "确定", "className": "btn-sm btn-success"}}
-                    });
-                    $("#zcheckbox").tips({
-                        side: 1,
-                        msg: '点这里全选',
-                        bg: '#AE81FF',
-                        time: 8
-                    });
-                    return;
-                } else {
-                    if (msg == '确定要删除选中的数据吗?') {
-                        top.jzts();
-                        $.ajax({
-                            type: "POST",
-                            url: '<%=basePath%>commodity/deleteAll.do?tm=' + new Date().getTime(),
-                            data: {DATA_IDS: str},
-                            dataType: 'json',
-                            //beforeSend: validateData,
-                            cache: false,
-                            success: function (data) {
-                                $.each(data.list, function (i, list) {
-                                    tosearch();
-                                });
-                            }
-                        });
-                    }
-                }
-            }
-        });
-    }
-    ;
-
-    //导出excel
-    function toExcel() {
-        window.location.href = '<%=basePath%>commodity/excel.do';
-    }
 
     function previewPic(cid) {
         var diag = new top.Dialog();
@@ -446,8 +271,8 @@
         diag.Width = 800;
         diag.Height = 550;
         diag.Modal = true; //有无遮罩窗口
-        diag.ShowMaxButton = false; //最大化按钮
-        diag.ShowMinButton = false; //最小化按钮
+        diag.ShowMaxButton = true; //最大化按钮
+        diag.ShowMinButton = true; //最小化按钮
         /* diag.CancelEvent = function(){ //关闭事件
          if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
          if('
@@ -464,7 +289,6 @@
         diag.show();
     }
 
-    //复选框选中事件
     function toCheck(Id){
         $("#simple-table").find("tr[name='listBeen']").css("background-color", "");
         $("#tr" + Id).css("background-color", "#CCCC99");
@@ -475,22 +299,25 @@
         }
     }
 
-    function editByID(Id) {
-        top.jzts();
-        var diag = new top.Dialog();
-        diag.Drag = true;
-        diag.Title = "编辑";
-        diag.URL = '<%=basePath%>commodity/edit_commodity.do?COMMODITY_ID=' + Id;
-        diag.Width = window.innerWidth * 0.7;
-        diag.Height = window.innerHeight * 0.7;
-        diag.Modal = true;				//有无遮罩窗口
-        diag.ShowMaxButton = false;	//最大化按钮
-        diag.ShowMinButton = false;		//最小化按钮
-        diag.CancelEvent = function () { //关闭事件
-            tosearch();
-            diag.close();
-        };
-        diag.show();
+    function submitCommodities() {
+        $("#msg").val("save");
+        var vals = [];
+        var checkBoxs = document.getElementsByName('ids');
+        for (var i=0; i<checkBoxs.length; i++){
+            if (checkBoxs[i].checked == true){
+                vals.push(checkBoxs[i].value);
+            }
+        }
+        if(vals == null || vals.length == 0){
+            bootbox.alert({
+                size: "small",
+                title:"失败",
+                message: "请至少选择一个商品!"
+            });
+            return false;
+        }
+        $("#FCOMMODITYIDS").val(vals);
+        top.Dialog.close();
     }
 </script>
 

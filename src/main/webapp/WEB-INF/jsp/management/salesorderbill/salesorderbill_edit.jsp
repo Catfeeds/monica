@@ -271,7 +271,7 @@
 		<li>变更日志</li>
 	</ul>
 	<div class="box01_c" id="spmx">
-		<a style="margin-left: 10px" class="btn btn-success btn-xs">
+		<a onclick="addCommodities();" style="margin-left: 10px" class="btn btn-success btn-xs">
 			<i class="ace-icon fa glyphicon-plus bigger-110 nav-search-icon yellow"></i>新增
 		</a>
 		<a class="btn btn-primary  btn-xs">
@@ -342,6 +342,8 @@
 	<script src="static/ace/js/chosen.jquery.js"></script>
 	<!-- 删除时确认窗口 -->
 	<script src="static/ace/js/bootbox.js"></script>
+	<!-- ace scripts -->
+	<script src="static/ace/js/ace/ace.js"></script>
 	<!-- 日期框 -->
 	<script src="static/ace/js/date-time/bootstrap-datepicker.js"></script>
 	<!--提示框-->
@@ -536,6 +538,89 @@
                 }
             });
         }
+
+        function addCommodities() {
+            top.jzts();
+            var diag = new top.Dialog();
+            diag.Drag = true;
+            diag.Title = "添加商品";
+            diag.URL = '<%=basePath%>commodity/listTree_select.do';
+            diag.Width = window.innerWidth * 1.2;
+            diag.Height = window.innerHeight * 1.2;
+            diag.Modal = true;				//有无遮罩窗口
+            diag.CancelEvent = function () { //关闭事件
+                var iframe = diag.innerFrame.contentWindow.document.getElementById('treeFrame').contentWindow;
+                var msg = iframe.document.getElementById('msg').value;
+                if (msg == 'save') {
+                    var FCOMMODITYIDS = iframe.document.getElementById('FCOMMODITYIDS').value;
+                    $.ajax({
+                        async: false,
+                        cache: false,
+                        url: '<%=basePath%>commodity/findCommoditiesByIds.do',
+                        type: 'POST',
+                        data: {
+                            FCOMMODITYIDS: FCOMMODITYIDS
+                        },
+                        datatype: 'JSON',
+                        success: function (obj) {
+                            var commoditiesList = obj.commoditiesList;
+                            console.log(commoditiesList);
+                            var tr = '';
+                            for (var i = 0; i < commoditiesList.length; i++) {
+                                tr += '<tr>';
+                                tr += '<td class="center"><label class="pos-rel"><input id="'+commoditiesList[i].COMMODITY_ID+'" type="checkbox" name="ids" value="'+commoditiesList[i].COMMODITY_ID+'" class="ace" /><span class="lbl"></span></label></td>';
+                                tr += '<td class="center"><span>1</span></td>';
+                                tr += '<td class="center"><span>'+commoditiesList[i].FNUMBER+'</span></td>';
+                                tr += '<td class="center"><span>'+commoditiesList[i].FNAME+'</span></td>';
+                                tr += '<td class="center"><span>'+commoditiesList[i].FMODEL+'</span></td>';
+                                tr += '<td class="center"><span></span></td>';
+                                tr += '<td class="center"><input type="number" min="1" id="'+commoditiesList[i].COMMODITY_ID+'QTY" onblur="calculationAmount(\''+commoditiesList[i].COMMODITY_ID+'\')"></td>';
+                                tr += '<td class="center"><span id="'+commoditiesList[i].COMMODITY_ID+'Pri">'+commoditiesList[i].PRICE+'</span></td>';
+                                tr += '<td class="center"><input type="number" readonly id="'+commoditiesList[i].COMMODITY_ID+'Amo" min="0.0" step="0.1"/></td>';
+                                tr += '<td class="center">'+commoditiesList[i].FNOTE+'</td>';
+                                tr += '</tr>';
+                            }
+                            $("#trspmx").before(tr);
+                        }
+                    });
+                }
+                diag.close();
+            	};
+            diag.show();
+        	}
+
+            function calculationAmount(Id){
+                var qty = $("#"+Id+"QTY").val();
+                var price = $("#"+Id+"Pri").text();
+                var amount;
+                if(qty == null || qty == ''){
+                    return false;
+                }
+                if(price == null || price == ''){
+                    return false;
+                }
+                amount = qty * price;
+                $("#"+Id+"Amo").val(amount.toFixed(2));
+                calculationOrderAmount();
+            }
+            
+            function calculationOrderAmount(){
+                var FORDERAMOUNT = 0.00;
+                $('#taspmx tr').each(function (i) {                   // 遍历 tr
+                    if (i > 0 && i < ($('#taspmx tr').length - 1)) {
+                        $(this).children('td').each(function (j) {  // 遍历 tr 的各个 td
+                            if (j == 8) {
+                                if($(this).find("input").val() == "" || $(this).find("input").val() == null){
+                                    FORDERAMOUNT += 0;
+                                }else {
+                                    FORDERAMOUNT += parseFloat($(this).find("input").val());
+                                }
+                            }
+                        });
+                    }
+                });
+                $("#FORDERAMOUNT").val(FORDERAMOUNT.toFixed(2));
+            }
 		</script>
 </body>
 </html>

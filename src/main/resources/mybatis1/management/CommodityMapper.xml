@@ -146,6 +146,16 @@
                  #{item}
 		</foreach>
 	</delete>
+
+	<!-- 根据多个商品id查商品 -->
+	<select id="findCommoditiesByIds" parameterType="pd" resultType="pd">
+		SELECT
+			<include refid="Field"></include>
+		FROM
+			<include refid="tableName"></include>
+		WHERE
+			COMMODITY_ID IN ${sql}
+</select>
 	
 	<!-- fh313596790qq(青苔) -->
 </mapper>

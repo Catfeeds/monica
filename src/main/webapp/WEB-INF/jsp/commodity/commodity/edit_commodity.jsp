@@ -26,149 +26,149 @@
 		<div class="main-content">
 			<div class="main-content-inner">
 				<div class="page-content">
-					<div class="hr hr-18 dotted hr-double"></div>
+					<div class="dotted"></div>
 					<div class="row">
 						<div class="col-xs-12">
 							<!-- ------------------------------------------------------------------------------- -->
-							<form action="commodity/${msg }.do" name="Form" id="Form" method="post">
-							<input type="hidden" name="COMMODITY_ID" id="COMMODITY_ID" value="${pd.COMMODITY_ID}"/>
-							<input type="hidden" name="ISPUTAWAY" id="ISPUTAWAY" value="${pd.ISPUTAWAY}"/>
-							<input type="hidden" name="COMMODITYPIC_ID" id="COMMODITYPIC_ID" value="${pd1.COMMODITYPIC_ID}"/>
-							<input type="hidden"  value="${pd.STATE}" name="STATE" id="STATE"/>
-							<%-- <input type="hidden" name="FITEMID" id="FITEMID" value="${pd.FITEMID}"/>
-							<input type="hidden" name="FPARENTID" id="FPARENTID" value="${pd.FPARENTID}"/> --%>
-							<table style="border-collapse:separate; border-spacing:10px;width: 100%;padding-left: 1%">
-								<tbody>
-									<tr class="warning">
-										<th width="20%"><label>商品名称：</label></th>
-										<th><input type="text" style="width: 250px" value="${pd.FNAME}"
-											class="input-text"  name="FNAME"
-											id="FNAME"></th>
+							<form action="commodity/${msg}.do" name="Form" id="Form" method="post" class="form-inline">
+								<input type="hidden" name="COMMODITY_ID" id="COMMODITY_ID" value="${pd.COMMODITY_ID}"/>
+								<input type="hidden" name="ISPUTAWAY" id="ISPUTAWAY" value="${pd.ISPUTAWAY}"/>
+								<input type="hidden" name="COMMODITYPIC_ID" id="COMMODITYPIC_ID" value="${pd1.COMMODITYPIC_ID}"/>
+								<input type="hidden"  value="${pd.STATE}" name="STATE" id="STATE"/>
+								<%-- <input type="hidden" name="FITEMID" id="FITEMID" value="${pd.FITEMID}"/>
+								<input type="hidden" name="FPARENTID" id="FPARENTID" value="${pd.FPARENTID}"/> --%>
+								<div id="zhongxin" style="padding-top: 13px;">
+									<table style="border-collapse:separate; border-spacing:10px;width: 100%">
+										<tbody>
+											<tr>
+												<td style="width:8%;text-align: right;">
+													<label>商品名称<span style="color: red;">*</span>:</label>
+												</td>
+												<td>
+													<input id="FNAME" name="FNAME" type="text" value="${pd.FNAME}"
+														   style="width: 100%;" class="input-text">
+												</td>
 
+												<td style="width:8%;text-align: right;">
+													<label>商品代码<span style="color: red;">*</span>:</label>
+												</td>
+												<td>
+													<input id="FNUMBER" value="${pd.FNUMBER}" type="text"
+														    style="width: 100%;" name="FNUMBER" class="input-text">
+												</td>
+											</tr>
 
-										<th width="20%"><label>商品代码：</label></th>
-										<th><input type="text" style="width: 250px" value="${pd.FNUMBER}"
-											class="input-text"  name="FNUMBER"
-											id="FNUMBER"></th>
-									</tr>
+											<tr >
+												<td style="width:8%;text-align: right;">
+													<label>商品状态<span style="color:red;">*</span>:</label>
+												</td>
+												<td>
+													<%--<c:set var="theString" value="${pd.STATE}"/>--%>
+													<label style="">
+														<input name="checkbox1" type="checkbox"
+															<c:if test="${fn:contains(theString,'普通商品')}"> checked="checked"
+															</c:if>  class="ace" id="checkbox1" value="普通商品">
+														<span class="lbl">普通商品</span>
+													</label>
+													<label style="">
+														<input name="checkbox1" type="checkbox"
+															<c:if test="${fn:contains(theString,'热销商品')}">  checked="checked"
+															</c:if> class="ace" id="checkbox2" value="热销商品">
+														<span class="lbl">热销商品</span>
+													</label>
+													<label style="">
+														<input name="checkbox1" type="checkbox"
+															<c:if test="${fn:contains(theString,'上新商品')}">  checked="checked"
+															</c:if> class="ace" id="checkbox3" value="上新商品">
+														<span class="lbl">上新商品</span>
+													</label>
+													<label style="">
+														<input name="checkbox1" type="checkbox"
+															<c:if test="${fn:contains(theString,'折扣商品')}">  checked="checked"
+															</c:if> class="ace" id="checkbox4" value="折扣商品">
+														<span class="lbl">折扣商品</span>
+													</label>
+												</td>
 
-									<tr class="warning">
-										<th width="20%"><label>商品状态：</label></th>
-										<%-- <input type="text" style="width: 250px" value="${pd.STATE}"
-											class="input-text"  name="STATE"
-											id="STATE">
-											<s:if test="item.name.contains(\"全能\")"> <c:if test="${fn:contains(theString, 'runoob')}">
-											 --%>
-											<td>
-											<c:set var="theString" value="${pd.STATE}"/>
-											 <label style="float:left;padding-left: 8px;padding-top:7px;">
-											     <input name="checkbox1" type="checkbox"  <c:if test="${fn:contains(theString,'普通商品')}"> checked="checked" </c:if>  class="ace" id="checkbox1" value="普通商品">	
-											     <span class="lbl">普通商品</span>
-											 </label>
-											 <label style="float:left;padding-left: 8px;padding-top:7px;">
-											     <input name="checkbox1" type="checkbox" <c:if test="${fn:contains(theString,'热销商品')}">  checked="checked" </c:if> class="ace" id="checkbox2" value="热销商品">	
-											     <span class="lbl">热销商品</span>
-											 </label>
-											 <label style="float:left;padding-left: 8px;padding-top:7px;">
-											     <input name="checkbox1" type="checkbox" <c:if test="${fn:contains(theString,'上新商品')}">  checked="checked" </c:if> class="ace" id="checkbox3" value="上新商品">	
-											     <span class="lbl">上新商品</span>
-											 </label>
-											 <label style="float:left;padding-left: 8px;padding-top:7px;">
-											     <input name="checkbox1" type="checkbox" <c:if test="${fn:contains(theString,'折扣商品')}">  checked="checked" </c:if> class="ace" id="checkbox4" value="折扣商品">	
-											     <span class="lbl">折扣商品</span>
-											 </label>
-										</td>
+												<td style="width:8%;text-align: right;">
+													<label>商品规格<span style="color: red;">*</span>:</label>
+												</td>
+												<td>
+													<textarea style="resize:none; width: 100%; " cols="" rows=""
+															  class="textarea" name="FMODEL" id="FMODEL" value="${pd.FMODEL}"
+															  placeholder="">${pd.FMODEL}</textarea>
+												</td>
+											</tr>
 
-										<th><label>商品规格：</label></th>
-										<td><textarea style="width: 400px" cols="" rows=""
-												class="textarea" name="FMODEL" id="FMODEL" value="${pd.FMODEL}"
-												placeholder="">${pd.FMODEL}</textarea></td>
-									</tr>
-									<tr>
-										<td style="width:70px;text-align: left;padding-top: 13px;">商品上下架：</td>
-										<td>
-											<label style="float:left;padding-left: 12px;"><input class="ace" name="form-field-radio" id="form-field-radio1" onclick="isPutaway('上架');" <c:if test="${pd.ISPUTAWAY == '上架' }">checked="checked"</c:if> type="radio" value="icon-edit"><span class="lbl">上架</span></label>
-											<label style="float:left;padding-left: 5px;"><input class="ace" name="form-field-radio" id="form-field-radio2" onclick="isPutaway('未上架');" <c:if test="${pd.ISPUTAWAY == '未上架' }">checked="checked"</c:if> type="radio" value="icon-edit"><span class="lbl">未上架</span></label>
-										</td>
+											<tr>
+												<td style="width:8%;height: 40px;text-align: right;">
+													<label>商品上下架:</label>
+												</td>
+												<td style="height: 40px;">
+													<label style="float:left;padding-left:12px;">
+														<input class="ace" name="form-field-radio" id="form-field-radio1" onclick="isPutaway('上架');"
+															   <c:if test="${pd.ISPUTAWAY == '上架' }">checked="checked"</c:if> type="radio" value="icon-edit">
+														<span class="lbl">上架</span>
+													</label>
+													<label style="float:left;padding-left:5px;">
+														<input class="ace" name="form-field-radio" id="form-field-radio2" onclick="isPutaway('未上架');"
+															   <c:if test="${pd.ISPUTAWAY == '未上架' }">checked="checked"</c:if> type="radio" value="icon-edit">
+														<span class="lbl">未上架</span>
+													</label>
+												</td>
+												<td style="width:8%;height: 40px;text-align: right;">
+													<label>商品价格:</label>
+												</td>
+												<td style="height: 30px;">
+													<div class="row" >
+														<div class="col-xs-5">
+															<input type="number" style="width:100%;"  value="${pd.PRICE}"
+																   class="input-text" placeholder="" name="PRICE"
+																   id="PRICE">
+														</div>
+														<div class="col-xs-1" style="margin-top:7px;">元</div>
+													</div>
+												</td>
+											</tr>
 
-									<%-- <tr>
-										<td style="width:70px;text-align: left;padding-top: 13px;">是否为头条：</td>
-										<td>
-											<label style="float:left;padding-left: 12px;"><input class="ace" name="form-field-radio" id="form-field-radio1" onclick="isHeadLine('1');" <c:if test="${pd.ISHEADLINE == 'true' }">checked="checked"</c:if> type="radio" value="icon-edit"><span class="lbl">是</span></label>
-											<label style="float:left;padding-left: 5px;"><input class="ace" name="form-field-radio" id="form-field-radio2" onclick="isHeadLine('0');" <c:if test="${pd.ISHEADLINE == 'false' }">checked="checked"</c:if> type="radio" value="icon-edit"><span class="lbl">否</span></label>
-										</td>
-									</tr> --%>
-									<!-- <tr class="warning">
-										<th width="20%"><label>是否发布该新闻：</label></th>
-										<th><select class="input-md form-control"
-											style="width: 65px" name="ISPUBLIC" id="ISPUBLIC">
-												<option value="是">是</option>
-												<option value="否" selected="selected">否</option>
-										</select>
-										</th>
-									</tr> -->
-										<th><label>商品价格：</label></th>
-										<td><input type="number" style="width: 80px"  value="${pd.PRICE}"
-											class="input-text" placeholder="" name="PRICE"
-											id="PRICE">   元</td>
-									</tr>
-									<tr class="success">
-										<th><label>商品价格优惠 ：</label></th>
-										<td><input type="number" style="width: 80px"  value="${pd.DISCOUNT}"
-											class="input-text" placeholder="" name="DISCOUNT"
-											id="DISCOUNT">   折</td>
+											<tr>
+												<td style="width:15%;text-align:right;">
+													<label>商品价格优惠:</label>
+												</td>
+												<td style="">
+													<div class="row">
+														<div class="col-xs-6">
+															<input type="number" style="width: 100%; margin: 0px;padding: 0px;"  value="${pd.DISCOUNT}"
+																   class="input-text" placeholder="" name="DISCOUNT"
+																   id="DISCOUNT">
+														</div>
+														<div class="col-xs-1" style="margin-top:7px;">折</div>
+													</div>
+												</td>
 
-									<!-- <tr class="active">
-										<th><label>原文跳转网址：</label></th>
-										<td><input type="text" style="width: 300px"
-											class="input-text" placeholder="填写原文跳转网址...（可选填）" name="content_source_url"
-											id="content_source_url"></td>
-									</tr> -->
-
-
-										<th><label>图片网址：</label></th>
-										<td><input type="text" style="width: 300px"
-											class="input-text" placeholder="" name="INVENTORY"
-											id="INVENTORY"></td>
-									</tr>
-									<tr class="active" style="display: none">
-										<th><label>内容：</label></th>
-										<td><input type="text" style="width: 300px"
-											class="input-text" placeholder="" name="FNOTE" id="FNOTE" value="${pd.FNOTE}"></td>
-
-										<th><label>封面图片：</label></th>
-										<td><input type="text" style="width: 250px" 
-											class="input-text" name="MAIN_PIC" id="MAIN_PIC"  value="${pd1.PIC_URL}" readonly="readonly"> <input
-											class="btn btn-warning radius" style="margin-left: 20px"
-											onclick="updatePic()" type="button" value="选择上传图片"></td>
-									</tr>
-								</tbody>
-							</table>
-							<%--<div>
-								<label style="margin-left: 7px">文章内容：</label>
-							</div>
-							<div style="margin-top: 5px;border-color: #FFDAC8;width:100%;">
-
-								<div class="col-sm-9">
-									<script id="editor" type="text/plain"
-										style="width:100%;height:400px;">${pd.FNOTE}</script>
-								</div>
-								</br>
-
-								<!-- <button onclick="getContent()">获得内容</button> -->
-							</div>
-							<table style="width:100%;height: 10px">--%>
-								<%----%>
-							<%--</table>--%>
+												<td style="width:8%;text-align: right;">
+													<label>图片网址:</label>
+												</td>
+												<td>
+													<input type="text" style="width: 415px;"
+														   class="input-text" placeholder="" name="INVENTORY"
+														   id="INVENTORY">
+												</td>
+											</tr>
+										</tbody>
+									</table>
 							<table style="width:100%;margin-left: 10px">
 								<tr>
-									<td ><a class="btn btn-success"
-										onclick="saveInfo();">保存</a></td>
+									<td style="text-align: right;">
+										<a class="btn btn-success"
+										onclick="saveInfo();">保存</a>
+									</td>
+									<td style="width: 5%;">
+									</td>
 								</tr>
 							</table>
 							<br />
 							</form>
-							<!-- ------------------------------------------------------------------------------- -->
 						</div>
 						<!-- /.col -->
 					</div>
@@ -178,7 +178,6 @@
 			</div>
 		</div>
 		<!-- /.main-content -->
-
 
 		<!-- 返回顶部 -->
 		<a href="#" id="btn-scroll-up"
