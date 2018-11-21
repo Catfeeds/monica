@@ -77,6 +77,10 @@ public class SalesOrderBillEntryService implements SalesOrderBillEntryManager{
 	public void deleteAll(String[] ArrayDATA_IDS)throws Exception{
 		dao.delete("SalesOrderBillEntryMapper.deleteAll", ArrayDATA_IDS);
 	}
-	
+
+	public List<PageData> findEntryListByOrderId(PageData pd) throws Exception {
+		return (List<PageData>) dao.findForList("SalesOrderBillEntryMapper.findEntryListByOrderId",pd);
+	}
+
 }
 

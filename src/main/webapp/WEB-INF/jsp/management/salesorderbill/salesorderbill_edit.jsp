@@ -275,7 +275,7 @@
 		<a onclick="addCommodities();" style="margin-left: 10px" class="btn btn-success btn-xs">
 			<i class="ace-icon fa glyphicon-plus bigger-110 nav-search-icon yellow"></i>新增
 		</a>
-		<a class="btn btn-primary  btn-xs">
+		<a onclick="delectCommodities();" class="btn btn-primary btn-xs">
 			<i class="ace-icon fa fa-trash-o bigger-120 nav-search-icon "></i>删除
 		</a>
 		<table id="taspmx" class="table table-striped table-bordered table-hover"
@@ -290,8 +290,27 @@
 				<th class="center">数量</th>
 				<th class="center">单价</th>
 				<th class="center">金额</th>
+				<th class="center">要求到货日期</th>
 				<th class="center">备注</th>
 			</tr>
+			<c:if test="${not empty entryList}">
+				<c:forEach items="${entryList}" var="var" varStatus="vs">
+					<tr id="tr${var.SALESORDERBILLENTRY_ID}">
+						<td class="center"><label class="pos-rel"><input type="checkbox" id="${var.SALESORDERBILLENTRY_ID}" name="ids" value="${var.SALESORDERBILLENTRY_ID}" class="ace"/><span class="lbl"></span></label></td>
+						<td class="center"><span>1</span></td>
+						<td class="center"><span>${var.FNUMBER}</span></td>
+						<td class="center"><span>${var.FCOMMODITYNAME}</span></td>
+						<td class="center"><span>${var.FMODEL}</span></td>
+						<td class="center"><span></span></td>
+						<td class="center"><input type="number" min="1" value="1" id="${var.FCOMMODITYID}QTY" onblur="calculationAmount('${var.FCOMMODITYID}')"></td>
+						<td class="center"><span id="${var.FCOMMODITYID}Pri">${var.FPRICE}</span></td>
+						<td class="center"><input type="number" value="${var.FAMOUNT}" readonly id="${var.FCOMMODITYID}Amo" min="0.0" step="0.1"/></td>
+						<td class="center"><input type="date" value="${var.FARRIVALTIME}"/></td>
+						<td class="center"><span>${var.FNOTE}</span></td>
+						<td style="display: none;" class="center"><input type="hidden" id="${var.FCOMMODITYID}" value="${var.FCOMMODITYID}"></td>
+					</tr>
+				</c:forEach>
+			</c:if>
 			<tr id="trspmx">
 			</tr>
 		</table>
@@ -353,7 +372,7 @@
 		$(top.hangge());
 		//保存
 		function save(){
-            if($("#FCLIENTID").val()==""){
+            /*if($("#FCLIENTID").val()==""){
                 $("#FCLIENTNAME").tips({
                     side:3,
                     msg:'请选择客户',
@@ -384,7 +403,7 @@
                 });
                 $("#FORDERTYPE").focus();
                 return false;
-            }
+            }*/
 
             /*if($("#FSALESID").val()==""){
                 $("#FSALESNAME").tips({
@@ -397,7 +416,7 @@
                 return false;
             }*/
 
-            if($("#FDELIVERYDATE").val()==""){
+           /* if($("#FDELIVERYDATE").val()==""){
                 $("#FDELIVERYDATE").tips({
                     side:3,
                     msg:'请选择提货日期',
@@ -417,11 +436,11 @@
                 });
                 $("#FORDERAMOUNT").focus();
                 return false;
-            }
+            }*/
             commoditiesToSave();
-			/*$("#Form").submit();
+			$("#Form").submit();
 			$("#zhongxin").hide();
-			$("#zhongxin2").show();*/
+			$("#zhongxin2").show();
 		}
 		
 		$(function() {
@@ -569,11 +588,10 @@
                         datatype: 'JSON',
                         success: function (obj) {
                             var commoditiesList = obj.commoditiesList;
-                            console.log(commoditiesList);
                             var tr = '';
                             for (var i = 0; i < commoditiesList.length; i++) {
-                                tr += '<tr>';
-                                tr += '<td class="center"><label class="pos-rel"><input id="'+commoditiesList[i].COMMODITY_ID+'" type="checkbox" name="ids" value="'+commoditiesList[i].COMMODITY_ID+'" class="ace" /><span class="lbl"></span></label></td>';
+                                tr += '<tr id="tr'+commoditiesList[i].FSALESORDERBILLENTRYID+'">';
+                                tr += '<td class="center"><label class="pos-rel"><input type="checkbox" id="'+commoditiesList[i].FSALESORDERBILLENTRYID+'" name="ids" value="'+commoditiesList[i].FSALESORDERBILLENTRYID+'" class="ace"/><span class="lbl"></span></label></td>';
                                 tr += '<td class="center"><span>1</span></td>';
                                 tr += '<td class="center"><span>'+commoditiesList[i].FNUMBER+'</span></td>';
                                 tr += '<td class="center"><span>'+commoditiesList[i].FNAME+'</span></td>';
@@ -582,7 +600,9 @@
                                 tr += '<td class="center"><input type="number" min="1" value="1" id="'+commoditiesList[i].COMMODITY_ID+'QTY" onblur="calculationAmount(\''+commoditiesList[i].COMMODITY_ID+'\')"></td>';
                                 tr += '<td class="center"><span id="'+commoditiesList[i].COMMODITY_ID+'Pri">'+commoditiesList[i].PRICE+'</span></td>';
                                 tr += '<td class="center"><input type="number" value="'+commoditiesList[i].PRICE.toFixed(2)+'" readonly id="'+commoditiesList[i].COMMODITY_ID+'Amo" min="0.0" step="0.1"/></td>';
-                                tr += '<td class="center">'+commoditiesList[i].FNOTE+'</td>';
+                                tr += '<td class="center"><input type="date"/></td>';
+                                tr += '<td class="center"><span>'+commoditiesList[i].FNOTE+'</span></td>';
+                                tr += '<td style="display: none;" class="center"><input type="hidden" id="'+commoditiesList[i].COMMODITY_ID+'" value="'+commoditiesList[i].COMMODITY_ID+'"></td>';
                                 tr += '</tr>';
                             }
                             $("#trspmx").before(tr);
@@ -632,39 +652,79 @@
 
             //保存商品明细
             function commoditiesToSave() {
+            	var FSALESORDERBILLENTRYID;
             	var FCOMMODITYID;
                 var FQTY;
                 var FAMOUNT;
+                var FARRIVALTIME;
                 var strJson = '[';
                 $('#taspmx tr').each(function (i) {                   // 遍历 tr
                     if (i > 0 && i < ($('#taspmx tr').length - 1)) {
                         $(this).children('td').each(function (j) {  // 遍历 tr 的各个 td
                             if (j == 0) {
-                                FCOMMODITYID = $(this).find("input").val();
+                                FSALESORDERBILLENTRYID = $(this).find("input").val();
                             } else if (j == 6) {
                                 FQTY = $(this).find("input").val();
-                                if((FQTY == null || FQTY == '') || (FQTY < 0)){
+                                if ((FQTY == null || FQTY == '') || (FQTY < 0)) {
                                     bootbox.alert({
                                         size: "small",
-                                        title:"失败",
+                                        title: "失败",
                                         message: "参数错误,请核对订单明细商品数量格式是否正确!"
                                     });
                                     return false;
-								}
+                                }
                             } else if (j == 8) {
                                 FAMOUNT = $(this).find("input").val();
-                            }
+                            } else if (j == 9) {
+                                FARRIVALTIME = $(this).find("input").val();
+                            } else if (j == 11) {
+                                FCOMMODITYID = $(this).find("input").val();
+							}
                         });
-                        strJson += '{"FCOMMODITYID":"' + FCOMMODITYID + '",'
+                        strJson += '{"FSALESORDERBILLENTRYID":"' + FSALESORDERBILLENTRYID + '",'
                         strJson += '"FQTY":"' + FQTY + '",'
+                        strJson += '"FCOMMODITYID":"' + FCOMMODITYID + '",'
+                        strJson += '"FARRIVALTIME":"' + FARRIVALTIME + '",'
                         strJson += '"FAMOUNT":"' + FAMOUNT + '"},'
                     }
                 });
                 strJson = strJson.substring(0, strJson.length - 1);
                 strJson += ']'
                 $("#strJson").val(strJson);
-                //console.log(strJson);
+                console.log(strJson);
             }
+
+            function delectCommodities(){
+                var str = [];
+                for(var i=0;i < document.getElementsByName('ids').length;i++){
+                    if(document.getElementsByName('ids')[i].checked){
+                        str.push(document.getElementsByName('ids')[i].value);
+                    }
+                }
+                if(str.length < 1){
+                    bootbox.alert({
+                        size: "small",
+                        title:"失败",
+                        message: "您没有选择任何内容!"
+                    });
+                    return false;
+                }else if(str.length > 1){
+                    bootbox.alert({
+                        size: "small",
+                        title:"失败",
+                        message: "您的选择内容必须要单项!"
+                    });
+                    return false;
+                }else{
+                    var Id = str[0];
+                    if(${msg == 'save'}){
+                        $("#tr"+Id).remove();
+                    } else {
+                        $("#tr"+Id).remove();
+                    }
+                }
+        	}
+
 		</script>
 </body>
 </html>
