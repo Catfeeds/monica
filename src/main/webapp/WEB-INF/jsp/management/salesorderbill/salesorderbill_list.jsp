@@ -469,7 +469,7 @@
                         tr += 	'<td class="center"></td>';
                         tr += 	'<td class="center">'+entryList[i].FQTY+'</td>';
                         tr += 	'<td class="center">'+entryList[i].FPRICE+'</td>';
-                        tr += 	'<td class="center">'+entryList[i].FAMOUNT+'</td>';
+                        tr += 	'<td class="center">'+entryList[i].FAMOUNT.toFixed(2)+'</td>';
                         tr += 	'<td class="center">'+entryList[i].FARRIVALTIME+'</td>';
                         tr += 	'<td class="center">'+entryList[i].FNOTE+'</td>';
                         tr += "</tr>";

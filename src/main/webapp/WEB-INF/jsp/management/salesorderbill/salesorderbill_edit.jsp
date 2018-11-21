@@ -375,7 +375,7 @@
 		$(top.hangge());
 		//保存
 		function save(){
-            /*if($("#FCLIENTID").val()==""){
+            if($("#FCLIENTID").val()==""){
                 $("#FCLIENTNAME").tips({
                     side:3,
                     msg:'请选择客户',
@@ -406,9 +406,9 @@
                 });
                 $("#FORDERTYPE").focus();
                 return false;
-            }*/
+            }
 
-            /*if($("#FSALESID").val()==""){
+            if($("#FSALESID").val()==""){
                 $("#FSALESNAME").tips({
                     side:3,
                     msg:'请选择业务员',
@@ -417,9 +417,9 @@
                 });
                 $("#FSALESNAME").focus();
                 return false;
-            }*/
+            }
 
-           /* if($("#FDELIVERYDATE").val()==""){
+            if($("#FDELIVERYDATE").val()==""){
                 $("#FDELIVERYDATE").tips({
                     side:3,
                     msg:'请选择提货日期',
@@ -439,7 +439,7 @@
                 });
                 $("#FORDERAMOUNT").focus();
                 return false;
-            }*/
+            }
             commoditiesToSave();
 			$("#Form").submit();
 			$("#zhongxin").hide();
