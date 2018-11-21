@@ -39,13 +39,13 @@
 											<a class="btn btn-light btn-xs" onclick="add();" title="新增">
 												<i id="nav-save-icon" class="ace-icon fa fa-plus bigger-120 green"></i>新增
 											</a>
-										</c:if>--%>
+										</c:if>
 										<c:if test="${QX.edit == 1 }">
 											<a class="btn btn-light btn-xs" onclick="edit('');" data-rel="tooltip" title="修改">
 												<i class="ace-icon fa fa-pencil-square-o bigger-120 orange"></i>修改
 											</a>
 										</c:if>
-										<%--<c:if test="${QX.del == 1 }">
+										<c:if test="${QX.del == 1 }">
 											<a class="btn btn-light btn-xs" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除">
 												<i class="ace-icon fa fa-trash-o bigger-125 red"></i>删除
 											</a>
@@ -84,7 +84,6 @@
 								<td style="padding-left:2px;">
 									<input class="span10 date-picker" name="lastEnd" name="lastEnd"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="结束日期" title="结束日期"/>
 								</td>--%>
-
 								<c:if test="${QX.cha == 1 }">
 									<td style="vertical-align:top;padding-left:2px">
 										<a class="btn btn-light btn-xs" onclick="tosearch();"  title="查询">
@@ -104,9 +103,9 @@
 						<table id="simple-table" class="table table-striped table-bordered table-hover" style="margin-top:5px;">	
 							<thead>
 								<tr>
-									<th class="center" style="width:35px;">
+									<%--<th class="center" style="width:35px;">
 									<label class="pos-rel"><input type="checkbox" class="ace" id="zcheckbox" /><span class="lbl"></span></label>
-									</th>
+									</th>--%>
 									<th class="center" style="width:50px;">序号</th>
 									<%--<th class="center">FItemID</th>--%>
 									<th class="center">编号</th>
@@ -123,10 +122,10 @@
 								<c:when test="${not empty varList}">
 									<c:if test="${QX.cha == 1 }">
 									<c:forEach items="${varList}" var="var" varStatus="vs">
-										<tr id="ItemId_${var.CLASSIFY_ITEM_ID}" name='listBeen' onclick="toCheck('${var.CLASSIFY_ITEM_ID}')" ondblclick="editByID('${var.CLASSIFY_ITEM_ID}')" style="cursor: pointer;">
-											<td class='center'>
-												<label class="pos-rel"><input type='checkbox' name='ids' id="${var.CLASSIFY_ITEM_ID}" value="${var.CLASSIFY_ITEM_ID}" class="ace" /><span class="lbl"></span></label>
-											</td>
+										<tr id="ItemId_${var.CLASSIFY_ITEM_ID}" name='listBeen' <%--onclick="toCheck('${var.CLASSIFY_ITEM_ID}')"--%> ondblclick="editByID('${var.CLASSIFY_ITEM_ID}')" style="cursor: pointer;">
+											<%--<td class='center'>--%>
+												<%--<label class="pos-rel"><input type='checkbox' name='ids' id="${var.CLASSIFY_ITEM_ID}" value="${var.CLASSIFY_ITEM_ID}" class="ace" /><span class="lbl"></span></label>--%>
+											<%--</td>--%>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
 											<%--<td class='center'>${var.FITEMID}</td>--%>
 											<td class='center'>${var.FNUMBER}</td>
@@ -407,7 +406,7 @@
             }
 		}
         //双击列表一行数据
-        function editByID(Id) {
+       /* function editByID(Id) {
             top.jzts();
             var diag = new top.Dialog();
             diag.Drag=true;
@@ -423,7 +422,7 @@
                 diag.close();
             };
             diag.show();
-        }
+        }*/
 
         //单击列表一行，选中复选框
         function toCheck(Id){
