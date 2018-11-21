@@ -86,13 +86,13 @@
 		from 
 		<include refid="tableName"></include>
 		where 1=1
-		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
+		<if test="pd.FNAME!= null and pd.FNAME != ''"><!-- 关键词检索 -->
 			and
 				(
-				<!--	根据需求自己加检索条件
-					字段1 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
-					 or 
-					字段2 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+				<!--	根据需求自己加检索条件 -->
+					FNAME LIKE CONCAT(CONCAT('%',#{pd.FNAME}),'%')
+				<!-- or
+					字段2 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
 				-->
 				)
 		</if>

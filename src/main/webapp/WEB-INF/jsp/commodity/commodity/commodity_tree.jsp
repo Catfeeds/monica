@@ -113,7 +113,6 @@
 			},
 			callback : {
 				onClick : function(event, treeId, treeNode, clickFlag) {
-				    debugger;
 					// 判断是否父节点  
 					if (!treeNode.isParent) {
 						/* alert("treeId自动编号：" + treeNode.tId + ", 节点id是："

@@ -35,11 +35,11 @@
 							<div class="row" style="margin-top:5px;">
 								<div class="col-xs-12">
 									<p>
-										<c:if test="${QX.add == 1 }">
+										<%--<c:if test="${QX.add == 1 }">
 											<a class="btn btn-light btn-xs" onclick="add();" title="新增">
 												<i id="nav-save-icon" class="ace-icon fa fa-plus bigger-120 green"></i>新增
 											</a>
-										</c:if>
+										</c:if>--%>
 										<c:if test="${QX.edit == 1 }">
 											<a class="btn btn-light btn-xs" onclick="edit('');" data-rel="tooltip" title="修改">
 												<i class="ace-icon fa fa-pencil-square-o bigger-120 orange"></i>修改
@@ -67,10 +67,9 @@
 							<tr>
 								<td>
 									<div class="nav-search">
-                                        <span class="input-icon">
+                                        商品名称：<span class="input-icon">
 											    <input type="text" placeholder="按商品名称进行搜索" class="nav-search-input"
-                                                       id="nav-input" autocomplete="off" name="keywords1"
-                                                       value="${pd.keywords }" placeholder="这里输入关键词"/>
+                                                       id="nav-input" autocomplete="off" name="FNAME" value="${pd.FNAME }"/>
                                                 <i class="ace-icon fa fa-search nav-search-icon"></i>
                                             </span>
 										<%--<span class="input-icon">
@@ -113,7 +112,7 @@
 									<th class="center">编号</th>
 									<th class="center">名称</th>
 									<%--<th class="center">父ID</th>--%>
-									<th class="center">更新时间</th>
+									<%--<th class="center">更新时间</th>--%>
 									<%--<th class="center">操作</th>--%>
 								</tr>
 							</thead>
@@ -133,7 +132,7 @@
 											<td class='center'>${var.FNUMBER}</td>
 											<td class='center'>${var.FNAME}</td>
 											<%--<td class='center'>${var.FPARENTID}</td>--%>
-											<td class='center'>${var.FMODIFYTIME}</td>
+											<%--<td class='center'>${var.FMODIFYTIME}</td>--%>
 											<%--<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
@@ -414,7 +413,7 @@
             diag.Drag=true;
             diag.Title ="编辑";
             diag.URL = '<%=basePath%>classify_item/goEdit.do?CLASSIFY_ITEM_ID='+Id;
-            diag.Width = 450;
+            diag.Width = 750;
             diag.Height = 355;
             diag.Modal = true;				//有无遮罩窗口
             diag.CancelEvent = function(){ //关闭事件

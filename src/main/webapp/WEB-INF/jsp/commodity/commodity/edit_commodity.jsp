@@ -157,17 +157,25 @@
 											</tr>
 										</tbody>
 									</table>
-							<table style="width:100%;margin-left: 10px">
-								<tr>
-									<td style="text-align: right;">
-										<a class="btn btn-success"
-										onclick="saveInfo();">保存</a>
-									</td>
-									<td style="width: 5%;">
-									</td>
-								</tr>
-							</table>
-							<br />
+                                    <table style="width:100%;margin-left: 10px">
+                                        <tr>
+                                            <td style="text-align: center;" colspan="11">
+                                                <a class="btn btn-mini btn-primary" onclick="saveInfo();">保存</a>
+                                                <a class="btn btn-mini btn-danger" onclick="top.Dialog.close();">取消</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div id="zhongxin2" class="center" style="display:none">
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <img src="static/images/jiazai.gif" />
+                                    <br/>
+                                    <h4 class="lighter block green">提交中...</h4>
+                                </div>
 							</form>
 						</div>
 						<!-- /.col -->
@@ -300,12 +308,14 @@
 		}
 		
 		function saveInfo(){
-			
-			var context = getContent();
+			//var context = getContent();
 			//alert(context);
-			$("#FNOTE").val(context);
-			jqchk();
+			//$("#FNOTE").val(context);
+			//jqchk();
 			$("#Form").submit();
+            $("#zhongxin").hide();
+            $("#zhongxin2").show();
+			//alert("gg");
 		}
 		
 	
