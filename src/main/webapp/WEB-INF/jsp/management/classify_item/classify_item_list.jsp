@@ -304,20 +304,26 @@
 			});
 		});
 
+		//同步数据
 		function updateItem(){
-			top.jzts();
-			$.ajax({
-				type: "POST",
-				url: '<%=basePath%>classify_item/getClassify_item',
-				//data: {DATA_IDS:str},
-				dataType:'json',
-				//beforeSend: validateData,
-				cache: false,
-				success: function(data){
-					alert(data.Data);
-					tosearch();
-				}
-			});
+            bootbox.confirm("同步需要一定的时间是否确认同步吗?", function(result) {
+                if(result) {
+                    top.jzts();
+                    var url = "<%=basePath%>rematoget/batchInsert.do";
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        //data: {DATA_IDS:str},
+                        dataType:'json',
+                        //beforeSend: validateData,
+                        cache: false,
+                        success: function(data){
+                            alert(data.Data);
+                            tosearch();
+                        }
+                    });
+                }
+            });
 		}
 		
 		//新增
@@ -390,8 +396,8 @@
                 diag.Width = 750;
                 diag.Height = 355;
                 diag.Modal = true;				//有无遮罩窗口
-                diag.ShowMaxButton = true;	//最大化按钮
-                diag.ShowMinButton = true;		//最小化按钮
+                diag.ShowMaxButton = false;	//最大化按钮
+                diag.ShowMinButton = false;		//最小化按钮
                 diag.CancelEvent = function () { //关闭事件
                     if (diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none') {
                         tosearch();

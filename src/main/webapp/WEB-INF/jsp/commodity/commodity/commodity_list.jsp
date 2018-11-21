@@ -299,8 +299,17 @@
             });
         });
     });
+    //同步
     function synchro(){
-        window.location.href='<%=basePath%>rematoget/getCustomer';
+        bootbox.confirm("同步需要一定的时间是否确认同步吗?", function(result) {
+            if(result) {
+                top.jzts();
+                var url = "<%=basePath%>rematoget/batchInsert.do";
+                $.get(url,function(data){
+                    nextPage(${page.currentPage});
+                });
+            }
+        });
     }
 
     //新增
@@ -313,8 +322,8 @@
         diag.Width = 450;
         diag.Height = 355;
         diag.Modal = true;				//有无遮罩窗口
-        diag.ShowMaxButton = true;	//最大化按钮
-        diag.ShowMinButton = true;		//最小化按钮
+        diag.ShowMaxButton = false;	//最大化按钮
+        diag.ShowMinButton = false;		//最小化按钮
         diag.CancelEvent = function () { //关闭事件
             tosearch();
             diag.close();
@@ -365,11 +374,11 @@
             diag.Drag = true;
             diag.Title = "编辑";
             diag.URL = '<%=basePath%>commodity/edit_commodity.do?COMMODITY_ID=' + Id;
-            diag.Width = window.innerWidth * 0.7;
+            diag.Width = window.innerWidth * 0.8;
             diag.Height = window.innerHeight * 0.7;
             diag.Modal = true;				//有无遮罩窗口
-            diag.ShowMaxButton = true;	//最大化按钮
-            diag.ShowMinButton = true;		//最小化按钮
+            diag.ShowMaxButton = false;	//最大化按钮
+            diag.ShowMinButton = false;		//最小化按钮
             diag.CancelEvent = function () { //关闭事件
                 tosearch();
                 diag.close();
@@ -437,8 +446,8 @@
         diag.Width = 800;
         diag.Height = 550;
         diag.Modal = true; //有无遮罩窗口
-        diag.ShowMaxButton = true; //最大化按钮
-        diag.ShowMinButton = true; //最小化按钮
+        diag.ShowMaxButton = false; //最大化按钮
+        diag.ShowMinButton = false; //最小化按钮
         /* diag.CancelEvent = function(){ //关闭事件
          if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
          if('
@@ -455,6 +464,7 @@
         diag.show();
     }
 
+    //复选框选中事件
     function toCheck(Id){
         $("#simple-table").find("tr[name='listBeen']").css("background-color", "");
         $("#tr" + Id).css("background-color", "#CCCC99");
@@ -474,8 +484,8 @@
         diag.Width = window.innerWidth * 0.7;
         diag.Height = window.innerHeight * 0.7;
         diag.Modal = true;				//有无遮罩窗口
-        diag.ShowMaxButton = true;	//最大化按钮
-        diag.ShowMinButton = true;		//最小化按钮
+        diag.ShowMaxButton = false;	//最大化按钮
+        diag.ShowMinButton = false;		//最小化按钮
         diag.CancelEvent = function () { //关闭事件
             tosearch();
             diag.close();

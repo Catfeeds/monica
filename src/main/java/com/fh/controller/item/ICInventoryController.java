@@ -183,7 +183,7 @@ public class ICInventoryController extends BaseController {
 	public JSONArray dateTree(Page page) throws Exception{
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		getWarehouse();
+		//getWarehouse();
 		String keywords = pd.getString("keywords"); // 关键词检索条件
 		if (null != keywords && !"".equals(keywords)) {
 			pd.put("keywords", keywords.trim());
