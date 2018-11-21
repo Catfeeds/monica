@@ -30,7 +30,7 @@ public class FileUtil {
 	
 	/**
 	 * 创建目录
-	 * @param destDirName目标目录名
+	 * @param destDirName 目标目录名
 	 * @return 
 	 */
 	public static Boolean createDir(String destDirName) {

@@ -170,9 +170,9 @@ public class Classify_itemController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		String keywords = pd.getString("keywords"); // 关键词检索条件
-		if (null != keywords && !"".equals(keywords)) {
-			pd.put("keywords", keywords.trim());
+		String fname = pd.getString("FNAME"); // 关键词检索条件
+		if (null != fname && !"".equals(fname)) {
+			pd.put("FNAME", fname.trim());
 		}
 		page.setPd(pd);
 		List<PageData> varList = classify_itemService.list(page); // 列出Classify_item列表
