@@ -254,7 +254,7 @@
 		}
         //重置
         function Form_reset(){
-            document.getElementById("Form").reset();
+			$("[name=\"FNAME\"]").val("");
         }
         $(function() {
 		
