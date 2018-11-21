@@ -5,9 +5,9 @@ import com.fh.entity.Page;
 import com.fh.util.PageData;
 
 /** 
- * 说明： 销售订单明细接口
+ * 说明： 订单明细表接口
  * 创建人：成
- * 创建时间：2018-01-19
+ * 创建时间：2018-11-21
  * @version
  */
 public interface SalesOrderBillEntryManager{
@@ -24,40 +24,17 @@ public interface SalesOrderBillEntryManager{
 	 */
 	public void delete(PageData pd)throws Exception;
 	
-	/**删除
-	 * @param pd
-	 * @throws Exception
-	 */
-	public void deleteBySALESORDERBILL_ID(PageData pd)throws Exception;
-	
 	/**修改
 	 * @param pd
 	 * @throws Exception
 	 */
 	public void edit(PageData pd)throws Exception;
 	
-	/**修改
-	 * @param pd
-	 * @throws Exception
-	 */
-	public void toEditOrder(PageData pd)throws Exception;
 	/**列表
 	 * @param page
 	 * @throws Exception
 	 */
 	public List<PageData> list(Page page)throws Exception;
-	
-	/**列表
-	 * @param page
-	 * @throws Exception
-	 */
-	public List<PageData> list_salesOrderEntry(Page page)throws Exception;
-	
-	/**列表
-	 * @param page
-	 * @throws Exception
-	 */
-	public List<PageData> list_oneOrder(Page page)throws Exception;
 	
 	/**列表(全部)
 	 * @param pd

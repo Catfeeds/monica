@@ -682,7 +682,7 @@ public class HttpController extends BaseController{
 		page.setPd(pd);
 		/* TODO */
 		/*List<PageData> synList = salesorderbillService.listNotSyn(page);*/
-		List<PageData> synEntryList = salesorderbillentryService.list_salesOrderEntry(page);
+		//List<PageData> synEntryList = salesorderbillentryService.list_salesOrderEntry(page);
 		/*json.put("Data", synList);
 		json.put("synEntryList", synEntryList);
 		for (PageData pageData : synList) {

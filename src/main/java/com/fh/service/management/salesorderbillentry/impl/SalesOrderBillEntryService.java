@@ -9,9 +9,9 @@ import com.fh.util.PageData;
 import com.fh.service.management.salesorderbillentry.SalesOrderBillEntryManager;
 
 /** 
- * 说明： 销售订单明细
+ * 说明： 订单明细表
  * 创建人：成
- * 创建时间：2018-01-19
+ * 创建时间：2018-11-21
  * @version
  */
 @Service("salesorderbillentryService")
@@ -36,28 +36,12 @@ public class SalesOrderBillEntryService implements SalesOrderBillEntryManager{
 		dao.delete("SalesOrderBillEntryMapper.delete", pd);
 	}
 	
-	/**删除
-	 * @param pd
-	 * @throws Exception
-	 */
-	public void deleteBySALESORDERBILL_ID(PageData pd)throws Exception{
-		dao.delete("SalesOrderBillEntryMapper.deleteBySALESORDERBILL_ID", pd);
-	}
-	
 	/**修改
 	 * @param pd
 	 * @throws Exception
 	 */
 	public void edit(PageData pd)throws Exception{
 		dao.update("SalesOrderBillEntryMapper.edit", pd);
-	}
-	
-	/**修改
-	 * @param pd
-	 * @throws Exception
-	 */
-	public void toEditOrder(PageData pd)throws Exception{
-		dao.update("SalesOrderBillEntryMapper.toEditOrder", pd);
 	}
 	
 	/**列表
@@ -67,24 +51,6 @@ public class SalesOrderBillEntryService implements SalesOrderBillEntryManager{
 	@SuppressWarnings("unchecked")
 	public List<PageData> list(Page page)throws Exception{
 		return (List<PageData>)dao.findForList("SalesOrderBillEntryMapper.datalistPage", page);
-	}
-	
-	/**列表
-	 * @param page
-	 * @throws Exception
-	 */
-	@SuppressWarnings("unchecked")
-	public List<PageData> list_oneOrder(Page page)throws Exception{
-		return (List<PageData>)dao.findForList("SalesOrderBillEntryMapper.list_oneOrder", page);
-	}
-	
-	/**列表
-	 * @param page
-	 * @throws Exception
-	 */
-	@SuppressWarnings("unchecked")
-	public List<PageData> list_salesOrderEntry(Page page)throws Exception{
-		return (List<PageData>)dao.findForList("SalesOrderBillEntryMapper.list_salesOrderEntry", page);
 	}
 	
 	/**列表(全部)

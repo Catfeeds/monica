@@ -33,6 +33,7 @@
 						<input type="hidden" id="FCLIENTID" name="FCLIENTID" value="${pd.FCLIENTID}"/>
 						<input type="hidden" id="FSALESID" name="FSALESID" value="${pd.FSALESID}"/>
 						<input type="hidden" id="FORDERPERSON" name="FORDERPERSON" value="${pd.FORDERPERSON}"/>
+						<input type="hidden" id="strJson" name="strJson" value="${pd.strJson}"/>
 						<div id="zhongxin" style="padding-top: 13px;">
 							<table style="border-collapse:separate; border-spacing:10px;width: 100%;padding-left: 1%">
 								<tbody>
@@ -417,9 +418,10 @@
                 $("#FORDERAMOUNT").focus();
                 return false;
             }
-			$("#Form").submit();
+            commoditiesToSave();
+			/*$("#Form").submit();
 			$("#zhongxin").hide();
-			$("#zhongxin2").show();
+			$("#zhongxin2").show();*/
 		}
 		
 		$(function() {
@@ -466,6 +468,7 @@
             $("#weektab li").removeClass('on').eq(num).addClass('on');
         }
 
+        //绑定客户
         function toClient(){
             top.jzts();
             var diag = new top.Dialog();
@@ -503,6 +506,7 @@
             diag.show();
 		}
 
+		//审批
         function approve(msg){
             bootbox.confirm(msg, function(result) {
                 if(result) {
@@ -539,6 +543,7 @@
             });
         }
 
+        //添加商品
         function addCommodities() {
             top.jzts();
             var diag = new top.Dialog();
@@ -574,13 +579,14 @@
                                 tr += '<td class="center"><span>'+commoditiesList[i].FNAME+'</span></td>';
                                 tr += '<td class="center"><span>'+commoditiesList[i].FMODEL+'</span></td>';
                                 tr += '<td class="center"><span></span></td>';
-                                tr += '<td class="center"><input type="number" min="1" id="'+commoditiesList[i].COMMODITY_ID+'QTY" onblur="calculationAmount(\''+commoditiesList[i].COMMODITY_ID+'\')"></td>';
+                                tr += '<td class="center"><input type="number" min="1" value="1" id="'+commoditiesList[i].COMMODITY_ID+'QTY" onblur="calculationAmount(\''+commoditiesList[i].COMMODITY_ID+'\')"></td>';
                                 tr += '<td class="center"><span id="'+commoditiesList[i].COMMODITY_ID+'Pri">'+commoditiesList[i].PRICE+'</span></td>';
-                                tr += '<td class="center"><input type="number" readonly id="'+commoditiesList[i].COMMODITY_ID+'Amo" min="0.0" step="0.1"/></td>';
+                                tr += '<td class="center"><input type="number" value="'+commoditiesList[i].PRICE.toFixed(2)+'" readonly id="'+commoditiesList[i].COMMODITY_ID+'Amo" min="0.0" step="0.1"/></td>';
                                 tr += '<td class="center">'+commoditiesList[i].FNOTE+'</td>';
                                 tr += '</tr>';
                             }
                             $("#trspmx").before(tr);
+                            calculationOrderAmount();
                         }
                     });
                 }
@@ -589,6 +595,7 @@
             diag.show();
         	}
 
+        	//计算商品总额
             function calculationAmount(Id){
                 var qty = $("#"+Id+"QTY").val();
                 var price = $("#"+Id+"Pri").text();
@@ -603,7 +610,8 @@
                 $("#"+Id+"Amo").val(amount.toFixed(2));
                 calculationOrderAmount();
             }
-            
+
+            //计算订单总额
             function calculationOrderAmount(){
                 var FORDERAMOUNT = 0.00;
                 $('#taspmx tr').each(function (i) {                   // 遍历 tr
@@ -620,6 +628,42 @@
                     }
                 });
                 $("#FORDERAMOUNT").val(FORDERAMOUNT.toFixed(2));
+            }
+
+            //保存商品明细
+            function commoditiesToSave() {
+            	var FCOMMODITYID;
+                var FQTY;
+                var FAMOUNT;
+                var strJson = '[';
+                $('#taspmx tr').each(function (i) {                   // 遍历 tr
+                    if (i > 0 && i < ($('#taspmx tr').length - 1)) {
+                        $(this).children('td').each(function (j) {  // 遍历 tr 的各个 td
+                            if (j == 0) {
+                                FCOMMODITYID = $(this).find("input").val();
+                            } else if (j == 6) {
+                                FQTY = $(this).find("input").val();
+                                if((FQTY == null || FQTY == '') || (FQTY < 0)){
+                                    bootbox.alert({
+                                        size: "small",
+                                        title:"失败",
+                                        message: "参数错误,请核对订单明细商品数量格式是否正确!"
+                                    });
+                                    return false;
+								}
+                            } else if (j == 8) {
+                                FAMOUNT = $(this).find("input").val();
+                            }
+                        });
+                        strJson += '{"FCOMMODITYID":"' + FCOMMODITYID + '",'
+                        strJson += '"FQTY":"' + FQTY + '",'
+                        strJson += '"FAMOUNT":"' + FAMOUNT + '"},'
+                    }
+                });
+                strJson = strJson.substring(0, strJson.length - 1);
+                strJson += ']'
+                $("#strJson").val(strJson);
+                //console.log(strJson);
             }
 		</script>
 </body>
