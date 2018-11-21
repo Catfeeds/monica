@@ -725,8 +725,31 @@
                     var Id = str[0];
                     if(${msg == 'save'}){
                         $("#tr"+Id).remove();
+                        bootbox.alert({
+                            size: "small",
+                            title:"成功",
+                            message: "删除成功!"
+                        });
                     } else {
-                        $("#tr"+Id).remove();
+                        $.ajax({
+							async:false,
+							cache:false,
+							url:'<%=basePath%>salesorderbillentry/delete.do',
+							data:{
+                                SALESORDERBILLENTRY_ID:Id
+							},
+							datatype:'JSON',
+							success:function (obj){
+								if(obj.msg == '1'){
+                                    $("#tr"+Id).remove();
+                                    bootbox.alert({
+                                        size: "small",
+                                        title:"成功",
+                                        message: "删除成功!"
+                                    });
+								}
+							}
+						});
                     }
                 }
         	}

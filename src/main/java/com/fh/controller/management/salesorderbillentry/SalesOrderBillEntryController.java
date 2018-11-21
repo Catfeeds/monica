@@ -56,18 +56,16 @@ public class SalesOrderBillEntryController extends BaseController {
 	}
 	
 	/**删除
-	 * @param out
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/delete")
-	public void delete(PrintWriter out) throws Exception{
-		logBefore(logger, Jurisdiction.getUsername()+"删除SalesOrderBillEntry");
-		if(!Jurisdiction.buttonJurisdiction(menuUrl, "del")){return;} //校验权限
-		PageData pd = new PageData();
-		pd = this.getPageData();
+	@ResponseBody
+	public Map<String,String> delete() throws Exception{
+		Map<String,String> resultMap = new HashMap<>();
+		PageData pd = this.getPageData();
 		salesorderbillentryService.delete(pd);
-		out.write("success");
-		out.close();
+		resultMap.put("msg","1");
+		return resultMap;
 	}
 	
 	/**修改
