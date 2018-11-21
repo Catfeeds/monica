@@ -73,9 +73,9 @@
 							<c:choose>
 								<c:when test="${not empty varList}">
 									<c:forEach items="${varList}" var="var" varStatus="vs">
-										<tr>
+										<tr id="tr${vs.index+1}" name="listBeen" onclick="toCheck('${vs.index+1}')" ondblclick="editByID('${vs.index+1}')" style="cursor: pointer;">
 											<td class='center'>
-												<label class="pos-rel"><input type='checkbox' name='ids' value="${var.AFNumber}" class="ace" /><span class="lbl"></span></label>
+												<label class="pos-rel"><input id="${vs.index+1}" type='checkbox' name='ids' value="${vs.index+1}" class="ace" /><span class="lbl"></span></label>
 											</td>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
 											<td class='center'>${var.AFNumber}</td>
@@ -360,7 +360,24 @@
 		function reset() {
             $("#keywords").val('');
         }
-		
+
+        //点击样式
+        function toCheck(Id){
+            $("#simple-table").find("tr[name='listBeen']").css("background-color", "");
+            $("#tr" + Id).css("background-color", "#CCCC99");
+            if($("#"+Id).prop("checked")){
+                $("#"+Id).removeAttr("checked");
+            }else {
+                $("#"+Id).prop("checked",true);
+            }
+
+            if($("#isDetail").prop("checked")){
+                back();
+                setTimeout("changecss()",300);
+            }
+
+            //changecss();
+        }
 	</script>
 
 

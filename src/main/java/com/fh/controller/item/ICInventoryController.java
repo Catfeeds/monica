@@ -83,6 +83,7 @@ public class ICInventoryController extends BaseController {
 		String todoType = Tools.readTxtFile("admin/config/TYPE.txt");
 		if ("0".equals(todoType)) {
 			List<PageData> varList = itemService.list(page);
+			System.out.println("----------->" + varList);
 			mv.addObject("varList", varList);
 		} else {
 			String requestUrl = this.getIpAndProjectName()+"/erp_Get/erp_getInventory?currentPage="+currentPage+"&treeKey="+treeKey;
