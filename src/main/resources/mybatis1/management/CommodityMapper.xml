@@ -104,10 +104,10 @@
 		<if test="pd.fparentid!= null and pd.fparentid != ''"><!-- 关键词检索 -->
 			and  FPARENTID = #{pd.fparentid}
 		</if>
-		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
+		<if test="pd.fnumber!= null and pd.fnumber != ''"><!-- 关键词检索 -->
 			and
 				(
-				FNUMBER LIKE '%'+#{pd.keywords}+'%'
+				FNUMBER LIKE '%'+#{pd.fnumber}+'%'
 				<!--	根据需求自己加检索条件
 					字段1 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
 					 or 
@@ -115,10 +115,10 @@
 				-->
 				)
 		</if>
-		<if test="pd.keywords1!= null and pd.keywords1 != ''"><!-- 关键词检索 -->
+		<if test="pd.fname!= null and pd.fname != ''"><!-- 关键词检索 -->
 			and
 				(
-				FNAME LIKE '%'+#{pd.keywords1}+'%' 
+				FNAME LIKE '%'+#{pd.fname}+'%'
 				<!--	根据需求自己加检索条件
 					字段1 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
 					 or 

@@ -31,13 +31,39 @@
 						<div class="col-xs-12">
 							
 						<!-- 检索  -->
-						<form action="itembase/list.do?treeKey=${treeKey }&treeName=${pd.treeName }" method="post" name="Form" id="Form">
+						<form action="itembase/list.do?treeKey=${treeKey }&treeName=${pd.treeName}" method="post" name="Form" id="Form">
+							<div class="row" style="margin-top:5px;">
+								<div class="col-xs-12">
+									<p>
+										<%--<c:if test="${QX.edit == 1 }">
+											<a class="btn btn-light btn-xs" onclick="edit('');" data-rel="tooltip" title="修改">
+												<i class="ace-icon fa fa-pencil-square-o bigger-120 orange"></i>修改
+											</a>
+										</c:if>
+										<c:if test="${QX.del == 1 }">
+											<a class="btn btn-light btn-xs" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除">
+												<i class="ace-icon fa fa-trash-o bigger-125 red"></i>删除
+											</a>
+										</c:if>--%>
+										<a class="btn btn-light btn-xs" onclick="updateItem()"><i
+												id="nav-refresh-icon"
+												class="ace-icon fa fa-refresh bigger-110 nav-search-icon blue"></i>同步
+										</a>
+										<c:if test="${QX.toExcel == 1 }">
+											<a class="btn btn-light btn-xs" onclick="toExcel();" title="导出到EXCEL">
+												<i id="nav-download-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i>导出Excel
+											</a>
+										</c:if>
+									</p>
+								</div>
+							</div>
 						<table style="margin-top:5px;">
 							<tr>
 								<td>
 									<div class="nav-search">
 										<span class="input-icon">
-											<input type="text" placeholder="这里输入关键词" class="nav-search-input" id="nav-search-input" autocomplete="off" name="keywords" value="${pd.keywords }" placeholder="这里输入关键词"/>
+											<input type="text" placeholder="这里输入关键词" class="nav-search-input" id="keyword"
+												   autocomplete="off" name="keyword" value="${pd.keyword }" placeholder="这里输入关键词"/>
 											<i class="ace-icon fa fa-search nav-search-icon"></i>
 										</span>
 									</div>
@@ -53,15 +79,17 @@
 								  	</select>
 								</td> -->
 								<c:if test="${QX.cha == 1 }">
-								<td style="vertical-align:top;padding-left:2px"><a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i></a></td>
+									<td style="vertical-align:top;padding-left:2px">
+										<a class="btn btn-light btn-xs" onclick="tosearch();"  title="查询">
+											<i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i>查询
+										</a>
+									</td>
+									<td style="vertical-align:top;padding-left:2px">
+										<a class="btn btn-light btn-xs" onclick="Form_reset()"  title="重置">
+											<i id="nav-repeat-icon" class="ace-icon fa fa-repeat bigger-120"></i>重置
+										</a>
+									</td>
 								</c:if>
-								<td  style="vertical-align:top;padding-left:5px"><a
-										style="width: 100%;"
-									class="btn btn-light btn-xs" onclick="updateItem()">同步物料资料<i 
-											id="nav-search-icon"
-											class="ace-icon fa fa-refresh bigger-110 nav-search-icon blue"></i>
-									</a></td>
-								<c:if test="${QX.toExcel == 1 }"><td style="vertical-align:top;padding-left:2px;"><a class="btn btn-light btn-xs" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i></a></td></c:if>
 							</tr>
 						</table>
 						<!-- 检索  -->
@@ -81,11 +109,11 @@
 									<th class="center">采购单位</th>
 									<th class="center">采购单价</th>
 									<th class="center">销售单价</th>
-									<th class="center">商品ID</th>
+									<%--<th class="center">商品ID</th>
 									<th class="center">父项ID</th>
 									<th class="center">基本单位ID</th>
 									<th class="center">销售单位ID</th>
-									<th class="center">采购单位ID</th>
+									<th class="center">采购单位ID</th>--%>
 									<!-- <th class="center">操作</th> -->
 								</tr>
 							</thead>
@@ -109,11 +137,11 @@
 											<td class='center'>${var.FORDERUNIT}</td>
 											<td class='center'>${var.FORDERPRICE}</td>
 											<td class='center'>${var.FSALEPRICE}</td>
-											<td class='center'>${var.FITEMID}</td>
+											<%--<td class='center'>${var.FITEMID}</td>
 											<td class='center'>${var.FPARENTID}</td>
 											<td class='center'>${var.FUNITID}</td>
 											<td class='center'>${var.FSALEUNITID}</td>
-											<td class='center'>${var.FORDERUNITID}</td>
+											<td class='center'>${var.FORDERUNITID}</td>--%>
 										</tr>
 									
 									</c:forEach>
@@ -187,6 +215,10 @@
 			top.jzts();
 			$("#Form").submit();
 		}
+        //重置
+        function Form_reset(){
+            $("[name='keyword']").val("");
+        }
 		$(function() {
 		
 			//日期框
@@ -340,19 +372,24 @@
 		};
 		
 		function updateItem(){
-			 top.jzts();
-			$.ajax({
-					type: "POST",
-					url: '<%=basePath%>itembase/getItembase',
-			    	//data: {DATA_IDS:str},
-					dataType:'json',
-					//beforeSend: validateData,
-					cache: false,
-					success: function(data){
-						alert(data.Data);
-						tosearch();
-					}
-				});
+            bootbox.confirm("同步需要一定的时间是否确认同步吗?", function(result) {
+                if(result) {
+                    top.jzts();
+                    var url = "<%=basePath%>itembase/getItembase.do";
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        //data: {DATA_IDS:str},
+                        dataType:'json',
+                        //beforeSend: validateData,
+                        cache: false,
+                        success: function(data){
+                            alert(data.Data);
+                            tosearch();
+                        }
+                    });
+                }
+            });
 		}
 		
 		//导出excel

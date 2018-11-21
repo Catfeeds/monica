@@ -110,6 +110,35 @@ public class SalesOrderBillController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		salesorderbillService.edit(pd);
+		JSONObject json = null;
+		PageData entryPd = new PageData();
+		if (pd.getString("strJson").length() > 5){
+			JSONArray jsonArray = JSONArray.fromObject(pd.getString("strJson"));
+			for (int i = 0; i < jsonArray.size(); i++) {
+				json = jsonArray.getJSONObject(i);
+				entryPd.put("SALESORDERBILLENTRY_ID", json.getString("FSALESORDERBILLENTRYID"));	//主键
+				PageData checkPd = salesorderbillentryService.findById(entryPd);
+				if (checkPd != null){ //存在则修改
+					PageData editPd = new PageData();
+					editPd.put("FCOMMODITYID",json.getString("FCOMMODITYID"));
+					editPd.put("FQTY",json.get("FQTY"));
+					editPd.put("FSALESORDERBILLID",pd.getString("SALESORDERBILL_ID"));
+					editPd.put("FAMOUNT",json.get("FAMOUNT"));
+					editPd.put("FARRIVALTIME",json.getString("FARRIVALTIME"));
+					editPd.put("SALESORDERBILLENTRY_ID", json.getString("FSALESORDERBILLENTRYID"));	//主键
+					salesorderbillentryService.edit(editPd);
+				} else { //不存在则保存
+					PageData savePd = new PageData();
+					savePd.put("FCOMMODITYID",json.getString("FCOMMODITYID"));
+					savePd.put("FQTY",json.get("FQTY"));
+					savePd.put("FSALESORDERBILLID",pd.getString("SALESORDERBILL_ID"));
+					savePd.put("FAMOUNT",json.get("FAMOUNT"));
+					savePd.put("FARRIVALTIME",json.getString("FARRIVALTIME"));
+					savePd.put("SALESORDERBILLENTRY_ID", json.getString("FSALESORDERBILLENTRYID"));	//主键
+					salesorderbillentryService.save(savePd);
+				}
+			}
+		}
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
 		return mv;
@@ -213,7 +242,7 @@ public class SalesOrderBillController extends BaseController {
 		pd.put("PNAME","物流");
 		List<PageData> logisticsList = dictionariesService.listByParentName(pd);
 		mv.addObject("logisticsList", logisticsList);
-
+		mv.addObject("count",1);
 		mv.setViewName("management/salesorderbill/salesorderbill_edit");
 		mv.addObject("msg", "save");
 		mv.addObject("pd", pd);
@@ -267,6 +296,7 @@ public class SalesOrderBillController extends BaseController {
 		mv.addObject("logisticsList", logisticsList);
 		List<PageData> entryList = salesorderbillentryService.findEntryListByOrderId(pd);
 		mv.addObject("entryList",entryList);
+		mv.addObject("count",entryList.size()+1);
 		mv.setViewName("management/salesorderbill/salesorderbill_edit");
 		mv.addObject("msg", "edit");
 		mv.addObject("pd", pd);

@@ -141,16 +141,16 @@ public class CommodityController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		String FPARENTID = pd.getString("fparentid");
-		String keywords = pd.getString("keywords");				//关键词检索条件
-		String keywords1 = pd.getString("keywords1");
-		if(null != keywords && !"".equals(keywords)){
-			pd.put("keywords", keywords.trim());
-		}
+		String fnumber = pd.getString("fnumber");				//关键词检索条件
+		String fname = pd.getString("fname");
 		if(null != FPARENTID && !"".equals(FPARENTID)){
 			pd.put("fparentid", FPARENTID);
 		}
-		if(null != keywords1 && !"".equals(keywords1)){
-			pd.put("keywords1", keywords1.trim());
+		if(null != fnumber && !"".equals(fnumber)){
+			pd.put("fnumber", fnumber.trim());
+		}
+		if(null != fname && !"".equals(fname)){
+			pd.put("fname", fname.trim());
 		}
 		page.setPd(pd);
 		List<PageData>	tvarList = itemService.tree_dataByid(page);

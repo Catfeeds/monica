@@ -117,9 +117,9 @@ public class ItemBaseController extends BaseController {
 		if(null != treeName && !"".equals(treeName)){
 			pd.put("treeName", treeName.trim());
 		}
-		String keywords = pd.getString("keywords");				//关键词检索条件
-		if(null != keywords && !"".equals(keywords)){
-			pd.put("keywords", keywords.trim());
+		String keyword = pd.getString("keyword");				//关键词检索条件
+		if(null != keyword && !"".equals(keyword)){
+			pd.put("keyword", keyword.trim());
 		}
 		
 		String treeKey = pd.getString("treeKey");				//关键词检索条件
