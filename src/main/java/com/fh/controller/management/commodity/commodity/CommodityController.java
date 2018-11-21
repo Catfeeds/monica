@@ -298,6 +298,9 @@ public class CommodityController extends BaseController {
 		String sql = EncapsulationUtil.encapsulateIds(idsList);
 		pd.put("sql",sql);
 		List<PageData> commoditiesList = commodityService.findCommoditiesByIds(pd);
+        for (int i = 0; i < commoditiesList.size(); i++) {
+            commoditiesList.get(i).put("FSALESORDERBILLENTRYID",this.get32UUID());
+        }
 		resultMap.put("commoditiesList",commoditiesList);
 		return resultMap;
 	}

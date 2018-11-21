@@ -6,7 +6,12 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.annotation.Resource;
 
+import com.fh.service.management.salesorderbillentry.SalesOrderBillEntryManager;
 import com.fh.service.system.dictionaries.DictionariesManager;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -36,6 +41,9 @@ public class SalesOrderBillController extends BaseController {
 	@Resource(name="salesorderbillService")
 	private SalesOrderBillManager salesorderbillService;
 
+	@Resource(name="salesorderbillentryService")
+	private SalesOrderBillEntryManager salesorderbillentryService;
+
 	@Resource(name="dictionariesService")
 	private DictionariesManager dictionariesService;
 	
@@ -50,12 +58,26 @@ public class SalesOrderBillController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		/* TODO 检查订单明细json后保存 */
+		pd.put("SALESORDERBILL_ID", this.get32UUID());	//主键
+		JSONObject json = null;
+		PageData entryPd = new PageData();
+		if (pd.getString("strJson").length() > 5){
+			JSONArray jsonArray = JSONArray.fromObject(pd.getString("strJson"));
+			for (int i = 0; i < jsonArray.size(); i++) {
+				json = jsonArray.getJSONObject(i);
+				entryPd.put("FCOMMODITYID",json.getString("FCOMMODITYID"));
+				entryPd.put("FQTY",json.get("FQTY"));
+				entryPd.put("FSALESORDERBILLID",pd.getString("SALESORDERBILL_ID"));
+				entryPd.put("FAMOUNT",json.get("FAMOUNT"));
+				entryPd.put("FARRIVALTIME",json.getString("FARRIVALTIME"));
+				entryPd.put("SALESORDERBILLENTRY_ID", json.getString("FSALESORDERBILLENTRYID"));	//主键
+				salesorderbillentryService.save(entryPd);
+			}
+		}
 		pd.put("FORDERSTATUS",0); //草稿
 		pd.put("FISSYNCHRONIZATION",0);//未同步
 		pd.put("FISCANCELLATION",0);//未作废
-		pd.put("SALESORDERBILL_ID", this.get32UUID());	//主键
-		//salesorderbillService.save(pd);
+		salesorderbillService.save(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
 		return mv;
@@ -243,6 +265,8 @@ public class SalesOrderBillController extends BaseController {
 		pd.put("PNAME","物流");
 		List<PageData> logisticsList = dictionariesService.listByParentName(pd);
 		mv.addObject("logisticsList", logisticsList);
+		List<PageData> entryList = salesorderbillentryService.findEntryListByOrderId(pd);
+		mv.addObject("entryList",entryList);
 		mv.setViewName("management/salesorderbill/salesorderbill_edit");
 		mv.addObject("msg", "edit");
 		mv.addObject("pd", pd);

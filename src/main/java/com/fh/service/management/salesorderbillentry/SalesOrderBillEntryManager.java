@@ -53,6 +53,14 @@ public interface SalesOrderBillEntryManager{
 	 * @throws Exception
 	 */
 	public void deleteAll(String[] ArrayDATA_IDS)throws Exception;
+
+	/**
+	 * 根据主订单id查商品明细
+	 * @param pd
+	 * @return
+	 * @throws Exception
+	 */
+	public List<PageData> findEntryListByOrderId(PageData pd) throws Exception;
 	
 }
 
