@@ -251,7 +251,75 @@
 								</tr>
 								</tbody>
 						</table>
+
+
 						</div>
+
+						<div style="margin-bottom: 0px" class="weeks">
+							<ul style="margin-left: 0px;margin-bottom: 0px" class="weekItem" id="weektab">
+								<li>订单明细</li>
+								<li>变更日志</li>
+							</ul>
+							<div class="box01_c" id="spmx">
+								<a onclick="addCommodities();" style="margin-left: 10px" class="btn btn-success btn-xs">
+									<i class="ace-icon fa glyphicon-plus bigger-110 nav-search-icon yellow"></i>新增
+								</a>
+								<a onclick="delectCommodities();" class="btn btn-primary btn-xs">
+									<i class="ace-icon fa fa-trash-o bigger-120 nav-search-icon "></i>删除
+								</a>
+								<table id="taspmx" class="table table-striped table-bordered table-hover"
+									   style="margin-top:5px;">
+									<tr>
+										<th style="width: 35px" class="center"></th>
+										<th style="width: 50px;" class="center">序号</th>
+										<th class="center">产品编号</th>
+										<th class="center">产品名称</th>
+										<th class="center">规格型号</th>
+										<th class="center">计量单位</th>
+										<th class="center">数量</th>
+										<th class="center">单价</th>
+										<th class="center">金额</th>
+										<th class="center">要求到货日期</th>
+										<th class="center">备注</th>
+									</tr>
+									<c:if test="${not empty entryList}">
+										<c:forEach items="${entryList}" var="var" varStatus="vs">
+											<tr id="tr${var.SALESORDERBILLENTRY_ID}">
+												<td class="center"><label class="pos-rel"><input type="checkbox" id="${var.SALESORDERBILLENTRY_ID}" name="ids" value="${var.SALESORDERBILLENTRY_ID}" class="ace"/><span class="lbl"></span></label></td>
+												<td class="center"><span>${vs.index+1}</span></td>
+												<td class="center"><span>${var.FNUMBER}</span></td>
+												<td class="center"><span>${var.FCOMMODITYNAME}</span></td>
+												<td class="center"><span>${var.FMODEL}</span></td>
+												<td class="center"><span></span></td>
+												<td class="center"><input type="number" min="1" value="${var.FQTY}" id="${var.SALESORDERBILLENTRY_ID}QTY" onblur="calculationAmount('${var.SALESORDERBILLENTRY_ID}')"></td>
+												<td class="center"><span id="${var.SALESORDERBILLENTRY_ID}Pri">${var.FPRICE}</span></td>
+												<td class="center"><input type="number" value="${var.FAMOUNT}" readonly id="${var.SALESORDERBILLENTRY_ID}Amo" min="0.0" step="0.1"/></td>
+												<td class="center"><input type="date" value="${var.FARRIVALTIME}"/></td>
+												<td class="center"><span>${var.FNOTE}</span></td>
+												<td style="display: none;" class="center"><input type="hidden" id="${var.FCOMMODITYID}" value="${var.FCOMMODITYID}"></td>
+											</tr>
+										</c:forEach>
+									</c:if>
+									<tr id="trspmx">
+									</tr>
+								</table>
+							</div>
+							<div class="box01_c" style="display: none" id="xmtd">
+								<table id="taxmtd" class="table table-striped table-bordered table-hover" style="margin-top:5px;">
+									<tr>
+										<th style="width: 35px" class="center"></th>
+										<th style="width: 50px;" class="center">序号</th>
+										<th class="center">变更日期</th>
+										<th class="center">变更人</th>
+										<th class="center">变更后版本</th>
+										<th class="center">备注</th>
+									</tr>
+									<tr id="trxmtd">
+									</tr>
+								</table>
+							</div>
+						</div>
+
 						<div id="zhongxin2" class="center" style="display:none"><br/><br/><br/><br/><br/><img src="static/images/jiazai.gif" /><br/><h4 class="lighter block green">提交中...</h4></div>
 					</form>
 					</div>
@@ -265,71 +333,6 @@
 	<!-- /.main-content -->
 </div>
 <!-- /.main-container -->
-
-<div style="margin-bottom: 0px" class="weeks">
-	<ul style="margin-left: 0px;margin-bottom: 0px" class="weekItem" id="weektab">
-		<li>订单明细</li>
-		<li>变更日志</li>
-	</ul>
-	<div class="box01_c" id="spmx">
-		<a onclick="addCommodities();" style="margin-left: 10px" class="btn btn-success btn-xs">
-			<i class="ace-icon fa glyphicon-plus bigger-110 nav-search-icon yellow"></i>新增
-		</a>
-		<a onclick="delectCommodities();" class="btn btn-primary btn-xs">
-			<i class="ace-icon fa fa-trash-o bigger-120 nav-search-icon "></i>删除
-		</a>
-		<table id="taspmx" class="table table-striped table-bordered table-hover"
-			   style="margin-top:5px;">
-			<tr>
-				<th style="width: 35px" class="center"></th>
-				<th style="width: 50px;" class="center">序号</th>
-				<th class="center">产品编号</th>
-				<th class="center">产品名称</th>
-				<th class="center">规格型号</th>
-				<th class="center">计量单位</th>
-				<th class="center">数量</th>
-				<th class="center">单价</th>
-				<th class="center">金额</th>
-				<th class="center">要求到货日期</th>
-				<th class="center">备注</th>
-			</tr>
-			<c:if test="${not empty entryList}">
-				<c:forEach items="${entryList}" var="var" varStatus="vs">
-					<tr id="tr${var.SALESORDERBILLENTRY_ID}">
-						<td class="center"><label class="pos-rel"><input type="checkbox" id="${var.SALESORDERBILLENTRY_ID}" name="ids" value="${var.SALESORDERBILLENTRY_ID}" class="ace"/><span class="lbl"></span></label></td>
-						<td class="center"><span>1</span></td>
-						<td class="center"><span>${var.FNUMBER}</span></td>
-						<td class="center"><span>${var.FCOMMODITYNAME}</span></td>
-						<td class="center"><span>${var.FMODEL}</span></td>
-						<td class="center"><span></span></td>
-						<td class="center"><input type="number" min="1" value="1" id="${var.FCOMMODITYID}QTY" onblur="calculationAmount('${var.FCOMMODITYID}')"></td>
-						<td class="center"><span id="${var.FCOMMODITYID}Pri">${var.FPRICE}</span></td>
-						<td class="center"><input type="number" value="${var.FAMOUNT}" readonly id="${var.FCOMMODITYID}Amo" min="0.0" step="0.1"/></td>
-						<td class="center"><input type="date" value="${var.FARRIVALTIME}"/></td>
-						<td class="center"><span>${var.FNOTE}</span></td>
-						<td style="display: none;" class="center"><input type="hidden" id="${var.FCOMMODITYID}" value="${var.FCOMMODITYID}"></td>
-					</tr>
-				</c:forEach>
-			</c:if>
-			<tr id="trspmx">
-			</tr>
-		</table>
-	</div>
-	<div class="box01_c" style="display: none" id="xmtd">
-		<table id="taxmtd" class="table table-striped table-bordered table-hover" style="margin-top:5px;">
-			<tr>
-				<th style="width: 35px" class="center"></th>
-				<th style="width: 50px;" class="center">序号</th>
-				<th class="center">变更日期</th>
-				<th class="center">变更人</th>
-				<th class="center">变更后版本</th>
-				<th class="center">备注</th>
-			</tr>
-			<tr id="trxmtd">
-			</tr>
-		</table>
-	</div>
-</div>
 
 <br><br>
 
@@ -562,6 +565,8 @@
             });
         }
 
+        var count = ${count};
+
         //添加商品
         function addCommodities() {
             top.jzts();
@@ -592,18 +597,19 @@
                             for (var i = 0; i < commoditiesList.length; i++) {
                                 tr += '<tr id="tr'+commoditiesList[i].FSALESORDERBILLENTRYID+'">';
                                 tr += '<td class="center"><label class="pos-rel"><input type="checkbox" id="'+commoditiesList[i].FSALESORDERBILLENTRYID+'" name="ids" value="'+commoditiesList[i].FSALESORDERBILLENTRYID+'" class="ace"/><span class="lbl"></span></label></td>';
-                                tr += '<td class="center"><span>1</span></td>';
+                                tr += '<td class="center"><span>'+count+'</span></td>';
                                 tr += '<td class="center"><span>'+commoditiesList[i].FNUMBER+'</span></td>';
                                 tr += '<td class="center"><span>'+commoditiesList[i].FNAME+'</span></td>';
                                 tr += '<td class="center"><span>'+commoditiesList[i].FMODEL+'</span></td>';
                                 tr += '<td class="center"><span></span></td>';
-                                tr += '<td class="center"><input type="number" min="1" value="1" id="'+commoditiesList[i].COMMODITY_ID+'QTY" onblur="calculationAmount(\''+commoditiesList[i].COMMODITY_ID+'\')"></td>';
-                                tr += '<td class="center"><span id="'+commoditiesList[i].COMMODITY_ID+'Pri">'+commoditiesList[i].PRICE+'</span></td>';
-                                tr += '<td class="center"><input type="number" value="'+commoditiesList[i].PRICE.toFixed(2)+'" readonly id="'+commoditiesList[i].COMMODITY_ID+'Amo" min="0.0" step="0.1"/></td>';
+                                tr += '<td class="center"><input type="number" min="1" value="1" id="'+commoditiesList[i].FSALESORDERBILLENTRYID+'QTY" onblur="calculationAmount(\''+commoditiesList[i].FSALESORDERBILLENTRYID+'\')"></td>';
+                                tr += '<td class="center"><span id="'+commoditiesList[i].FSALESORDERBILLENTRYID+'Pri">'+commoditiesList[i].PRICE+'</span></td>';
+                                tr += '<td class="center"><input type="number" value="'+commoditiesList[i].PRICE.toFixed(2)+'" readonly id="'+commoditiesList[i].FSALESORDERBILLENTRYID+'Amo" min="0.0" step="0.1"/></td>';
                                 tr += '<td class="center"><input type="date"/></td>';
                                 tr += '<td class="center"><span>'+commoditiesList[i].FNOTE+'</span></td>';
                                 tr += '<td style="display: none;" class="center"><input type="hidden" id="'+commoditiesList[i].COMMODITY_ID+'" value="'+commoditiesList[i].COMMODITY_ID+'"></td>';
                                 tr += '</tr>';
+                                count++;
                             }
                             $("#trspmx").before(tr);
                             calculationOrderAmount();
