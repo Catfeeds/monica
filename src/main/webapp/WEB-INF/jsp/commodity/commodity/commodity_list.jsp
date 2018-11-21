@@ -65,8 +65,8 @@
                                         <div class="nav-search">
                                             商品代码： <span class="input-icon">
 											<input type="text" placeholder="按商品代码进行搜索" class="nav-search-input"
-                                                   id="nav1-input" autocomplete="off" name="keywords"
-                                                   value="${pd.keywords }" placeholder="这里输入关键词"/>
+                                                   id="nav1-input" autocomplete="off" name="fnumber"
+                                                   value="${pd.fnumber}" placeholder="这里输入关键词"/>
 											<i class="ace-icon fa fa-search nav-search-icon"></i>
 										</span>
                                         </div>
@@ -76,8 +76,8 @@
                                         <div class="nav-search">
                                             商品名称：  <span class="input-icon">
 											<input type="text" placeholder="按商品名称进行搜索" class="nav-search-input"
-                                                   id="nav-search-input" autocomplete="off" name="keywords1"
-                                                   value="${pd.keywords1 }" placeholder="这里输入关键词"/>
+                                                   id="nav-search-input" autocomplete="off" name="fname"
+                                                   value="${pd.fname}" placeholder="这里输入关键词"/>
 											<i class="ace-icon fa fa-search nav-search-icon"></i>
 										</span>
                                         </div>
@@ -251,7 +251,8 @@
     }
     //重置
     function Form_reset(){
-        document.getElementById("Form").reset();
+        $("[name=\"fnumber\"]").val("");
+        $("[name=\"fname\"]").val("");
     }
     $(function () {
 

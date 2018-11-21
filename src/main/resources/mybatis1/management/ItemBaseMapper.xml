@@ -122,15 +122,15 @@
         from
         <include refid="tableName"></include>
         where 1=1
-        <if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
+        <if test="pd.keyword!= null and pd.keyword != ''"><!-- 关键词检索 -->
             and
             (
-            FNAME LIKE '%' + #{pd.keywords} +'%' or FNUMBER LIKE '%' + #{pd.keywords} +'%'
-            <!--	根据需求自己加检索条件
-                字段1 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
-                 or
-                字段2 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
-            -->
+                FNAME LIKE '%' + #{pd.keyword} +'%' or FNUMBER LIKE '%' + #{pd.keyword} +'%'
+                <!--	根据需求自己加检索条件
+                    字段1 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+                     or
+                    字段2 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+                -->
             )
         </if>
         <if test="pd.treeKey!= null and pd.treeKey != ''"><!-- 关键词检索 -->
@@ -147,9 +147,11 @@
         from
         <include refid="tableName"></include>
         where 1=1
-        <if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
+        <if test="pd.keyword!= null and pd.keyword != ''"><!-- 关键词检索 -->
             and (
-            FNAME LIKE '%' + #{pd.keywords} +'%' or FNUMBER LIKE '%' + #{pd.keywords} +'%'
+                FNAME LIKE '%' + #{pd.keyword} +'%'
+                or
+                FNUMBER LIKE '%' + #{pd.keyword} +'%'
             )
         </if>
         <if test="pd.treeName!= null and pd.treeName != ''"><!-- 关键词检索 -->
