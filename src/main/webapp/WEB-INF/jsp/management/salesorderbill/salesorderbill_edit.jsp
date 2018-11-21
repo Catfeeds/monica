@@ -569,14 +569,14 @@
                             for (var i = 0; i < commoditiesList.length; i++) {
                                 tr += '<tr>';
                                 tr += '<td class="center"><label class="pos-rel"><input id="'+commoditiesList[i].COMMODITY_ID+'" type="checkbox" name="ids" value="'+commoditiesList[i].COMMODITY_ID+'" class="ace" /><span class="lbl"></span></label></td>';
-                                tr += '<td class="center">1</td>';
-                                tr += '<td class="center">'+commoditiesList[i].FNUMBER+'</td>';
-                                tr += '<td class="center">'+commoditiesList[i].FNAME+'</td>';
-                                tr += '<td class="center">'+commoditiesList[i].FMODEL+'</td>';
-                                tr += '<td class="center"></td>';
-                                tr += '<td class="center">'+commoditiesList[i].FQTY+'</td>';
-                                tr += '<td class="center">'+commoditiesList[i].PRICE+'</td>';
-                                tr += '<td class="center"><input type="text"/></td>';
+                                tr += '<td class="center"><span>1</span></td>';
+                                tr += '<td class="center"><span>'+commoditiesList[i].FNUMBER+'</span></td>';
+                                tr += '<td class="center"><span>'+commoditiesList[i].FNAME+'</span></td>';
+                                tr += '<td class="center"><span>'+commoditiesList[i].FMODEL+'</span></td>';
+                                tr += '<td class="center"><span></span></td>';
+                                tr += '<td class="center"><input type="number" min="1" id="'+commoditiesList[i].COMMODITY_ID+'QTY" onblur="calculationAmount(\''+commoditiesList[i].COMMODITY_ID+'\')"></td>';
+                                tr += '<td class="center"><span id="'+commoditiesList[i].COMMODITY_ID+'Pri">'+commoditiesList[i].PRICE+'</span></td>';
+                                tr += '<td class="center"><input type="number" readonly id="'+commoditiesList[i].COMMODITY_ID+'Amo" min="0.0" step="0.1"/></td>';
                                 tr += '<td class="center">'+commoditiesList[i].FNOTE+'</td>';
                                 tr += '</tr>';
                             }
@@ -588,6 +588,39 @@
             	};
             diag.show();
         	}
+
+            function calculationAmount(Id){
+                var qty = $("#"+Id+"QTY").val();
+                var price = $("#"+Id+"Pri").text();
+                var amount;
+                if(qty == null || qty == ''){
+                    return false;
+                }
+                if(price == null || price == ''){
+                    return false;
+                }
+                amount = qty * price;
+                $("#"+Id+"Amo").val(amount.toFixed(2));
+                calculationOrderAmount();
+            }
+            
+            function calculationOrderAmount(){
+                var FORDERAMOUNT = 0.00;
+                $('#taspmx tr').each(function (i) {                   // 遍历 tr
+                    if (i > 0 && i < ($('#taspmx tr').length - 1)) {
+                        $(this).children('td').each(function (j) {  // 遍历 tr 的各个 td
+                            if (j == 8) {
+                                if($(this).find("input").val() == "" || $(this).find("input").val() == null){
+                                    FORDERAMOUNT += 0;
+                                }else {
+                                    FORDERAMOUNT += parseFloat($(this).find("input").val());
+                                }
+                            }
+                        });
+                    }
+                });
+                $("#FORDERAMOUNT").val(FORDERAMOUNT.toFixed(2));
+            }
 		</script>
 </body>
 </html>
