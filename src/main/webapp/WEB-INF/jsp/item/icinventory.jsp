@@ -54,9 +54,9 @@
 						<table id="simple-table" class="table table-striped table-bordered table-hover" style="margin-top:5px;">	
 							<thead>
 								<tr>
-									<th class="center" style="width:35px;">
+									<%--<th class="center" style="width:35px;">
 									<label class="pos-rel"><input type="checkbox" class="ace" id="zcheckbox" /><span class="lbl"></span></label>
-									</th>
+									</th>--%>
 									<th class="center" style="width:50px;">序号</th>
 									<th class="center">商品代码</th>
 									<th class="center">商品名称</th>
@@ -74,9 +74,9 @@
 								<c:when test="${not empty varList}">
 									<c:forEach items="${varList}" var="var" varStatus="vs">
 										<tr id="tr${vs.index+1}" name="listBeen" onclick="toCheck('${vs.index+1}')" ondblclick="editByID('${vs.index+1}')" style="cursor: pointer;">
-											<td class='center'>
+											<%--<td class='center'>
 												<label class="pos-rel"><input id="${vs.index+1}" type='checkbox' name='ids' value="${vs.index+1}" class="ace" /><span class="lbl"></span></label>
-											</td>
+											</td>--%>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
 											<td class='center'>${var.AFNumber}</td>
 											<td class='center'>${var.AFName}</td>
