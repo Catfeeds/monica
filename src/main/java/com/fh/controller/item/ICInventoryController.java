@@ -111,7 +111,7 @@ public class ICInventoryController extends BaseController {
 			//String jsonPageStr = jsStr.getString("getPageStr"); // 分页
 			//String jsonPage = jsStr.getString("page"); // 分页
 			//System.out.println(jsonPageStr);
-			//List<PageData> listInventory = jsonarr;
+			List<PageData> listInventory = jsonarr;
 			//mv.addObject("varList", listInventory);
 			//mv.addObject("jsonPageStr", jsonPageStr);
 		} catch (MalformedURLException e) {
