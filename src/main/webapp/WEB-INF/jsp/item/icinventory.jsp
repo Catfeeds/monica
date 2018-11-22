@@ -362,7 +362,7 @@
         }
 
         //点击样式
-        function toCheck(Id){
+        /*function toCheck(Id){
             $("#simple-table").find("tr[name='listBeen']").css("background-color", "");
             $("#tr" + Id).css("background-color", "#CCCC99");
             if($("#"+Id).prop("checked")){
@@ -377,7 +377,7 @@
             }
 
             //changecss();
-        }
+        }*/
 
         //回车搜索
         $("body").keydown(function() {
