@@ -378,6 +378,13 @@
 
             //changecss();
         }
+
+        //回车搜索
+        $("body").keydown(function() {
+            if (event.keyCode == "13") {//keyCode=13是回车键
+                $('#globelSearch').click();
+            }
+        });
 	</script>
 
 
