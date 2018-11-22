@@ -61,7 +61,7 @@
 								<c:if test="${QX.toExcel == 1 }"><a style="margin-left: 3px" class="btn btn-light btn-mini" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i>导出到EXCEL</a></c:if>
 								<label style="float: right;margin-top: 5px;margin-right: 15px">
 									<input id="isDetail" <c:if test="${pd.isDetail == 'true'}">checked</c:if>
-										   name="isDetail" class="ace ace-switch ace-switch-5" type="checkbox">
+										   onclick="checkOn();" name="isDetail" class="ace ace-switch ace-switch-5" type="checkbox">
 									<span class="lbl"></span>
 								</label>
 							</tr>
@@ -250,6 +250,7 @@
 		//检索
 		function tosearch(){
 			top.jzts();
+            checkOn();
 			$("#Form").submit();
 		}
 
@@ -625,6 +626,12 @@
                 $('#globelSearch').click();
             }
         });
+
+        function checkOn(){
+            if($("#isDetail").prop("checked")){
+                $("#isDetail").val("true");
+            }
+        }
 	</script>
 
 
