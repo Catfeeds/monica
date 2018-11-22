@@ -80,7 +80,7 @@
 								</td> -->
 								<c:if test="${QX.cha == 1 }">
 									<td style="vertical-align:top;padding-left:2px">
-										<a class="btn btn-light btn-xs" onclick="tosearch();"  title="查询">
+										<a class="btn btn-light btn-xs" onclick="tosearch();" id="btn_search" title="查询">
 											<i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i>查询
 										</a>
 									</td>
@@ -264,6 +264,13 @@
 					else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
 				});
 			});
+
+            //回车搜索
+            $("body").keydown(function() {
+                if (event.keyCode == "13") {//keyCode=13是回车键
+                    $('#btn_search').click();
+                }
+            });
 		});
 		
 		//新增
