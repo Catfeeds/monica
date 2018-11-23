@@ -51,7 +51,30 @@
 	<include refid="FieldValue"></include>
 		)
 	</insert>
-	
+
+	<insert id="saveByList" parameterType="java.util.List">
+		insert into
+		<include refid="tableName"></include>
+		(
+		<include refid="Field"></include>
+		) values
+		<foreach item="pd" index="index" collection="list" separator="," >
+			(#{FITEMID},
+			#{FPARENTID},
+			#{FMODEL},
+			#{FQTY},
+			#{INVENTORY},
+			#{ISPUTAWAY},
+			#{FNOTE},
+			#{PRICE},
+			#{DISCOUNT},
+			#{STATE},
+			#{FNUMBER},
+			#{FNAME},
+			#{COMMODITY_ID})
+		</foreach>
+	</insert>
+
 	<!-- 删除-->
 	<delete id="delete" parameterType="pd">
 		delete from
@@ -145,6 +168,14 @@
 		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
                  #{item}
 		</foreach>
+	</delete>
+
+	<!-- 删除-->
+	<delete id="deleteByFITEMID" parameterType="pd">
+		delete from
+		<include refid="tableName"></include>
+		where
+		FITEMID = #{FITEMID}
 	</delete>
 
 	<!-- 根据多个商品id查商品 -->

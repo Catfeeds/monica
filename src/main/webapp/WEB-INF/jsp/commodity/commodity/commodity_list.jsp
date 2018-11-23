@@ -451,7 +451,7 @@
         diag.Title = "封面预览图片";
         diag.URL = "<%=basePath%>commodity/toPreview?cid=" + cid;
         diag.Width = 800;
-        diag.Height = 550;
+        diag.Height = 555;
         diag.Modal = true; //有无遮罩窗口
         diag.ShowMaxButton = false; //最大化按钮
         diag.ShowMinButton = false; //最小化按钮
@@ -487,7 +487,7 @@
         diag.Drag = true;
         diag.Title = "编辑";
         diag.URL = '<%=basePath%>commodity/edit_commodity.do?COMMODITY_ID=' + Id;
-        diag.Width = window.innerWidth * 0.7;
+        diag.Width = window.innerWidth * 0.6;
         diag.Height = window.innerHeight * 0.5;
         diag.Modal = true;				//有无遮罩窗口
         diag.ShowMaxButton = false;	//最大化按钮

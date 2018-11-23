@@ -122,7 +122,7 @@
 								<c:when test="${not empty varList}">
 									<c:if test="${QX.cha == 1 }">
 									<c:forEach items="${varList}" var="var" varStatus="vs">
-										<tr id="ItemId_${var.CLASSIFY_ITEM_ID}" name='listBeen' <%--onclick="toCheck('${var.CLASSIFY_ITEM_ID}')"--%> ondblclick="editByID('${var.CLASSIFY_ITEM_ID}')" style="cursor: pointer;">
+										<tr id="ItemId_${var.CLASSIFY_ITEM_ID}" name='listBeen' onclick="toCheck('${var.CLASSIFY_ITEM_ID}')" ondblclick="editByID('${var.CLASSIFY_ITEM_ID}')" style="cursor: pointer;">
 											<%--<td class='center'>--%>
 												<%--<label class="pos-rel"><input type='checkbox' name='ids' id="${var.CLASSIFY_ITEM_ID}" value="${var.CLASSIFY_ITEM_ID}" class="ace" /><span class="lbl"></span></label>--%>
 											<%--</td>--%>
@@ -413,14 +413,14 @@
             }
 		}
         //双击列表一行数据
-       /* function editByID(Id) {
+        function editByID(Id) {
             top.jzts();
             var diag = new top.Dialog();
             diag.Drag=true;
-            diag.Title ="编辑";
+            diag.Title ="查看详情";
             diag.URL = '<%=basePath%>classify_item/goEdit.do?CLASSIFY_ITEM_ID='+Id;
-            diag.Width = 750;
-            diag.Height = 355;
+            diag.Width = 600;
+            diag.Height = 320;
             diag.Modal = true;				//有无遮罩窗口
             diag.CancelEvent = function(){ //关闭事件
                 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
@@ -429,7 +429,7 @@
                 diag.close();
             };
             diag.show();
-        }*/
+        }
 
         //单击列表一行，选中复选框
         function toCheck(Id){
