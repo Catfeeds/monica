@@ -39,8 +39,8 @@
                                         <div class="nav-search">
                                             商品代码： <span class="input-icon">
 											<input type="text" placeholder="按商品代码进行搜索" class="nav-search-input"
-                                                   id="nav1-input" autocomplete="off" name="keywords"
-                                                   value="${pd.keywords }" placeholder="这里输入关键词"/>
+                                                   id="FNUMBER" autocomplete="off" name="FNUMBER"
+                                                   value="${pd.FNUMBER }" placeholder="这里输入关键词"/>
 											<i class="ace-icon fa fa-search nav-search-icon"></i>
 										</span>
                                         </div>
@@ -50,31 +50,31 @@
                                         <div class="nav-search">
                                             商品名称：  <span class="input-icon">
 											<input type="text" placeholder="按商品名称进行搜索" class="nav-search-input"
-                                                   id="nav-search-input" autocomplete="off" name="keywords1"
-                                                   value="${pd.keywords1 }" placeholder="这里输入关键词"/>
+                                                   id="FNAME" autocomplete="off" name="FNAME"
+                                                   value="${pd.FNAME }" placeholder="这里输入关键词"/>
 											<i class="ace-icon fa fa-search nav-search-icon"></i>
 										</span>
                                         </div>
                                     </td>
                                     <c:if test="${QX.cha == 1 }">
                                         <td style="vertical-align:top;padding-left:2px">
-                                            <a class="btn btn-light btn-xs" onclick="tosearch();" title="查询"><i
+                                            <a class="btn btn-light btn-mini" onclick="tosearch();" title="查询"><i
                                                 id="nav-search-icon"
-                                                class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i>查询
+                                                class="ace-icon fa fa-search bigger-120 nav-search-icon blue"></i>查询
                                             </a>
-                                            <a class="btn btn-light btn-xs" onclick="Form_reset()"  title="重置">
+                                            <a class="btn btn-light btn-mini" onclick="Form_reset()"  title="重置">
                                                 <i id="nav-repeat-icon" class="ace-icon fa fa-repeat bigger-120"></i>重置
                                             </a>
                                         </td>
                                     </c:if>
                                     
                                     <td style="vertical-align:top;padding-left:2px">
-                                        <a class="btn btn-light btn-xs" onclick="submitCommodities();" data-rel="tooltip" title="提交">
-                                          <i class="ace-icon fa fa-pencil-square-o bigger-120 orange"></i>提交
+                                        <a class="btn btn-light btn-mini" onclick="submitCommodities();" data-rel="tooltip" title="提交">
+                                          <i class="ace-icon glyphicon glyphicon-ok bigger-120 green"></i>提交
                                         </a>
 
-                                        <a class="btn btn-light btn-xs" onclick="top.Dialog.close();" data-rel="tooltip" title="取消">
-                                            <i class="ace-icon fa fa-pencil-square-o bigger-120 orange"></i>取消
+                                        <a class="btn btn-light btn-mini" onclick="top.Dialog.close();" data-rel="tooltip" title="取消">
+                                            <i class="ace-icon glyphicon glyphicon-remove bigger-120 red"></i>取消
                                         </a>
                                     </td>
                                 </tr>
@@ -137,7 +137,7 @@
                                                     >
                                                             ${var.ISPUTAWAY}
                                                     </td>
-                                                    <td class='center'><a class='btn btn-xs btn-info'
+                                                    <td class='center'><a class='btn btn-mini btn-info'
                                                                           onclick="previewPic('${var.COMMODITY_ID}');event.cancelBubble=true">预览封面图片</a>
                                                     </td>
                                                     <td class='center'>无法预览</td>
@@ -214,7 +214,8 @@
     }
     //重置
     function Form_reset(){
-        document.getElementById("Form").reset();
+        $("#FNUMBER").val('');
+        $("#FNAME").val('');
     }
     $(function () {
 

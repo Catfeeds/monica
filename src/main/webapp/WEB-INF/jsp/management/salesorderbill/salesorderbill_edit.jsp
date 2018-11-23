@@ -342,11 +342,11 @@
 		<a style="margin-top: 10px;" onclick="approve('您确定审批该订单吗?')" class="btn btn-light btn-xs">
 			<i class="ace-icon glyphicon glyphicon-ok bigger-110 nav-search-icon green"></i>审批
 		</a>
-	</c:if>
 
-	<a style="margin-top: 10px;" class="btn btn-light btn-xs">
-		<i class="ace-icon glyphicon glyphicon-edit bigger-110 nav-search-icon blue"></i>变更
-	</a>
+		<a style="margin-top: 10px;" class="btn btn-light btn-xs">
+			<i class="ace-icon glyphicon glyphicon-edit bigger-110 nav-search-icon blue"></i>变更
+		</a>
+	</c:if>
 
 	<a style="margin-top: 10px;" class="btn btn-light btn-xs" onclick="save()">
 		<i class="ace-icon fa fa-credit-card bigger-110 nav-search-icon green"></i>保存
@@ -739,6 +739,7 @@
 									title:"成功",
 									message: "删除成功!"
 								});
+                                calculationOrderAmount();
 							}
 						}
 					});
