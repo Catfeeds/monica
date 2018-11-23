@@ -101,13 +101,13 @@
 		from 
 		<include refid="tableName"></include>
 		where 1=1
-		<if test="pd.fparentid!= null and pd.fparentid != ''"><!-- 关键词检索 -->
-			and  FPARENTID = #{pd.fparentid}
+		<if test="pd.FPARENTID!= null and pd.FPARENTID != ''"><!-- 关键词检索 -->
+			and  FPARENTID = #{pd.FPARENTID}
 		</if>
-		<if test="pd.fnumber!= null and pd.fnumber != ''"><!-- 关键词检索 -->
+		<if test="pd.FNUMBER!= null and pd.FNUMBER != ''"><!-- 关键词检索 -->
 			and
 				(
-				FNUMBER LIKE '%'+#{pd.fnumber}+'%'
+				FNUMBER LIKE '%'+#{pd.FNUMBER}+'%'
 				<!--	根据需求自己加检索条件
 					字段1 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
 					 or 
@@ -115,10 +115,10 @@
 				-->
 				)
 		</if>
-		<if test="pd.fname!= null and pd.fname != ''"><!-- 关键词检索 -->
+		<if test="pd.FNAME!= null and pd.FNAME != ''"><!-- 关键词检索 -->
 			and
 				(
-				FNAME LIKE '%'+#{pd.fname}+'%'
+				FNAME LIKE '%'+#{pd.FNAME}+'%'
 				<!--	根据需求自己加检索条件
 					字段1 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
 					 or 

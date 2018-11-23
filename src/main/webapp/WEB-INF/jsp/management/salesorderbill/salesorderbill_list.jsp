@@ -92,7 +92,7 @@
 													style="vertical-align:top;width: 150px;">
 												<option></option>
 												<option value="0">草稿</option>
-												<option value="1">已审核</option>
+												<option value="1">已审批</option>
 											</select>
 										  </span>
 									</div>
@@ -146,7 +146,7 @@
 												</c:if>
 
 												<c:if test="${var.FORDERSTATUS == 1}">
-													已审核
+													已审批
 												</c:if>
 											</td>
 											<td class='center'>
