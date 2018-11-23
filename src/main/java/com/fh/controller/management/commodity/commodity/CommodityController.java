@@ -98,13 +98,12 @@ public class CommodityController extends BaseController {
 			pd1.put("COMMODITYPIC_ID", this.get32UUID());
 			commoditypicService.save(pd1);
 		}else {
-			System.out.println("开始执行主图不     为null的修改");
+			System.out.println("开始执行主图不为null的修改");
 			pd1.put("COMMODITYPIC_ID", pd.getString("COMMODITYPIC_ID"));
 			pd1.put("PIC_URL", pd.getString("MAIN_PIC"));
 			pd1.put("ISMAINPIC","是");
 			commoditypicService.edit(pd1);
 		}
-		
 		commodityService.edit(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");

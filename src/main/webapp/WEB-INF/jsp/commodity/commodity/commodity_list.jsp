@@ -375,8 +375,8 @@
             diag.Drag = true;
             diag.Title = "编辑";
             diag.URL = '<%=basePath%>commodity/edit_commodity.do?COMMODITY_ID=' + Id;
-            diag.Width = window.innerWidth * 0.8;
-            diag.Height = window.innerHeight * 0.7;
+            diag.Width = window.innerWidth * 0.7;
+            diag.Height = window.innerHeight * 0.5;
             diag.Modal = true;				//有无遮罩窗口
             diag.ShowMaxButton = false;	//最大化按钮
             diag.ShowMinButton = false;		//最小化按钮
@@ -449,19 +449,18 @@
         diag.Modal = true; //有无遮罩窗口
         diag.ShowMaxButton = false; //最大化按钮
         diag.ShowMinButton = false; //最小化按钮
-        /* diag.CancelEvent = function(){ //关闭事件
-         if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
-         if('
-        ${page.currentPage}' == '0'){
-         top.jzts();
-         setTimeout("self.location=self.location",100);
-         }else{
-         nextPage(
-        ${page.currentPage});
-         }
-         }
-         diag.close();
-         }; */
+        /*diag.CancelEvent = function(){ //关闭事件
+            if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+                if('${page.currentPage}' == '0'){
+                    top.jzts();
+                    setTimeout("self.location=self.location",100);
+                }else{
+                    nextPage(${page.currentPage});
+
+                }
+            }
+            diag.close();
+        };*/
         diag.show();
     }
 
@@ -483,7 +482,7 @@
         diag.Title = "编辑";
         diag.URL = '<%=basePath%>commodity/edit_commodity.do?COMMODITY_ID=' + Id;
         diag.Width = window.innerWidth * 0.7;
-        diag.Height = window.innerHeight * 0.7;
+        diag.Height = window.innerHeight * 0.5;
         diag.Modal = true;				//有无遮罩窗口
         diag.ShowMaxButton = false;	//最大化按钮
         diag.ShowMinButton = false;		//最小化按钮

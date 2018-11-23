@@ -37,7 +37,7 @@
 								<input type="hidden"  value="${pd.STATE}" name="STATE" id="STATE"/>
 								<%-- <input type="hidden" name="FITEMID" id="FITEMID" value="${pd.FITEMID}"/>
 								<input type="hidden" name="FPARENTID" id="FPARENTID" value="${pd.FPARENTID}"/> --%>
-								<div id="zhongxin" style="padding-top: 13px;">
+								<div id="zhongxin" style="padding-top:30px;">
 									<table style="border-collapse:separate; border-spacing:10px;width: 100%">
 										<tbody>
 											<tr>
@@ -63,31 +63,31 @@
 													<label>商品状态<span style="color:red;">*</span>:</label>
 												</td>
 												<td>
-													<%--<c:set var="theString" value="${pd.STATE}"/>--%>
-													<label style="">
-														<input name="checkbox1" type="checkbox"
-															<c:if test="${fn:contains(theString,'普通商品')}"> checked="checked"
-															</c:if>  class="ace" id="checkbox1" value="普通商品">
-														<span class="lbl">普通商品</span>
-													</label>
-													<label style="">
-														<input name="checkbox1" type="checkbox"
-															<c:if test="${fn:contains(theString,'热销商品')}">  checked="checked"
-															</c:if> class="ace" id="checkbox2" value="热销商品">
-														<span class="lbl">热销商品</span>
-													</label>
-													<label style="">
-														<input name="checkbox1" type="checkbox"
-															<c:if test="${fn:contains(theString,'上新商品')}">  checked="checked"
-															</c:if> class="ace" id="checkbox3" value="上新商品">
-														<span class="lbl">上新商品</span>
-													</label>
-													<label style="">
-														<input name="checkbox1" type="checkbox"
-															<c:if test="${fn:contains(theString,'折扣商品')}">  checked="checked"
-															</c:if> class="ace" id="checkbox4" value="折扣商品">
-														<span class="lbl">折扣商品</span>
-													</label>
+													<c:set var="theString" value="${pd.STATE}"/>
+														<label style="">
+															<input name="STATE" type="checkbox"
+																<c:if test="${fn:contains(theString,'普通商品')}"> checked="checked"
+																</c:if>  class="ace" id="checkbox1" value="普通商品">
+															<span class="lbl">普通商品</span>
+														</label>
+														<label style="">
+															<input name="STATE" type="checkbox"
+																<c:if test="${fn:contains(theString,'热销商品')}">  checked="checked"
+																</c:if> class="ace" id="checkbox2" value="热销商品">
+															<span class="lbl">热销商品</span>
+														</label>
+														<label style="">
+															<input name="STATE" type="checkbox"
+																<c:if test="${fn:contains(theString,'上新商品')}">  checked="checked"
+																</c:if> class="ace" id="checkbox3" value="上新商品">
+															<span class="lbl">上新商品</span>
+														</label>
+														<label style="">
+															<input name="STATE" type="checkbox"
+																<c:if test="${fn:contains(theString,'折扣商品')}">  checked="checked"
+																</c:if> class="ace" id="checkbox4" value="折扣商品">
+															<span class="lbl">折扣商品</span>
+														</label>
 												</td>
 
 												<td style="width:8%;text-align: right;">
@@ -150,21 +150,21 @@
 													<label>图片网址:</label>
 												</td>
 												<td>
-													<input type="text" style="width: 415px;"
-														   class="input-text" placeholder="" name="INVENTORY"
+													<input type="text" style="width: 415px;" value="${pd1.PIC_URL}"
+														   class="input-text" name="INVENTORY"
 														   id="INVENTORY">
 												</td>
 											</tr>
 										</tbody>
 									</table>
-                                    <table style="width:100%;margin-left: 10px">
+                                    <%--<table style="width:100%;margin-left: 10px">
                                         <tr>
                                             <td style="text-align: center;" colspan="11">
                                                 <a class="btn btn-mini btn-primary" onclick="saveInfo();">保存</a>
                                                 <a class="btn btn-mini btn-danger" onclick="top.Dialog.close();">取消</a>
                                             </td>
                                         </tr>
-                                    </table>
+                                    </table>--%>
                                 </div>
                                 <div id="zhongxin2" class="center" style="display:none">
                                     <br/>
@@ -194,6 +194,20 @@
 
 	</div>
 	<!-- /.main-container -->
+
+	<br><br>
+
+	<div style="text-align: right;height:45px;
+		background: url(static/login/images/topbg.png) repeat-x; position:fixed;width: 100%;z-index:10000000;bottom: 0px;";>
+
+		<a style="margin-top: 10px;" class="btn btn-light btn-xs" onclick="saveInfo()">
+			<i class="ace-icon fa fa-credit-card bigger-110 nav-search-icon green"></i>保存
+		</a>
+
+		<a style="margin-top: 10px;margin-right: 10px;" class="btn btn-light btn-xs" onclick="top.Dialog.close();">
+			<i class="ace-icon fa  fa-external-link bigger-110 nav-search-icon red"></i>取消
+		</a>
+	</div>
 
 	<!-- basic scripts -->
 	<!-- 页面底部js¨ -->
@@ -337,6 +351,7 @@
 		$("#STATE").val(chk_value.length==0 ?'普通商品':chk_value);
 		//alert(chk_value.length==0 ?'你还没有选择任何内容！':chk_value); 
 		}
+
 	</script>
 
 
