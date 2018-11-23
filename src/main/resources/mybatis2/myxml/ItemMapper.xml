@@ -17,19 +17,28 @@
 	
 	<!-- 列表 -->
 	<select id="datalistPage11" parameterType="page" resultType="pd">
-		select * from (select top 100 percent A.FItemID as FID,A.FParentID as PID,
-		A.FNumber as AFNumber,A.FName as AFName,A.FModel as AFModel,B.FName as BFName,Sum(IsNull(C.FQty,0)) as CFQty,
-		ISNULL(D.FName,'') as DFName
-		from t_ICItem A inner Join T_MeasureUnit B On A.FUnitID=B.FMeasureUnitID
-		left  Join ICInventory C On C.FItemID=A.FItemID left  Join t_Stock D On D.FItemID=C.FStockID
-		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
-		where A.FName +ISNULL(A.FModel,'') Like '%'+#{pd.keywords}+'%'
+		SELECT
+			B.FNumber as BFNumber,B.FName as BFName,B.FModel as BFModel,C.FName as CFName,sum(A.FQty) as AFQty
+		FROM
+			ICInventory A INNER JOIN t_ICItem B ON A.FItemID = B.FItemID
+						  INNER JOIN t_MeasureUnit C ON B.FUnitID = C.FMeasureUnitID
+						  INNER JOIN t_Stock D ON A.FStockID = D.FItemID
+		WHERE
+			D.FMRPAvail = 1 AND B.FNumber LIKE '3.%' AND B.FNumber + B.FName + B.FModel LIKE '%{0}%'
+		<if test="pd.treeKey != null and pd.treeKey != ''">
+			AND D.FItemID = #{pd.treeKey}
 		</if>
-		<if test="pd.treeKey!= null and pd.treeKey != ''"><!-- 关键词检索 -->
-		where D.FItemID = #{pd.treeKey}
+		<if test="pd.categoryParent != null and pd.categoryParent != ''">
+			AND
 		</if>
-		Group By A.FItemID ,A.FParentID,A.FNumber,A.FName,A.FModel,B.FName,ISNULL(D.FName,'')
-		Order By A.FNumber,ISNULL(D.FName,'')) as a
+		<if test="pd.productInfo != null and pd.productInfo != ''">
+			AND
+		</if>
+		<if test="pd.warehouseInfo != null and pd.warehouseInfo != ''">
+			AND
+		</if>
+		GROUP BY
+			B.FNumber,B.FName, B.FModel,C.FName
 	</select>
 	
 	<select id="tree_data" parameterType="page" resultType="pd">

@@ -36,8 +36,18 @@
 							<tr>
 								<td>
 									<div class="nav-search">
-										商品名称:<span class="input-icon">
-											<input type="text" placeholder="这里输入关键词" class="nav-search-input" id="keywords" autocomplete="off" name="keywords" value="${pd.keywords }" placeholder="这里输入关键词"/>
+										上级分类:<span class="input-icon">
+											<input type="text" placeholder="这里输入关键词" class="nav-search-input" id="categoryParent" autocomplete="off" name="categoryParent" value="${pd.categoryParent }" placeholder="这里输入关键词"/>
+											<i class="ace-icon fa fa-search nav-search-icon"></i>
+										</span>
+
+										产品信息:<span class="input-icon">
+											<input type="text" placeholder="这里输入关键词" class="nav-search-input" id="productInfo" autocomplete="off" name="productInfo" value="${pd.productInfo }" placeholder="这里输入关键词"/>
+											<i class="ace-icon fa fa-search nav-search-icon"></i>
+										</span>
+
+										仓库信息:<span class="input-icon">
+											<input type="text" placeholder="这里输入关键词" class="nav-search-input" id="warehouseInfo" autocomplete="off" name="warehouseInfo" value="${pd.warehouseInfo }" placeholder="这里输入关键词"/>
 											<i class="ace-icon fa fa-search nav-search-icon"></i>
 										</span>
 									</div>
@@ -45,8 +55,8 @@
 								<td style="vertical-align:top;padding-left:2px;">
 									<div style="margin-top: 1px;"><a id="globelSearch" class="btn btn-light btn-mini" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i>查询</a></div></td>
 								<td style="vertical-align:top;padding-left:2px;margin-top: 2px;">
-									<div style="margin-top: 1px;"><a class="btn btn-light btn-mini" onclick="reset();"  title="重置"><i id="nav-search-icon" class="ace-icon glyphicon glyphicon-repeat bigger-110 nav-search-icon blue"></i>重置</a></div></td>
-								<c:if test="${QX.toExcel == 1 }"><td style="vertical-align:top;padding-left:2px;"><a class="btn btn-light btn-mini" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i>导出到EXCEL</a></td></c:if>
+									<div style="margin-top: 1px;"><a class="btn btn-light btn-mini" onclick="reset();"  title="重置"><i id="nav-reset-icon" class="ace-icon glyphicon glyphicon-repeat bigger-110 nav-search-icon blue"></i>重置</a></div></td>
+								<c:if test="${QX.toExcel == 1 }"><td style="vertical-align:top;padding-left:2px;"><a class="btn btn-light btn-mini" onclick="toExcel();" title="导出到EXCEL"><i id="nav-excel-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i>导出到EXCEL</a></td></c:if>
 							</tr>
 						</table>
 						<!-- 检索  -->
@@ -58,12 +68,12 @@
 									<label class="pos-rel"><input type="checkbox" class="ace" id="zcheckbox" /><span class="lbl"></span></label>
 									</th>--%>
 									<th class="center" style="width:50px;">序号</th>
-									<th class="center">商品代码</th>
-									<th class="center">商品名称</th>
+									<th class="center">产品代码</th>
+									<th class="center">产品名称</th>
 									<th class="center">规格型号</th>
 									<th class="center">单位</th>
-									<th class="center">库存数量</th>
-									<th class="center">仓库</th>
+									<th class="center">数量</th>
+									<%--<th class="center">仓库</th>--%>
 									<!-- <th class="center">操作</th> -->
 								</tr>
 							</thead>
@@ -73,17 +83,17 @@
 							<c:choose>
 								<c:when test="${not empty varList}">
 									<c:forEach items="${varList}" var="var" varStatus="vs">
-										<tr id="tr${vs.index+1}" name="listBeen" onclick="toCheck('${vs.index+1}')" ondblclick="editByID('${vs.index+1}')" style="cursor: pointer;">
+										<tr id="tr${vs.index+1}" name="listBeen" onclick="toCheck('${vs.index+1}')" ondblclick="toQuery('${vs.index+1}')" style="cursor: pointer;">
 											<%--<td class='center'>
 												<label class="pos-rel"><input id="${vs.index+1}" type='checkbox' name='ids' value="${vs.index+1}" class="ace" /><span class="lbl"></span></label>
 											</td>--%>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
-											<td class='center'>${var.AFNumber}</td>
-											<td class='center'>${var.AFName}</td>
-											<td class='center'>${var.AFModel}</td>
+											<td class='center'>${var.BFNumber}</td>
 											<td class='center'>${var.BFName}</td>
-											<td class='center'><fmt:formatNumber value="${var.CFQty}" pattern="0"/></td>
-											<td class='center'>${var.DFName}</td>
+											<td class='center'>${var.BFModel}</td>
+											<td class='center'>${var.CFName}</td>
+											<td class='center'><fmt:formatNumber value="${var.AFQty}" pattern="0"/></td>
+											<%--<td class='center'>${var.DFName}</td>--%>
 											<%-- <td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
@@ -356,9 +366,12 @@
 		function toExcel(){
 			window.location.href='<%=basePath%>icinventory/excel.do';
 		}
-		
+
+		//重置
 		function reset() {
-            $("#keywords").val('');
+            $("#categoryParent").val('');
+            $("#productInfo").val('');
+            $("#warehouseInfo").val('');
         }
 
         //点击样式
@@ -378,6 +391,27 @@
 
             //changecss();
         }
+
+		//查询详情
+        function toQuery(Id) {
+            top.jzts();
+            var diag = new top.Dialog();
+            diag.Drag=true;
+            diag.Title ="查看详情";
+            diag.URL = '<%=basePath%>icinventory/goQuery.do?AFNumber='+Id;
+            //diag.Width =  window.innerWidth;
+            //diag.Height = window.innerHeight;
+            diag.Modal = true; //有无遮罩窗口
+            diag.ShowMaxButton = true; //最大化按钮
+            diag.ShowMinButton = true; //最小化按钮
+			/*diag.CancelEvent = function(){ //关闭事件
+				if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+                     tosearch();
+                }
+                diag.close();
+             };*/
+            diag.show();
+		}
 
         //回车搜索
         $("body").keydown(function() {

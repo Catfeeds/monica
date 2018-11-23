@@ -63,8 +63,10 @@ public class ICInventoryController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		String keywords = pd.getString("keywords"); // 关键词检索条件
 		String treeKey = pd.getString("treeKey");
+		String categoryParent = pd.getString("categoryParent"); // 关键词检索条件
+		String productInfo = pd.getString("productInfo"); // 关键词检索条件
+		String warehouseInfo = pd.getString("warehouseInfo"); // 关键词检索条件
 		String currentPage = pd.getString("currentPage");
 		System.out.println("pd"+pd);
 		if (null != currentPage && !"".equals(currentPage)) {
@@ -72,11 +74,17 @@ public class ICInventoryController extends BaseController {
 		}else {
 			currentPage = "0";
 		}
-		if (null != keywords && !"".equals(keywords)) {
-			pd.put("keywords", keywords.trim());
-		}
 		if (null != treeKey && !"".equals(treeKey)) {
 			pd.put("treeKey", treeKey.trim());
+		}
+		if (null != categoryParent && !"".equals(categoryParent)) {
+			pd.put("categoryParent", categoryParent.trim());
+		}
+		if (null != productInfo && !"".equals(productInfo)) {
+			pd.put("productInfo", productInfo.trim());
+		}
+		if (null != warehouseInfo && !"".equals(warehouseInfo)) {
+			pd.put("warehouseInfo", warehouseInfo.trim());
 		}
 		page.setPd(pd);
 		//调用方式  0为多数据源调用方式，1为远程接口方式
@@ -274,4 +282,16 @@ public class ICInventoryController extends BaseController {
 		mv = new ModelAndView(erv, dataMap);
 		return mv;
 	}
+
+	@RequestMapping(value = "/goQuery")
+	public ModelAndView goQuery() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		// TODO 根据id查询信息
+		mv.setViewName("item/icinventory_query");
+		mv.addObject("pd", pd);
+		return mv;
+	}
+
 }
