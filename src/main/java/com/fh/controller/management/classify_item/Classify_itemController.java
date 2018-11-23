@@ -322,7 +322,7 @@ public class Classify_itemController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		pd = classify_itemService.findById(pd); // 根据ID读取
-		mv.setViewName("management/classify_item/classify_item_edit");
+		mv.setViewName("management/classify_item/classify_item_query");
 		mv.addObject("msg", "edit");
 		mv.addObject("pd", pd);
 		return mv;

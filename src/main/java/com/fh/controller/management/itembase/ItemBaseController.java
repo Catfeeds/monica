@@ -152,7 +152,7 @@ public class ItemBaseController extends BaseController {
 		return mv;
 	}	
 	
-	 /**去修改页面
+	 /**去查看详情页面
 	 * @param
 	 * @throws Exception
 	 */
@@ -162,7 +162,7 @@ public class ItemBaseController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		pd = itembaseService.findById(pd);	//根据ID读取
-		mv.setViewName("management/itembase/itembase_edit");
+		mv.setViewName("management/itembase/itembase_query");
 		mv.addObject("msg", "edit");
 		mv.addObject("pd", pd);
 		return mv;

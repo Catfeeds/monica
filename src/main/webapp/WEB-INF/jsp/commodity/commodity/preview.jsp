@@ -39,9 +39,9 @@
 		<div class="main-content">
 			<div class="main-content-inner">
 				<div class="page-content">
-					<div class="hr hr-18 dotted hr-double"></div>
+					<div class="dotted"></div>
 					<div class="row">
-						<div class="col-xs-12">
+						<div class="col-xs-12 center">
 							<!-- =========================================================================== -->
 							<c:choose>
 								<c:when test="${pd1 == null}">
@@ -50,7 +50,7 @@
 									</div>
 								</c:when>
 								<c:otherwise>
-									<div class="form-group" style="width: 750px;height: 500px">
+									<div class="center"style="width: 780px;height: 550px">
 										<img style="width: 95%;height: 95%"
 											src="${pic_qzurl}${pd1.PIC_URL}" />
 									</div>

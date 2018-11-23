@@ -26,7 +26,6 @@
 		<div class="main-content">
 			<div class="main-content-inner">
 				<div class="page-content">
-					<div class="dotted"></div>
 					<div class="row">
 						<div class="col-xs-12">
 							<!-- ------------------------------------------------------------------------------- -->
@@ -38,7 +37,7 @@
 								<%-- <input type="hidden" name="FITEMID" id="FITEMID" value="${pd.FITEMID}"/>
 								<input type="hidden" name="FPARENTID" id="FPARENTID" value="${pd.FPARENTID}"/> --%>
 								<div id="zhongxin" style="padding-top:30px;">
-									<table style="border-collapse:separate; border-spacing:10px;width: 100%">
+									<%--<table style="border-collapse:separate; border-spacing:10px;width: 100%">
 										<tbody>
 											<tr>
 												<td style="width:8%;text-align: right;">
@@ -156,6 +155,103 @@
 												</td>
 											</tr>
 										</tbody>
+									</table>--%>
+									<table id="table_report" style="border-collapse:separate; border-spacing:10px;width: 100%;padding-left: 1%">
+										<tr>
+											<td class="center" style="width:75px;text-align: right;padding-top: 7px;"> 商品编号: </td>
+											<td colspan="2">
+												<input type="text" name="FITEMID" id="FITEMID" value="${pd.FITEMID}" maxlength="255"  title="商品编号" style="width:98%;" disabled/>
+											</td>
+											<td class="center" style="width:75px;text-align: right;padding-top: 7px;"> 商品代码: </td>
+											<td colspan="2">
+												<input type="text" name="FNUMBER" id="FNUMBER" value="${pd.FNUMBER}" maxlength="255"  title="商品代码" style="width:98%;" disabled/>
+											</td>
+										</tr>
+										<tr>
+											<td class="center" style="width:75px;text-align: right;padding-top: 7px;">商品名称:</td>
+											<td colspan="2">
+												<input type="text" name="FNAME" id="FNAME" value="${pd.FNAME }" maxlength="255" title="商品名称" style="width:98%;" />
+											</td>
+											<td class="center" style="width:75px;text-align: right;padding-top: 7px;">规格型号:</td>
+											<td colspan="2">
+												<input type="text" name="FMODEL" id="FMODEL" value="${pd.FMODEL}" maxlength="255" title="规格型号" style="width:98%;" />
+											</td>
+										</tr>
+										<tr>
+											<td class="center" style="width:75px;text-align: right;padding-top: 7px;">数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;量:</td>
+											<td colspan="2">
+												<input type="number" name="FQTY" id="FQTY" value="${pd.FQTY}" maxlength="255" title="数量" style="width:98%;" />
+											</td>
+											<td class="center" style="width:75px;text-align: right;padding-top: 7px;">库&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;存:</td>
+											<td colspan="2">
+												<input type="number" name="INVENTORY" id="INVENTORY" value="${pd.INVENTORY}" maxlength="255" title="库存" style="width:98%;" />
+											</td>
+										</tr>
+										<tr>
+											<td class="center" style="width:75px;text-align: right;padding-top: 7px;">商品状态:</td>
+											<td colspan="2">
+												<c:set var="theString" value="${pd.STATE}"/>
+												<label style="">
+													<input name="STATE" type="radio"
+													<c:if test="${fn:contains(theString,'普通商品')}"> checked="checked"
+													</c:if>  class="ace" id="checkbox1" value="普通商品">
+													<span class="lbl">普通商品</span>
+												</label>
+												<label style="">
+													<input name="STATE" type="radio"
+													<c:if test="${fn:contains(theString,'热销商品')}">  checked="checked"
+													</c:if> class="ace" id="checkbox2" value="热销商品">
+													<span class="lbl">热销商品</span>
+												</label>
+												<label style="">
+													<input name="STATE" type="radio"
+													<c:if test="${fn:contains(theString,'上新商品')}">  checked="checked"
+													</c:if> class="ace" id="checkbox3" value="上新商品">
+													<span class="lbl">上新商品</span>
+												</label>
+												<label style="">
+													<input name="STATE" type="radio"
+													<c:if test="${fn:contains(theString,'折扣商品')}">  checked="checked"
+													</c:if> class="ace" id="checkbox4" value="折扣商品">
+													<span class="lbl">折扣商品</span>
+												</label>
+											</td>
+											<td class="center" style="width:75px;text-align: right;padding-top: 7px;">商品上下架:</td>
+											<td colspan="2">
+												<label style="float:left;padding-left:20px;">
+													<input class="ace" name="form-field-radio" id="form-field-radio1" onclick="isPutaway('上架');"
+														   <c:if test="${pd.ISPUTAWAY == '上架' }">checked="checked"</c:if> type="radio" value="icon-edit">
+													<span class="lbl">上架</span>
+												</label>
+												<label style="float:left;padding-left:5px;">
+													<input class="ace" name="form-field-radio" id="form-field-radio2" onclick="isPutaway('未上架');"
+														   <c:if test="${pd.ISPUTAWAY == '未上架' }">checked="checked"</c:if> type="radio" value="icon-edit">
+													<span class="lbl">未上架</span>
+												</label>
+											</td>
+										</tr>
+										<tr>
+											<td class="center" style="width:75px;text-align: right;padding-top: 7px;">商品价格:</td>
+											<td width="198">
+												<input type="number" name="PRICE" id="PRICE" value="${pd.PRICE}" maxlength="32"  title="商品价格" style="width:98%;" />
+											</td>
+											<td>元</td>
+											<td class="center" style="width:75px;text-align: right;padding-top: 7px;">优惠折扣:</td>
+											<td width="198">
+												<input type="number" name="DISCOUNT" id="DISCOUNT" value="${pd.DISCOUNT}" maxlength="32" title="优惠折扣" style="width:98%;" />
+											</td>
+											<td>折</td>
+										</tr>
+										<tr>
+											<td class="center" style="width:75px;text-align: right;padding-top: 7px;">商品描述:</td>
+											<td colspan="2">
+												<input type="number" name="FUNITID" id="FUNITID" value="${pd}" maxlength="32" title="商品描述" style="width:98%;" />
+											</td>
+											<td class="center" style="width:75px;text-align: right;padding-top: 7px;">商品预览图:</td>
+											<td class="center" colspan="2">
+												<input type="text" name="FSALEUNITID" id="FSALEUNITID" value="${pd}" maxlength="32"  title="商品预览图" style="width:98%;" />
+											</td>
+										</tr>
 									</table>
                                     <%--<table style="width:100%;margin-left: 10px">
                                         <tr>

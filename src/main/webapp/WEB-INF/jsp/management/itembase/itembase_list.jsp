@@ -80,7 +80,7 @@
 								</td> -->
 								<c:if test="${QX.cha == 1 }">
 									<td style="vertical-align:top;padding-left:2px">
-										<a class="btn btn-light btn-xs" onclick="tosearch();"  title="查询">
+										<a class="btn btn-light btn-xs" onclick="tosearch();" id="btn_search" title="查询">
 											<i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i>查询
 										</a>
 									</td>
@@ -124,8 +124,8 @@
 								<c:when test="${not empty varList}">
 									<c:if test="${QX.cha == 1 }">
 									<c:forEach items="${varList}" var="var" varStatus="vs">
-										<tr>
-											<%--<td class='center'>--%>
+										<tr id="ItemId_${var.ITEMBASE_ID}" name='listBeen' onclick="toCheck('${var.ITEMBASE_ID}')" ondblclick="editByID('${var.ITEMBASE_ID}')" style="cursor: pointer;">
+                                            <%--<td class='center'>--%>
 												<%--<label class="pos-rel"><input type='checkbox' name='ids' value="${var.ITEMBASE_ID}" class="ace" /><span class="lbl"></span></label>--%>
 											<%--</td>--%>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
@@ -264,8 +264,20 @@
 					else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
 				});
 			});
+
+            //回车搜索
+            $("body").keydown(function() {
+                if (event.keyCode == "13") {//keyCode=13是回车键
+                    $('#btn_search').click();
+                }
+            });
 		});
-		
+        //复选框选中事件
+        function toCheck(Id){
+            $("#simple-table").find("tr[name='listBeen']").css("background-color", "");
+            $("#ItemId_" + Id).css("background-color", "#CCCC99");
+        }
+
 		//新增
 		function add(){
 			 top.jzts();
@@ -370,7 +382,27 @@
 				}
 			});
 		};
-		
+
+        //双击列表一行数据
+        function editByID(Id) {
+            top.jzts();
+            var diag = new top.Dialog();
+            diag.Drag=true;
+            diag.Title ="查看详情";
+            diag.URL = '<%=basePath%>itembase/goEdit.do?ITEMBASE_ID='+Id;
+            diag.Width = 750;
+            diag.Height = 400;
+            diag.Modal = true;				//有无遮罩窗口
+            diag.CancelEvent = function(){ //关闭事件
+                if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+                    tosearch();
+                }
+                diag.close();
+            };
+            diag.show();
+        }
+
+        //同步数据
 		function updateItem(){
             bootbox.confirm("同步需要一定的时间是否确认同步吗?", function(result) {
                 if(result) {
